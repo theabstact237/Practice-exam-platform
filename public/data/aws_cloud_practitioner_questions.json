@@ -1,0 +1,1203 @@
+[
+  {
+    "id": 1,
+    "question": "What is the AWS shared responsibility model?",
+    "options": {
+      "A": "AWS is responsible for security of the cloud, customers are responsible for security in the cloud",
+      "B": "Customers are responsible for all security aspects",
+      "C": "AWS is responsible for all security aspects",
+      "D": "Security responsibilities are equally shared between AWS and customers"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "The AWS shared responsibility model divides security responsibilities: AWS secures the underlying infrastructure (security OF the cloud), while customers secure their data, applications, and configurations (security IN the cloud)."
+  },
+  {
+    "id": 2,
+    "question": "Which AWS service provides a virtual private cloud environment?",
+    "options": {
+      "A": "Amazon EC2",
+      "B": "Amazon VPC",
+      "C": "Amazon S3",
+      "D": "Amazon RDS"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon VPC (Virtual Private Cloud) allows you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define."
+  },
+  {
+    "id": 3,
+    "question": "What is the primary benefit of using AWS CloudFormation?",
+    "options": {
+      "A": "Database management",
+      "B": "Infrastructure as Code",
+      "C": "Content delivery",
+      "D": "User authentication"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS CloudFormation enables Infrastructure as Code (IaC), allowing you to model and provision AWS resources using templates, ensuring consistent and repeatable deployments."
+  },
+  {
+    "id": 4,
+    "question": "Which AWS service is best suited for hosting a static website?",
+    "options": {
+      "A": "Amazon EC2",
+      "B": "Amazon RDS",
+      "C": "Amazon S3",
+      "D": "Amazon EBS"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon S3 can host static websites directly, providing a cost-effective solution for serving HTML, CSS, JavaScript, and other static content without the need for web servers."
+  },
+  {
+    "id": 5,
+    "question": "What does AWS IAM stand for?",
+    "options": {
+      "A": "Identity and Access Management",
+      "B": "Infrastructure and Application Monitoring",
+      "C": "Internet and API Management",
+      "D": "Instance and AMI Management"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "AWS IAM (Identity and Access Management) is a service that helps you securely control access to AWS resources by managing users, groups, roles, and permissions."
+  },
+  {
+    "id": 6,
+    "question": "Which AWS service provides scalable DNS and domain name registration?",
+    "options": {
+      "A": "Amazon CloudFront",
+      "B": "Amazon Route 53",
+      "C": "AWS Direct Connect",
+      "D": "Amazon VPC"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon Route 53 is a scalable DNS web service that translates domain names into IP addresses and provides domain registration services."
+  },
+  {
+    "id": 7,
+    "question": "What is the AWS Free Tier?",
+    "options": {
+      "A": "A premium support plan",
+      "B": "A program offering limited free usage of AWS services",
+      "C": "A certification program",
+      "D": "A marketplace for third-party applications"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Free Tier provides customers the ability to explore and try out AWS services free of charge up to specified limits for each service."
+  },
+  {
+    "id": 8,
+    "question": "Which AWS service is used for monitoring and observability?",
+    "options": {
+      "A": "Amazon CloudWatch",
+      "B": "Amazon S3",
+      "C": "Amazon EC2",
+      "D": "Amazon RDS"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon CloudWatch is a monitoring and observability service that provides data and actionable insights to monitor applications, respond to system-wide performance changes, and optimize resource utilization."
+  },
+  {
+    "id": 9,
+    "question": "What is Amazon EC2?",
+    "options": {
+      "A": "A database service",
+      "B": "A storage service",
+      "C": "A compute service providing virtual servers",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon EC2 (Elastic Compute Cloud) is a web service that provides secure, resizable compute capacity in the cloud, essentially virtual servers that you can configure and manage."
+  },
+  {
+    "id": 10,
+    "question": "Which AWS service provides object storage?",
+    "options": {
+      "A": "Amazon EBS",
+      "B": "Amazon EFS",
+      "C": "Amazon S3",
+      "D": "Amazon FSx"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon S3 (Simple Storage Service) is an object storage service that offers industry-leading scalability, data availability, security, and performance."
+  },
+  {
+    "id": 11,
+    "question": "What is the AWS Well-Architected Framework?",
+    "options": {
+      "A": "A certification program",
+      "B": "A set of best practices for designing and operating reliable, secure, efficient systems",
+      "C": "A monitoring tool",
+      "D": "A deployment service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Well-Architected Framework provides a set of best practices across five pillars: operational excellence, security, reliability, performance efficiency, and cost optimization."
+  },
+  {
+    "id": 12,
+    "question": "Which AWS service provides content delivery network (CDN) capabilities?",
+    "options": {
+      "A": "Amazon S3",
+      "B": "Amazon CloudFront",
+      "C": "Amazon Route 53",
+      "D": "AWS Direct Connect"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds."
+  },
+  {
+    "id": 13,
+    "question": "What is AWS Lambda?",
+    "options": {
+      "A": "A database service",
+      "B": "A serverless compute service",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. You pay only for the compute time you consume."
+  },
+  {
+    "id": 14,
+    "question": "Which AWS service is used for relational database management?",
+    "options": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon S3",
+      "C": "Amazon RDS",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon RDS (Relational Database Service) makes it easy to set up, operate, and scale a relational database in the cloud, supporting multiple database engines."
+  },
+  {
+    "id": 15,
+    "question": "What is the primary purpose of AWS Regions?",
+    "options": {
+      "A": "To provide different pricing models",
+      "B": "To offer geographic distribution and compliance",
+      "C": "To separate development and production environments",
+      "D": "To provide different service offerings"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Regions are geographic areas that contain multiple Availability Zones, allowing you to place resources closer to users and meet data residency and compliance requirements."
+  },
+  {
+    "id": 16,
+    "question": "Which AWS service provides NoSQL database capabilities?",
+    "options": {
+      "A": "Amazon RDS",
+      "B": "Amazon DynamoDB",
+      "C": "Amazon Redshift",
+      "D": "Amazon Aurora"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability."
+  },
+  {
+    "id": 17,
+    "question": "What is an AWS Availability Zone?",
+    "options": {
+      "A": "A geographic region",
+      "B": "A data center or group of data centers within a region",
+      "C": "A virtual private cloud",
+      "D": "A content delivery network location"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "An Availability Zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity in an AWS Region, designed to be isolated from failures in other AZs."
+  },
+  {
+    "id": 18,
+    "question": "Which AWS service helps you manage costs and usage?",
+    "options": {
+      "A": "AWS CloudTrail",
+      "B": "AWS Cost Explorer",
+      "C": "AWS Config",
+      "D": "AWS CloudWatch"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Cost Explorer is a tool that enables you to view and analyze your costs and usage, helping you understand where your money is being spent and identify cost optimization opportunities."
+  },
+  {
+    "id": 19,
+    "question": "What is AWS CloudTrail used for?",
+    "options": {
+      "A": "Cost management",
+      "B": "Performance monitoring",
+      "C": "API logging and auditing",
+      "D": "Content delivery"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "AWS CloudTrail is a service that enables governance, compliance, operational auditing, and risk auditing by logging and monitoring account activity across your AWS infrastructure."
+  },
+  {
+    "id": 20,
+    "question": "Which AWS support plan provides 24/7 access to Cloud Support Engineers?",
+    "options": {
+      "A": "Basic",
+      "B": "Developer",
+      "C": "Business",
+      "D": "All of the above"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "The Business support plan (and Enterprise) provides 24/7 access to Cloud Support Engineers via phone, email, and chat. Basic and Developer plans have more limited support options."
+  },
+  {
+    "id": 21,
+    "question": "Which AWS service provides managed message queuing?",
+    "options": {
+      "A": "Amazon SNS",
+      "B": "Amazon SQS",
+      "C": "Amazon SES",
+      "D": "Amazon Kinesis"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon SQS (Simple Queue Service) is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications."
+  },
+  {
+    "id": 22,
+    "question": "What is the AWS pricing model for most services?",
+    "options": {
+      "A": "Fixed monthly fee",
+      "B": "Pay-as-you-go",
+      "C": "Annual subscription only",
+      "D": "Per-user licensing"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS follows a pay-as-you-go pricing model where you only pay for the resources you actually use, with no upfront costs or long-term commitments for most services."
+  },
+  {
+    "id": 23,
+    "question": "Which AWS service provides notification services?",
+    "options": {
+      "A": "Amazon SQS",
+      "B": "Amazon SNS",
+      "C": "Amazon SES",
+      "D": "Amazon Connect"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon SNS (Simple Notification Service) is a fully managed messaging service for both application-to-application (A2A) and application-to-person (A2P) communication."
+  },
+  {
+    "id": 24,
+    "question": "What is Amazon Glacier used for?",
+    "options": {
+      "A": "Real-time data processing",
+      "B": "Long-term archival storage",
+      "C": "Content delivery",
+      "D": "Database management"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon Glacier is a secure, durable, and extremely low-cost cloud storage service for data archiving and long-term backup."
+  },
+  {
+    "id": 25,
+    "question": "Which AWS service helps you manage and deploy applications?",
+    "options": {
+      "A": "AWS Elastic Beanstalk",
+      "B": "Amazon S3",
+      "C": "Amazon RDS",
+      "D": "Amazon VPC"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services. You simply upload your code and Elastic Beanstalk handles the deployment."
+  },
+  {
+    "id": 26,
+    "question": "What does AWS Auto Scaling do?",
+    "options": {
+      "A": "Automatically backs up data",
+      "B": "Automatically adjusts compute capacity",
+      "C": "Automatically updates software",
+      "D": "Automatically encrypts data"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost."
+  },
+  {
+    "id": 27,
+    "question": "Which AWS service provides email sending capabilities?",
+    "options": {
+      "A": "Amazon SNS",
+      "B": "Amazon SQS",
+      "C": "Amazon SES",
+      "D": "Amazon Connect"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon SES (Simple Email Service) is a cloud-based email sending service designed to help digital marketers and application developers send marketing, notification, and transactional emails."
+  },
+  {
+    "id": 28,
+    "question": "What is the purpose of AWS Edge Locations?",
+    "options": {
+      "A": "To host databases",
+      "B": "To cache content closer to users",
+      "C": "To run virtual machines",
+      "D": "To store backups"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Edge Locations are sites that CloudFront uses to cache copies of your content closer to your users for faster delivery."
+  },
+  {
+    "id": 29,
+    "question": "Which AWS service provides data warehousing capabilities?",
+    "options": {
+      "A": "Amazon RDS",
+      "B": "Amazon DynamoDB",
+      "C": "Amazon Redshift",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon Redshift is a fast, scalable data warehouse that makes it simple and cost-effective to analyze all your data across your data warehouse and data lake."
+  },
+  {
+    "id": 30,
+    "question": "What is AWS CodeCommit?",
+    "options": {
+      "A": "A deployment service",
+      "B": "A source control service",
+      "C": "A monitoring service",
+      "D": "A testing service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS CodeCommit is a fully-managed source control service that hosts secure Git-based repositories, making it easy for teams to collaborate on code."
+  },
+  {
+    "id": 31,
+    "question": "Which AWS service provides container orchestration?",
+    "options": {
+      "A": "Amazon ECS",
+      "B": "Amazon S3",
+      "C": "Amazon RDS",
+      "D": "Amazon VPC"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon ECS (Elastic Container Service) is a highly scalable, high-performance container orchestration service that supports Docker containers."
+  },
+  {
+    "id": 32,
+    "question": "What is the AWS Trusted Advisor?",
+    "options": {
+      "A": "A security service",
+      "B": "A cost optimization and best practices tool",
+      "C": "A backup service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Trusted Advisor is an online tool that provides real-time guidance to help you provision your resources following AWS best practices for cost optimization, security, fault tolerance, and performance."
+  },
+  {
+    "id": 33,
+    "question": "Which AWS service provides managed Kubernetes?",
+    "options": {
+      "A": "Amazon ECS",
+      "B": "Amazon EKS",
+      "C": "AWS Fargate",
+      "D": "AWS Lambda"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon EKS (Elastic Kubernetes Service) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to install and operate your own Kubernetes clusters."
+  },
+  {
+    "id": 34,
+    "question": "What is AWS Systems Manager?",
+    "options": {
+      "A": "A database management service",
+      "B": "A unified interface for managing AWS resources",
+      "C": "A content delivery service",
+      "D": "A storage service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Systems Manager gives you visibility and control of your infrastructure on AWS, providing a unified user interface to view operational data and automate operational tasks."
+  },
+  {
+    "id": 35,
+    "question": "Which AWS service provides machine learning capabilities?",
+    "options": {
+      "A": "Amazon SageMaker",
+      "B": "Amazon S3",
+      "C": "Amazon EC2",
+      "D": "Amazon VPC"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon SageMaker is a fully managed service that provides every developer and data scientist with the ability to build, train, and deploy machine learning models quickly."
+  },
+  {
+    "id": 36,
+    "question": "What is AWS Direct Connect?",
+    "options": {
+      "A": "A VPN service",
+      "B": "A dedicated network connection to AWS",
+      "C": "A load balancing service",
+      "D": "A DNS service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Direct Connect is a cloud service that links your network directly to AWS, bypassing the internet to deliver more consistent, lower-latency performance."
+  },
+  {
+    "id": 37,
+    "question": "Which AWS service provides API management?",
+    "options": {
+      "A": "Amazon API Gateway",
+      "B": "Amazon CloudFront",
+      "C": "Amazon Route 53",
+      "D": "AWS Lambda"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale."
+  },
+  {
+    "id": 38,
+    "question": "What is the AWS Global Infrastructure composed of?",
+    "options": {
+      "A": "Regions and Availability Zones",
+      "B": "Data centers only",
+      "C": "Edge locations only",
+      "D": "Virtual private clouds"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "The AWS Global Infrastructure is composed of AWS Regions and Availability Zones, with additional Edge Locations for content delivery."
+  },
+  {
+    "id": 39,
+    "question": "Which AWS service provides file storage for EC2 instances?",
+    "options": {
+      "A": "Amazon S3",
+      "B": "Amazon EBS",
+      "C": "Amazon EFS",
+      "D": "Amazon Glacier"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon EFS (Elastic File System) provides a simple, scalable, fully managed elastic NFS file system for use with AWS Cloud services and on-premises resources."
+  },
+  {
+    "id": 40,
+    "question": "What is AWS Config used for?",
+    "options": {
+      "A": "Cost management",
+      "B": "Resource configuration tracking and compliance",
+      "C": "Performance monitoring",
+      "D": "User management"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources for compliance and governance."
+  },
+  {
+    "id": 41,
+    "question": "Which AWS service provides block storage for EC2?",
+    "options": {
+      "A": "Amazon S3",
+      "B": "Amazon EBS",
+      "C": "Amazon EFS",
+      "D": "Amazon Glacier"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon EBS (Elastic Block Store) provides high-performance block storage for use with Amazon EC2 instances for both throughput and transaction intensive workloads."
+  },
+  {
+    "id": 42,
+    "question": "What is AWS Organizations used for?",
+    "options": {
+      "A": "Managing multiple AWS accounts",
+      "B": "Monitoring resources",
+      "C": "Storing data",
+      "D": "Running applications"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "AWS Organizations helps you centrally manage and govern your environment as you grow and scale your AWS resources by organizing and managing multiple AWS accounts."
+  },
+  {
+    "id": 43,
+    "question": "Which AWS service provides real-time data streaming?",
+    "options": {
+      "A": "Amazon SQS",
+      "B": "Amazon SNS",
+      "C": "Amazon Kinesis",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon Kinesis makes it easy to collect, process, and analyze real-time, streaming data so you can get timely insights and react quickly to new information."
+  },
+  {
+    "id": 44,
+    "question": "What is AWS Secrets Manager?",
+    "options": {
+      "A": "A backup service",
+      "B": "A service for managing secrets and credentials",
+      "C": "A monitoring service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources by enabling you to easily rotate, manage, and retrieve secrets."
+  },
+  {
+    "id": 45,
+    "question": "Which AWS service provides search capabilities?",
+    "options": {
+      "A": "Amazon CloudSearch",
+      "B": "Amazon S3",
+      "C": "Amazon RDS",
+      "D": "Amazon VPC"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon CloudSearch is a managed service that makes it simple and cost-effective to set up, manage, and scale a search solution for your website or application."
+  },
+  {
+    "id": 46,
+    "question": "What is AWS Step Functions?",
+    "options": {
+      "A": "A database service",
+      "B": "A workflow orchestration service",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Step Functions is a serverless function orchestrator that makes it easy to sequence AWS Lambda functions and multiple AWS services into business-critical applications."
+  },
+  {
+    "id": 47,
+    "question": "Which AWS service provides desktop virtualization?",
+    "options": {
+      "A": "Amazon WorkSpaces",
+      "B": "Amazon EC2",
+      "C": "Amazon VPC",
+      "D": "AWS Lambda"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon WorkSpaces is a managed, secure Desktop-as-a-Service (DaaS) solution that allows you to provision either Windows or Linux desktops."
+  },
+  {
+    "id": 48,
+    "question": "What is AWS X-Ray used for?",
+    "options": {
+      "A": "Cost analysis",
+      "B": "Application performance monitoring and debugging",
+      "C": "Data backup",
+      "D": "User management"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture."
+  },
+  {
+    "id": 49,
+    "question": "Which AWS service provides managed Apache Spark?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "Amazon EC2",
+      "C": "Amazon S3",
+      "D": "Amazon RDS"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR (Elastic MapReduce) is a cloud big data platform for processing vast amounts of data using open source tools such as Apache Spark, Apache Hive, and Apache HBase."
+  },
+  {
+    "id": 50,
+    "question": "What is AWS Batch?",
+    "options": {
+      "A": "A database service",
+      "B": "A batch computing service",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Batch enables you to run batch computing workloads on the AWS Cloud by dynamically provisioning the optimal quantity and type of compute resources."
+  },
+  {
+    "id": 51,
+    "question": "Which AWS service provides managed GraphQL APIs?",
+    "options": {
+      "A": "AWS AppSync",
+      "B": "Amazon API Gateway",
+      "C": "AWS Lambda",
+      "D": "Amazon CloudFront"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "AWS AppSync is a managed service that uses GraphQL to make it easy for applications to get exactly the data they need from multiple sources."
+  },
+  {
+    "id": 52,
+    "question": "What is Amazon Inspector?",
+    "options": {
+      "A": "A cost optimization tool",
+      "B": "An automated security assessment service",
+      "C": "A backup service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon Inspector is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS."
+  },
+  {
+    "id": 53,
+    "question": "Which AWS service provides managed Apache Kafka?",
+    "options": {
+      "A": "Amazon MSK",
+      "B": "Amazon SQS",
+      "C": "Amazon SNS",
+      "D": "Amazon Kinesis"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon MSK (Managed Streaming for Apache Kafka) is a fully managed service that makes it easy for you to build and run applications that use Apache Kafka."
+  },
+  {
+    "id": 54,
+    "question": "What is AWS Glue?",
+    "options": {
+      "A": "A database service",
+      "B": "An ETL (Extract, Transform, Load) service",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Glue is a fully managed extract, transform, and load (ETL) service that makes it easy for customers to prepare and load their data for analytics."
+  },
+  {
+    "id": 55,
+    "question": "Which AWS service provides managed time series database?",
+    "options": {
+      "A": "Amazon Timestream",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Timestream is a fast, scalable, and serverless time series database service for IoT and operational applications."
+  },
+  {
+    "id": 56,
+    "question": "What is AWS DataSync?",
+    "options": {
+      "A": "A database synchronization service",
+      "B": "A data transfer service",
+      "C": "A backup service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS DataSync is an online data transfer service that simplifies, automates, and accelerates moving data between on-premises storage and AWS storage services."
+  },
+  {
+    "id": 57,
+    "question": "Which AWS service provides managed blockchain?",
+    "options": {
+      "A": "Amazon Managed Blockchain",
+      "B": "Amazon EC2",
+      "C": "Amazon S3",
+      "D": "Amazon RDS"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Managed Blockchain is a fully managed service that makes it easy to create and manage scalable blockchain networks using popular open source frameworks."
+  },
+  {
+    "id": 58,
+    "question": "What is AWS Ground Station?",
+    "options": {
+      "A": "A data center service",
+      "B": "A satellite communication service",
+      "C": "A networking service",
+      "D": "A storage service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Ground Station is a fully managed service that lets you control satellite communications, process data, and scale your operations without having to worry about building or managing your own ground station infrastructure."
+  },
+  {
+    "id": 59,
+    "question": "Which AWS service provides managed Apache Cassandra?",
+    "options": {
+      "A": "Amazon Keyspaces",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service."
+  },
+  {
+    "id": 60,
+    "question": "What is AWS Outposts?",
+    "options": {
+      "A": "A cloud-only service",
+      "B": "A hybrid cloud service that extends AWS to on-premises",
+      "C": "A backup service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to virtually any datacenter, co-location space, or on-premises facility."
+  },
+  {
+    "id": 61,
+    "question": "Which AWS service provides managed Redis?",
+    "options": {
+      "A": "Amazon ElastiCache",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon ElastiCache is a web service that makes it easy to deploy, operate, and scale an in-memory cache in the cloud, supporting both Redis and Memcached."
+  },
+  {
+    "id": 62,
+    "question": "What is AWS License Manager?",
+    "options": {
+      "A": "A cost management service",
+      "B": "A service for managing software licenses",
+      "C": "A security service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS License Manager makes it easier to manage your software licenses from software vendors like Microsoft, SAP, Oracle, and IBM across AWS and on-premises environments."
+  },
+  {
+    "id": 63,
+    "question": "Which AWS service provides managed Apache Airflow?",
+    "options": {
+      "A": "Amazon MWAA",
+      "B": "AWS Step Functions",
+      "C": "AWS Lambda",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon MWAA (Managed Workflows for Apache Airflow) is a managed orchestration service for Apache Airflow that makes it easier to set up and operate end-to-end data pipelines."
+  },
+  {
+    "id": 64,
+    "question": "What is AWS Resource Access Manager (RAM)?",
+    "options": {
+      "A": "A memory management service",
+      "B": "A service for sharing AWS resources across accounts",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Resource Access Manager (RAM) helps you securely share your resources across AWS accounts, within your organization or organizational units (OUs), and with IAM roles and users."
+  },
+  {
+    "id": 65,
+    "question": "Which AWS service provides managed document database?",
+    "options": {
+      "A": "Amazon DocumentDB",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon DocumentDB (with MongoDB compatibility) is a fast, scalable, highly available, and fully managed document database service that supports MongoDB workloads."
+  },
+  {
+    "id": 66,
+    "question": "What is AWS App Runner?",
+    "options": {
+      "A": "A database service",
+      "B": "A containerized web application deployment service",
+      "C": "A storage service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS App Runner is a fully managed service that makes it easy for developers to quickly deploy containerized web applications and APIs, at scale and with no prior infrastructure experience required."
+  },
+  {
+    "id": 67,
+    "question": "Which AWS service provides managed graph database?",
+    "options": {
+      "A": "Amazon Neptune",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets."
+  },
+  {
+    "id": 68,
+    "question": "What is AWS Amplify?",
+    "options": {
+      "A": "A database service",
+      "B": "A full-stack application development platform",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Amplify is a set of tools and services that can be used together or on their own, to help front-end web and mobile developers build scalable full stack applications."
+  },
+  {
+    "id": 69,
+    "question": "Which AWS service provides managed in-memory database?",
+    "options": {
+      "A": "Amazon MemoryDB for Redis",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon MemoryDB for Redis is a Redis-compatible, durable, in-memory database service that delivers ultra-fast performance."
+  },
+  {
+    "id": 70,
+    "question": "What is AWS Proton?",
+    "options": {
+      "A": "A database service",
+      "B": "An application deployment service for container and serverless applications",
+      "C": "A storage service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Proton is the first fully managed application deployment service for container and serverless applications, helping platform teams to connect and coordinate all the different tools needed for infrastructure provisioning, code deployments, monitoring, and updates."
+  },
+  {
+    "id": 71,
+    "question": "Which AWS service provides quantum computing?",
+    "options": {
+      "A": "Amazon Braket",
+      "B": "Amazon EC2",
+      "C": "AWS Lambda",
+      "D": "Amazon SageMaker"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Braket is a fully managed quantum computing service that helps researchers and developers get started with the technology to accelerate research and discovery."
+  },
+  {
+    "id": 72,
+    "question": "What is AWS Snow Family?",
+    "options": {
+      "A": "A database service family",
+      "B": "A data migration and edge computing device family",
+      "C": "A storage service family",
+      "D": "A networking service family"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Snow Family is a collection of physical devices that help migrate large amounts of data into and out of the cloud without depending on networks."
+  },
+  {
+    "id": 73,
+    "question": "Which AWS service provides managed Apache Flink?",
+    "options": {
+      "A": "Amazon Kinesis Data Analytics",
+      "B": "Amazon EMR",
+      "C": "AWS Lambda",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Kinesis Data Analytics is the easiest way to transform and analyze streaming data in real time with Apache Flink."
+  },
+  {
+    "id": 74,
+    "question": "What is AWS Wavelength?",
+    "options": {
+      "A": "A database service",
+      "B": "A service that brings AWS to 5G networks",
+      "C": "A storage service",
+      "D": "A monitoring service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Wavelength brings AWS services to the edge of the 5G network, minimizing the latency to connect to an application from a 5G device."
+  },
+  {
+    "id": 75,
+    "question": "Which AWS service provides managed Prometheus?",
+    "options": {
+      "A": "Amazon Managed Service for Prometheus",
+      "B": "Amazon CloudWatch",
+      "C": "AWS X-Ray",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Managed Service for Prometheus is a serverless, Prometheus-compatible monitoring service for container metrics that makes it easier to securely monitor container environments at scale."
+  },
+  {
+    "id": 76,
+    "question": "What is AWS Local Zones?",
+    "options": {
+      "A": "A database service",
+      "B": "AWS infrastructure deployments that place compute and storage closer to end-users",
+      "C": "A storage service",
+      "D": "A networking service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Local Zones are a type of AWS infrastructure deployment that places compute, storage, database, and other select AWS services closer to large population and industry centers."
+  },
+  {
+    "id": 77,
+    "question": "Which AWS service provides managed Grafana?",
+    "options": {
+      "A": "Amazon Managed Grafana",
+      "B": "Amazon CloudWatch",
+      "C": "AWS X-Ray",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon Managed Grafana is a fully managed service for open source Grafana developed in collaboration with Grafana Labs."
+  },
+  {
+    "id": 78,
+    "question": "What is AWS Fault Injection Simulator?",
+    "options": {
+      "A": "A database testing service",
+      "B": "A chaos engineering service",
+      "C": "A storage testing service",
+      "D": "A networking testing service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Fault Injection Simulator (FIS) is a fully managed service for running fault injection experiments on AWS that makes it easier to improve an application's performance, observability, and resiliency."
+  },
+  {
+    "id": 79,
+    "question": "Which AWS service provides managed OpenSearch?",
+    "options": {
+      "A": "Amazon OpenSearch Service",
+      "B": "Amazon CloudSearch",
+      "C": "Amazon S3",
+      "D": "Amazon RDS"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon OpenSearch Service makes it easy for you to perform interactive log analytics, real-time application monitoring, website search, and more."
+  },
+  {
+    "id": 80,
+    "question": "What is AWS Compute Optimizer?",
+    "options": {
+      "A": "A database optimization service",
+      "B": "A service that recommends optimal AWS compute resources",
+      "C": "A storage optimization service",
+      "D": "A networking optimization service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Compute Optimizer recommends optimal AWS compute resources for your workloads to reduce costs and improve performance by using machine learning."
+  },
+  {
+    "id": 81,
+    "question": "Which AWS service provides managed Apache Hudi?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "AWS Glue",
+      "C": "Amazon S3",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Hudi, an open-source data management framework used to simplify incremental data processing and data pipeline development."
+  },
+  {
+    "id": 82,
+    "question": "What is AWS Migration Hub?",
+    "options": {
+      "A": "A database migration service",
+      "B": "A central place to track application migrations",
+      "C": "A storage migration service",
+      "D": "A networking migration service"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Migration Hub provides a single location to track the progress of application migrations across multiple AWS and partner solutions."
+  },
+  {
+    "id": 83,
+    "question": "Which AWS service provides managed Apache Iceberg?",
+    "options": {
+      "A": "AWS Lake Formation",
+      "B": "Amazon S3",
+      "C": "Amazon EMR",
+      "D": "AWS Glue"
+    },
+    "correctAnswerLetter": "C",
+    "explanation": "Amazon EMR supports Apache Iceberg, an open table format for huge analytic datasets that brings the reliability and simplicity of SQL tables to big data."
+  },
+  {
+    "id": 84,
+    "question": "What is AWS Application Discovery Service?",
+    "options": {
+      "A": "A service for discovering applications in the cloud",
+      "B": "A service for discovering on-premises applications for migration planning",
+      "C": "A service for discovering security vulnerabilities",
+      "D": "A service for discovering cost optimization opportunities"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Application Discovery Service helps enterprise customers plan migration projects by gathering information about their on-premises data centers."
+  },
+  {
+    "id": 85,
+    "question": "Which AWS service provides managed Apache Delta Lake?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "AWS Glue",
+      "C": "Amazon S3",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Delta Lake, an open-source storage layer that brings ACID transactions to Apache Spark and big data workloads."
+  },
+  {
+    "id": 86,
+    "question": "What is AWS Well-Architected Tool?",
+    "options": {
+      "A": "A cost optimization tool",
+      "B": "A tool for reviewing architectures against AWS best practices",
+      "C": "A monitoring tool",
+      "D": "A deployment tool"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Well-Architected Tool helps you review the state of your workloads and compares them to the latest AWS architectural best practices."
+  },
+  {
+    "id": 87,
+    "question": "Which AWS service provides managed Apache Ranger?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "AWS Lake Formation",
+      "C": "Amazon S3",
+      "D": "AWS Glue"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Ranger, which provides a centralized security administration framework to manage fine-grained access control over Hadoop data."
+  },
+  {
+    "id": 88,
+    "question": "What is AWS Resource Groups?",
+    "options": {
+      "A": "A service for grouping users",
+      "B": "A service for organizing and managing AWS resources",
+      "C": "A service for grouping applications",
+      "D": "A service for grouping data"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Resource Groups lets you organize AWS resources that are related to an application or project, making it easier to manage and automate tasks on large numbers of resources at one time."
+  },
+  {
+    "id": 89,
+    "question": "Which AWS service provides managed Apache Superset?",
+    "options": {
+      "A": "Amazon QuickSight",
+      "B": "Amazon EMR",
+      "C": "AWS Glue",
+      "D": "Amazon Managed Apache Airflow"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "Amazon EMR supports Apache Superset, a modern data exploration and visualization platform that makes it easy to explore and visualize data."
+  },
+  {
+    "id": 90,
+    "question": "What is AWS Personal Health Dashboard?",
+    "options": {
+      "A": "A service for monitoring personal fitness",
+      "B": "A personalized view of AWS service health",
+      "C": "A service for monitoring application health",
+      "D": "A service for monitoring network health"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you."
+  },
+  {
+    "id": 91,
+    "question": "Which AWS service provides managed Apache Zeppelin?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "Amazon SageMaker",
+      "C": "AWS Glue",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Zeppelin, a web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala, and more."
+  },
+  {
+    "id": 92,
+    "question": "What is AWS Service Health Dashboard?",
+    "options": {
+      "A": "A dashboard for monitoring personal health",
+      "B": "A public dashboard showing AWS service status",
+      "C": "A dashboard for monitoring application health",
+      "D": "A dashboard for monitoring cost health"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Service Health Dashboard shows the general status of AWS services, providing a public view of service availability across all AWS regions."
+  },
+  {
+    "id": 93,
+    "question": "Which AWS service provides managed Apache Livy?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "AWS Glue",
+      "C": "Amazon SageMaker",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Livy, a service that enables easy interaction with a Spark cluster over a REST interface."
+  },
+  {
+    "id": 94,
+    "question": "What is AWS Billing and Cost Management?",
+    "options": {
+      "A": "A service for managing AWS resources",
+      "B": "A service for monitoring and managing AWS costs",
+      "C": "A service for managing AWS users",
+      "D": "A service for managing AWS applications"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs."
+  },
+  {
+    "id": 95,
+    "question": "Which AWS service provides managed Apache Phoenix?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Redshift"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Phoenix, a relational database layer over HBase for low latency applications."
+  },
+  {
+    "id": 96,
+    "question": "What is AWS Support?",
+    "options": {
+      "A": "A service for technical support and guidance",
+      "B": "A service for application support",
+      "C": "A service for infrastructure support",
+      "D": "A service for cost support"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "AWS Support provides a mix of tools and technology, people, and programs designed to proactively help you optimize performance, lower costs, and innovate faster."
+  },
+  {
+    "id": 97,
+    "question": "Which AWS service provides managed Apache Tez?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "AWS Glue",
+      "C": "Amazon EC2",
+      "D": "Amazon S3"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Tez, a framework for building high-performance batch and interactive data processing applications."
+  },
+  {
+    "id": 98,
+    "question": "What is the AWS Acceptable Use Policy?",
+    "options": {
+      "A": "A policy for acceptable costs",
+      "B": "A policy that describes prohibited uses of AWS services",
+      "C": "A policy for acceptable performance",
+      "D": "A policy for acceptable security"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Acceptable Use Policy describes prohibited uses of the web services offered by AWS and is designed to protect AWS customers and the general Internet community from unethical, irresponsible, and illegal activity."
+  },
+  {
+    "id": 99,
+    "question": "Which AWS service provides managed Apache Mahout?",
+    "options": {
+      "A": "Amazon EMR",
+      "B": "Amazon SageMaker",
+      "C": "AWS Glue",
+      "D": "Amazon EC2"
+    },
+    "correctAnswerLetter": "A",
+    "explanation": "Amazon EMR supports Apache Mahout, a distributed linear algebra framework and mathematically expressive Scala DSL designed to let mathematicians, statisticians, and data scientists quickly implement their own algorithms."
+  },
+  {
+    "id": 100,
+    "question": "What is the AWS Customer Agreement?",
+    "options": {
+      "A": "An agreement for customer support",
+      "B": "The main contract between AWS and customers",
+      "C": "An agreement for customer data",
+      "D": "An agreement for customer applications"
+    },
+    "correctAnswerLetter": "B",
+    "explanation": "The AWS Customer Agreement is the main contract that governs your use of AWS services and contains the terms and conditions for using AWS."
+  }
+]
+
