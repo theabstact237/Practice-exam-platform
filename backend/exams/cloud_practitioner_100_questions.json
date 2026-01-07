@@ -1,0 +1,2502 @@
+[
+  {
+    "question_text": "What is the AWS shared responsibility model?",
+    "domain": "Security",
+    "difficulty": "easy",
+    "explanation": "The AWS shared responsibility model divides security responsibilities: AWS secures the underlying infrastructure (security OF the cloud), while customers secure their data, applications, and configurations (security IN the cloud).",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "AWS secures the cloud infrastructure, customers secure their data and applications"
+      },
+      {
+        "letter": "B",
+        "text": "Customers are responsible for all security aspects"
+      },
+      {
+        "letter": "C",
+        "text": "AWS is responsible for all security aspects"
+      },
+      {
+        "letter": "D",
+        "text": "Security responsibilities are equally shared"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides scalable object storage?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "Amazon S3 (Simple Storage Service) provides scalable object storage in the cloud. It's designed to store and retrieve any amount of data from anywhere on the web.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EBS"
+      },
+      {
+        "letter": "B",
+        "text": "S3"
+      },
+      {
+        "letter": "C",
+        "text": "EFS"
+      },
+      {
+        "letter": "D",
+        "text": "Glacier"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the primary benefit of using AWS Cloud?",
+    "domain": "Cloud Concepts",
+    "difficulty": "easy",
+    "explanation": "The primary benefits of AWS Cloud include cost savings, scalability, flexibility, and the ability to pay only for what you use without upfront infrastructure investments.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Fixed costs"
+      },
+      {
+        "letter": "B",
+        "text": "Limited scalability"
+      },
+      {
+        "letter": "C",
+        "text": "Pay-as-you-go pricing and scalability"
+      },
+      {
+        "letter": "D",
+        "text": "Physical server management"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides virtual servers in the cloud?",
+    "domain": "EC2",
+    "difficulty": "easy",
+    "explanation": "Amazon EC2 (Elastic Compute Cloud) provides resizable compute capacity in the cloud, allowing you to launch virtual servers as needed.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2"
+      },
+      {
+        "letter": "B",
+        "text": "S3"
+      },
+      {
+        "letter": "C",
+        "text": "RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS Well-Architected Framework?",
+    "domain": "Architecture",
+    "difficulty": "medium",
+    "explanation": "The AWS Well-Architected Framework provides best practices and guidance for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A deployment tool"
+      },
+      {
+        "letter": "B",
+        "text": "Best practices for cloud architecture"
+      },
+      {
+        "letter": "C",
+        "text": "A monitoring service"
+      },
+      {
+        "letter": "D",
+        "text": "A database service"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS support plan includes 24/7 technical support?",
+    "domain": "Support",
+    "difficulty": "medium",
+    "explanation": "AWS Business and Enterprise support plans include 24/7 technical support. Basic support includes account and billing support only, while Developer support includes business hours support.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Basic"
+      },
+      {
+        "letter": "B",
+        "text": "Developer"
+      },
+      {
+        "letter": "C",
+        "text": "Business and Enterprise"
+      },
+      {
+        "letter": "D",
+        "text": "All plans"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS Identity and Access Management (IAM)?",
+    "domain": "IAM",
+    "difficulty": "easy",
+    "explanation": "AWS IAM enables you to manage access to AWS services and resources securely by creating users, groups, roles, and policies.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manage user access and permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Monitor AWS resources"
+      },
+      {
+        "letter": "C",
+        "text": "Store data"
+      },
+      {
+        "letter": "D",
+        "text": "Deploy applications"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service is used for content delivery?",
+    "domain": "CloudFront",
+    "difficulty": "easy",
+    "explanation": "Amazon CloudFront is a content delivery network (CDN) service that delivers data, videos, applications, and APIs to users globally with low latency.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "S3"
+      },
+      {
+        "letter": "B",
+        "text": "CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "API Gateway"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS Regions?",
+    "domain": "Cloud Concepts",
+    "difficulty": "easy",
+    "explanation": "AWS Regions are geographic areas where AWS has data centers. Each region consists of multiple Availability Zones and is isolated from other regions.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A single data center"
+      },
+      {
+        "letter": "B",
+        "text": "A service"
+      },
+      {
+        "letter": "C",
+        "text": "Geographic areas with data centers"
+      },
+      {
+        "letter": "D",
+        "text": "A network protocol"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides managed relational databases?",
+    "domain": "RDS",
+    "difficulty": "easy",
+    "explanation": "Amazon RDS (Relational Database Service) makes it easy to set up, operate, and scale relational databases in the cloud, supporting MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "RDS"
+      },
+      {
+        "letter": "B",
+        "text": "DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Redshift"
+      },
+      {
+        "letter": "D",
+        "text": "ElastiCache"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS CloudWatch?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "Amazon CloudWatch is a monitoring and observability service that provides data and actionable insights for AWS resources, applications, and services.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store data"
+      },
+      {
+        "letter": "B",
+        "text": "Monitor and observe AWS resources"
+      },
+      {
+        "letter": "C",
+        "text": "Deploy applications"
+      },
+      {
+        "letter": "D",
+        "text": "Manage users"
+      }
+    ]
+  },
+  {
+    "question_text": "Which pricing model allows you to pay only for what you use?",
+    "domain": "Pricing",
+    "difficulty": "easy",
+    "explanation": "Pay-as-you-go pricing allows you to pay only for the AWS services you consume, with no upfront costs or long-term commitments.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Pay-as-you-go"
+      },
+      {
+        "letter": "B",
+        "text": "Fixed pricing"
+      },
+      {
+        "letter": "C",
+        "text": "Annual contracts"
+      },
+      {
+        "letter": "D",
+        "text": "Upfront payment"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an Availability Zone?",
+    "domain": "Cloud Concepts",
+    "difficulty": "medium",
+    "explanation": "An Availability Zone is one or more discrete data centers with redundant power, networking, and connectivity in an AWS Region. They are designed for fault isolation.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A geographic region"
+      },
+      {
+        "letter": "B",
+        "text": "Isolated data centers within a region"
+      },
+      {
+        "letter": "C",
+        "text": "A service"
+      },
+      {
+        "letter": "D",
+        "text": "A network protocol"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides serverless compute?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "AWS Lambda is a serverless compute service that runs code in response to events without provisioning or managing servers.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2"
+      },
+      {
+        "letter": "B",
+        "text": "ECS"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Elastic Beanstalk"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS Trusted Advisor?",
+    "domain": "Support",
+    "difficulty": "medium",
+    "explanation": "AWS Trusted Advisor provides real-time guidance to help you provision resources following AWS best practices for cost optimization, security, performance, and fault tolerance.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Provide best practice recommendations"
+      },
+      {
+        "letter": "B",
+        "text": "Deploy applications"
+      },
+      {
+        "letter": "C",
+        "text": "Store data"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor logs"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides DNS management?",
+    "domain": "Route 53",
+    "difficulty": "easy",
+    "explanation": "Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service designed to give developers and businesses a reliable way to route end users to internet applications.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "CloudFront"
+      },
+      {
+        "letter": "B",
+        "text": "Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "API Gateway"
+      },
+      {
+        "letter": "D",
+        "text": "VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Infrastructure as Code (IaC)?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "Infrastructure as Code is the practice of managing and provisioning computing infrastructure through machine-readable definition files, rather than through physical hardware configuration or interactive configuration tools.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Physical infrastructure management"
+      },
+      {
+        "letter": "B",
+        "text": "Manual server configuration"
+      },
+      {
+        "letter": "C",
+        "text": "Managing infrastructure through code"
+      },
+      {
+        "letter": "D",
+        "text": "Cloud storage"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides managed container orchestration?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "Amazon ECS (Elastic Container Service) is a fully managed container orchestration service that makes it easy to run, stop, and manage Docker containers on a cluster.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "ECS"
+      },
+      {
+        "letter": "B",
+        "text": "EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS Budgets?",
+    "domain": "Billing",
+    "difficulty": "easy",
+    "explanation": "AWS Budgets allows you to set custom cost and usage budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store data"
+      },
+      {
+        "letter": "B",
+        "text": "Track and manage costs"
+      },
+      {
+        "letter": "C",
+        "text": "Deploy applications"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor performance"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides virtual private networks?",
+    "domain": "VPC",
+    "difficulty": "easy",
+    "explanation": "Amazon VPC (Virtual Private Cloud) lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2"
+      },
+      {
+        "letter": "B",
+        "text": "S3"
+      },
+      {
+        "letter": "C",
+        "text": "VPC"
+      },
+      {
+        "letter": "D",
+        "text": "CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 bucket?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Container for storing objects"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an EC2 instance?",
+    "domain": "EC2",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Virtual server in the cloud"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What database engines does RDS support?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "MySQL, PostgreSQL, MariaDB, Oracle, SQL Server"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is serverless computing?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Running code without managing servers"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CDN?",
+    "domain": "CloudFront",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Content Delivery Network for faster content distribution"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DNS?",
+    "domain": "Route 53",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Domain Name System for translating domain names"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a subnet?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Range of IP addresses in your VPC"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an IAM user?",
+    "domain": "IAM",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Identity with long-term credentials"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CloudWatch metric?",
+    "domain": "CloudWatch",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Data point representing system performance"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 storage class?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Different storage options for different use cases"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an EC2 AMI?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Amazon Machine Image - template for instances"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Multi-AZ?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "High availability deployment across zones"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What triggers Lambda functions?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Events from AWS services or applications"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront origin?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Source location for content distribution"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 health check?",
+    "domain": "Route 53",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Monitor resource health and route traffic"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a security group?",
+    "domain": "VPC",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Virtual firewall for instances"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an IAM role?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Temporary credentials for services"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch alarm?",
+    "domain": "CloudWatch",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Notification when metric crosses threshold"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 versioning?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Keep multiple versions of objects"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Auto Scaling?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically adjust instance count"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS snapshot?",
+    "domain": "RDS",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Backup of database at a point in time"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda cold start?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Initialization delay when function is invoked"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront cache?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store content at edge locations"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 record type?",
+    "domain": "Route 53",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "DNS record types like A, CNAME, MX"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an internet gateway?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Connect VPC to the internet"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM policy?",
+    "domain": "IAM",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Document defining permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Logs?",
+    "domain": "CloudWatch",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Centralized log storage and analysis"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 lifecycle policy?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically transition objects between classes"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 instance type?",
+    "domain": "EC2",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "CPU, memory, storage, and networking capacity"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS read replica?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Copy of database for read scaling"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Code that runs in response to events"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront distribution?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Configuration for content delivery"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 hosted zone?",
+    "domain": "Route 53",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Container for DNS records"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a NAT gateway?",
+    "domain": "VPC",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Allow instances to access internet privately"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM group?",
+    "domain": "IAM",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Collection of users with shared permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch dashboard?",
+    "domain": "CloudWatch",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Customizable view of metrics"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 encryption?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Protect data at rest"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Elastic IP?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Static IPv4 address for instances"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS parameter group?",
+    "domain": "RDS",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Database configuration settings"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda layer?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Package libraries and dependencies"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront signed URL?",
+    "domain": "CloudFront",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Time-limited access to content"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 failover?",
+    "domain": "Route 53",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Route traffic to backup resources"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is VPC peering?",
+    "domain": "VPC",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Connect two VPCs together"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM access key?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Credentials for programmatic access"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Events?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Event-driven compute service"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 transfer acceleration?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Faster uploads using CloudFront"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Spot Instance?",
+    "domain": "EC2",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Discount capacity with interruption risk"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS encryption?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Encrypt database at rest"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda concurrency?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Number of simultaneous executions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront origin access identity?",
+    "domain": "CloudFront",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Secure S3 bucket access"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 weighted routing?",
+    "domain": "Route 53",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Distribute traffic across resources"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is VPC endpoint?",
+    "domain": "VPC",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Private connection to AWS services"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM MFA?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Multi-factor authentication"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch metric filter?",
+    "domain": "CloudWatch",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Extract metrics from logs"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 cross-region replication?",
+    "domain": "S3",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Copy objects to another region"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 placement group?",
+    "domain": "EC2",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Logical grouping for low latency"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS maintenance window?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Scheduled time for updates"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda reserved concurrency?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Guaranteed execution capacity"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront geo restriction?",
+    "domain": "CloudFront",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Restrict content by location"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 latency routing?",
+    "domain": "Route 53",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Route based on lowest latency"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is VPC flow logs?",
+    "domain": "VPC",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Capture IP traffic information"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM condition key?",
+    "domain": "IAM",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Additional policy constraints"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Insights?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Query and analyze log data"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 intelligent tiering?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically move objects to optimal class"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 dedicated instance?",
+    "domain": "EC2",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Single-tenant hardware"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS automated backup?",
+    "domain": "RDS",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatic daily backups"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda provisioned concurrency?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Pre-initialize functions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront cache behavior?",
+    "domain": "CloudFront",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Rules for caching content"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 geolocation routing?",
+    "domain": "Route 53",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Route based on user location"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is VPC CIDR block?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "IP address range for VPC"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM service-linked role?",
+    "domain": "IAM",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Role linked to AWS service"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch log group?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudWatch for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Container for log streams"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 bucket policy?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of S3 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Access control for bucket"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 user data?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of EC2 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Scripts run at instance launch"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for EC2"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for EC2"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS read replica lag?",
+    "domain": "RDS",
+    "difficulty": "hard",
+    "explanation": "This question tests foundational knowledge of RDS for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Delay in replication"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for RDS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for RDS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for RDS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda environment variable?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Lambda for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Configuration values for functions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront invalidation?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of CloudFront for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Remove content from cache"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFront"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFront"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFront"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 alias record?",
+    "domain": "Route 53",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of Route 53 for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Route to AWS resource"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Route 53"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Route 53"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Route 53"
+      }
+    ]
+  },
+  {
+    "question_text": "What is VPC internet gateway?",
+    "domain": "VPC",
+    "difficulty": "easy",
+    "explanation": "This question tests foundational knowledge of VPC for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Gateway for internet access"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for VPC"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for VPC"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM password policy?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "This question tests foundational knowledge of IAM for AWS Cloud Practitioner certification. Understanding basic AWS concepts and services is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Password requirements for users"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  }
+]

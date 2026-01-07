@@ -1,0 +1,2502 @@
+[
+  {
+    "question_text": "What is the primary purpose of AWS CloudFormation?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "AWS CloudFormation enables Infrastructure as Code (IaC) by allowing you to model and provision AWS resources using templates. This ensures consistent, repeatable infrastructure deployments.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Infrastructure as Code for AWS resources"
+      },
+      {
+        "letter": "B",
+        "text": "Container orchestration service"
+      },
+      {
+        "letter": "C",
+        "text": "Serverless compute service"
+      },
+      {
+        "letter": "D",
+        "text": "Content delivery network"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides scalable object storage?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "Amazon S3 (Simple Storage Service) provides scalable object storage in the cloud. It's designed to store and retrieve any amount of data from anywhere on the web.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EBS"
+      },
+      {
+        "letter": "B",
+        "text": "S3"
+      },
+      {
+        "letter": "C",
+        "text": "EFS"
+      },
+      {
+        "letter": "D",
+        "text": "Glacier"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum number of availability zones in an AWS region?",
+    "domain": "EC2",
+    "difficulty": "hard",
+    "explanation": "AWS regions contain multiple Availability Zones (AZs). While the exact number varies by region, most regions have 3-6 availability zones. There's no fixed maximum, but typically regions have between 2-6 AZs.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "2"
+      },
+      {
+        "letter": "B",
+        "text": "3"
+      },
+      {
+        "letter": "C",
+        "text": "Varies by region, typically 3-6"
+      },
+      {
+        "letter": "D",
+        "text": "10"
+      }
+    ]
+  },
+  {
+    "question_text": "Which service is used for serverless compute in AWS?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "AWS Lambda is a serverless compute service that runs code in response to events and automatically manages the compute resources. You only pay for the compute time you consume.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lambda"
+      },
+      {
+        "letter": "B",
+        "text": "EC2"
+      },
+      {
+        "letter": "C",
+        "text": "ECS"
+      },
+      {
+        "letter": "D",
+        "text": "Elastic Beanstalk"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of an IAM role?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "An IAM role is an AWS identity with permission policies that determine what the identity can and cannot do in AWS. Roles are similar to users, but are intended to be assumable by anyone who needs them, including AWS services.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "To store user credentials"
+      },
+      {
+        "letter": "B",
+        "text": "To grant permissions to AWS resources and services"
+      },
+      {
+        "letter": "C",
+        "text": "To manage billing"
+      },
+      {
+        "letter": "D",
+        "text": "To configure network settings"
+      }
+    ]
+  },
+  {
+    "question_text": "Which storage class in S3 provides the lowest cost for long-term archival?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Glacier Deep Archive is the lowest-cost storage class in S3, designed for long-term archival and digital preservation. It offers retrieval times of 12 hours.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "S3 Standard"
+      },
+      {
+        "letter": "B",
+        "text": "S3 Intelligent-Tiering"
+      },
+      {
+        "letter": "C",
+        "text": "S3 Glacier"
+      },
+      {
+        "letter": "D",
+        "text": "S3 Glacier Deep Archive"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of a VPC?",
+    "domain": "VPC",
+    "difficulty": "easy",
+    "explanation": "A Virtual Private Cloud (VPC) is a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. It provides network-level isolation and control.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "To create a logically isolated network in AWS"
+      },
+      {
+        "letter": "B",
+        "text": "To manage user access"
+      },
+      {
+        "letter": "C",
+        "text": "To store data"
+      },
+      {
+        "letter": "D",
+        "text": "To run containers"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service is used for real-time data streaming?",
+    "domain": "Kinesis",
+    "difficulty": "medium",
+    "explanation": "Amazon Kinesis is a platform for streaming data on AWS. It enables you to collect, process, and analyze real-time, streaming data so you can get timely insights and react quickly to new information.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "SQS"
+      },
+      {
+        "letter": "B",
+        "text": "Kinesis"
+      },
+      {
+        "letter": "C",
+        "text": "SNS"
+      },
+      {
+        "letter": "D",
+        "text": "EventBridge"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the difference between SQS and SNS?",
+    "domain": "Messaging",
+    "difficulty": "hard",
+    "explanation": "SQS is a message queuing service (point-to-point), while SNS is a pub/sub messaging service (one-to-many). SQS decouples and scales microservices, while SNS sends notifications to multiple subscribers.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "SQS is for storage, SNS is for compute"
+      },
+      {
+        "letter": "B",
+        "text": "SQS is faster than SNS"
+      },
+      {
+        "letter": "C",
+        "text": "SQS is point-to-point, SNS is pub/sub"
+      },
+      {
+        "letter": "D",
+        "text": "SQS is for batch processing, SNS is for real-time"
+      }
+    ]
+  },
+  {
+    "question_text": "Which database service is best for NoSQL document storage?",
+    "domain": "Database",
+    "difficulty": "medium",
+    "explanation": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. It's designed for document and key-value data models.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "RDS"
+      },
+      {
+        "letter": "B",
+        "text": "DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Redshift"
+      },
+      {
+        "letter": "D",
+        "text": "ElastiCache"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an EC2 instance type?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "An EC2 instance type determines the hardware of the host computer for your instance.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A combination of CPU, memory, storage, and networking capacity"
+      },
+      {
+        "letter": "B",
+        "text": "The operating system running on the instance"
+      },
+      {
+        "letter": "C",
+        "text": "The region where the instance is located"
+      },
+      {
+        "letter": "D",
+        "text": "The security group attached to the instance"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of an Auto Scaling Group?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "Auto Scaling Groups automatically adjust the number of EC2 instances based on demand, ensuring you have the right amount of capacity.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "To manually scale instances"
+      },
+      {
+        "letter": "B",
+        "text": "To automatically adjust capacity based on demand"
+      },
+      {
+        "letter": "C",
+        "text": "To manage instance permissions"
+      },
+      {
+        "letter": "D",
+        "text": "To configure instance networking"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Cross-Region Replication used for?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Cross-Region Replication automatically replicates objects across AWS regions for compliance, lower latency, or disaster recovery.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "To reduce storage costs"
+      },
+      {
+        "letter": "B",
+        "text": "To improve upload speeds"
+      },
+      {
+        "letter": "C",
+        "text": "To replicate data across regions automatically"
+      },
+      {
+        "letter": "D",
+        "text": "To encrypt data at rest"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a NAT Gateway used for?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "A NAT Gateway allows instances in a private subnet to connect to the internet or other AWS services while preventing the internet from initiating connections with those instances.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "To allow private instances to access the internet"
+      },
+      {
+        "letter": "B",
+        "text": "To connect VPCs together"
+      },
+      {
+        "letter": "C",
+        "text": "To provide DNS resolution"
+      },
+      {
+        "letter": "D",
+        "text": "To manage IAM permissions"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum execution time for a Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda functions have a maximum execution time of 15 minutes (900 seconds). For longer-running tasks, consider other services.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "5 minutes"
+      },
+      {
+        "letter": "B",
+        "text": "10 minutes"
+      },
+      {
+        "letter": "C",
+        "text": "30 minutes"
+      },
+      {
+        "letter": "D",
+        "text": "15 minutes"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the principle of least privilege?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "The principle of least privilege means granting only the minimum permissions necessary to perform a task, reducing security risks.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Granting all permissions by default"
+      },
+      {
+        "letter": "B",
+        "text": "Granting only minimum necessary permissions"
+      },
+      {
+        "letter": "C",
+        "text": "Using IAM roles for everything"
+      },
+      {
+        "letter": "D",
+        "text": "Sharing credentials between users"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch used for?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "Amazon CloudWatch is a monitoring and observability service that provides data and actionable insights for AWS resources and applications.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Monitoring and observability of AWS resources"
+      },
+      {
+        "letter": "B",
+        "text": "Storing application code"
+      },
+      {
+        "letter": "C",
+        "text": "Managing user access"
+      },
+      {
+        "letter": "D",
+        "text": "Provisioning infrastructure"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an RDS Multi-AZ deployment?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Multi-AZ deployments provide enhanced availability and durability by maintaining a synchronous standby replica in a different Availability Zone.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Multiple databases in one region"
+      },
+      {
+        "letter": "B",
+        "text": "Database backup to S3"
+      },
+      {
+        "letter": "C",
+        "text": "Synchronous standby replica in another AZ"
+      },
+      {
+        "letter": "D",
+        "text": "Read replicas for scaling"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53?",
+    "domain": "Route53",
+    "difficulty": "medium",
+    "explanation": "Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service designed to give developers and businesses a reliable way to route end users to internet applications.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A load balancer service"
+      },
+      {
+        "letter": "B",
+        "text": "A DNS and domain name service"
+      },
+      {
+        "letter": "C",
+        "text": "A content delivery network"
+      },
+      {
+        "letter": "D",
+        "text": "A database service"
+      }
+    ]
+  },
+  {
+    "question_text": "What does AWS Elastic Beanstalk do?",
+    "domain": "Elastic Beanstalk",
+    "difficulty": "medium",
+    "explanation": "AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services. It automatically handles capacity provisioning, load balancing, and application health monitoring.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically deploys and scales web applications"
+      },
+      {
+        "letter": "B",
+        "text": "Provides serverless compute"
+      },
+      {
+        "letter": "C",
+        "text": "Manages database connections"
+      },
+      {
+        "letter": "D",
+        "text": "Configures network security"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "Amazon CloudFront is a content delivery network (CDN) service that delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A compute service"
+      },
+      {
+        "letter": "B",
+        "text": "A storage service"
+      },
+      {
+        "letter": "C",
+        "text": "A database service"
+      },
+      {
+        "letter": "D",
+        "text": "A content delivery network (CDN)"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Amazon ECS?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "Amazon Elastic Container Service (ECS) is a fully managed container orchestration service that makes it easy to deploy, manage, and scale containerized applications.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A serverless compute service"
+      },
+      {
+        "letter": "B",
+        "text": "A container orchestration service"
+      },
+      {
+        "letter": "C",
+        "text": "A virtual machine service"
+      },
+      {
+        "letter": "D",
+        "text": "A database service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Amazon EKS?",
+    "domain": "EKS",
+    "difficulty": "medium",
+    "explanation": "Amazon Elastic Kubernetes Service (EKS) is a managed service that makes it easy to run Kubernetes on AWS without needing to install and operate your own Kubernetes control plane.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A container registry"
+      },
+      {
+        "letter": "B",
+        "text": "A serverless platform"
+      },
+      {
+        "letter": "C",
+        "text": "A managed Kubernetes service"
+      },
+      {
+        "letter": "D",
+        "text": "A monitoring service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 versioning?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 versioning enables you to keep multiple versions of an object in the same bucket, protecting against accidental deletion or overwrites.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Keeping multiple versions of objects"
+      },
+      {
+        "letter": "B",
+        "text": "Storing objects in multiple regions"
+      },
+      {
+        "letter": "C",
+        "text": "Encrypting objects automatically"
+      },
+      {
+        "letter": "D",
+        "text": "Compressing objects to save space"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a Security Group?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "A Security Group acts as a virtual firewall that controls the traffic for one or more instances. It operates at the instance level.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A network routing table"
+      },
+      {
+        "letter": "B",
+        "text": "A virtual firewall for instances"
+      },
+      {
+        "letter": "C",
+        "text": "A load balancer configuration"
+      },
+      {
+        "letter": "D",
+        "text": "A DNS resolver"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an Elastic IP address?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "An Elastic IP address is a static IPv4 address designed for dynamic cloud computing. It's associated with your AWS account and can be remapped to different instances.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A dynamic IP address"
+      },
+      {
+        "letter": "B",
+        "text": "A private IP address"
+      },
+      {
+        "letter": "C",
+        "text": "A static IPv4 address for your account"
+      },
+      {
+        "letter": "D",
+        "text": "An IPv6 address"
+      }
+    ]
+  },
+  {
+    "question_text": "What triggers can invoke a Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda functions can be triggered by various AWS services including API Gateway, S3, DynamoDB, SNS, SQS, CloudWatch Events, and more.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only API Gateway"
+      },
+      {
+        "letter": "B",
+        "text": "Only S3"
+      },
+      {
+        "letter": "C",
+        "text": "Only manual invocation"
+      },
+      {
+        "letter": "D",
+        "text": "Multiple AWS services and events"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Global Tables?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Global Tables provide multi-region, multi-active replication for DynamoDB tables, enabling global applications with local read and write performance.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Multi-region replication for DynamoDB"
+      },
+      {
+        "letter": "B",
+        "text": "A backup service for DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "A query optimization feature"
+      },
+      {
+        "letter": "D",
+        "text": "A data export tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an RDS Read Replica?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "An RDS Read Replica is a read-only copy of your primary database instance in the same or different Availability Zone, used for scaling read operations.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A backup of your database"
+      },
+      {
+        "letter": "B",
+        "text": "A read-only copy for scaling reads"
+      },
+      {
+        "letter": "C",
+        "text": "A synchronous standby database"
+      },
+      {
+        "letter": "D",
+        "text": "A database migration tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Lifecycle Management?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Lifecycle Management automates moving objects between storage classes or archiving/deleting them based on rules you define, helping reduce costs.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Managing S3 bucket permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Configuring S3 versioning"
+      },
+      {
+        "letter": "C",
+        "text": "Automating object transitions and deletions"
+      },
+      {
+        "letter": "D",
+        "text": "Setting up S3 replication"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a VPC Endpoint?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "A VPC Endpoint enables private connectivity between your VPC and AWS services without requiring an internet gateway, NAT device, or VPN connection.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A public IP address for your VPC"
+      },
+      {
+        "letter": "B",
+        "text": "A load balancer in your VPC"
+      },
+      {
+        "letter": "C",
+        "text": "A DNS server for your VPC"
+      },
+      {
+        "letter": "D",
+        "text": "Private connectivity to AWS services"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an IAM Policy?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "An IAM Policy is a document that defines permissions, specifying what actions are allowed or denied on which AWS resources.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A document defining permissions"
+      },
+      {
+        "letter": "B",
+        "text": "A user account"
+      },
+      {
+        "letter": "C",
+        "text": "A security group rule"
+      },
+      {
+        "letter": "D",
+        "text": "A network configuration"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CloudFormation Stack?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "A CloudFormation Stack is a collection of AWS resources that are created and managed together as a single unit based on a CloudFormation template.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A single AWS resource"
+      },
+      {
+        "letter": "B",
+        "text": "A collection of resources managed together"
+      },
+      {
+        "letter": "C",
+        "text": "A template file"
+      },
+      {
+        "letter": "D",
+        "text": "A deployment script"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Spot Instances?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Spot Instances allow you to request unused EC2 capacity at up to 90% discount, but can be interrupted if AWS needs the capacity back.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Dedicated instances with guaranteed capacity"
+      },
+      {
+        "letter": "B",
+        "text": "Instances with reserved pricing"
+      },
+      {
+        "letter": "C",
+        "text": "Unused capacity at discounted prices"
+      },
+      {
+        "letter": "D",
+        "text": "Instances with enhanced networking"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Transfer Acceleration?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Transfer Acceleration uses CloudFront's globally distributed edge locations to accelerate uploads to S3 buckets, reducing latency for distant clients.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatic backup to another region"
+      },
+      {
+        "letter": "B",
+        "text": "Compression of uploaded files"
+      },
+      {
+        "letter": "C",
+        "text": "Encryption during transfer"
+      },
+      {
+        "letter": "D",
+        "text": "Faster uploads using CloudFront edge locations"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda@Edge?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda@Edge lets you run Lambda functions at CloudFront edge locations, enabling you to customize content delivered through CloudFront closer to your users.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Running Lambda at CloudFront edge locations"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda functions with longer timeout"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda functions with more memory"
+      },
+      {
+        "letter": "D",
+        "text": "Lambda functions for batch processing"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Streams?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Streams captures a time-ordered sequence of item-level changes in a DynamoDB table and stores this information for up to 24 hours.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A backup service for DynamoDB"
+      },
+      {
+        "letter": "B",
+        "text": "A time-ordered sequence of table changes"
+      },
+      {
+        "letter": "C",
+        "text": "A query optimization feature"
+      },
+      {
+        "letter": "D",
+        "text": "A data export tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Automated Backups?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Automated Backups enable point-in-time recovery by taking daily snapshots and storing transaction logs, allowing you to restore to any point within the retention period.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual backup creation"
+      },
+      {
+        "letter": "B",
+        "text": "Backup to S3 only"
+      },
+      {
+        "letter": "C",
+        "text": "Automated daily snapshots with point-in-time recovery"
+      },
+      {
+        "letter": "D",
+        "text": "Backup to another region only"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Route 53 Health Checks?",
+    "domain": "Route53",
+    "difficulty": "medium",
+    "explanation": "Route 53 Health Checks monitor the health and performance of your applications, servers, and other AWS resources, and can automatically route traffic away from unhealthy resources.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "DNS query logging"
+      },
+      {
+        "letter": "B",
+        "text": "Domain registration service"
+      },
+      {
+        "letter": "C",
+        "text": "Traffic routing only"
+      },
+      {
+        "letter": "D",
+        "text": "Monitoring and automatic failover"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Logs?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "CloudWatch Logs enables you to centralize the logs from all your systems, applications, and AWS services in a single, highly scalable service.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Centralized log management and monitoring"
+      },
+      {
+        "letter": "B",
+        "text": "Real-time data streaming"
+      },
+      {
+        "letter": "C",
+        "text": "Database query logging"
+      },
+      {
+        "letter": "D",
+        "text": "Network traffic monitoring"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an ECS Task Definition?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "An ECS Task Definition is a blueprint for your application, describing which Docker containers to run, how much CPU and memory to use, and other configuration details.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A running container instance"
+      },
+      {
+        "letter": "B",
+        "text": "A blueprint describing containers to run"
+      },
+      {
+        "letter": "C",
+        "text": "A cluster configuration"
+      },
+      {
+        "letter": "D",
+        "text": "A service definition"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Object Lock?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Object Lock enables you to store objects using a write-once-read-many (WORM) model, preventing objects from being deleted or overwritten for a fixed amount of time or indefinitely.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Locking objects during upload"
+      },
+      {
+        "letter": "B",
+        "text": "Preventing public access"
+      },
+      {
+        "letter": "C",
+        "text": "WORM model to prevent deletion/overwrite"
+      },
+      {
+        "letter": "D",
+        "text": "Encrypting objects automatically"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a VPC Peering Connection?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "A VPC Peering Connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 or IPv6 addresses.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Connecting VPC to the internet"
+      },
+      {
+        "letter": "B",
+        "text": "Connecting VPC to on-premises"
+      },
+      {
+        "letter": "C",
+        "text": "Connecting VPC to AWS services"
+      },
+      {
+        "letter": "D",
+        "text": "Networking connection between two VPCs"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an IAM User?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "An IAM User is an entity that represents a person or application that interacts with AWS. Users have permanent credentials and can be assigned permissions.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "An entity representing a person or application"
+      },
+      {
+        "letter": "B",
+        "text": "A temporary credential"
+      },
+      {
+        "letter": "C",
+        "text": "A resource permission"
+      },
+      {
+        "letter": "D",
+        "text": "A network configuration"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Instance Store?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Instance Store provides temporary block-level storage for instances. This storage is located on disks that are physically attached to the host computer.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Persistent EBS storage"
+      },
+      {
+        "letter": "B",
+        "text": "Temporary block storage on the host"
+      },
+      {
+        "letter": "C",
+        "text": "Network-attached storage"
+      },
+      {
+        "letter": "D",
+        "text": "Object storage like S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Provisioned Concurrency?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Provisioned Concurrency keeps functions initialized and ready to respond in double-digit milliseconds, ensuring consistent performance for your applications.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Unlimited concurrent executions"
+      },
+      {
+        "letter": "B",
+        "text": "Automatic scaling configuration"
+      },
+      {
+        "letter": "C",
+        "text": "Pre-initialized functions for low latency"
+      },
+      {
+        "letter": "D",
+        "text": "Longer execution timeout"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB On-Demand capacity mode?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB On-Demand capacity mode automatically scales up and down based on traffic, with no capacity planning required. You pay only for what you use.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Fixed read/write capacity units"
+      },
+      {
+        "letter": "B",
+        "text": "Manual scaling only"
+      },
+      {
+        "letter": "C",
+        "text": "Reserved capacity pricing"
+      },
+      {
+        "letter": "D",
+        "text": "Automatic scaling with pay-per-use"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Encryption at Rest?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Encryption at Rest encrypts your database instances and snapshots at rest using AWS-managed keys or customer-managed keys, providing an additional layer of data protection.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Encrypting database storage and snapshots"
+      },
+      {
+        "letter": "B",
+        "text": "Encrypting network traffic only"
+      },
+      {
+        "letter": "C",
+        "text": "Encrypting backups only"
+      },
+      {
+        "letter": "D",
+        "text": "Encrypting application data only"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront Signed URLs?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "CloudFront Signed URLs allow you to control who can access your content by adding authentication information to the URL, restricting access to private content.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Public URLs for all content"
+      },
+      {
+        "letter": "B",
+        "text": "URLs with authentication to restrict access"
+      },
+      {
+        "letter": "C",
+        "text": "URLs that never expire"
+      },
+      {
+        "letter": "D",
+        "text": "URLs for internal use only"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Intelligent-Tiering?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Intelligent-Tiering automatically moves objects between access tiers (frequent, infrequent, archive) based on changing access patterns, optimizing costs without performance impact.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual tier selection"
+      },
+      {
+        "letter": "B",
+        "text": "Fixed storage class"
+      },
+      {
+        "letter": "C",
+        "text": "Automatic tier optimization based on access"
+      },
+      {
+        "letter": "D",
+        "text": "Compression service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a VPC Flow Log?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "VPC Flow Logs capture information about IP traffic going to and from network interfaces in your VPC, helping with troubleshooting, security analysis, and compliance.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Logging VPC configuration changes"
+      },
+      {
+        "letter": "B",
+        "text": "Monitoring instance health"
+      },
+      {
+        "letter": "C",
+        "text": "Tracking DNS queries"
+      },
+      {
+        "letter": "D",
+        "text": "Capturing IP traffic information"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Access Analyzer?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Access Analyzer helps you identify resources in your organization and accounts that are shared with an external entity, helping you determine unintended access.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Identifying resources shared externally"
+      },
+      {
+        "letter": "B",
+        "text": "Analyzing IAM user activity"
+      },
+      {
+        "letter": "C",
+        "text": "Optimizing IAM policy performance"
+      },
+      {
+        "letter": "D",
+        "text": "Generating IAM reports"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Dedicated Hosts?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Dedicated Hosts are physical servers with EC2 instance capacity fully dedicated to your use, helping you meet compliance requirements and reduce costs by using existing server-bound software licenses.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Shared tenancy instances"
+      },
+      {
+        "letter": "B",
+        "text": "Physical servers dedicated to your use"
+      },
+      {
+        "letter": "C",
+        "text": "Spot instances with discounts"
+      },
+      {
+        "letter": "D",
+        "text": "Reserved instances with discounts"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Layers?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Layers provide a way to package libraries, custom runtimes, and other function dependencies separately from your function code, enabling code sharing and reducing deployment package size.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Multiple Lambda functions in one"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda function versioning"
+      },
+      {
+        "letter": "C",
+        "text": "Separate packaging for dependencies"
+      },
+      {
+        "letter": "D",
+        "text": "Lambda function aliases"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB TTL?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB TTL (Time To Live) allows you to define when items in a table expire so that they can be automatically deleted, helping reduce storage costs and manage data lifecycle.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Time-based indexing"
+      },
+      {
+        "letter": "B",
+        "text": "Query performance optimization"
+      },
+      {
+        "letter": "C",
+        "text": "Data replication timing"
+      },
+      {
+        "letter": "D",
+        "text": "Automatic item expiration and deletion"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Performance Insights?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Performance Insights is a database performance monitoring and tuning feature that helps you quickly assess the load on your database and determine when and where to take action.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Database performance monitoring and tuning"
+      },
+      {
+        "letter": "B",
+        "text": "Automated database scaling"
+      },
+      {
+        "letter": "C",
+        "text": "Database backup scheduling"
+      },
+      {
+        "letter": "D",
+        "text": "Database migration tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFormation StackSets?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "CloudFormation StackSets extends the functionality of stacks by enabling you to create, update, or delete stacks across multiple accounts and regions with a single operation.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Single stack management"
+      },
+      {
+        "letter": "B",
+        "text": "Multi-account and multi-region stack operations"
+      },
+      {
+        "letter": "C",
+        "text": "Stack template validation"
+      },
+      {
+        "letter": "D",
+        "text": "Stack rollback automation"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Access Points?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Access Points simplify managing data access at scale for shared datasets in S3, allowing you to create hundreds of access points per bucket with distinct permissions and network controls.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Public access to S3 buckets"
+      },
+      {
+        "letter": "B",
+        "text": "S3 bucket versioning"
+      },
+      {
+        "letter": "C",
+        "text": "Distinct access points with unique permissions"
+      },
+      {
+        "letter": "D",
+        "text": "S3 bucket replication"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS PrivateLink?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "AWS PrivateLink provides private connectivity between VPCs, AWS services, and on-premises applications, securely on the Amazon network, without exposing your traffic to the public internet.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Public internet gateway"
+      },
+      {
+        "letter": "B",
+        "text": "VPN connection service"
+      },
+      {
+        "letter": "C",
+        "text": "Direct Connect service"
+      },
+      {
+        "letter": "D",
+        "text": "Private connectivity without internet exposure"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Identity Center?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Identity Center (formerly AWS SSO) is a cloud-based single sign-on (SSO) service that makes it easy to centrally manage SSO access to multiple AWS accounts and business applications.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Centralized SSO management for AWS and applications"
+      },
+      {
+        "letter": "B",
+        "text": "IAM user credential storage"
+      },
+      {
+        "letter": "C",
+        "text": "IAM policy generator"
+      },
+      {
+        "letter": "D",
+        "text": "IAM access logging service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Placement Groups?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Placement Groups are logical groupings of instances within a single Availability Zone that enable applications to participate in a low-latency, 10 Gbps network.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Grouping instances across regions"
+      },
+      {
+        "letter": "B",
+        "text": "Logical groupings for low-latency networking"
+      },
+      {
+        "letter": "C",
+        "text": "Instance type categories"
+      },
+      {
+        "letter": "D",
+        "text": "Security group configurations"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Destinations?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Destinations allow you to route function results asynchronously to other AWS services, enabling you to build powerful workflows and handle function results without additional code.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lambda function deployment targets"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda function triggers"
+      },
+      {
+        "letter": "C",
+        "text": "Asynchronous result routing to AWS services"
+      },
+      {
+        "letter": "D",
+        "text": "Lambda function monitoring"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Point-in-Time Recovery?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Point-in-Time Recovery provides continuous backups of your DynamoDB table data, enabling you to restore your table to any point in time within the last 35 days.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual backup creation"
+      },
+      {
+        "letter": "B",
+        "text": "Daily snapshot backups"
+      },
+      {
+        "letter": "C",
+        "text": "Backup to S3 only"
+      },
+      {
+        "letter": "D",
+        "text": "Continuous backups with 35-day recovery window"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Proxy?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Proxy is a fully managed, highly available database proxy for Amazon RDS that makes applications more scalable, more resilient to database failures, and more secure.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Managed database proxy for connection pooling"
+      },
+      {
+        "letter": "B",
+        "text": "RDS backup service"
+      },
+      {
+        "letter": "C",
+        "text": "RDS monitoring tool"
+      },
+      {
+        "letter": "D",
+        "text": "RDS migration service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Alarms?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "CloudWatch Alarms monitor a single metric over a time period and perform one or more actions based on the value of the metric relative to a threshold over time.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Real-time log streaming"
+      },
+      {
+        "letter": "B",
+        "text": "Metric monitoring with automated actions"
+      },
+      {
+        "letter": "C",
+        "text": "Dashboard visualization only"
+      },
+      {
+        "letter": "D",
+        "text": "Cost monitoring service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECS Service Auto Scaling?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "ECS Service Auto Scaling automatically adjusts the number of tasks in your ECS service based on CloudWatch metrics, ensuring you have the right number of tasks running.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual task scaling"
+      },
+      {
+        "letter": "B",
+        "text": "Container image optimization"
+      },
+      {
+        "letter": "C",
+        "text": "Automatic task count adjustment"
+      },
+      {
+        "letter": "D",
+        "text": "Task definition versioning"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Object Ownership?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Object Ownership controls who owns new objects uploaded to your bucket and whether ACLs are disabled, simplifying access management for data shared in S3.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Object versioning control"
+      },
+      {
+        "letter": "B",
+        "text": "Object encryption settings"
+      },
+      {
+        "letter": "C",
+        "text": "Object lifecycle management"
+      },
+      {
+        "letter": "D",
+        "text": "Control over object ownership and ACLs"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS Transit Gateway?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "AWS Transit Gateway is a network transit hub that enables you to connect VPCs and on-premises networks through a single gateway, simplifying network architecture and reducing operational overhead.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Network transit hub for connecting VPCs"
+      },
+      {
+        "letter": "B",
+        "text": "Internet gateway replacement"
+      },
+      {
+        "letter": "C",
+        "text": "VPN connection service"
+      },
+      {
+        "letter": "D",
+        "text": "Load balancer service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Policy Simulator?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Policy Simulator helps you test and troubleshoot IAM and resource-based policies, allowing you to test access to AWS resources without making actual API calls.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "IAM policy generator"
+      },
+      {
+        "letter": "B",
+        "text": "Testing and troubleshooting IAM policies"
+      },
+      {
+        "letter": "C",
+        "text": "IAM user activity simulator"
+      },
+      {
+        "letter": "D",
+        "text": "IAM access report generator"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Elastic Network Interface (ENI)?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "An Elastic Network Interface (ENI) is a virtual network interface that you can attach to an instance in a VPC, enabling you to create a management network or use multiple network interfaces.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Physical network adapter"
+      },
+      {
+        "letter": "B",
+        "text": "Load balancer component"
+      },
+      {
+        "letter": "C",
+        "text": "Virtual network interface for instances"
+      },
+      {
+        "letter": "D",
+        "text": "VPN connection endpoint"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Function URLs?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Function URLs provide a dedicated HTTP(S) endpoint for your Lambda function, enabling you to invoke your function through a web browser, curl, or any HTTP client.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lambda function versioning"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda function aliases"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda function layers"
+      },
+      {
+        "letter": "D",
+        "text": "Dedicated HTTP(S) endpoint for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Accelerator (DAX)?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory caching service that makes DynamoDB reads up to 10 times faster.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "In-memory caching for DynamoDB"
+      },
+      {
+        "letter": "B",
+        "text": "DynamoDB backup service"
+      },
+      {
+        "letter": "C",
+        "text": "DynamoDB query optimizer"
+      },
+      {
+        "letter": "D",
+        "text": "DynamoDB migration tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Snapshot?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "An RDS Snapshot is a user-initiated backup of your DB instance that is stored in S3 and can be used to restore your database to a specific point in time.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automated daily backup"
+      },
+      {
+        "letter": "B",
+        "text": "User-initiated backup stored in S3"
+      },
+      {
+        "letter": "C",
+        "text": "Real-time database replication"
+      },
+      {
+        "letter": "D",
+        "text": "Database performance report"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront Origin Shield?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "CloudFront Origin Shield is a regional cache layer that sits between CloudFront edge locations and your origin, reducing origin load and improving cache hit ratio.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Origin server replacement"
+      },
+      {
+        "letter": "B",
+        "text": "Edge location management"
+      },
+      {
+        "letter": "C",
+        "text": "Regional cache layer to reduce origin load"
+      },
+      {
+        "letter": "D",
+        "text": "Origin access control"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Batch Operations?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Batch Operations perform large-scale batch operations on S3 objects, such as copying objects, invoking Lambda functions, or replacing object tag sets, across millions of objects.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Real-time object processing"
+      },
+      {
+        "letter": "B",
+        "text": "Object versioning management"
+      },
+      {
+        "letter": "C",
+        "text": "Object lifecycle transitions"
+      },
+      {
+        "letter": "D",
+        "text": "Large-scale batch operations on objects"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS Direct Connect?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "AWS Direct Connect establishes a dedicated network connection from your premises to AWS, providing more consistent network performance than internet-based connections.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Dedicated network connection to AWS"
+      },
+      {
+        "letter": "B",
+        "text": "VPN connection service"
+      },
+      {
+        "letter": "C",
+        "text": "Internet gateway service"
+      },
+      {
+        "letter": "D",
+        "text": "Load balancer service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Credential Report?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Credential Report lists all users in your account and the status of their various credentials, including passwords, access keys, and MFA devices, helping with security auditing.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "IAM policy document"
+      },
+      {
+        "letter": "B",
+        "text": "Report of user credentials and status"
+      },
+      {
+        "letter": "C",
+        "text": "IAM access log"
+      },
+      {
+        "letter": "D",
+        "text": "IAM user activity log"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Systems Manager?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Systems Manager provides a unified interface for viewing operational data and performing management tasks on your EC2 instances and other AWS resources.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2 instance monitoring only"
+      },
+      {
+        "letter": "B",
+        "text": "EC2 backup service"
+      },
+      {
+        "letter": "C",
+        "text": "Unified management interface for EC2 and AWS resources"
+      },
+      {
+        "letter": "D",
+        "text": "EC2 networking service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Reserved Concurrency?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Reserved Concurrency guarantees the maximum number of concurrent executions for a function, preventing it from using all available account concurrency and affecting other functions.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Unlimited concurrency for a function"
+      },
+      {
+        "letter": "B",
+        "text": "Automatic concurrency scaling"
+      },
+      {
+        "letter": "C",
+        "text": "Concurrency monitoring"
+      },
+      {
+        "letter": "D",
+        "text": "Guaranteed maximum concurrent executions"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Transactions?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Transactions provide atomicity, consistency, isolation, and durability (ACID) guarantees, enabling you to coordinate multiple writes across multiple items in one or more tables.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "ACID transactions across multiple items"
+      },
+      {
+        "letter": "B",
+        "text": "Single item updates only"
+      },
+      {
+        "letter": "C",
+        "text": "Read operation optimization"
+      },
+      {
+        "letter": "D",
+        "text": "Data export functionality"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Blue/Green Deployments?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Blue/Green Deployments create a fully managed staging environment that lets you make database changes with near-zero downtime and reduced risk.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Database backup strategy"
+      },
+      {
+        "letter": "B",
+        "text": "Near-zero downtime database updates"
+      },
+      {
+        "letter": "C",
+        "text": "Database replication method"
+      },
+      {
+        "letter": "D",
+        "text": "Database migration tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFormation Change Sets?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "CloudFormation Change Sets allow you to preview how proposed changes to a stack might impact your running resources before you implement them.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatic stack updates"
+      },
+      {
+        "letter": "B",
+        "text": "Stack deletion tool"
+      },
+      {
+        "letter": "C",
+        "text": "Preview of proposed stack changes"
+      },
+      {
+        "letter": "D",
+        "text": "Stack template validator"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Replication Time Control?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Replication Time Control (RTC) replicates 99.99% of objects within 15 minutes, providing predictable replication time and monitoring of replication metrics.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual replication control"
+      },
+      {
+        "letter": "B",
+        "text": "Replication to single region only"
+      },
+      {
+        "letter": "C",
+        "text": "Replication without monitoring"
+      },
+      {
+        "letter": "D",
+        "text": "Predictable replication within 15 minutes"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS Client VPN?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "AWS Client VPN is a managed client-based VPN service that enables you to securely access your AWS resources and on-premises networks from any location using an OpenVPN-based VPN client.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Managed client-based VPN service"
+      },
+      {
+        "letter": "B",
+        "text": "Site-to-site VPN only"
+      },
+      {
+        "letter": "C",
+        "text": "VPC peering service"
+      },
+      {
+        "letter": "D",
+        "text": "Load balancer service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Service-Linked Roles?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Service-Linked Roles are unique IAM role types that are linked directly to AWS services, simplifying the process of granting permissions to services that need to access other AWS resources.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "User-assigned roles"
+      },
+      {
+        "letter": "B",
+        "text": "Roles linked directly to AWS services"
+      },
+      {
+        "letter": "C",
+        "text": "Temporary credentials"
+      },
+      {
+        "letter": "D",
+        "text": "Cross-account access roles"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Image Builder?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Image Builder simplifies the creation, maintenance, and validation of secure machine images for use with EC2 and on-premises environments.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2 instance management"
+      },
+      {
+        "letter": "B",
+        "text": "EC2 backup service"
+      },
+      {
+        "letter": "C",
+        "text": "Automated secure image creation and maintenance"
+      },
+      {
+        "letter": "D",
+        "text": "EC2 monitoring service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda Container Images?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda Container Images allow you to package Lambda functions as container images, enabling you to use familiar container tooling and workflows for larger deployment packages.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lambda function versioning"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda function layers"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda function aliases"
+      },
+      {
+        "letter": "D",
+        "text": "Packaging functions as container images"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB PartiQL?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB PartiQL provides a SQL-compatible query language for DynamoDB, allowing you to query, insert, update, and delete DynamoDB data using familiar SQL syntax.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "SQL-compatible query language for DynamoDB"
+      },
+      {
+        "letter": "B",
+        "text": "NoSQL query optimizer"
+      },
+      {
+        "letter": "C",
+        "text": "Data export tool"
+      },
+      {
+        "letter": "D",
+        "text": "Backup service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Custom?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Custom is a managed database service that gives you access to the underlying operating system and database, enabling you to configure settings, install patches, and access native features.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Fully managed RDS with no access"
+      },
+      {
+        "letter": "B",
+        "text": "Managed service with OS and DB access"
+      },
+      {
+        "letter": "C",
+        "text": "RDS backup service"
+      },
+      {
+        "letter": "D",
+        "text": "RDS monitoring tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Insights?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "CloudWatch Insights enables you to interactively search and analyze your log data in CloudWatch Logs, using a purpose-built query language to find what you're looking for.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Real-time log streaming"
+      },
+      {
+        "letter": "B",
+        "text": "Log storage only"
+      },
+      {
+        "letter": "C",
+        "text": "Interactive log search and analysis"
+      },
+      {
+        "letter": "D",
+        "text": "Log archiving service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECS Exec?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "ECS Exec enables you to run commands in or get a shell to a container running on an Amazon ECS task, making it easier to troubleshoot and debug your applications.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "ECS task scheduling"
+      },
+      {
+        "letter": "B",
+        "text": "ECS service management"
+      },
+      {
+        "letter": "C",
+        "text": "ECS cluster configuration"
+      },
+      {
+        "letter": "D",
+        "text": "Running commands in ECS containers"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Inventory?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Inventory provides scheduled reports of the objects and their metadata in an S3 bucket, helping you manage storage, analyze access patterns, and meet compliance requirements.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Scheduled reports of S3 objects and metadata"
+      },
+      {
+        "letter": "B",
+        "text": "Real-time object monitoring"
+      },
+      {
+        "letter": "C",
+        "text": "Object versioning management"
+      },
+      {
+        "letter": "D",
+        "text": "Object lifecycle management"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS App Mesh?",
+    "domain": "VPC",
+    "difficulty": "medium",
+    "explanation": "AWS App Mesh is a service mesh that provides application-level networking to make it easy for services to communicate with each other across multiple types of compute infrastructure.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "VPC networking service"
+      },
+      {
+        "letter": "B",
+        "text": "Application-level networking service mesh"
+      },
+      {
+        "letter": "C",
+        "text": "Load balancer service"
+      },
+      {
+        "letter": "D",
+        "text": "VPN connection service"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM Permissions Boundary?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "IAM Permissions Boundary sets the maximum permissions that an identity-based policy can grant to an IAM entity, providing an additional safeguard to limit access.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Minimum required permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Default permissions for new users"
+      },
+      {
+        "letter": "C",
+        "text": "Maximum permissions limit for policies"
+      },
+      {
+        "letter": "D",
+        "text": "Temporary permission grants"
+      }
+    ]
+  },
+  {
+    "question_text": "What is EC2 Nitro System?",
+    "domain": "EC2",
+    "difficulty": "medium",
+    "explanation": "EC2 Nitro System is the underlying platform for the next generation of EC2 instances, providing better performance, security, and new instance types.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2 instance type"
+      },
+      {
+        "letter": "B",
+        "text": "EC2 networking feature"
+      },
+      {
+        "letter": "C",
+        "text": "EC2 storage type"
+      },
+      {
+        "letter": "D",
+        "text": "Underlying platform for next-gen instances"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda SnapStart?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda SnapStart improves startup performance for Java functions by taking a snapshot of the initialized execution environment and caching it for reuse, reducing cold start latency.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Improved startup performance for Java functions"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda function versioning"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda function monitoring"
+      },
+      {
+        "letter": "D",
+        "text": "Lambda function deployment"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB Backup and Restore?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Backup and Restore provides on-demand and continuous backups of your DynamoDB tables, enabling you to restore your table data to any point in time.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual backup only"
+      },
+      {
+        "letter": "B",
+        "text": "On-demand and continuous backups"
+      },
+      {
+        "letter": "C",
+        "text": "Backup to S3 only"
+      },
+      {
+        "letter": "D",
+        "text": "Real-time replication"
+      }
+    ]
+  },
+  {
+    "question_text": "What is RDS Multi-Region Clusters?",
+    "domain": "RDS",
+    "difficulty": "medium",
+    "explanation": "RDS Multi-Region Clusters provide fast read performance across multiple AWS regions, with automatic failover to a healthy region in under a minute.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Single region database clusters"
+      },
+      {
+        "letter": "B",
+        "text": "Database backup across regions"
+      },
+      {
+        "letter": "C",
+        "text": "Fast read performance across multiple regions"
+      },
+      {
+        "letter": "D",
+        "text": "Database migration tool"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFront Functions?",
+    "domain": "CloudFront",
+    "difficulty": "medium",
+    "explanation": "CloudFront Functions are lightweight JavaScript functions that run at the edge locations, enabling you to customize content at the edge with low latency and low cost.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lambda@Edge replacement"
+      },
+      {
+        "letter": "B",
+        "text": "Origin server functions"
+      },
+      {
+        "letter": "C",
+        "text": "CloudFront configuration tool"
+      },
+      {
+        "letter": "D",
+        "text": "Lightweight JavaScript functions at edge"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 Object Lambda?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 Object Lambda uses AWS Lambda functions to automatically transform and process data as it's being retrieved from S3, enabling you to add custom code to process objects.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Transform S3 objects with Lambda functions"
+      },
+      {
+        "letter": "B",
+        "text": "S3 object versioning"
+      },
+      {
+        "letter": "C",
+        "text": "S3 object replication"
+      },
+      {
+        "letter": "D",
+        "text": "S3 object encryption"
+      }
+    ]
+  }
+]

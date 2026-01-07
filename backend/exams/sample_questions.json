@@ -1,0 +1,79 @@
+[
+  {
+    "question_text": "What is the primary purpose of AWS CloudFormation?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "AWS CloudFormation allows you to model and provision AWS resources using templates. It enables Infrastructure as Code (IaC) for AWS resources, making it easier to manage and deploy infrastructure consistently.",
+    "correct_answer_letter": "A",
+    "options": [
+      {"letter": "A", "text": "Infrastructure as Code for AWS resources"},
+      {"letter": "B", "text": "Container orchestration service"},
+      {"letter": "C", "text": "Serverless compute service"},
+      {"letter": "D", "text": "Content delivery network"}
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides scalable object storage?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "Amazon S3 (Simple Storage Service) provides scalable object storage in the cloud. It's designed to store and retrieve any amount of data from anywhere on the web.",
+    "correct_answer_letter": "B",
+    "options": [
+      {"letter": "A", "text": "EBS"},
+      {"letter": "B", "text": "S3"},
+      {"letter": "C", "text": "EFS"},
+      {"letter": "D", "text": "Glacier"}
+    ]
+  },
+  {
+    "question_text": "What is the maximum number of availability zones in an AWS region?",
+    "domain": "EC2",
+    "difficulty": "hard",
+    "explanation": "AWS regions contain multiple Availability Zones (AZs). While the exact number varies by region, most regions have 3-6 availability zones. There's no fixed maximum, but typically regions have between 2-6 AZs.",
+    "correct_answer_letter": "C",
+    "options": [
+      {"letter": "A", "text": "2"},
+      {"letter": "B", "text": "3"},
+      {"letter": "C", "text": "Varies by region, typically 3-6"},
+      {"letter": "D", "text": "10"}
+    ]
+  },
+  {
+    "question_text": "Which service is used for serverless compute in AWS?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "AWS Lambda is a serverless compute service that runs code in response to events and automatically manages the compute resources. You only pay for the compute time you consume.",
+    "correct_answer_letter": "A",
+    "options": [
+      {"letter": "A", "text": "Lambda"},
+      {"letter": "B", "text": "EC2"},
+      {"letter": "C", "text": "ECS"},
+      {"letter": "D", "text": "Elastic Beanstalk"}
+    ]
+  },
+  {
+    "question_text": "What is the purpose of an IAM role?",
+    "domain": "IAM",
+    "difficulty": "medium",
+    "explanation": "An IAM role is an AWS identity with permission policies that determine what the identity can and cannot do in AWS. Roles are similar to users, but are intended to be assumable by anyone who needs them, including AWS services.",
+    "correct_answer_letter": "B",
+    "options": [
+      {"letter": "A", "text": "To store user credentials"},
+      {"letter": "B", "text": "To grant permissions to AWS resources and services"},
+      {"letter": "C", "text": "To manage billing"},
+      {"letter": "D", "text": "To configure network settings"}
+    ]
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+

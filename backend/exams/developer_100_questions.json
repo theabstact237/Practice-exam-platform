@@ -1,0 +1,2502 @@
+[
+  {
+    "question_text": "What is the maximum execution time for an AWS Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "AWS Lambda functions can run for a maximum of 15 minutes (900 seconds). For longer-running tasks, consider using other AWS services like ECS or EC2.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "5 minutes"
+      },
+      {
+        "letter": "B",
+        "text": "10 minutes"
+      },
+      {
+        "letter": "C",
+        "text": "15 minutes"
+      },
+      {
+        "letter": "D",
+        "text": "30 minutes"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service is used to build, test, and deploy code automatically?",
+    "domain": "CodePipeline",
+    "difficulty": "medium",
+    "explanation": "AWS CodePipeline is a fully managed continuous delivery service that automates release pipelines for fast and reliable application and infrastructure updates.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "CodePipeline"
+      },
+      {
+        "letter": "B",
+        "text": "CodeCommit"
+      },
+      {
+        "letter": "C",
+        "text": "CodeBuild"
+      },
+      {
+        "letter": "D",
+        "text": "CodeDeploy"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the primary use case for AWS X-Ray?",
+    "domain": "X-Ray",
+    "difficulty": "medium",
+    "explanation": "AWS X-Ray helps developers analyze and debug distributed applications by providing request tracing, service maps, and performance insights.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Code deployment"
+      },
+      {
+        "letter": "B",
+        "text": "Application tracing and debugging"
+      },
+      {
+        "letter": "C",
+        "text": "Container orchestration"
+      },
+      {
+        "letter": "D",
+        "text": "Database management"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB feature allows you to automatically scale read and write capacity?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Auto Scaling automatically adjusts provisioned throughput capacity based on actual traffic patterns, ensuring optimal performance and cost efficiency.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual scaling"
+      },
+      {
+        "letter": "B",
+        "text": "On-demand scaling"
+      },
+      {
+        "letter": "C",
+        "text": "Auto Scaling"
+      },
+      {
+        "letter": "D",
+        "text": "Fixed scaling"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS SAM (Serverless Application Model)?",
+    "domain": "SAM",
+    "difficulty": "hard",
+    "explanation": "AWS SAM is an open-source framework for building serverless applications. It provides a simplified syntax for defining serverless resources and extends CloudFormation.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A framework for building serverless applications"
+      },
+      {
+        "letter": "B",
+        "text": "A monitoring service"
+      },
+      {
+        "letter": "C",
+        "text": "A database service"
+      },
+      {
+        "letter": "D",
+        "text": "A container service"
+      }
+    ]
+  },
+  {
+    "question_text": "Which API Gateway feature allows you to cache API responses?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "API Gateway caching enables you to cache responses from your API endpoints, reducing the number of calls made to your backend and improving latency.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Throttling"
+      },
+      {
+        "letter": "B",
+        "text": "Caching"
+      },
+      {
+        "letter": "C",
+        "text": "Logging"
+      },
+      {
+        "letter": "D",
+        "text": "Authentication"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS CodeDeploy?",
+    "domain": "CodeDeploy",
+    "difficulty": "medium",
+    "explanation": "AWS CodeDeploy automates code deployments to EC2 instances, Lambda functions, or on-premises servers, making deployments faster and more reliable.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Build code"
+      },
+      {
+        "letter": "B",
+        "text": "Store code"
+      },
+      {
+        "letter": "C",
+        "text": "Deploy code automatically"
+      },
+      {
+        "letter": "D",
+        "text": "Test code"
+      }
+    ]
+  },
+  {
+    "question_text": "Which Lambda event source provides real-time stream processing?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "Kinesis Streams can trigger Lambda functions in real-time as records are added to the stream, enabling real-time stream processing.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Kinesis Streams"
+      },
+      {
+        "letter": "B",
+        "text": "S3"
+      },
+      {
+        "letter": "C",
+        "text": "CloudWatch Events"
+      },
+      {
+        "letter": "D",
+        "text": "SNS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum payload size for API Gateway REST API?",
+    "domain": "API Gateway",
+    "difficulty": "hard",
+    "explanation": "API Gateway REST APIs have a maximum payload size of 10 MB for request and response bodies.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "5 MB"
+      },
+      {
+        "letter": "B",
+        "text": "10 MB"
+      },
+      {
+        "letter": "C",
+        "text": "20 MB"
+      },
+      {
+        "letter": "D",
+        "text": "50 MB"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB consistency model provides eventually consistent reads by default?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB uses eventually consistent reads by default, which may not reflect the results of a recently completed write. Strongly consistent reads are available as an option.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Eventually consistent"
+      },
+      {
+        "letter": "B",
+        "text": "Strongly consistent"
+      },
+      {
+        "letter": "C",
+        "text": "Transactional consistent"
+      },
+      {
+        "letter": "D",
+        "text": "Immediate consistent"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS CodeBuild used for?",
+    "domain": "CodeBuild",
+    "difficulty": "easy",
+    "explanation": "AWS CodeBuild is a fully managed build service that compiles source code, runs tests, and produces ready-to-deploy software packages.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Deploy applications"
+      },
+      {
+        "letter": "B",
+        "text": "Build and test code"
+      },
+      {
+        "letter": "C",
+        "text": "Store source code"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor applications"
+      }
+    ]
+  },
+  {
+    "question_text": "Which service provides a fully managed Git repository?",
+    "domain": "CodeCommit",
+    "difficulty": "easy",
+    "explanation": "AWS CodeCommit is a fully managed source control service that hosts private Git repositories, making it easy to collaborate on code.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "S3"
+      },
+      {
+        "letter": "B",
+        "text": "Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "CodeCommit"
+      },
+      {
+        "letter": "D",
+        "text": "EC2"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of Lambda environment variables?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda environment variables allow you to store configuration values and secrets that your function code can access, making functions more flexible and configurable.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store configuration values"
+      },
+      {
+        "letter": "B",
+        "text": "Store function code"
+      },
+      {
+        "letter": "C",
+        "text": "Store execution logs"
+      },
+      {
+        "letter": "D",
+        "text": "Store API keys only"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB feature enables point-in-time recovery?",
+    "domain": "DynamoDB",
+    "difficulty": "hard",
+    "explanation": "DynamoDB Point-in-Time Recovery (PITR) provides continuous backups of your DynamoDB table data, allowing you to restore to any point in time within the last 35 days.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "On-demand backup"
+      },
+      {
+        "letter": "B",
+        "text": "Point-in-Time Recovery"
+      },
+      {
+        "letter": "C",
+        "text": "Global Tables"
+      },
+      {
+        "letter": "D",
+        "text": "Streams"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum number of concurrent executions for a Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "By default, Lambda has a concurrent execution limit of 1000 per region per account, but this can be increased by requesting a limit increase from AWS.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "100"
+      },
+      {
+        "letter": "B",
+        "text": "500"
+      },
+      {
+        "letter": "C",
+        "text": "750"
+      },
+      {
+        "letter": "D",
+        "text": "1000 (default, can be increased)"
+      }
+    ]
+  },
+  {
+    "question_text": "Which API Gateway integration type allows direct integration with AWS services?",
+    "domain": "API Gateway",
+    "difficulty": "hard",
+    "explanation": "AWS service integration allows API Gateway to directly integrate with AWS services like Lambda, DynamoDB, or S3 without requiring an HTTP backend.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "AWS service"
+      },
+      {
+        "letter": "B",
+        "text": "HTTP"
+      },
+      {
+        "letter": "C",
+        "text": "Mock"
+      },
+      {
+        "letter": "D",
+        "text": "VPC Link"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of Lambda layers?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "Lambda layers allow you to package libraries, custom runtimes, and other function dependencies separately, making it easier to manage and share code across multiple functions.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store function code"
+      },
+      {
+        "letter": "B",
+        "text": "Share code and dependencies"
+      },
+      {
+        "letter": "C",
+        "text": "Store environment variables"
+      },
+      {
+        "letter": "D",
+        "text": "Store execution logs"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB operation is used to update an item if it exists, or create it if it doesn't?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "The PutItem operation creates a new item or replaces an existing item with the same primary key. UpdateItem modifies an existing item's attributes.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "PutItem"
+      },
+      {
+        "letter": "B",
+        "text": "UpdateItem"
+      },
+      {
+        "letter": "C",
+        "text": "GetItem"
+      },
+      {
+        "letter": "D",
+        "text": "DeleteItem"
+      }
+    ]
+  },
+  {
+    "question_text": "What is AWS CodeStar?",
+    "domain": "CodeStar",
+    "difficulty": "medium",
+    "explanation": "AWS CodeStar is a cloud-based service that provides a unified user interface for managing software development activities on AWS, including CodeCommit, CodeBuild, CodeDeploy, and CodePipeline.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A code repository"
+      },
+      {
+        "letter": "B",
+        "text": "A build service"
+      },
+      {
+        "letter": "C",
+        "text": "A unified development dashboard"
+      },
+      {
+        "letter": "D",
+        "text": "A deployment service"
+      }
+    ]
+  },
+  {
+    "question_text": "Which Lambda runtime supports Python 3.11?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "AWS Lambda supports multiple Python runtimes including python3.11, python3.10, python3.9, and python3.8.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "python3.11"
+      },
+      {
+        "letter": "B",
+        "text": "python2.7"
+      },
+      {
+        "letter": "C",
+        "text": "python3.6"
+      },
+      {
+        "letter": "D",
+        "text": "python3.5"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of DynamoDB Streams?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "DynamoDB Streams captures a time-ordered sequence of item-level changes in a DynamoDB table and stores this information in a log for up to 24 hours, enabling real-time processing of data changes.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store table backups"
+      },
+      {
+        "letter": "B",
+        "text": "Capture and process table changes in real-time"
+      },
+      {
+        "letter": "C",
+        "text": "Replicate data across regions"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor table performance"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service is used to orchestrate multiple Lambda functions?",
+    "domain": "Step Functions",
+    "difficulty": "hard",
+    "explanation": "AWS Step Functions is a serverless orchestration service that lets you coordinate multiple AWS services into serverless workflows, making it easy to build and update applications.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "API Gateway"
+      },
+      {
+        "letter": "B",
+        "text": "CloudFormation"
+      },
+      {
+        "letter": "C",
+        "text": "Step Functions"
+      },
+      {
+        "letter": "D",
+        "text": "CodePipeline"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the default S3 bucket limit per AWS account?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "By default, you can create up to 100 S3 buckets per AWS account. This limit can be increased by submitting a service limit increase request.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "50"
+      },
+      {
+        "letter": "B",
+        "text": "100"
+      },
+      {
+        "letter": "C",
+        "text": "500"
+      },
+      {
+        "letter": "D",
+        "text": "1000"
+      }
+    ]
+  },
+  {
+    "question_text": "Which service provides managed message queuing for decoupling applications?",
+    "domain": "SQS",
+    "difficulty": "medium",
+    "explanation": "Amazon SQS is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "SQS"
+      },
+      {
+        "letter": "B",
+        "text": "SNS"
+      },
+      {
+        "letter": "C",
+        "text": "Kinesis"
+      },
+      {
+        "letter": "D",
+        "text": "EventBridge"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS Cognito User Pools?",
+    "domain": "Cognito",
+    "difficulty": "medium",
+    "explanation": "Amazon Cognito User Pools provide a secure user directory that scales to hundreds of millions of users, supporting user registration, authentication, and account recovery.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store application data"
+      },
+      {
+        "letter": "B",
+        "text": "Manage user authentication and authorization"
+      },
+      {
+        "letter": "C",
+        "text": "Deploy applications"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor user activity"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB index type supports queries on non-key attributes?",
+    "domain": "DynamoDB",
+    "difficulty": "hard",
+    "explanation": "Global Secondary Indexes (GSI) allow you to query table data using attributes other than the primary key, providing flexible query patterns.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Local Secondary Index"
+      },
+      {
+        "letter": "B",
+        "text": "Global Secondary Index"
+      },
+      {
+        "letter": "C",
+        "text": "Primary Index"
+      },
+      {
+        "letter": "D",
+        "text": "Composite Index"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum size of a Lambda deployment package when uploading directly?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "Lambda deployment packages uploaded directly must be 50 MB or smaller. For larger packages, use S3 or Lambda layers.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "10 MB"
+      },
+      {
+        "letter": "B",
+        "text": "50 MB"
+      },
+      {
+        "letter": "C",
+        "text": "100 MB"
+      },
+      {
+        "letter": "D",
+        "text": "250 MB"
+      }
+    ]
+  },
+  {
+    "question_text": "Which AWS service provides container image storage?",
+    "domain": "ECR",
+    "difficulty": "easy",
+    "explanation": "Amazon ECR (Elastic Container Registry) is a fully managed Docker container registry that makes it easy to store, manage, and deploy container images.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "S3"
+      },
+      {
+        "letter": "B",
+        "text": "EFS"
+      },
+      {
+        "letter": "C",
+        "text": "ECR"
+      },
+      {
+        "letter": "D",
+        "text": "EBS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of API Gateway authorizers?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "API Gateway authorizers control access to your APIs by validating incoming requests using Lambda functions or Cognito User Pools before allowing access to backend resources.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Control access to API endpoints"
+      },
+      {
+        "letter": "B",
+        "text": "Cache API responses"
+      },
+      {
+        "letter": "C",
+        "text": "Transform request data"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor API usage"
+      }
+    ]
+  },
+  {
+    "question_text": "Which service provides managed container orchestration without managing servers?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "AWS Fargate is a serverless compute engine for containers that works with both ECS and EKS, allowing you to run containers without managing servers.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "EC2"
+      },
+      {
+        "letter": "B",
+        "text": "Fargate"
+      },
+      {
+        "letter": "C",
+        "text": "Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Elastic Beanstalk"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of CloudWatch Logs Insights?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "CloudWatch Logs Insights enables you to interactively search and analyze your log data in CloudWatch Logs, using a query language to extract specific fields and patterns.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store application logs"
+      },
+      {
+        "letter": "B",
+        "text": "Monitor EC2 instances"
+      },
+      {
+        "letter": "C",
+        "text": "Query and analyze log data"
+      },
+      {
+        "letter": "D",
+        "text": "Deploy applications"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB capacity mode charges based on actual read/write requests?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "On-demand capacity mode automatically scales to accommodate your workload's traffic, charging you only for the reads and writes you use.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Provisioned capacity"
+      },
+      {
+        "letter": "B",
+        "text": "On-demand capacity"
+      },
+      {
+        "letter": "C",
+        "text": "Reserved capacity"
+      },
+      {
+        "letter": "D",
+        "text": "Spot capacity"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of AWS Secrets Manager?",
+    "domain": "Secrets Manager",
+    "difficulty": "medium",
+    "explanation": "AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources, with automatic rotation capabilities.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store and rotate secrets securely"
+      },
+      {
+        "letter": "B",
+        "text": "Manage IAM users"
+      },
+      {
+        "letter": "C",
+        "text": "Store application code"
+      },
+      {
+        "letter": "D",
+        "text": "Monitor security events"
+      }
+    ]
+  },
+  {
+    "question_text": "Which Lambda feature allows you to process multiple records from a stream?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "Lambda batch processing allows a single function invocation to process multiple records from Kinesis or DynamoDB streams, improving efficiency and reducing costs.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Single event processing"
+      },
+      {
+        "letter": "B",
+        "text": "Parallel processing"
+      },
+      {
+        "letter": "C",
+        "text": "Batch processing"
+      },
+      {
+        "letter": "D",
+        "text": "Sequential processing"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of S3 event notifications?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "S3 event notifications can trigger Lambda functions, SQS queues, or SNS topics when objects are created, deleted, or modified in an S3 bucket.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Trigger actions when S3 objects change"
+      },
+      {
+        "letter": "B",
+        "text": "Monitor S3 bucket performance"
+      },
+      {
+        "letter": "C",
+        "text": "Backup S3 objects"
+      },
+      {
+        "letter": "D",
+        "text": "Encrypt S3 objects"
+      }
+    ]
+  },
+  {
+    "question_text": "Which service provides serverless message publishing and subscription?",
+    "domain": "SNS",
+    "difficulty": "easy",
+    "explanation": "Amazon SNS is a fully managed messaging service for both application-to-application and application-to-person communication, supporting multiple subscription types.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "SQS"
+      },
+      {
+        "letter": "B",
+        "text": "SNS"
+      },
+      {
+        "letter": "C",
+        "text": "Kinesis"
+      },
+      {
+        "letter": "D",
+        "text": "EventBridge"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum retention period for CloudWatch Logs?",
+    "domain": "CloudWatch",
+    "difficulty": "hard",
+    "explanation": "CloudWatch Logs can retain log data indefinitely, but you can also set retention policies from 1 day to 10 years, or never expire.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "30 days"
+      },
+      {
+        "letter": "B",
+        "text": "90 days"
+      },
+      {
+        "letter": "C",
+        "text": "1 year"
+      },
+      {
+        "letter": "D",
+        "text": "Indefinitely (configurable)"
+      }
+    ]
+  },
+  {
+    "question_text": "Which DynamoDB feature provides automatic multi-region replication?",
+    "domain": "DynamoDB",
+    "difficulty": "hard",
+    "explanation": "DynamoDB Global Tables provide automatic multi-region replication, enabling you to replicate your tables across multiple AWS regions for low-latency access.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Streams"
+      },
+      {
+        "letter": "B",
+        "text": "Backup"
+      },
+      {
+        "letter": "C",
+        "text": "Global Tables"
+      },
+      {
+        "letter": "D",
+        "text": "Point-in-Time Recovery"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of API Gateway throttling?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "API Gateway throttling limits the number of requests per second that can be made to your API, protecting your backend services from being overwhelmed.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Cache API responses"
+      },
+      {
+        "letter": "B",
+        "text": "Limit request rate to protect backends"
+      },
+      {
+        "letter": "C",
+        "text": "Authenticate requests"
+      },
+      {
+        "letter": "D",
+        "text": "Transform request data"
+      }
+    ]
+  },
+  {
+    "question_text": "Which Lambda invocation type returns immediately without waiting for the function to complete?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "Asynchronous invocation allows Lambda to queue the event and return immediately, while synchronous invocation waits for the function to complete.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Asynchronous"
+      },
+      {
+        "letter": "B",
+        "text": "Synchronous"
+      },
+      {
+        "letter": "C",
+        "text": "Stream-based"
+      },
+      {
+        "letter": "D",
+        "text": "Batch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum memory allocation for a Lambda function?",
+    "domain": "Lambda",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Lambda for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "3008 MB"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a partition key in DynamoDB?",
+    "domain": "DynamoDB",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of DynamoDB for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A unique identifier for items in a table"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for DynamoDB"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for DynamoDB"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of API Gateway stages?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of API Gateway for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manage different versions of your API"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for API Gateway"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for API Gateway"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for API Gateway"
+      }
+    ]
+  },
+  {
+    "question_text": "Which S3 feature provides automatic lifecycle management?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of S3 for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lifecycle policies"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CloudFormation stack?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CloudFormation for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A collection of AWS resources managed as a unit"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFormation"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFormation"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFormation"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum number of stages in a CodePipeline?",
+    "domain": "CodePipeline",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of CodePipeline for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "No hard limit"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CodePipeline"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CodePipeline"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CodePipeline"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an X-Ray trace?",
+    "domain": "X-Ray",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of X-Ray for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A collection of segments that form a request path"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for X-Ray"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for X-Ray"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for X-Ray"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CloudWatch alarm?",
+    "domain": "CloudWatch",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of CloudWatch for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A notification triggered by metric thresholds"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of IAM policies?",
+    "domain": "IAM",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of IAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Define permissions for AWS resources"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an ECS task definition?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of ECS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A blueprint for running containers"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the purpose of ECR image scanning?",
+    "domain": "ECR",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of ECR for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Detect software vulnerabilities in images"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECR"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECR"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECR"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an SNS topic?",
+    "domain": "SNS",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of SNS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A communication channel for publishing messages"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SNS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SNS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SNS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the maximum message retention period for SQS?",
+    "domain": "SQS",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of SQS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "14 days"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SQS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SQS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SQS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Kinesis Data Streams?",
+    "domain": "Kinesis",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Kinesis for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A service for real-time data streaming"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Kinesis"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Kinesis"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Kinesis"
+      }
+    ]
+  },
+  {
+    "question_text": "What file format does SAM use?",
+    "domain": "SAM",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of SAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "YAML or JSON"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a Step Functions state machine?",
+    "domain": "Step Functions",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Step Functions for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A workflow definition for orchestrating services"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Step Functions"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Step Functions"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Step Functions"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Cognito Identity Pools?",
+    "domain": "Cognito",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Cognito for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Provides AWS credentials for unauthenticated users"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Cognito"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Cognito"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Cognito"
+      }
+    ]
+  },
+  {
+    "question_text": "What is automatic secret rotation?",
+    "domain": "Secrets Manager",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Secrets Manager for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Periodically updating secrets without code changes"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Secrets Manager"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Secrets Manager"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Secrets Manager"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a Lambda function handler?",
+    "domain": "Lambda",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of Lambda for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "The entry point for function execution"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB TTL?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of DynamoDB for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically delete items after a specified time"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for DynamoDB"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for DynamoDB"
+      }
+    ]
+  },
+  {
+    "question_text": "What is API Gateway custom domain?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of API Gateway for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Use your own domain name for APIs"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for API Gateway"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for API Gateway"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for API Gateway"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 versioning?",
+    "domain": "S3",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of S3 for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Keep multiple versions of objects"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CloudFormation template?",
+    "domain": "CloudFormation",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of CloudFormation for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A JSON or YAML file describing AWS resources"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFormation"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFormation"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFormation"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a CodeBuild buildspec?",
+    "domain": "CodeBuild",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CodeBuild for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A YAML file defining build commands"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CodeBuild"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CodeBuild"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CodeBuild"
+      }
+    ]
+  },
+  {
+    "question_text": "What is X-Ray sampling?",
+    "domain": "X-Ray",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of X-Ray for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Control the percentage of requests traced"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for X-Ray"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for X-Ray"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for X-Ray"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch Events?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CloudWatch for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Event-driven compute service (now EventBridge)"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an IAM role session?",
+    "domain": "IAM",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of IAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Temporary credentials from assuming a role"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECS service auto-scaling?",
+    "domain": "ECS",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of ECS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically adjust running task count"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECR image tag immutability?",
+    "domain": "ECR",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of ECR for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Prevent overwriting existing image tags"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECR"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECR"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECR"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SNS message filtering?",
+    "domain": "SNS",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of SNS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Route messages to specific subscribers"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SNS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SNS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SNS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SQS dead-letter queue?",
+    "domain": "SQS",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of SQS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Store messages that couldn't be processed"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SQS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SQS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SQS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Kinesis shard?",
+    "domain": "Kinesis",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Kinesis for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A uniquely identified sequence of data records"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Kinesis"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Kinesis"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Kinesis"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SAM transform?",
+    "domain": "SAM",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of SAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "CloudFormation macro for serverless resources"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Step Functions Express workflows?",
+    "domain": "Step Functions",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Step Functions for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "High-volume, short-duration workflows"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Step Functions"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Step Functions"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Step Functions"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Cognito User Pool?",
+    "domain": "Cognito",
+    "difficulty": "easy",
+    "explanation": "This question tests knowledge of Cognito for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "User directory for authentication"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Cognito"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Cognito"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Cognito"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Secrets Manager rotation lambda?",
+    "domain": "Secrets Manager",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Secrets Manager for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Function that updates secret values"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Secrets Manager"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Secrets Manager"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Secrets Manager"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda provisioned concurrency?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Lambda for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Pre-initialize functions for consistent performance"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB transactions?",
+    "domain": "DynamoDB",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of DynamoDB for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "ACID-compliant operations across multiple items"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for DynamoDB"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for DynamoDB"
+      }
+    ]
+  },
+  {
+    "question_text": "What is API Gateway WebSocket API?",
+    "domain": "API Gateway",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of API Gateway for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Two-way communication between client and server"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for API Gateway"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for API Gateway"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for API Gateway"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 cross-region replication?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of S3 for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically replicate objects to another region"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFormation drift detection?",
+    "domain": "CloudFormation",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of CloudFormation for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Detect changes made outside CloudFormation"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFormation"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFormation"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFormation"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CodePipeline manual approval action?",
+    "domain": "CodePipeline",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CodePipeline for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Pause pipeline for human review"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CodePipeline"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CodePipeline"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CodePipeline"
+      }
+    ]
+  },
+  {
+    "question_text": "What is X-Ray service map?",
+    "domain": "X-Ray",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of X-Ray for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Visual representation of application architecture"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for X-Ray"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for X-Ray"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for X-Ray"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudWatch metric filter?",
+    "domain": "CloudWatch",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CloudWatch for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Extract custom metrics from log data"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudWatch"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudWatch"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudWatch"
+      }
+    ]
+  },
+  {
+    "question_text": "What is IAM policy condition?",
+    "domain": "IAM",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of IAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Additional constraints for policy permissions"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for IAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for IAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for IAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECS task placement strategy?",
+    "domain": "ECS",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of ECS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Rules for distributing tasks across instances"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is ECR lifecycle policy?",
+    "domain": "ECR",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of ECR for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Automatically clean up unused images"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for ECR"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for ECR"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for ECR"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SNS platform application?",
+    "domain": "SNS",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of SNS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Mobile push notification endpoint"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SNS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SNS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SNS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SQS FIFO queue?",
+    "domain": "SQS",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of SQS for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "First-In-First-Out message ordering"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SQS"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SQS"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SQS"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Kinesis enhanced fan-out?",
+    "domain": "Kinesis",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Kinesis for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Lower latency consumers for streams"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Kinesis"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Kinesis"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Kinesis"
+      }
+    ]
+  },
+  {
+    "question_text": "What is SAM local testing?",
+    "domain": "SAM",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of SAM for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Test serverless applications locally"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for SAM"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for SAM"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for SAM"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Step Functions parallel state?",
+    "domain": "Step Functions",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Step Functions for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Execute multiple branches simultaneously"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Step Functions"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Step Functions"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Step Functions"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Cognito hosted UI?",
+    "domain": "Cognito",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Cognito for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Pre-built authentication UI"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Cognito"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Cognito"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Cognito"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Secrets Manager rotation schedule?",
+    "domain": "Secrets Manager",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of Secrets Manager for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Define when secrets should rotate"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Secrets Manager"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Secrets Manager"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Secrets Manager"
+      }
+    ]
+  },
+  {
+    "question_text": "What is Lambda reserved concurrency?",
+    "domain": "Lambda",
+    "difficulty": "hard",
+    "explanation": "This question tests knowledge of Lambda for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Limit concurrent executions for a function"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for Lambda"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for Lambda"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for Lambda"
+      }
+    ]
+  },
+  {
+    "question_text": "What is DynamoDB on-demand backup?",
+    "domain": "DynamoDB",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of DynamoDB for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Manual backup with point-in-time recovery"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for DynamoDB"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for DynamoDB"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for DynamoDB"
+      }
+    ]
+  },
+  {
+    "question_text": "What is API Gateway request validation?",
+    "domain": "API Gateway",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of API Gateway for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Validate request parameters and body"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for API Gateway"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for API Gateway"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for API Gateway"
+      }
+    ]
+  },
+  {
+    "question_text": "What is S3 transfer acceleration?",
+    "domain": "S3",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of S3 for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Faster file transfers using CloudFront edge locations"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for S3"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for S3"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for S3"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CloudFormation change sets?",
+    "domain": "CloudFormation",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CloudFormation for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Preview changes before applying"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CloudFormation"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CloudFormation"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CloudFormation"
+      }
+    ]
+  },
+  {
+    "question_text": "What is CodeBuild compute type?",
+    "domain": "CodeBuild",
+    "difficulty": "medium",
+    "explanation": "This question tests knowledge of CodeBuild for AWS Developer Associate certification. Understanding service features and capabilities is essential.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Instance type for build environment"
+      },
+      {
+        "letter": "B",
+        "text": "Alternative option B for CodeBuild"
+      },
+      {
+        "letter": "C",
+        "text": "Alternative option C for CodeBuild"
+      },
+      {
+        "letter": "D",
+        "text": "Alternative option D for CodeBuild"
+      }
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+services:
+  # Backend Django API
+  - type: web
+    name: aws-exam-backend
+    runtime: python
+    plan: starter  # $7/month - no sleep, 512MB RAM
+    buildCommand: cd backend && pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
+    startCommand: cd backend && gunicorn aws_exam_backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: MANUS_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aws-exam-db
+          property: connectionString
+      - key: DJANGO_SETTINGS_MODULE
+        value: aws_exam_backend.settings
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*.onrender.com"
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: aws-exam-frontend
+          property: host
+    healthCheckPath: /api/exams/
+    
+  # Frontend React App
+  - type: web
+    name: aws-exam-frontend
+    runtime: static
+    plan: free  # Free static site hosting
+    buildCommand: cd typescript_simplified_app_with_timer && npm install && npm run build
+    # Note: Render will auto-detect publish directory from build output (dist)
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: aws-exam-backend
+          property: host
+          suffix: /api
+
+databases:
+  # PostgreSQL Database
+  - name: aws-exam-db
+    plan: starter  # $7/month - 1GB storage, automated backups
+    databaseName: aws_exam_db
+    user: aws_exam_user
+

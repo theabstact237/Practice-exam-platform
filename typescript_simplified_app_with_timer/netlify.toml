@@ -1,0 +1,10 @@
+# netlify.toml (Optional - for Netlify deployment)
+# This file is not needed for Render deployment but kept for reference
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
