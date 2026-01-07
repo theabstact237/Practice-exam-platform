@@ -38,7 +38,7 @@ services:
     runtime: static
     plan: free  # Free static site hosting
     buildCommand: cd typescript_simplified_app_with_timer && npm install && npm run build
-    # Note: Render will auto-detect publish directory from build output (dist)
+    staticPublishPath: typescript_simplified_app_with_timer/dist
     envVars:
       - key: VITE_API_BASE_URL
         fromService:
@@ -46,6 +46,21 @@ services:
           name: aws-exam-backend
           property: host
           suffix: /api
+      # Firebase configuration - set these in Render Dashboard
+      - key: VITE_FIREBASE_API_KEY
+        sync: false
+      - key: VITE_FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: VITE_FIREBASE_PROJECT_ID
+        sync: false
+      - key: VITE_FIREBASE_STORAGE_BUCKET
+        sync: false
+      - key: VITE_FIREBASE_MESSAGING_SENDER_ID
+        sync: false
+      - key: VITE_FIREBASE_APP_ID
+        sync: false
+      - key: VITE_FIREBASE_MEASUREMENT_ID
+        sync: false
 
 databases:
   # PostgreSQL Database
