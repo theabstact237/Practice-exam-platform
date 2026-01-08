@@ -3,7 +3,7 @@ services:
   - type: web
     name: aws-exam-backend
     runtime: python
-    plan: starter  # $7/month - no sleep, 512MB RAM
+    plan: free  # Free tier (sleeps after 15 min inactivity)
     buildCommand: cd backend && pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
     startCommand: cd backend && gunicorn aws_exam_backend.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
@@ -32,11 +32,10 @@ services:
           property: host
     healthCheckPath: /api/exams/
     
-  # Frontend React App
+  # Frontend React App (Static Site - no plan needed)
   - type: web
     name: aws-exam-frontend
     runtime: static
-    plan: free  # Free static site hosting
     buildCommand: cd typescript_simplified_app_with_timer && npm install && npm run build
     staticPublishPath: typescript_simplified_app_with_timer/dist
     envVars:
@@ -65,7 +64,6 @@ services:
 databases:
   # PostgreSQL Database
   - name: aws-exam-db
-    plan: starter  # $7/month - 1GB storage, automated backups
+    plan: free  # Free tier (1GB storage, 30-day expiration)
     databaseName: aws_exam_db
     user: aws_exam_user
-
