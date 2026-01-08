@@ -27,6 +27,15 @@ class Command(BaseCommand):
                 'time_limit_minutes': 90,
                 'passing_score': 70,
                 'is_active': True
+            },
+            {
+                'name': 'AWS Developer Associate',
+                'exam_type': 'developer',
+                'description': 'AWS Developer Associate certification practice exam. Tests knowledge of developing, deploying, and debugging cloud-based applications using AWS.',
+                'total_questions': 50,
+                'time_limit_minutes': 90,
+                'passing_score': 70,
+                'is_active': True
             }
         ]
 
