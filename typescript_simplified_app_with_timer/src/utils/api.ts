@@ -245,14 +245,13 @@ export const generateExamQuestionsWithPrompt = async (
 };
 
 /**
- * Get or create exam questions
- * Always generates fresh questions from Manus API when exam is clicked
- * Returns 50 random questions from the generated set
+ * Get exam questions from pre-loaded database
+ * Fetches random questions from the existing pool (no AI generation needed)
  */
 export const getOrGenerateExamQuestions = async (
   examType: string,
   numQuestions: number = 50,
-  useManus: boolean = true  // Default to Manus API
+  _useManus: boolean = true  // Kept for backwards compatibility, not used
 ): Promise<Question[]> => {
   try {
     // Get exams by type
@@ -264,57 +263,19 @@ export const getOrGenerateExamQuestions = async (
 
     const exam = exams[0]; // Get the first exam of this type
     
-    // Map exam type to display name for prompt
-    const examDisplayNames: { [key: string]: string } = {
-      'solutions_architect': 'solution architect',
-      'cloud_practitioner': 'cloud practitioner',
-      'developer': 'developer',
-      'sysops': 'sysops administrator',
-      'security': 'security specialist',
-      'data_analytics': 'data analytics',
-      'machine_learning': 'machine learning',
-      'database': 'database',
-      'advanced_networking': 'advanced networking'
-    };
-    
-    const examDisplayName = examDisplayNames[examType] || examType.replace('_', ' ');
-    
-    // Always generate 100 questions when exam is clicked
-    // Construct prompt: "generate 100 multiple choice questions for the solution architect"
-    const prompt = `generate 100 multiple choice questions for the ${examDisplayName}`;
-    
-    console.log(`Generating 100 questions for ${exam.name} using prompt: "${prompt}"`);
-      
-      try {
-      // Always generate questions with the prompt (60 second timeout for 100 questions)
-      const result = await generateExamQuestionsWithPrompt(
-        exam.id, 
-        100, // Always generate 100 questions
-        undefined, // domain
-        useManus, 
-        prompt,
-        60000 // 60 second timeout
-      );
-      
-      console.log(`Generated ${result.created_count} questions`);
-          // Wait a bit for questions to be saved
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (error) {
-        console.error('Error generating questions:', error);
-        // Continue to try fetching existing questions even if generation fails
-        // Don't throw error - try to get existing questions
-      }
+    console.log(`Fetching ${numQuestions} random questions for ${exam.name}...`);
 
-    // Fetch 50 random questions from the generated set
+    // Fetch random questions from the pre-loaded database
     const questions = await getRandomExamQuestions(exam.id, numQuestions);
     
     if (questions.length === 0) {
-      throw new Error(`No questions available for ${exam.name}`);
+      throw new Error(`No questions available for ${exam.name}. Please contact support.`);
     }
 
+    console.log(`Successfully loaded ${questions.length} questions for ${exam.name}`);
     return questions;
   } catch (error) {
-    console.error('Error getting or generating exam questions:', error);
+    console.error('Error fetching exam questions:', error);
     throw error;
   }
 };
