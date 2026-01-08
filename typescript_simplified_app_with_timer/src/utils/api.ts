@@ -1,19 +1,23 @@
 // API Configuration
 // In production (onrender.com), use the backend URL; otherwise use env var or localhost
 const getApiBaseUrl = () => {
-  // Check environment variable first
+  // Auto-detect production on Render - most reliable method
+  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+    return 'https://aws-exam-backend.onrender.com/api';
+  }
+  
+  // Check environment variable for other deployments
   let envUrl = import.meta.env.VITE_API_BASE_URL;
   if (envUrl) {
-    // Ensure URL has https:// prefix (Render's fromService returns just hostname)
+    // Ensure URL has https:// prefix
     if (!envUrl.startsWith('http://') && !envUrl.startsWith('https://')) {
       envUrl = `https://${envUrl}`;
     }
+    // If it's a Render service name without domain, add .onrender.com
+    if (!envUrl.includes('.') || envUrl.match(/^https?:\/\/[^.]+\//)) {
+      envUrl = envUrl.replace(/^(https?:\/\/)([^\/]+)/, '$1$2.onrender.com');
+    }
     return envUrl;
-  }
-  
-  // Auto-detect production on Render
-  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
-    return 'https://aws-exam-backend.onrender.com/api';
   }
   
   // Default to localhost for development
