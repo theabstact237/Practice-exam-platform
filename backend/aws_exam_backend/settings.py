@@ -164,6 +164,8 @@ else:
     
     CORS_ALLOWED_ORIGINS = [
         "https://aws-exam-frontend.onrender.com",
+        "https://freecertify.org",
+        "https://www.freecertify.org",
     ]
     
     # Add custom frontend URL if provided
