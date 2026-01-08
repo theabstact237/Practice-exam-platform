@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { BookOpen, Users, Target, LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
 import { getAllExams, Exam } from '../utils/api';
@@ -88,7 +88,7 @@ const TechBackground = () => {
 const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
-  const [loadingExams, setLoadingExams] = useState(true);
+  const [_loadingExams, setLoadingExams] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
