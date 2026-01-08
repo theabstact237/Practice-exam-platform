@@ -156,12 +156,19 @@ if DEBUG:
 else:
     # Production: Allow Render frontend URL
     CORS_ALLOW_ALL_ORIGINS = False
+    
+    # Get frontend URL from env var and ensure it has https:// prefix
+    frontend_url = os.getenv('FRONTEND_URL', '')
+    if frontend_url and not frontend_url.startswith(('http://', 'https://')):
+        frontend_url = f'https://{frontend_url}'
+    
     CORS_ALLOWED_ORIGINS = [
         "https://aws-exam-frontend.onrender.com",
-        os.getenv('FRONTEND_URL', ''),  # Allow custom frontend URL via env var
     ]
-    # Filter out empty strings
-    CORS_ALLOWED_ORIGINS = [origin for origin in CORS_ALLOWED_ORIGINS if origin]
+    
+    # Add custom frontend URL if provided
+    if frontend_url:
+        CORS_ALLOWED_ORIGINS.append(frontend_url)
 
 CORS_ALLOW_CREDENTIALS = True
 
