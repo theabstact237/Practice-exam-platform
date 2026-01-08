@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
 import { getAllExams, Exam } from '../utils/api';
