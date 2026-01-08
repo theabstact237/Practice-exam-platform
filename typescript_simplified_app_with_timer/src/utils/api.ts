@@ -2,8 +2,13 @@
 // In production (onrender.com), use the backend URL; otherwise use env var or localhost
 const getApiBaseUrl = () => {
   // Check environment variable first
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL;
+  let envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl) {
+    // Ensure URL has https:// prefix (Render's fromService returns just hostname)
+    if (!envUrl.startsWith('http://') && !envUrl.startsWith('https://')) {
+      envUrl = `https://${envUrl}`;
+    }
+    return envUrl;
   }
   
   // Auto-detect production on Render
