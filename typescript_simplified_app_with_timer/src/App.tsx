@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle, XCircle, Home, Mail, Menu, X, BarChart3, User, LogOut } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
@@ -976,7 +976,7 @@ function App() {
           {/* Social Media Links */}
           <div className="flex justify-center space-x-6 mb-4">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/theabstact237"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-white transition-colors"
@@ -986,7 +986,7 @@ function App() {
               <FontAwesomeIcon icon={faGithub} size="2x" />
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/siaka-karl"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors"
@@ -995,29 +995,9 @@ function App() {
             >
               <FontAwesomeIcon icon={faLinkedin} size="2x" />
             </a>
-            <a
-              href="https://facebook.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-blue-600 transition-colors"
-              title="Facebook"
-              onClick={() => analytics.socialMediaClicked('facebook')}
-            >
-              <FontAwesomeIcon icon={faFacebook} size="2x" />
-            </a>
-            <a
-              href="https://instagram.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-pink-400 transition-colors"
-              title="Instagram"
-              onClick={() => analytics.socialMediaClicked('instagram')}
-            >
-              <FontAwesomeIcon icon={faInstagram} size="2x" />
-            </a>
           </div>
           
-          <h2 className="text-xl font-bold mt-4 text-white">Your Name</h2>
+          <h2 className="text-xl font-bold mt-4 text-white">Karl Siaka</h2>
           <p className="text-slate-300">AWS Solutions Architect & Cloud Practitioner</p>
         </div>
         
