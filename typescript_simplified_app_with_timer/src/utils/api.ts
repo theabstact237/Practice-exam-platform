@@ -1,5 +1,21 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+// In production (onrender.com), use the backend URL; otherwise use env var or localhost
+const getApiBaseUrl = () => {
+  // Check environment variable first
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // Auto-detect production on Render
+  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+    return 'https://aws-exam-backend.onrender.com/api';
+  }
+  
+  // Default to localhost for development
+  return 'http://localhost:8000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export interface Exam {
   id: number;

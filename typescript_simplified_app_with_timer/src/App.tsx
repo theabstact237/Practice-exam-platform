@@ -697,7 +697,9 @@ function App() {
                 Try Again
               </button>
               <p className="text-xs text-slate-400 mt-2">
-                Make sure the backend server is running on http://localhost:8000
+                {window.location.hostname.includes('onrender.com') 
+                  ? 'The backend server may be starting up. Please wait a moment and try again.'
+                  : 'Make sure the backend server is running on http://localhost:8000'}
               </p>
             </div>
           )}
