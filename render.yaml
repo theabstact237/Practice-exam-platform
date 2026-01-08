@@ -3,7 +3,7 @@ services:
   - type: web
     name: aws-exam-backend
     runtime: python
-    plan: free  # Free tier (sleeps after 15 min inactivity)
+    plan: free
     buildCommand: cd backend && pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
     startCommand: cd backend && gunicorn aws_exam_backend.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
@@ -31,14 +31,16 @@ services:
           name: aws-exam-frontend
           property: host
     healthCheckPath: /api/exams/
-    
-  # Frontend React App (Static Site - no plan needed)
+
+  # Frontend React App (Static Site)
   - type: web
     name: aws-exam-frontend
-    runtime: static
+    env: static
     buildCommand: cd typescript_simplified_app_with_timer && npm install && npm run build
-    staticPublishPath: typescript_simplified_app_with_timer/dist
+    staticPublishPath: ./typescript_simplified_app_with_timer/dist
     envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
       - key: VITE_API_BASE_URL
         fromService:
           type: web
@@ -64,6 +66,6 @@ services:
 databases:
   # PostgreSQL Database
   - name: aws-exam-db
-    plan: free  # Free tier (1GB storage, 30-day expiration)
+    plan: free
     databaseName: aws_exam_db
     user: aws_exam_user
