@@ -964,7 +964,7 @@ function App() {
         {/* Profile Section */}
         <div className="text-center mb-8">
           <img 
-            src="/profile-image.jpg" 
+            src="/profile-image.png" 
             alt="Profile" 
             className="w-32 h-32 rounded-full mx-auto border-4 border-sky-500 shadow-lg object-cover mb-4"
             onError={(e) => {

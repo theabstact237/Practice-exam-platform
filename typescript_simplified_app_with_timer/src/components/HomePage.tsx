@@ -385,7 +385,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user }) => {
             <div className="relative w-40 h-40 bg-gradient-to-br from-slate-800 to-slate-950 rounded-full border-2 border-sky-500/30 p-1 group-hover:border-sky-500 transition-colors overflow-hidden">
               <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/profile-image.jpg" 
+                  src="/profile-image.png" 
                   alt="Karl Siaka" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   onError={(e) => {
