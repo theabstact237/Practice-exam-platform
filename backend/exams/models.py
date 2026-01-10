@@ -106,3 +106,45 @@ class Answer(models.Model):
         return f"{self.question.exam.name} - Q{self.question.id} - {self.letter}) {self.text[:50]}"
 
 
+
+class Review(models.Model):
+    """User reviews/testimonials after completing an exam"""
+    
+    exam = models.ForeignKey(
+        Exam,
+        on_delete=models.CASCADE,
+        related_name='reviews',
+        db_index=True
+    )
+    user_uid = models.CharField(max_length=128, help_text="Firebase user UID")
+    user_name = models.CharField(max_length=100, help_text="User display name")
+    user_photo_url = models.URLField(max_length=500, blank=True, help_text="User profile picture URL")
+    user_email = models.EmailField(blank=True, help_text="User email (optional)")
+    
+    rating = models.IntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)],
+        help_text="Rating from 1 to 5 stars"
+    )
+    comment = models.TextField(help_text="User's review comment")
+    
+    exam_score = models.IntegerField(null=True, blank=True, help_text="User's exam score percentage")
+    passed = models.BooleanField(null=True, blank=True, help_text="Whether user passed the exam")
+    
+    is_approved = models.BooleanField(default=True, help_text="Approved reviews appear on homepage")
+    is_featured = models.BooleanField(default=False, help_text="Featured reviews shown first")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
+        unique_together = ['user_uid', 'exam']
+        indexes = [
+            models.Index(fields=['is_approved', '-created_at'], name='approved_reviews_idx'),
+            models.Index(fields=['exam', 'rating'], name='exam_rating_idx'),
+        ]
+    
+    def __str__(self):
+        return f"{self.user_name} - {self.exam.name} - {self.rating} stars"

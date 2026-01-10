@@ -6,12 +6,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
 import { initGA, analytics, setUserProperties } from './utils/analytics';
-import { getOrGenerateExamQuestions, Question as APIQuestion, preGenerateExamQuestions } from './utils/api';
+import { getOrGenerateExamQuestions, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review } from './utils/api';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import LoginModal from './components/LoginModal';
 import HomePage from './components/HomePage';
 import Certificate from './components/Certificate';
 import ExamInProgressModal from './components/ExamInProgressModal';
+import ReviewModal, { ReviewData } from './components/ReviewModal';
+import { Testimonial } from './components/TestimonialsCarousel';
 
 // Define page types for navigation
 const PAGES = {
@@ -181,6 +183,14 @@ function App() {
   const [showCertificate, setShowCertificate] = useState(false);
   const [examCompletionDate, setExamCompletionDate] = useState<Date>(new Date());
 
+  // Review/Testimonial state
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [pendingCertificate, setPendingCertificate] = useState(false);
+  const [lastExamScore, setLastExamScore] = useState(0);
+  const [lastExamPassed, setLastExamPassed] = useState(false);
+  const [currentExamId, setCurrentExamId] = useState(1);
+
   // Initialize Google Analytics on component mount
   useEffect(() => {
     initGA();
@@ -206,6 +216,32 @@ function App() {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [sessionStartTime]);
+
+  // Fetch testimonials for homepage
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const reviews = await getReviews(20);
+        // Transform reviews to testimonials format
+        const transformedTestimonials: Testimonial[] = reviews.map((review: Review) => ({
+          id: review.id,
+          user_name: review.user_name,
+          user_photo_url: review.user_photo_url,
+          exam_name: review.exam_name,
+          rating: review.rating,
+          comment: review.comment,
+          passed: review.passed || false,
+          exam_score: review.exam_score,
+          created_at: review.created_at
+        }));
+        setTestimonials(transformedTestimonials);
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      }
+    };
+    
+    fetchTestimonials();
+  }, []);
 
   // Load questions based on exam type from Django API (only when on exam page)
   useEffect(() => {
@@ -461,9 +497,22 @@ function App() {
       setExamInProgress(false); // Mark exam as complete
       setExamCompletionDate(new Date());
       
-      // Show certificate if user passed (70% or higher)
+      // Store exam results for review modal
+      setLastExamScore(percentage);
+      setLastExamPassed(percentage >= 70);
+      
+      // Map exam type to exam ID
+      const examIdMap: { [key: string]: number } = {
+        [EXAM_TYPES.SOLUTIONS_ARCHITECT]: 1,
+        [EXAM_TYPES.CLOUD_PRACTITIONER]: 2,
+        [EXAM_TYPES.DEVELOPER]: 3
+      };
+      setCurrentExamId(examIdMap[currentExamType] || 1);
+      
+      // Show review modal if user passed (they can then get certificate after review)
       if (percentage >= 70 && user) {
-        setShowCertificate(true);
+        setPendingCertificate(true);
+        setShowReviewModal(true);
       }
       
       // Track review mode entry
@@ -500,6 +549,47 @@ function App() {
     setQuestionStartTime(Date.now());
     setExamInProgress(true);
     setShowCertificate(false);
+  };
+
+  // Handle review submission
+  const handleReviewSubmit = async (reviewData: ReviewData) => {
+    try {
+      await submitReview(reviewData);
+      console.log('Review submitted successfully');
+      
+      // Refresh testimonials
+      const reviews = await getReviews(20);
+      const transformedTestimonials: Testimonial[] = reviews.map((review: Review) => ({
+        id: review.id,
+        user_name: review.user_name,
+        user_photo_url: review.user_photo_url,
+        exam_name: review.exam_name,
+        rating: review.rating,
+        comment: review.comment,
+        passed: review.passed || false,
+        exam_score: review.exam_score,
+        created_at: review.created_at
+      }));
+      setTestimonials(transformedTestimonials);
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
+    
+    // Close review modal and show certificate if pending
+    setShowReviewModal(false);
+    if (pendingCertificate) {
+      setShowCertificate(true);
+      setPendingCertificate(false);
+    }
+  };
+
+  // Handle review modal close (skip)
+  const handleReviewClose = () => {
+    setShowReviewModal(false);
+    if (pendingCertificate) {
+      setShowCertificate(true);
+      setPendingCertificate(false);
+    }
   };
 
   // Handle continuing current exam from modal
@@ -644,6 +734,7 @@ function App() {
         <HomePage 
           onSelectExam={handleExamSelection}
           user={user}
+          testimonials={testimonials}
         />
         
         {/* Exam In Progress Modal - also shown on homepage */}
@@ -1493,6 +1584,18 @@ function App() {
         totalQuestions={calculateScore().total}
         percentage={calculateScore().percentage}
         completionDate={examCompletionDate}
+      />
+
+      {/* Review Modal - shown after exam completion, before certificate */}
+      <ReviewModal
+        isOpen={showReviewModal}
+        onClose={handleReviewClose}
+        onSubmit={handleReviewSubmit}
+        examName={getExamTitle()}
+        examId={currentExamId}
+        examScore={lastExamScore}
+        passed={lastExamPassed}
+        user={user}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-// API Configuration
+﻿// API Configuration
 // In production (onrender.com), use the backend URL; otherwise use env var or localhost
 const getApiBaseUrl = () => {
   // Auto-detect production on Render - most reliable method
@@ -289,3 +289,102 @@ export const getOrGenerateExamQuestions = async (
   }
 };
 
+
+// ============ REVIEWS API ============
+
+export interface Review {
+  id: number;
+  exam: number;
+  exam_name: string;
+  exam_type: string;
+  user_uid: string;
+  user_name: string;
+  user_photo_url: string;
+  user_email: string;
+  rating: number;
+  comment: string;
+  exam_score: number | null;
+  passed: boolean | null;
+  is_featured: boolean;
+  created_at: string;
+}
+
+export interface ReviewCreateData {
+  exam: number;
+  user_uid: string;
+  user_name: string;
+  user_photo_url: string;
+  user_email: string;
+  rating: number;
+  comment: string;
+  exam_score?: number;
+  passed?: boolean;
+}
+
+export const getReviews = async (limit: number = 20): Promise<Review[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/reviews/?limit=${limit}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.reviews || [];
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    return [];
+  }
+};
+
+export const getRecentReviews = async (limit: number = 5): Promise<Review[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/reviews/recent/?limit=${limit}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.reviews || [];
+  } catch (error) {
+    console.error('Error fetching recent reviews:', error);
+    return [];
+  }
+};
+
+export const submitReview = async (reviewData: ReviewCreateData): Promise<{ success: boolean; message: string }> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/reviews/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reviewData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return { success: true, message: data.message };
+  } catch (error) {
+    console.error('Error submitting review:', error);
+    throw error;
+  }
+};
+
+export const getReviewStats = async (): Promise<{ 
+  total_reviews: number; 
+  average_rating: number; 
+  rating_distribution: Record<string, number> 
+}> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/reviews/stats/`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching review stats:', error);
+    return { total_reviews: 0, average_rating: 0, rating_distribution: {} };
+  }
+};

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
-from .views import ExamViewSet, QuestionViewSet
+from .views import ExamViewSet, QuestionViewSet, ReviewViewSet
 from .models import Exam, Question
 from .serializers import ExamSerializer, QuestionSerializer
 import random
@@ -13,6 +13,7 @@ import random
 router = DefaultRouter()
 router.register(r'exams', ExamViewSet, basename='exam')
 router.register(r'questions', QuestionViewSet, basename='question')
+router.register(r'reviews', ReviewViewSet, basename='review')
 
 @api_view(['GET'])
 def exams_by_type(request, exam_type):

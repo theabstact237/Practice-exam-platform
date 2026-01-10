@@ -1,13 +1,15 @@
 import { useState, useEffect, useMemo } from 'react';
-import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
+import TestimonialsCarousel, { Testimonial } from './TestimonialsCarousel';
 import { getAllExams, Exam } from '../utils/api';
 import { signOutUser } from '../utils/auth';
 
 interface HomePageProps {
   onSelectExam: (examType: string) => void;
   user: any;
+  testimonials?: Testimonial[];
 }
 
 // Background Animation Component
@@ -85,7 +87,7 @@ const TechBackground = () => {
   );
 };
 
-const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user }) => {
+const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user, testimonials = [] }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
   const [_loadingExams, setLoadingExams] = useState(true);
@@ -377,6 +379,25 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user }) => {
             </div>
           </div>
         </div>
+
+        {/* Testimonials Section */}
+        {testimonials.length > 0 && (
+          <div className="py-16 sm:py-24">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full mb-6">
+                <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                <span className="text-yellow-400 text-sm font-semibold uppercase tracking-wider">Student Reviews</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-['Space_Grotesk']">
+                What Our Students Say
+              </h2>
+              <p className="text-slate-400 max-w-2xl mx-auto">
+                Join thousands of successful professionals who have used FreeCertify to achieve their AWS certifications
+              </p>
+            </div>
+            <TestimonialsCarousel testimonials={testimonials} autoPlayInterval={6000} />
+          </div>
+        )}
 
         {/* Founder Section */}
         <div className="text-center">

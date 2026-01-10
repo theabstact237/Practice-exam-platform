@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Exam, Question, Answer
+from .models import Exam, Question, Answer, Review
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -101,3 +101,33 @@ class ExamWithQuestionsSerializer(serializers.ModelSerializer):
         ]
 
 
+
+from .models import Review
+
+class ReviewSerializer(serializers.ModelSerializer):
+    exam_name = serializers.CharField(source='exam.name', read_only=True)
+    exam_type = serializers.CharField(source='exam.exam_type', read_only=True)
+    
+    class Meta:
+        model = Review
+        fields = [
+            'id', 'exam', 'exam_name', 'exam_type',
+            'user_uid', 'user_name', 'user_photo_url', 'user_email',
+            'rating', 'comment', 'exam_score', 'passed',
+            'is_featured', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'exam_name', 'exam_type']
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'exam', 'user_uid', 'user_name', 'user_photo_url', 'user_email',
+            'rating', 'comment', 'exam_score', 'passed'
+        ]
+    
+    def validate_rating(self, value):
+        if value < 1 or value > 5:
+            raise serializers.ValidationError("Rating must be between 1 and 5")
+        return value

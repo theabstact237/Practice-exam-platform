@@ -7,8 +7,8 @@ from django.conf import settings
 from django.core.cache import cache
 import random
 import hashlib
-from .models import Exam, Question, Answer
-from .serializers import ExamSerializer, ExamWithQuestionsSerializer, QuestionSerializer
+from .models import Exam, Question, Answer, Review
+from .serializers import ExamSerializer, ExamWithQuestionsSerializer, QuestionSerializer, ReviewSerializer, ReviewCreateSerializer
 from .services import QuestionGenerator
 
 # Cache timeout constants (in seconds)
@@ -424,4 +424,143 @@ def invalidate_exam_cache(exam_id):
     """Helper function to invalidate exam-related caches"""
     cache.delete(f'exam_{exam_id}_question_ids')
     # Could also invalidate other related caches here
+
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for managing user reviews/testimonials
+    
+    list: Get all approved reviews (for homepage carousel)
+    create: Create a new review after exam completion
+    retrieve: Get a specific review
+    """
+    queryset = Review.objects.filter(is_approved=True).select_related('exam')
+    serializer_class = ReviewSerializer
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ReviewCreateSerializer
+        return ReviewSerializer
+    
+    def get_queryset(self):
+        queryset = Review.objects.filter(is_approved=True).select_related('exam')
+        
+        # Filter by exam if specified
+        exam_id = self.request.query_params.get('exam', None)
+        if exam_id:
+            queryset = queryset.filter(exam_id=exam_id)
+        
+        # Filter featured first, then by date
+        return queryset.order_by('-is_featured', '-created_at')
+    
+    def list(self, request, *args, **kwargs):
+        """
+        Get all approved reviews for homepage carousel
+        GET /api/reviews/?limit=10&featured=true
+        """
+        queryset = self.get_queryset()
+        
+        # Optional: only featured reviews
+        featured_only = request.query_params.get('featured', 'false').lower() == 'true'
+        if featured_only:
+            queryset = queryset.filter(is_featured=True)
+        
+        # Limit results
+        limit = int(request.query_params.get('limit', 20))
+        queryset = queryset[:limit]
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'reviews': serializer.data,
+            'count': len(serializer.data)
+        })
+    
+    def create(self, request, *args, **kwargs):
+        """
+        Create a new review after exam completion
+        POST /api/reviews/
+        
+        Body:
+        {
+            "exam": 1,
+            "user_uid": "firebase_uid",
+            "user_name": "John Doe",
+            "user_photo_url": "https://...",
+            "user_email": "john@example.com",
+            "rating": 5,
+            "comment": "Great exam!",
+            "exam_score": 85,
+            "passed": true
+        }
+        """
+        serializer = self.get_serializer(data=request.data)
+        
+        if serializer.is_valid():
+            # Check if user already reviewed this exam
+            existing = Review.objects.filter(
+                user_uid=serializer.validated_data.get('user_uid'),
+                exam=serializer.validated_data.get('exam')
+            ).first()
+            
+            if existing:
+                # Update existing review instead of creating duplicate
+                for key, value in serializer.validated_data.items():
+                    setattr(existing, key, value)
+                existing.save()
+                return Response({
+                    'message': 'Review updated successfully',
+                    'review': ReviewSerializer(existing).data
+                }, status=status.HTTP_200_OK)
+            
+            # Create new review
+            review = serializer.save()
+            return Response({
+                'message': 'Review submitted successfully',
+                'review': ReviewSerializer(review).data
+            }, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['get'], url_path='recent')
+    def recent_reviews(self, request):
+        """
+        Get recent reviews for homepage
+        GET /api/reviews/recent/?limit=5
+        """
+        limit = int(request.query_params.get('limit', 5))
+        reviews = Review.objects.filter(
+            is_approved=True
+        ).select_related('exam').order_by('-created_at')[:limit]
+        
+        serializer = self.get_serializer(reviews, many=True)
+        return Response({
+            'reviews': serializer.data,
+            'count': len(serializer.data)
+        })
+    
+    @action(detail=False, methods=['get'], url_path='stats')
+    def review_stats(self, request):
+        """
+        Get review statistics
+        GET /api/reviews/stats/
+        """
+        from django.db.models import Avg, Count
+        
+        stats = Review.objects.filter(is_approved=True).aggregate(
+            total_reviews=Count('id'),
+            average_rating=Avg('rating')
+        )
+        
+        # Get rating distribution
+        rating_distribution = {}
+        for i in range(1, 6):
+            rating_distribution[str(i)] = Review.objects.filter(
+                is_approved=True, rating=i
+            ).count()
+        
+        return Response({
+            'total_reviews': stats['total_reviews'] or 0,
+            'average_rating': round(stats['average_rating'] or 0, 1),
+            'rating_distribution': rating_distribution
+        })
 
