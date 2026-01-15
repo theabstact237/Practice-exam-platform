@@ -455,11 +455,12 @@ function App() {
       const nextQuestionIndex = currentQuestionIndex + 1;
       
       // Show login prompt after 25th question (index 24) for non-authenticated users
+      // User can skip login and continue - they just won't get certificate at the end
       if (nextQuestionIndex === 25 && !user && !hasShownLoginPrompt) {
         setShowLoginModal(true);
         setHasShownLoginPrompt(true);
         analytics.paymentTabClicked('login_prompt_shown');
-        return; // Don't advance to next question yet
+        // Don't return - allow user to continue after modal is shown
       }
       
       // Track progress milestone
@@ -727,12 +728,19 @@ function App() {
     }
   };
 
+  // Handle navigation to contact page
+  const handleContactClick = () => {
+    setCurrentPage(PAGES.CONTACT);
+    setMobileMenuOpen(false);
+  };
+
   // Show home page if not on exam page
   if (currentPage === PAGES.HOME) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <HomePage 
           onSelectExam={handleExamSelection}
+          onContactClick={handleContactClick}
           user={user}
           testimonials={testimonials}
         />

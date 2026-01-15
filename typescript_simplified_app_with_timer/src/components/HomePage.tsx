@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star, Mail } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
 import TestimonialsCarousel, { Testimonial } from './TestimonialsCarousel';
@@ -8,6 +8,7 @@ import { signOutUser } from '../utils/auth';
 
 interface HomePageProps {
   onSelectExam: (examType: string) => void;
+  onContactClick: () => void;
   user: any;
   testimonials?: Testimonial[];
 }
@@ -87,7 +88,7 @@ const TechBackground = () => {
   );
 };
 
-const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user, testimonials = [] }) => {
+const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, user, testimonials = [] }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
   const [_loadingExams, setLoadingExams] = useState(true);
@@ -155,6 +156,15 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user, testimonials = 
                 </div>
               )}
               
+              {/* Contact Link */}
+              <button
+                onClick={onContactClick}
+                className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all border border-transparent hover:border-sky-500/20 flex items-center gap-1.5"
+              >
+                <Mail className="w-4 h-4" />
+                Contact
+              </button>
+              
               {/* Language Selector */}
               <LanguageSelector />
 
@@ -214,6 +224,18 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user, testimonials = 
               </button>
             ))}
             
+            {/* Contact Link - Mobile */}
+            <button
+              onClick={() => {
+                onContactClick();
+                setMobileMenuOpen(false);
+              }}
+              className="block w-full text-left px-4 py-3 text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2"
+            >
+              <Mail className="w-5 h-5" />
+              Contact & Support
+            </button>
+            
             {/* Language Selector - Mobile */}
             <div className="px-4 py-2 border-t border-slate-800 mt-4">
               <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Language</p>
@@ -261,37 +283,35 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, user, testimonials = 
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            {!user ? (
+            {/* Always show exam buttons - users can start without login */}
+            <div className="flex flex-wrap justify-center gap-4">
               <button
-                onClick={() => setShowLoginModal(true)}
-                className="group px-8 py-4 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-2xl text-xl font-bold transition-all shadow-[0_0_30px_rgba(56,189,248,0.4)] flex items-center justify-center gap-3 hover:scale-105"
+                onClick={() => onSelectExam('solutions_architect')}
+                className="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-2xl text-lg font-bold transition-all shadow-lg shadow-sky-500/20 hover:scale-105"
               >
-                <LogIn className="w-6 h-6 transition-transform group-hover:translate-x-1" />
-                Get Started Free
+                Solutions Architect
               </button>
-            ) : (
-              <div className="flex flex-wrap justify-center gap-4">
-                <button
-                  onClick={() => onSelectExam('solutions_architect')}
-                  className="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-2xl text-lg font-bold transition-all shadow-lg shadow-sky-500/20 hover:scale-105"
-                >
-                  Solutions Architect
-                </button>
-                <button
-                  onClick={() => onSelectExam('cloud_practitioner')}
-                  className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-lg font-bold border border-slate-700 transition-all hover:scale-105"
-                >
-                  Cloud Practitioner
-                </button>
-                <button
-                  onClick={() => onSelectExam('developer')}
-                  className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-lg font-bold border border-slate-700 transition-all hover:scale-105"
-                >
-                  Developer Associate
-                </button>
-              </div>
-            )}
+              <button
+                onClick={() => onSelectExam('cloud_practitioner')}
+                className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-lg font-bold border border-slate-700 transition-all hover:scale-105"
+              >
+                Cloud Practitioner
+              </button>
+              <button
+                onClick={() => onSelectExam('developer')}
+                className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-lg font-bold border border-slate-700 transition-all hover:scale-105"
+              >
+                Developer Associate
+              </button>
+            </div>
           </div>
+          
+          {/* Sign in prompt for non-logged-in users */}
+          {!user && (
+            <p className="text-slate-500 text-sm mt-6">
+              Start practicing now! Sign in after question 25 to save your progress and get your certificate.
+            </p>
+          )}
         </div>
 
         {/* Features Grid */}
