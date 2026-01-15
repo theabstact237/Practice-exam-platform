@@ -98,7 +98,7 @@ class ExamViewSet(viewsets.ModelViewSet):
     def pre_generate_questions(self, request):
         """
         Pre-generate questions when user clicks exam tab
-        Always generates 100 questions with prompt
+        PRIORITY: Returns existing database questions first, only generates if pool is empty
         POST /api/exams/pre-generate/
         
         Body:
@@ -106,11 +106,10 @@ class ExamViewSet(viewsets.ModelViewSet):
             "exam_type": "solutions_architect",
             "num_questions": 100,  // default: 100
             "use_manus": true,  // defaults to true (Manus API)
-            "use_llama": false  // use Llama via Groq (FREE)
+            "force_generate": false  // if true, generates even if questions exist
         }
         
-        API Priority: Llama (if use_llama=true) > Manus > OpenAI
-        Get free Llama API key at: https://console.groq.com
+        API Priority: Manus > OpenAI (only used if database is empty or force_generate=true)
         """
         exam_type = request.data.get('exam_type')
         if not exam_type:
@@ -123,8 +122,34 @@ class ExamViewSet(viewsets.ModelViewSet):
         
         num_questions = request.data.get('num_questions', 100)  # Default to 100
         use_manus = request.data.get('use_manus', True)  # Default to Manus API
-        use_llama = request.data.get('use_llama', False)  # Use Llama (Groq) API
+        force_generate = request.data.get('force_generate', False)  # Force AI generation
         
+        # PRIORITY: Check existing questions in database first
+        current_count = exam.questions.count()
+        
+        # If we have enough questions and not forcing generation, return success
+        if current_count >= num_questions and not force_generate:
+            return Response({
+                'success': True,
+                'message': f'Using {current_count} existing questions from database. Ready for exam.',
+                'exam_id': exam.id,
+                'current_count': current_count,
+                'created_count': 0,
+                'source': 'database'
+            }, status=status.HTTP_200_OK)
+        
+        # If we have some questions but not enough, and not forcing, still use what we have
+        if current_count > 0 and not force_generate:
+            return Response({
+                'success': True,
+                'message': f'Using {current_count} existing questions from database. Ready for exam.',
+                'exam_id': exam.id,
+                'current_count': current_count,
+                'created_count': 0,
+                'source': 'database'
+            }, status=status.HTTP_200_OK)
+        
+        # Only generate if database is empty OR force_generate is true
         # Map exam type to display name for prompt
         exam_display_names = {
             'solutions_architect': 'solution architect',
@@ -228,7 +253,9 @@ class ExamViewSet(viewsets.ModelViewSet):
     def generate_questions(self, request, pk=None):
         """
         Generate questions for an exam using AI API
-        Always generates questions when called (no pool size checks)
+        NOTE: Only use this if you need to ADD more questions to the database.
+        For normal exam-taking, use /random-questions/ which serves existing questions.
+        
         POST /api/exams/{id}/generate-questions/
         
         Body:
@@ -236,12 +263,10 @@ class ExamViewSet(viewsets.ModelViewSet):
             "num_questions": 100,  // default: 100
             "domain": "EC2",  // optional
             "use_manus": true,  // optional, defaults to Manus API
-            "use_llama": false,  // optional, use Llama via Groq (FREE)
             "prompt": "generate 100 multiple choice questions for the solution architect"  // optional custom prompt
         }
         
-        API Priority: Llama (if use_llama=true) > Manus > OpenAI
-        Get free Llama API key at: https://console.groq.com
+        API Priority: Manus > OpenAI
         """
         exam = get_object_or_404(Exam, pk=pk)
         
