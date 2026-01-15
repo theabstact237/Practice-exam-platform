@@ -32,7 +32,7 @@ services:
           name: aws-exam-frontend
           property: host
     healthCheckPath: /api/exams/
-
+    
   # Frontend React App (Static Site)
   - type: web
     name: aws-exam-frontend

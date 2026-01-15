@@ -1,9 +1,13 @@
 ﻿// API Configuration
-// In production (onrender.com), use the backend URL; otherwise use env var or localhost
+// In production, use the backend URL; otherwise use env var or localhost
 const getApiBaseUrl = () => {
-  // Auto-detect production on Render - most reliable method
-  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
-    return 'https://aws-exam-backend.onrender.com/api';
+  // Auto-detect production environments (Render or custom domain)
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    // Check for Render domain OR custom domain (freecertify.org)
+    if (hostname.includes('onrender.com') || hostname.includes('freecertify.org')) {
+      return 'https://aws-exam-backend.onrender.com/api';
+    }
   }
   
   // Check environment variable for other deployments
@@ -289,7 +293,6 @@ export const getOrGenerateExamQuestions = async (
   }
 };
 
-
 // ============ REVIEWS API ============
 
 export interface Review {
@@ -321,6 +324,9 @@ export interface ReviewCreateData {
   passed?: boolean;
 }
 
+/**
+ * Get all approved reviews for homepage carousel
+ */
 export const getReviews = async (limit: number = 20): Promise<Review[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/reviews/?limit=${limit}`);
@@ -331,10 +337,13 @@ export const getReviews = async (limit: number = 20): Promise<Review[]> => {
     return data.reviews || [];
   } catch (error) {
     console.error('Error fetching reviews:', error);
-    return [];
+    return []; // Return empty array on error (non-critical)
   }
 };
 
+/**
+ * Get recent reviews
+ */
 export const getRecentReviews = async (limit: number = 5): Promise<Review[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/reviews/recent/?limit=${limit}`);
@@ -349,6 +358,9 @@ export const getRecentReviews = async (limit: number = 5): Promise<Review[]> => 
   }
 };
 
+/**
+ * Submit a new review
+ */
 export const submitReview = async (reviewData: ReviewCreateData): Promise<{ success: boolean; message: string }> => {
   try {
     const response = await fetch(`${API_BASE_URL}/reviews/`, {
@@ -372,6 +384,9 @@ export const submitReview = async (reviewData: ReviewCreateData): Promise<{ succ
   }
 };
 
+/**
+ * Get review statistics
+ */
 export const getReviewStats = async (): Promise<{ 
   total_reviews: number; 
   average_rating: number; 
@@ -388,3 +403,5 @@ export const getReviewStats = async (): Promise<{
     return { total_reviews: 0, average_rating: 0, rating_distribution: {} };
   }
 };
+
+
