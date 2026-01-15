@@ -294,7 +294,9 @@ export const getOrGenerateExamQuestions = async (
   }
 };
 
-// ============ REVIEWS API ============export interface Review {
+// ============ REVIEWS API ============
+
+export interface Review {
   id: number;
   exam: number;
   exam_name: string;
