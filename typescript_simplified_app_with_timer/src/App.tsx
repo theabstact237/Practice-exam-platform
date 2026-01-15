@@ -1595,7 +1595,12 @@ function App() {
         examId={currentExamId}
         examScore={lastExamScore}
         passed={lastExamPassed}
-        user={user}
+        user={user ? {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL
+        } : null}
       />
     </div>
   );
