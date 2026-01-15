@@ -105,8 +105,12 @@ class ExamViewSet(viewsets.ModelViewSet):
         {
             "exam_type": "solutions_architect",
             "num_questions": 100,  // default: 100
-            "use_manus": true  // defaults to true (Manus API)
+            "use_manus": true,  // defaults to true (Manus API)
+            "use_llama": false  // use Llama via Groq (FREE)
         }
+        
+        API Priority: Llama (if use_llama=true) > Manus > OpenAI
+        Get free Llama API key at: https://console.groq.com
         """
         exam_type = request.data.get('exam_type')
         if not exam_type:
@@ -119,6 +123,7 @@ class ExamViewSet(viewsets.ModelViewSet):
         
         num_questions = request.data.get('num_questions', 100)  # Default to 100
         use_manus = request.data.get('use_manus', True)  # Default to Manus API
+        use_llama = request.data.get('use_llama', False)  # Use Llama (Groq) API
         
         # Map exam type to display name for prompt
         exam_display_names = {
@@ -140,12 +145,13 @@ class ExamViewSet(viewsets.ModelViewSet):
         
         try:
             generator = QuestionGenerator()
-            # This will automatically fallback to OpenAI if Manus fails
+            # This will automatically fallback to other APIs if one fails
             generated_questions = generator.generate_questions(
                 exam_name=exam.name,
                 num_questions=num_questions,
                 domain=None,
                 use_manus=use_manus,
+                use_llama=use_llama,
                 prompt=prompt  # Pass the prompt
             )
             
@@ -229,15 +235,20 @@ class ExamViewSet(viewsets.ModelViewSet):
         {
             "num_questions": 100,  // default: 100
             "domain": "EC2",  // optional
-            "use_manus": true  // optional, defaults to Manus API
+            "use_manus": true,  // optional, defaults to Manus API
+            "use_llama": false,  // optional, use Llama via Groq (FREE)
             "prompt": "generate 100 multiple choice questions for the solution architect"  // optional custom prompt
         }
+        
+        API Priority: Llama (if use_llama=true) > Manus > OpenAI
+        Get free Llama API key at: https://console.groq.com
         """
         exam = get_object_or_404(Exam, pk=pk)
         
         num_questions = request.data.get('num_questions', 100)  # Default to 100
         domain = request.data.get('domain', None)
         use_manus = request.data.get('use_manus', True)  # Default to Manus API
+        use_llama = request.data.get('use_llama', False)  # Use Llama (Groq) API
         prompt = request.data.get('prompt', None)  # Optional custom prompt
         
         # Always generate questions when this endpoint is called
@@ -251,6 +262,7 @@ class ExamViewSet(viewsets.ModelViewSet):
                 num_questions=num_questions,
                 domain=domain,
                 use_manus=use_manus,
+                use_llama=use_llama,
                 prompt=prompt
             )
             

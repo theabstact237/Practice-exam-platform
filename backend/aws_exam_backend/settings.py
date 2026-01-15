@@ -200,6 +200,11 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
 MANUS_API_KEY = os.getenv('MANUS_API_KEY', '')
 MANUS_API_URL = os.getenv('MANUS_API_URL', 'https://api.manus.ai/v1')  # Update with actual Manus API URL
 
+# Llama API via Groq (free tier available at https://console.groq.com)
+GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
+# Default model: llama-3.3-70b-versatile (best for question generation)
+LLAMA_MODEL = os.getenv('LLAMA_MODEL', 'llama-3.3-70b-versatile')
+
 # Intelligent Question Pool Enrichment Settings
 # Probability of enriching database when pool is full (0.0 to 1.0)
 # 0.15 = 15% chance to enrich on each request when pool >= 100

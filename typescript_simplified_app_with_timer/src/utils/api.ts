@@ -1,9 +1,10 @@
-﻿// API Configuration
+// API Configuration
 // In production, use the backend URL; otherwise use env var or localhost
 const getApiBaseUrl = () => {
-  // Auto-detect production environments (Render or custom domain)
+  // Auto-detect production environments
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
+    
     // Check for Render domain OR custom domain (freecertify.org)
     if (hostname.includes('onrender.com') || hostname.includes('freecertify.org')) {
       return 'https://aws-exam-backend.onrender.com/api';
@@ -17,9 +18,9 @@ const getApiBaseUrl = () => {
     if (!envUrl.startsWith('http://') && !envUrl.startsWith('https://')) {
       envUrl = `https://${envUrl}`;
     }
-    // If it's a Render service name without domain, add .onrender.com
-    if (!envUrl.includes('.') || envUrl.match(/^https?:\/\/[^.]+\//)) {
-      envUrl = envUrl.replace(/^(https?:\/\/)([^\/]+)/, '$1$2.onrender.com');
+    // Ensure /api suffix is present
+    if (!envUrl.endsWith('/api') && !envUrl.endsWith('/api/')) {
+      envUrl = envUrl.replace(/\/?$/, '/api');
     }
     return envUrl;
   }
@@ -293,9 +294,7 @@ export const getOrGenerateExamQuestions = async (
   }
 };
 
-// ============ REVIEWS API ============
-
-export interface Review {
+// ============ REVIEWS API ============export interface Review {
   id: number;
   exam: number;
   exam_name: string;
@@ -403,5 +402,3 @@ export const getReviewStats = async (): Promise<{
     return { total_reviews: 0, average_rating: 0, rating_distribution: {} };
   }
 };
-
-

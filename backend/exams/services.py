@@ -1,10 +1,18 @@
 """
 Service module for generating questions using AI APIs
+Supports: OpenAI, Manus, and Llama (via Groq)
 """
 import json
 import requests
 from django.conf import settings
 from openai import OpenAI
+
+# Try to import Groq for Llama support
+try:
+    from groq import Groq
+    GROQ_AVAILABLE = True
+except ImportError:
+    GROQ_AVAILABLE = False
 
 
 class QuestionGenerator:
@@ -12,10 +20,18 @@ class QuestionGenerator:
     
     def __init__(self):
         self.openai_client = None
+        self.groq_client = None
+        
         if settings.OPENAI_API_KEY:
             self.openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        
+        # Initialize Groq client for Llama
+        if GROQ_AVAILABLE and getattr(settings, 'GROQ_API_KEY', ''):
+            self.groq_client = Groq(api_key=settings.GROQ_API_KEY)
+        
         self.manus_api_key = settings.MANUS_API_KEY
         self.manus_api_url = settings.MANUS_API_URL
+        self.llama_model = getattr(settings, 'LLAMA_MODEL', 'llama-3.3-70b-versatile')
     
     def generate_questions_openai(self, exam_name: str, num_questions: int = 50, domain: str = None) -> list:
         """
@@ -158,43 +174,154 @@ Make questions realistic and aligned with AWS best practices and official exam c
             # Re-raise other exceptions so they can be caught by the fallback logic
             raise Exception(f"Error generating questions with Manus API: {str(e)}")
     
-    def generate_questions(self, exam_name: str, num_questions: int = 50, domain: str = None, use_manus: bool = True, prompt: str = None) -> list:
+    def generate_questions_llama(self, exam_name: str, num_questions: int = 50, domain: str = None) -> list:
+        """
+        Generate exam questions using Llama via Groq API (FREE tier available)
+        
+        Args:
+            exam_name: Name of the exam (e.g., "AWS Solutions Architect")
+            num_questions: Number of questions to generate
+            domain: Optional AWS service domain filter
+        
+        Returns:
+            List of question dictionaries in the same format as other generators
+        """
+        if not self.groq_client:
+            raise ValueError("Groq API key not configured. Get a free key at https://console.groq.com")
+        
+        domain_context = f" focusing on {domain}" if domain else ""
+        
+        # Use the same prompt format as OpenAI for consistency
+        prompt = f"""Generate {num_questions} multiple-choice questions for the {exam_name} certification exam{domain_context}.
+
+For each question, provide:
+1. A clear, relevant question text about AWS services, architectures, or best practices
+2. Exactly 4 answer options labeled A, B, C, D
+3. The correct answer letter (A, B, C, or D)
+4. A detailed explanation of why the correct answer is correct
+5. An AWS service domain (e.g., EC2, S3, Lambda, VPC, IAM, etc.)
+6. A difficulty level (easy, medium, or hard)
+
+Return the response as a JSON array with this exact structure:
+[
+  {{
+    "question_text": "Question text here",
+    "domain": "AWS service name",
+    "difficulty": "medium",
+    "options": [
+      {{"letter": "A", "text": "Option A text"}},
+      {{"letter": "B", "text": "Option B text"}},
+      {{"letter": "C", "text": "Option C text"}},
+      {{"letter": "D", "text": "Option D text"}}
+    ],
+    "correct_answer_letter": "A",
+    "explanation": "Detailed explanation here"
+  }}
+]
+
+Make questions realistic and aligned with AWS best practices and official exam content.
+IMPORTANT: Return ONLY the JSON array, no additional text or markdown formatting."""
+        
+        try:
+            response = self.groq_client.chat.completions.create(
+                model=self.llama_model,
+                messages=[
+                    {
+                        "role": "system", 
+                        "content": "You are an expert AWS certification exam question writer. Generate accurate, realistic questions. Always respond with valid JSON only."
+                    },
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7,
+                max_tokens=8000,  # Llama supports larger context
+            )
+            
+            content = response.choices[0].message.content.strip()
+            
+            # Extract JSON from markdown code blocks if present
+            if '```json' in content:
+                start = content.find('```json') + 7
+                end = content.find('```', start)
+                content = content[start:end].strip()
+            elif '```' in content:
+                start = content.find('```') + 3
+                end = content.find('```', start)
+                if end == -1:
+                    end = len(content)
+                content = content[start:end].strip()
+            
+            # Try to parse JSON
+            try:
+                questions = json.loads(content)
+                if not isinstance(questions, list):
+                    questions = [questions]
+            except json.JSONDecodeError:
+                # Try to extract JSON array from text
+                import re
+                json_match = re.search(r'\[.*\]', content, re.DOTALL)
+                if json_match:
+                    questions = json.loads(json_match.group())
+                else:
+                    raise ValueError(f"Could not parse JSON from Llama response: {content[:200]}")
+            
+            return questions
+            
+        except Exception as e:
+            raise Exception(f"Error generating questions with Llama (Groq): {str(e)}")
+    
+    def generate_questions(self, exam_name: str, num_questions: int = 50, domain: str = None, use_manus: bool = True, use_llama: bool = False, prompt: str = None) -> list:
         """
         Generate questions using the specified API
-        Defaults to Manus API if available, with automatic fallback to OpenAI on failure
+        Priority order: Llama (if use_llama=True) > Manus > OpenAI
         
         Args:
             exam_name: Name of the exam
             num_questions: Number of questions to generate
             domain: Optional domain filter
-            use_manus: If True, try Manus API first; otherwise use OpenAI (default: True)
-            prompt: Optional custom prompt for Manus API (e.g., "generate 100 multiple choice questions for the solution architect")
+            use_manus: If True, try Manus API first (default: True)
+            use_llama: If True, try Llama (Groq) API first (default: False)
+            prompt: Optional custom prompt for Manus API
         
         Returns:
             List of question dictionaries
         """
-        # Try Manus API first if requested and available
+        errors = []
+        
+        # Try Llama first if requested and available
+        if use_llama and self.groq_client:
+            try:
+                print(f"Generating questions with Llama ({self.llama_model})...")
+                return self.generate_questions_llama(exam_name, num_questions, domain)
+            except Exception as e:
+                errors.append(f"Llama: {str(e)}")
+                print(f"Llama API failed: {str(e)}. Trying fallback...")
+        
+        # Try Manus API if requested and available
         if use_manus and self.manus_api_key:
             try:
                 return self.generate_questions_manus(exam_name, num_questions, domain, prompt)
             except Exception as e:
-                # Log the error but don't fail - fallback to OpenAI
-                print(f"Manus API failed: {str(e)}. Falling back to OpenAI...")
-                if self.openai_client:
-                    return self.generate_questions_openai(exam_name, num_questions, domain)
-                else:
-                    # Re-raise if no fallback available
-                    raise Exception(f"Manus API failed and OpenAI is not configured. Original error: {str(e)}")
+                errors.append(f"Manus: {str(e)}")
+                print(f"Manus API failed: {str(e)}. Trying fallback...")
         
-        # Use OpenAI if explicitly requested or if Manus is not available
+        # Try OpenAI as fallback
         if self.openai_client:
-            return self.generate_questions_openai(exam_name, num_questions, domain)
-        elif self.manus_api_key:
-            # Last resort: try Manus even if not explicitly requested
             try:
-                return self.generate_questions_manus(exam_name, num_questions, domain, prompt)
+                return self.generate_questions_openai(exam_name, num_questions, domain)
             except Exception as e:
-                raise Exception(f"Both Manus and OpenAI APIs failed. Manus error: {str(e)}")
+                errors.append(f"OpenAI: {str(e)}")
+        
+        # Try Llama as last resort if not already tried
+        if not use_llama and self.groq_client:
+            try:
+                print("Trying Llama as last resort...")
+                return self.generate_questions_llama(exam_name, num_questions, domain)
+            except Exception as e:
+                errors.append(f"Llama (fallback): {str(e)}")
+        
+        # All APIs failed
+        if errors:
+            raise Exception(f"All AI APIs failed. Errors: {'; '.join(errors)}")
         else:
-            raise ValueError("No AI API configured. Please set MANUS_API_KEY or OPENAI_API_KEY in environment variables.")
+            raise ValueError("No AI API configured. Please set GROQ_API_KEY, MANUS_API_KEY, or OPENAI_API_KEY in environment variables.")
 
