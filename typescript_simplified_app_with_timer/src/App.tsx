@@ -13,11 +13,13 @@ import HomePage from './components/HomePage';
 import Certificate from './components/Certificate';
 import ExamInProgressModal from './components/ExamInProgressModal';
 import ReviewModal, { ReviewData } from './components/ReviewModal';
+import ExamLandingPage from './components/ExamLandingPage';
 import { Testimonial } from './components/TestimonialsCarousel';
 
 // Define page types for navigation
 const PAGES = {
   HOME: 'home',
+  EXAM_LANDING: 'exam_landing',
   EXAM: 'exam',
   CONTACT: 'contact',
   REVIEW: 'review'
@@ -692,8 +694,8 @@ function App() {
     };
   };
 
-  // Handle exam selection with pre-generation
-  const handleExamSelection = async (examType: string) => {
+  // Handle exam selection - go to landing page first
+  const handleExamSelection = (examType: string) => {
     // Check if exam is in progress and user is trying to switch
     if (examInProgress && examType !== currentExamType && !isReviewMode) {
       setPendingExamType(examType);
@@ -701,8 +703,13 @@ function App() {
       return;
     }
     
-    setIsPreGenerating(true);
     setCurrentExamType(examType);
+    setCurrentPage(PAGES.EXAM_LANDING);
+  };
+
+  // Handle starting the actual exam from landing page
+  const handleStartExam = async () => {
+    setIsPreGenerating(true);
     setCurrentPage(PAGES.EXAM);
     
     // Map frontend exam types to backend exam types
@@ -712,12 +719,12 @@ function App() {
       [EXAM_TYPES.DEVELOPER]: 'developer'
     };
 
-    const backendExamType = examTypeMap[examType] || examType;
+    const backendExamType = examTypeMap[currentExamType] || currentExamType;
     
     try {
-      // Pre-generate questions when user clicks exam tab
+      // Pre-generate questions when user starts exam
       console.log(`Pre-generating questions for ${backendExamType}...`);
-      await preGenerateExamQuestions(backendExamType, 50, true); // Use Manus API
+      await preGenerateExamQuestions(backendExamType, 50, true);
       console.log('Pre-generation complete!');
     } catch (error) {
       console.error('Error pre-generating questions:', error);
@@ -757,6 +764,19 @@ function App() {
           totalQuestions={questions.length || 50}
         />
       </div>
+    );
+  }
+
+  // Show exam landing page
+  if (currentPage === PAGES.EXAM_LANDING) {
+    return (
+      <ExamLandingPage
+        examType={currentExamType}
+        onStartExam={handleStartExam}
+        onGoBack={() => setCurrentPage(PAGES.HOME)}
+        user={user}
+        onLoginClick={() => setShowLoginModal(true)}
+      />
     );
   }
 
