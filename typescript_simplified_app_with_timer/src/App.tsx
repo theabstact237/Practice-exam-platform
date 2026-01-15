@@ -1202,19 +1202,19 @@ function App() {
                 <div className="flex items-center mb-4">
                   <input
                     type="text"
-                    value="$YourCashAppID"
+                    value="$theabstract237"
                     readOnly
                     className="flex-1 p-2 bg-slate-800 border border-slate-600 rounded-l-md"
                   />
                   <button
-                    onClick={() => copyToClipboard('$YourCashAppID')}
+                    onClick={() => copyToClipboard('$theabstract237')}
                     className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-r-md"
                   >
                     {copySuccess === 'Copied!' ? copySuccess : 'Copy'}
                   </button>
                 </div>
                 <a
-                  href="https://cash.app/$YourCashAppID"
+                  href="https://cash.app/$theabstract237"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-2 rounded-md"
@@ -1232,12 +1232,12 @@ function App() {
                 <div className="flex items-center mb-4">
                   <input
                     type="text"
-                    value="@YourVenmoID"
+                    value="@karl-siaka"
                     readOnly
                     className="flex-1 p-2 bg-slate-800 border border-slate-600 rounded-l-md"
                   />
                   <button
-                    onClick={() => copyToClipboard('@YourVenmoID')}
+                    onClick={() => copyToClipboard('@karl-siaka')}
                     className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-md"
                   >
                     {copySuccess === 'Copied!' ? copySuccess : 'Copy'}
@@ -1251,13 +1251,13 @@ function App() {
                 <h3 className="text-sky-400 font-semibold mb-2">PayPal</h3>
                 <p className="mb-4">Support me with PayPal:</p>
                 <a
-                  href="https://paypal.me/YourPayPalID"
+                  href="https://paypal.me/SiakaKarl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-sky-600 hover:bg-sky-700 text-white text-center py-2 rounded-md mb-4"
                   onClick={() => analytics.paymentLinkClicked('paypal')}
                 >
-                  PayPal.me/YourPayPalID
+                  PayPal.me/SiakaKarl
                 </a>
               </div>
             )}
@@ -1269,12 +1269,12 @@ function App() {
                 <div className="flex items-center mb-4">
                   <input
                     type="text"
-                    value="your.email@example.com"
+                    value="siakatayoukarlwilliam@gmail.com"
                     readOnly
                     className="flex-1 p-2 bg-slate-800 border border-slate-600 rounded-l-md"
                   />
                   <button
-                    onClick={() => copyToClipboard('your.email@example.com')}
+                    onClick={() => copyToClipboard('siakatayoukarlwilliam@gmail.com')}
                     className="bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-r-md"
                   >
                     {copySuccess === 'Copied!' ? copySuccess : 'Copy'}
