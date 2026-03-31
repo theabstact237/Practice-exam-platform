@@ -182,7 +182,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
               {user && onOpenAnalytics && (
                 <button
                   onClick={onOpenAnalytics}
-                  className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all border border-transparent hover:border-sky-500/20 flex items-center gap-1.5"
+                  className="px-3 py-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 rounded-md transition-all border border-emerald-500/20 hover:border-emerald-500/40 flex items-center gap-1.5"
                   title="Analytics Dashboard"
                 >
                   <BarChart3 className="w-4 h-4" />
@@ -272,6 +272,20 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
               >
                 <MessageCircle className="w-5 h-5" />
                 AI Assistant
+              </button>
+            )}
+
+            {/* Analytics - Mobile */}
+            {user && onOpenAnalytics && (
+              <button
+                onClick={() => {
+                  onOpenAnalytics();
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3 text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2"
+              >
+                <BarChart3 className="w-5 h-5" />
+                Analytics Dashboard
               </button>
             )}
             

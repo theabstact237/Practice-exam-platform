@@ -1778,7 +1778,7 @@ function App() {
                 {user && (
                   <button
                     onClick={() => setShowAnalyticsDashboard(true)}
-                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
                     title="View Analytics"
                   >
                     <BarChart3 className="w-4 h-4 mr-2" />
@@ -1962,10 +1962,10 @@ function App() {
                     setShowAnalyticsDashboard(true);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-600"
+                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20"
                 >
                   <BarChart3 className="w-4 h-4 mr-2" />
-                  Analytics
+                  Analytics Dashboard
                 </button>
               )}
             </div>
