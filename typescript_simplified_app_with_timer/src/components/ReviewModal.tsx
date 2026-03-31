@@ -4,7 +4,7 @@ import { Star, X, Send, MessageSquare } from 'lucide-react';
 interface ReviewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (review: ReviewData) => void;
+  onSubmit: (review: ReviewData) => Promise<void>;
   examName: string;
   examId: number;
   examScore: number;
@@ -43,6 +43,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -50,6 +51,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
     if (!user || !comment.trim()) return;
     
     setIsSubmitting(true);
+    setSubmitError(null);
     
     const reviewData: ReviewData = {
       exam: examId,
@@ -63,8 +65,13 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
       passed
     };
     
-    await onSubmit(reviewData);
-    setIsSubmitting(false);
+    try {
+      await onSubmit(reviewData);
+    } catch {
+      setSubmitError('Could not save your review. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSkip = () => {
@@ -173,6 +180,9 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
         </div>
 
         {/* Footer */}
+        {submitError && (
+          <p className="px-6 pb-2 text-sm text-red-400 text-center">{submitError}</p>
+        )}
         <div className="p-6 pt-0 flex gap-3">
           <button
             onClick={handleSkip}

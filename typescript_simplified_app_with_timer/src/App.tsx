@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
 import { initGA, analytics, setUserProperties } from './utils/analytics';
-import { getOrGenerateExamQuestions, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan } from './utils/api';
+import { getOrGenerateExamQuestions, getExamsByType, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan } from './utils/api';
 import type { ChatMessage } from './components/AIAssistantModal';
 import { getOrCreateSessionKey, getDeviceCategory } from './utils/analyticsClient';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
@@ -315,6 +315,11 @@ function App() {
         };
 
         const backendExamType = examTypeMap[currentExamType] || currentExamType;
+
+        // Resolve the real exam ID from the API (avoids hardcoded ID assumptions)
+        getExamsByType(backendExamType).then(exams => {
+          if (exams.length > 0) setCurrentExamId(exams[0].id);
+        }).catch(() => {});
         
         // Get or generate questions from Django API with timeout (using Manus API by default)
         const apiQuestions = await Promise.race([
@@ -566,13 +571,7 @@ function App() {
       setLastExamScore(percentage);
       setLastExamPassed(percentage >= 70);
       
-      // Map exam type to exam ID
-      const examIdMap: { [key: string]: number } = {
-        [EXAM_TYPES.SOLUTIONS_ARCHITECT]: 1,
-        [EXAM_TYPES.CLOUD_PRACTITIONER]: 2,
-        [EXAM_TYPES.DEVELOPER]: 3
-      };
-      setCurrentExamId(examIdMap[currentExamType] || 1);
+      // currentExamId is already set during question loading via getExamsByType
       
       // Show review modal if user passed (they can then get certificate after review)
       if (percentage >= 70 && user) {
@@ -619,32 +618,51 @@ function App() {
   // Handle review submission
   const handleReviewSubmit = async (reviewData: ReviewData) => {
     try {
-      await submitReview(reviewData);
-      console.log('Review submitted successfully');
-      
-      // Refresh testimonials
-      const reviews = await getReviews(20);
-      const transformedTestimonials: Testimonial[] = reviews.map((review: Review) => ({
-        id: review.id,
-        user_name: review.user_name,
-        user_photo_url: review.user_photo_url,
-        exam_name: review.exam_name,
-        rating: review.rating,
-        comment: review.comment,
-        passed: review.passed || false,
-        exam_score: review.exam_score,
-        created_at: review.created_at
-      }));
-      setTestimonials(transformedTestimonials);
+      const result = await submitReview(reviewData);
+      console.log('Review submitted successfully', result);
+
+      // Immediately add the new review to the top of the testimonials list
+      // so the user sees it as soon as they return to the homepage
+      const newTestimonial: Testimonial = {
+        id: Date.now(), // temporary ID until the re-fetch resolves
+        user_name: reviewData.user_name,
+        user_photo_url: reviewData.user_photo_url,
+        exam_name: getExamTitle(),
+        rating: reviewData.rating,
+        comment: reviewData.comment,
+        passed: reviewData.passed,
+        exam_score: reviewData.exam_score,
+        created_at: new Date().toISOString(),
+      };
+      setTestimonials(prev => [newTestimonial, ...prev]);
+
+      // Background refresh to pick up the real DB record (with correct ID)
+      getReviews(20).then(reviews => {
+        const refreshed: Testimonial[] = reviews.map((review: Review) => ({
+          id: review.id,
+          user_name: review.user_name,
+          user_photo_url: review.user_photo_url,
+          exam_name: review.exam_name,
+          rating: review.rating,
+          comment: review.comment,
+          passed: review.passed || false,
+          exam_score: review.exam_score,
+          created_at: review.created_at,
+        }));
+        setTestimonials(refreshed);
+      }).catch(() => {});
+
     } catch (error) {
       console.error('Error submitting review:', error);
-    }
-    
-    // Close review modal and show certificate if pending
-    setShowReviewModal(false);
-    if (pendingCertificate) {
-      setShowCertificate(true);
-      setPendingCertificate(false);
+      // Rethrow so the ReviewModal can display an error state
+      throw error;
+    } finally {
+      // Close review modal and show certificate whether submission succeeded or failed
+      setShowReviewModal(false);
+      if (pendingCertificate) {
+        setShowCertificate(true);
+        setPendingCertificate(false);
+      }
     }
   };
 
