@@ -19,12 +19,6 @@ services:
         sync: false
       - key: MANUS_API_KEY
         sync: false
-      - key: GROQ_API_KEY
-        sync: false
-      - key: GROQ_BASE_URL
-        value: "https://api.groq.com/openai"
-      - key: GROQ_MODEL
-        value: "llama-3.3-70b-versatile"
       - key: DEEPSEEK_API_KEY
         sync: false
       - key: DEEPSEEK_BASE_URL
