@@ -15,6 +15,7 @@ def root_view(request):
         'endpoints': {
             'admin': '/admin/',
             'api': '/api/',
+            'analytics': '/api/analytics/dashboard/',
             'exams': '/api/exams/',
             'health': '/api/exams/'
         },
@@ -24,6 +25,7 @@ def root_view(request):
 urlpatterns = [
     path('', root_view, name='root'),
     path('admin/', admin.site.urls),
+    path('api/analytics/', include('analytics.urls')),
     path('api/', include('exams.urls')),
 ]
 

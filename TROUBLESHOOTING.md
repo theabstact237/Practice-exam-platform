@@ -180,6 +180,37 @@ Should return JSON with at least 2 exams:
 
 ---
 
+## Issue: Render backend fails or API errors — database not connected
+
+### Problem
+
+On Render, the Django backend uses PostgreSQL when `DATABASE_URL` is set (see `backend/aws_exam_backend/settings.py`). If there is no database, or `DATABASE_URL` is missing or wrong, deploys can fail at startup or the API will not work reliably in production.
+
+### Typical symptoms
+
+- Startup logs: `migrate` retries then failure, or connection refused / authentication errors to PostgreSQL
+- Health check or `/api/exams/` failing after deploy
+- Backend service crashes or restarts in a loop
+
+### Causes
+
+1. **No PostgreSQL instance** on Render for this project
+2. **`DATABASE_URL` missing, incorrect, or not linked** from the database resource to the web service
+3. **Region mismatch** (less common): backend and database in different regions can cause latency or connection issues; prefer the same region
+
+### Resolution
+
+1. **Create a PostgreSQL** instance on Render (same region as the backend service when possible).
+2. **Set `DATABASE_URL` on the backend service** (e.g. **aws-exam-backend** → **Environment**):
+   - Prefer **linking** the database so Render injects the connection string (same idea as `fromDatabase` in `render.yaml`).
+   - Or set it manually using the **Internal Database URL** / connection string from the database dashboard.
+3. **Save** environment variables and **redeploy** the backend (manual deploy is enough; no code change required).
+4. **Confirm** in service logs that `migrate` succeeds and Gunicorn starts (the deploy start command retries migrations until Postgres is reachable).
+
+For full environment variable tables and deploy steps, see `RENDER_DEPLOYMENT.md` and `ENVIRONMENT_VARIABLES_GUIDE.md`.
+
+---
+
 ## Quick Checklist
 
 - [ ] Backend running on http://localhost:8000
@@ -244,7 +275,8 @@ Should return JSON with at least 2 exams:
 
 5. **Check environment variables:**
    - Frontend: `VITE_API_BASE_URL`
-   - Backend: `OPENAI_API_KEY`, `DEBUG`, etc.
+   - Backend (local): `OPENAI_API_KEY`, `DEBUG`, etc.
+   - Backend (Render / production): `DATABASE_URL` must point to your PostgreSQL instance (see **Issue: Render backend fails or API errors — database not connected** above)
 
 ---
 
@@ -252,6 +284,7 @@ Should return JSON with at least 2 exams:
 
 Check these files:
 - `LOCAL_DEVELOPMENT.md` - Setup guide
+- `RENDER_DEPLOYMENT.md` - Render deploy and database linking
 - `FRONTEND_BACKEND_CONNECTION.md` - Connection details
 - `backend/aws_exam_backend/settings.py` - Backend config
 - `typescript_simplified_app_with_timer/src/utils/api.ts` - API client

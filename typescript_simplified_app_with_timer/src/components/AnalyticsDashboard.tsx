@@ -1,76 +1,102 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { getAnalyticsDashboard, AnalyticsDashboardData } from '../utils/api';
 
 interface AnalyticsDashboardProps {
   isVisible: boolean;
   onClose: () => void;
 }
 
-interface LocalAnalytics {
-  sessionsToday: number;
-  totalSessions: number;
-  examCompletions: number;
-  averageScore: number;
-  popularExamType: string;
-  deviceBreakdown: { mobile: number; desktop: number };
-  questionStats: Array<{ questionId: number; correctRate: number; avgTime: number }>;
-}
+const POLL_MS = 5000;
+
+const DEVICE_COLORS: Record<string, string> = {
+  mobile: '#10b981',
+  tablet: '#a855f7',
+  desktop: '#0ea5e9',
+  unknown: '#64748b',
+};
+
+const DEVICE_LABELS: Record<string, string> = {
+  mobile: 'Mobile',
+  tablet: 'Tablet',
+  desktop: 'Desktop',
+  unknown: 'Unknown',
+};
+
+const emptyDashboard: AnalyticsDashboardData = {
+  sessions_today: 0,
+  total_sessions: 0,
+  exam_completions: 0,
+  average_score_percent: 0,
+  exam_type_performance: [],
+  device_breakdown: { mobile: 0, tablet: 0, desktop: 0, unknown: 0 },
+  popular_exam_type: 'solutions_architect',
+  popular_exam_label: 'AWS Solutions Architect',
+  updated_at: '',
+};
 
 const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isVisible, onClose }) => {
-  const [analytics, setAnalytics] = useState<LocalAnalytics>({
-    sessionsToday: 0,
-    totalSessions: 0,
-    examCompletions: 0,
-    averageScore: 0,
-    popularExamType: 'solutions_architect',
-    deviceBreakdown: { mobile: 0, desktop: 0 },
-    questionStats: []
-  });
+  const [dashboardData, setDashboardData] = useState<AnalyticsDashboardData>(emptyDashboard);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (isVisible) {
-      loadLocalAnalytics();
-    }
+    if (!isVisible) return;
+
+    let cancelled = false;
+
+    const load = async () => {
+      const data = await getAnalyticsDashboard();
+      if (cancelled) return;
+      if (data) {
+        setDashboardData(data);
+        setLoadError(null);
+      } else {
+        setLoadError('Could not load analytics. Is the API running and CORS configured?');
+      }
+      setIsLoading(false);
+    };
+
+    void load();
+    const interval = setInterval(() => void load(), POLL_MS);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, [isVisible]);
 
-  const loadLocalAnalytics = () => {
-    // Load analytics from localStorage (basic implementation)
-    const today = new Date().toDateString();
-    const sessionsToday = parseInt(localStorage.getItem(`sessions_${today}`) || '0');
-    const totalSessions = parseInt(localStorage.getItem('total_sessions') || '0');
-    const examCompletions = parseInt(localStorage.getItem('exam_completions') || '0');
-    const totalScore = parseInt(localStorage.getItem('total_score') || '0');
-    const averageScore = examCompletions > 0 ? Math.round(totalScore / examCompletions) : 0;
-    
-    // Device breakdown
-    const mobileCount = parseInt(localStorage.getItem('mobile_sessions') || '0');
-    const desktopCount = parseInt(localStorage.getItem('desktop_sessions') || '0');
-    
-    // Popular exam type
-    const saCount = parseInt(localStorage.getItem('sa_exam_count') || '0');
-    const cpCount = parseInt(localStorage.getItem('cp_exam_count') || '0');
-    const popularExamType = saCount > cpCount ? 'Solutions Architect' : 'Cloud Practitioner';
+  const examChartRows = dashboardData.exam_type_performance
+    .filter((row) => row.sessions > 0 || row.completions > 0)
+    .map((row) => ({
+      name: row.name.replace(/^AWS\s+/i, '').trim() || row.name,
+      sessions: row.sessions,
+      completions: row.completions,
+    }));
 
-    setAnalytics({
-      sessionsToday,
-      totalSessions,
-      examCompletions,
-      averageScore,
-      popularExamType,
-      deviceBreakdown: { mobile: mobileCount, desktop: desktopCount },
-      questionStats: [] // Would need more complex tracking for this
-    });
-  };
+  const deviceTotal =
+    dashboardData.device_breakdown.mobile +
+    dashboardData.device_breakdown.tablet +
+    dashboardData.device_breakdown.desktop +
+    dashboardData.device_breakdown.unknown;
 
-  const deviceData = [
-    { name: 'Desktop', value: analytics.deviceBreakdown.desktop, color: '#0ea5e9' },
-    { name: 'Mobile', value: analytics.deviceBreakdown.mobile, color: '#10b981' }
-  ];
+  const deviceData = (['mobile', 'tablet', 'desktop', 'unknown'] as const)
+    .map((key) => ({
+      name: DEVICE_LABELS[key],
+      value: dashboardData.device_breakdown[key] ?? 0,
+      color: DEVICE_COLORS[key],
+    }))
+    .filter((d) => d.value > 0);
 
-  const examTypeData = [
-    { name: 'Solutions Architect', sessions: 45, completions: 32 },
-    { name: 'Cloud Practitioner', sessions: 38, completions: 28 }
-  ];
+  const mobilePct =
+    deviceTotal > 0
+      ? Math.round(((dashboardData.device_breakdown.mobile ?? 0) / deviceTotal) * 100)
+      : 0;
+
+  const completionRate =
+    dashboardData.total_sessions > 0
+      ? Math.round((dashboardData.exam_completions / dashboardData.total_sessions) * 100)
+      : 0;
 
   if (!isVisible) return null;
 
@@ -78,114 +104,148 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isVisible, onCl
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-slate-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6 border-b border-slate-700 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-white">Analytics Dashboard</h2>
+          <div>
+            <h2 className="text-2xl font-bold text-white">Analytics Dashboard</h2>
+            <p className="text-slate-400 text-sm mt-1">
+              Live metrics from all visitors (updates every {POLL_MS / 1000}s)
+              {dashboardData.updated_at && (
+                <span className="ml-2">
+                  · Last sync: {new Date(dashboardData.updated_at).toLocaleString()}
+                </span>
+              )}
+            </p>
+          </div>
           <button
             onClick={onClose}
             className="text-slate-400 hover:text-white text-2xl"
+            type="button"
+            aria-label="Close"
           >
             ×
           </button>
         </div>
-        
+
         <div className="p-6">
+          {loadError && (
+            <div className="mb-6 bg-amber-900/40 border border-amber-700 text-amber-100 px-4 py-3 rounded-lg text-sm">
+              {loadError}
+            </div>
+          )}
+
           {/* Key Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div className="bg-slate-700 p-4 rounded-lg">
               <h3 className="text-slate-300 text-sm font-medium">Sessions Today</h3>
-              <p className="text-2xl font-bold text-white">{analytics.sessionsToday}</p>
+              <p className="text-2xl font-bold text-white">
+                {isLoading ? '…' : dashboardData.sessions_today}
+              </p>
             </div>
             <div className="bg-slate-700 p-4 rounded-lg">
               <h3 className="text-slate-300 text-sm font-medium">Total Sessions</h3>
-              <p className="text-2xl font-bold text-white">{analytics.totalSessions}</p>
+              <p className="text-2xl font-bold text-white">
+                {isLoading ? '…' : dashboardData.total_sessions}
+              </p>
             </div>
             <div className="bg-slate-700 p-4 rounded-lg">
               <h3 className="text-slate-300 text-sm font-medium">Exam Completions</h3>
-              <p className="text-2xl font-bold text-white">{analytics.examCompletions}</p>
+              <p className="text-2xl font-bold text-white">
+                {isLoading ? '…' : dashboardData.exam_completions}
+              </p>
             </div>
             <div className="bg-slate-700 p-4 rounded-lg">
               <h3 className="text-slate-300 text-sm font-medium">Average Score</h3>
-              <p className="text-2xl font-bold text-white">{analytics.averageScore}%</p>
+              <p className="text-2xl font-bold text-white">
+                {isLoading ? '…' : `${dashboardData.average_score_percent}%`}
+              </p>
             </div>
           </div>
 
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Exam Type Performance */}
             <div className="bg-slate-700 p-6 rounded-lg">
               <h3 className="text-lg font-semibold text-white mb-4">Exam Type Performance</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={examTypeData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                  <XAxis dataKey="name" stroke="#cbd5e1" />
-                  <YAxis stroke="#cbd5e1" />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: '#1e293b', 
-                      border: '1px solid #475569',
-                      borderRadius: '6px'
-                    }}
-                  />
-                  <Bar dataKey="sessions" fill="#0ea5e9" name="Sessions" />
-                  <Bar dataKey="completions" fill="#10b981" name="Completions" />
-                </BarChart>
-              </ResponsiveContainer>
+              {examChartRows.length === 0 ? (
+                <p className="text-slate-400 text-sm h-[300px] flex items-center justify-center">
+                  No exam activity recorded yet.
+                </p>
+              ) : (
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={examChartRows}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+                    <XAxis dataKey="name" stroke="#cbd5e1" tick={{ fontSize: 11 }} />
+                    <YAxis stroke="#cbd5e1" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#1e293b',
+                        border: '1px solid #475569',
+                        borderRadius: '6px',
+                      }}
+                    />
+                    <Bar dataKey="sessions" fill="#0ea5e9" name="Sessions" />
+                    <Bar dataKey="completions" fill="#10b981" name="Completions" />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
             </div>
 
-            {/* Device Breakdown */}
             <div className="bg-slate-700 p-6 rounded-lg">
               <h3 className="text-lg font-semibold text-white mb-4">Device Breakdown</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={deviceData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    dataKey="value"
-                    label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`}
-                  >
-                    {deviceData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+              {deviceData.length === 0 ? (
+                <p className="text-slate-400 text-sm h-[300px] flex items-center justify-center">
+                  No session data yet.
+                </p>
+              ) : (
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={deviceData}
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={100}
+                      dataKey="value"
+                      label={({ name, percent }) =>
+                        `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`
+                      }
+                    >
+                      {deviceData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </div>
 
-          {/* Additional Insights */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-slate-700 p-6 rounded-lg">
               <h3 className="text-lg font-semibold text-white mb-4">Popular Features</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Most Popular Exam: {analytics.popularExamType}</li>
+                <li>• Most Popular Exam (by starts): {dashboardData.popular_exam_label}</li>
                 <li>• Contact Form Submissions: {localStorage.getItem('contact_submissions') || '0'}</li>
                 <li>• Payment Interest: {localStorage.getItem('payment_clicks') || '0'} clicks</li>
                 <li>• Social Media Clicks: {localStorage.getItem('social_clicks') || '0'}</li>
               </ul>
             </div>
-            
+
             <div className="bg-slate-700 p-6 rounded-lg">
               <h3 className="text-lg font-semibold text-white mb-4">User Engagement</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Average Session: {localStorage.getItem('avg_session_time') || '0'} minutes</li>
-                <li>• Return Visitors: {localStorage.getItem('return_visitors') || '0'}%</li>
-                <li>• Mobile Users: {Math.round((analytics.deviceBreakdown.mobile / (analytics.deviceBreakdown.mobile + analytics.deviceBreakdown.desktop)) * 100) || 0}%</li>
-                <li>• Exam Completion Rate: {analytics.totalSessions > 0 ? Math.round((analytics.examCompletions / analytics.totalSessions) * 100) : 0}%</li>
+                <li>• Average Session: {localStorage.getItem('avg_session_time') || '0'} minutes (local)</li>
+                <li>• Return Visitors: {localStorage.getItem('return_visitors') || '0'}% (local)</li>
+                <li>• Mobile Share (sessions): {mobilePct}%</li>
+                <li>• Exam Completion Rate (completions / sessions): {completionRate}%</li>
               </ul>
             </div>
           </div>
 
-          {/* Google Analytics Note */}
           <div className="mt-8 bg-blue-900 bg-opacity-50 border border-blue-700 p-4 rounded-lg">
-            <h3 className="text-blue-300 font-semibold mb-2">📊 Enhanced Analytics Available</h3>
+            <h3 className="text-blue-300 font-semibold mb-2">📊 How this works</h3>
             <p className="text-blue-200 text-sm">
-              This dashboard shows basic local metrics. For comprehensive analytics including geographic data, 
-              real-time visitors, traffic sources, and detailed user journeys, check your Google Analytics 4 dashboard.
-            </p>
-            <p className="text-blue-200 text-sm mt-2">
-              <strong>Key GA4 Reports:</strong> Realtime → Events → Custom Events (exam_started, question_answered, etc.)
+              Top metrics, exam type bars, and device breakdown are aggregated on the server from all
+              visitors (sessions + exam start/complete events). Data refreshes automatically while this
+              panel is open. Google Analytics still captures additional marketing and event detail.
             </p>
           </div>
         </div>
@@ -195,4 +255,3 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isVisible, onCl
 };
 
 export default AnalyticsDashboard;
-
