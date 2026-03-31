@@ -997,6 +997,7 @@ function App() {
           onClose={() => setShowLoginModal(false)}
           onSuccess={handleLoginSuccess}
           questionNumber={currentQuestionIndex + 1}
+          examType={currentExamType}
         />
       </>
     );
