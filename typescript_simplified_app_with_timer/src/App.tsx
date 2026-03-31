@@ -984,13 +984,21 @@ function App() {
   // Show exam landing page
   if (currentPage === PAGES.EXAM_LANDING) {
     return (
-      <ExamLandingPage
-        examType={currentExamType}
-        onStartExam={handleStartExam}
-        onGoBack={() => setCurrentPage(PAGES.HOME)}
-        user={user}
-        onLoginClick={() => setShowLoginModal(true)}
-      />
+      <>
+        <ExamLandingPage
+          examType={currentExamType}
+          onStartExam={handleStartExam}
+          onGoBack={() => setCurrentPage(PAGES.HOME)}
+          user={user}
+          onLoginClick={() => setShowLoginModal(true)}
+        />
+        <LoginModal
+          isVisible={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          onSuccess={handleLoginSuccess}
+          questionNumber={currentQuestionIndex + 1}
+        />
+      </>
     );
   }
 
