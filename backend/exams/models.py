@@ -189,6 +189,41 @@ class CachedLecturePlan(models.Model):
         return f"LecturePlan: {self.syllabus} (provider: {self.provider})"
 
 
+class CachedChatResponse(models.Model):
+    """Global cache of AI chat responses keyed by (syllabus, question hash).
+
+    Responses for standalone questions (no or minimal history) are stored here
+    so subsequent users asking the same question get instant answers without
+    hitting the AI provider again.
+    """
+
+    syllabus = models.CharField(max_length=50, db_index=True)
+    question_hash = models.CharField(max_length=64, db_index=True)
+    question_text = models.TextField()
+    response_text = models.TextField()
+    provider = models.CharField(max_length=50, default="deepseek")
+    hit_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    CACHE_TTL_DAYS = 7
+
+    class Meta:
+        unique_together = ("syllabus", "question_hash")
+        verbose_name = "Cached Chat Response"
+        verbose_name_plural = "Cached Chat Responses"
+        indexes = [
+            models.Index(fields=["syllabus", "question_hash"], name="chat_cache_lookup_idx"),
+        ]
+
+    def is_stale(self) -> bool:
+        from datetime import timedelta
+        return timezone.now() - self.updated_at > timedelta(days=self.CACHE_TTL_DAYS)
+
+    def __str__(self):
+        return f"ChatCache: {self.syllabus} | hits={self.hit_count} | {self.question_text[:60]}"
+
+
 class PinnedPlan(models.Model):
     """A user's pinned lecture plan + chat history, stored per syllabus."""
 

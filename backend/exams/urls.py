@@ -9,11 +9,13 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.conf import settings as django_settings
 from .views import ExamViewSet, QuestionViewSet, ReviewViewSet
-from .models import Exam, Question, CachedLecturePlan, PinnedPlan
+from .models import Exam, Question, CachedLecturePlan, PinnedPlan, CachedChatResponse
 from .serializers import ExamSerializer, QuestionSerializer
 from .assistant import SyllabusAssistantService
 import json
 import random
+import hashlib
+import re
 
 router = DefaultRouter()
 router.register(r'exams', ExamViewSet, basename='exam')
@@ -168,9 +170,25 @@ def syllabus_assistant_chat(request):
     except Exception as exc:
         return Response({'error': str(exc)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+def _chat_cache_key(syllabus: str, message: str) -> str:
+    """Stable MD5 hash used as the DB lookup key for a (syllabus, question) pair."""
+    normalized = re.sub(r'\s+', ' ', message.lower().strip())
+    raw = f"{syllabus}:{normalized}"
+    return hashlib.md5(raw.encode('utf-8')).hexdigest()
+
+
 @csrf_exempt
 def syllabus_assistant_chat_stream(request):
-    """Streaming SSE chat endpoint — text arrives token-by-token."""
+    """Streaming SSE chat endpoint — text arrives token-by-token.
+
+    Cache behaviour:
+    - Standalone questions (history length ≤ 1) are looked up in CachedChatResponse
+      before hitting the AI.  A cache hit streams instantly and increments hit_count.
+    - On a cache miss the response is streamed from DeepSeek and saved to the DB
+      so future users with the same question get an instant answer.
+    - Questions that are part of an ongoing conversation (history > 1) bypass the
+      cache because their answers depend on prior context.
+    """
     # Handle CORS preflight
     origin = request.META.get('HTTP_ORIGIN', '')
     if request.method == 'OPTIONS':
@@ -194,14 +212,63 @@ def syllabus_assistant_chat_stream(request):
     lectures = body.get('lectures', [])
     history = body.get('history', [])
 
+    # Only cache standalone questions (first turn or after just the greeting)
+    is_cacheable = len(history) <= 1
+    q_hash = _chat_cache_key(syllabus, message) if is_cacheable else None
+
     service = SyllabusAssistantService()
 
     def generate():
+        # ── Cache HIT: serve stored response instantly ────────────────────────
+        if is_cacheable and q_hash:
+            try:
+                cached = CachedChatResponse.objects.filter(
+                    syllabus=syllabus, question_hash=q_hash
+                ).first()
+                if cached and not cached.is_stale():
+                    CachedChatResponse.objects.filter(pk=cached.pk).update(
+                        hit_count=cached.hit_count + 1
+                    )
+                    yield f"data: {json.dumps({'delta': cached.response_text})}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'provider': 'cache'})}\n\n"
+                    return
+            except Exception:
+                pass  # Cache lookup failed — fall through to AI
+
+        # ── Cache MISS: stream from AI and save result ────────────────────────
+        accumulated = []
+        final_provider = 'deepseek'
         try:
             for chunk in service.stream_chat_about_syllabus(syllabus, message, lectures, history):
                 yield chunk
+                if is_cacheable and q_hash and chunk.startswith('data: '):
+                    try:
+                        data = json.loads(chunk[6:])
+                        if 'delta' in data:
+                            accumulated.append(data['delta'])
+                        elif data.get('done'):
+                            final_provider = data.get('provider', 'deepseek')
+                    except (json.JSONDecodeError, Exception):
+                        pass
         except Exception as exc:
             yield f"data: {json.dumps({'error': str(exc)})}\n\n"
+            return
+
+        # Persist to cache after the stream completes (only for on-topic responses)
+        if is_cacheable and q_hash and accumulated:
+            full_response = ''.join(accumulated)
+            try:
+                CachedChatResponse.objects.update_or_create(
+                    syllabus=syllabus,
+                    question_hash=q_hash,
+                    defaults={
+                        'question_text': message,
+                        'response_text': full_response,
+                        'provider': final_provider,
+                    },
+                )
+            except Exception:
+                pass  # Cache write failure is non-fatal
 
     response = StreamingHttpResponse(generate(), content_type='text/event-stream')
     response['Cache-Control'] = 'no-cache'
