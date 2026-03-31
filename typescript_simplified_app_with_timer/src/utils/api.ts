@@ -125,33 +125,61 @@ export const getExamsByType = async (examType: string): Promise<Exam[]> => {
 };
 
 /**
- * Generate syllabus-specific lecture roadmap from AI assistant endpoint
+ * Generate syllabus-specific lecture roadmap from AI assistant endpoint.
+ * Retries once if the server appears to be waking up (Render free tier sleep).
  */
-export const getSyllabusLectures = async (syllabus: string): Promise<SyllabusLecturePlan> => {
-  try {
+export const getSyllabusLectures = async (
+  syllabus: string,
+  onRetry?: () => void,
+): Promise<SyllabusLecturePlan> => {
+  const attempt = async (timeoutMs: number) => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(`${API_BASE_URL}/assistant/syllabus-lectures/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ syllabus }),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      return await response.json() as SyllabusLecturePlan;
+    } catch (err) {
+      clearTimeout(timer);
+      throw err;
+    }
+  };
 
-    const response = await fetch(`${API_BASE_URL}/assistant/syllabus-lectures/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ syllabus }),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
+  try {
+    return await attempt(65000);
+  } catch (firstError) {
+    const isFetchFail =
+      firstError instanceof TypeError ||
+      (firstError instanceof Error && firstError.name === 'AbortError');
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    if (isFetchFail) {
+      // Server was likely sleeping — notify caller, wait, then retry once
+      onRetry?.();
+      await new Promise(res => setTimeout(res, 4000));
+      try {
+        return await attempt(65000);
+      } catch (retryError) {
+        if (retryError instanceof Error && retryError.name === 'AbortError') {
+          throw new Error('Request timed out. The server is waking up — please try again in a moment.');
+        }
+        throw retryError;
+      }
     }
 
-    return await response.json();
-  } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (firstError instanceof Error && firstError.name === 'AbortError') {
       throw new Error('Request timed out. The AI provider may be slow — please try again.');
     }
-    console.error('Error fetching syllabus lectures:', error);
-    throw error;
+    console.error('Error fetching syllabus lectures:', firstError);
+    throw firstError;
   }
 };
 

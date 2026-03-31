@@ -182,6 +182,7 @@ function App() {
   const [assistantLoading, setAssistantLoading] = useState(false);
   const [assistantChatLoading, setAssistantChatLoading] = useState(false);
   const [assistantError, setAssistantError] = useState<string | null>(null);
+  const [assistantStatusMsg, setAssistantStatusMsg] = useState<string | null>(null);
   const [selectedSyllabus, setSelectedSyllabus] = useState<string | null>(null);
   const [lecturePlan, setLecturePlan] = useState<SyllabusLecturePlan | null>(null);
   const [assistantChatInput, setAssistantChatInput] = useState('');
@@ -735,12 +736,15 @@ function App() {
   const handleSyllabusSelection = async (syllabus: string) => {
     setSelectedSyllabus(syllabus);
     setAssistantError(null);
+    setAssistantStatusMsg(null);
     setAssistantLoading(true);
     setAssistantChatMessages([]);
     setAssistantChatInput('');
     setAssistantPinned(false);
     try {
-      const response = await getSyllabusLectures(syllabus);
+      const response = await getSyllabusLectures(syllabus, () => {
+        setAssistantStatusMsg('Server is waking up, please wait a moment...');
+      });
       setLecturePlan(response);
       const starterMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [
         {
@@ -754,6 +758,7 @@ function App() {
       setAssistantError(message);
     } finally {
       setAssistantLoading(false);
+      setAssistantStatusMsg(null);
     }
   };
 
@@ -966,6 +971,7 @@ function App() {
           loading={assistantLoading}
           chatLoading={assistantChatLoading}
           error={assistantError}
+          statusMsg={assistantStatusMsg}
           selectedSyllabus={selectedSyllabus}
           lecturePlan={lecturePlan}
           chatMessages={assistantChatMessages}
@@ -1841,6 +1847,7 @@ function App() {
         loading={assistantLoading}
         chatLoading={assistantChatLoading}
         error={assistantError}
+        statusMsg={assistantStatusMsg}
         selectedSyllabus={selectedSyllabus}
         lecturePlan={lecturePlan}
         chatMessages={assistantChatMessages}

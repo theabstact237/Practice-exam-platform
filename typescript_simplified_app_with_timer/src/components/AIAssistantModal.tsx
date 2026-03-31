@@ -27,6 +27,7 @@ interface AIAssistantModalProps {
   loading: boolean;
   chatLoading: boolean;
   error: string | null;
+  statusMsg?: string | null;
   selectedSyllabus: string | null;
   lecturePlan: SyllabusLecturePlan | null;
   chatMessages: ChatMessage[];
@@ -58,6 +59,7 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
   loading,
   chatLoading,
   error,
+  statusMsg,
   selectedSyllabus,
   lecturePlan,
   chatMessages,
@@ -116,8 +118,12 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
           ))}
         </div>
 
-        {loading && <p className="text-sky-300 mb-4">Generating tailored lecture roadmap...</p>}
-        {error && <p className="text-red-400 mb-4">{error}</p>}
+        {loading && (
+          <p className="text-sky-300 mb-4">
+            {statusMsg ?? 'Generating tailored lecture roadmap...'}
+          </p>
+        )}
+        {!loading && error && <p className="text-red-400 mb-4">{error}</p>}
 
         {lecturePlan && (
           <div className="space-y-4">
