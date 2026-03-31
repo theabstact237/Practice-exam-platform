@@ -338,9 +338,23 @@ const ExamLandingPage: React.FC<ExamLandingPageProps> = ({
             Start Exam
             <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
           </button>
-          <p className="text-slate-500 text-sm mt-4">
-            {user ? 'Good luck! Your progress will be saved.' : 'You can sign in anytime during the exam.'}
-          </p>
+
+          {!user && (
+            <div className="mt-4 flex flex-col items-center gap-2">
+              <p className="text-slate-500 text-xs uppercase tracking-widest font-medium">or</p>
+              <button
+                onClick={onStartExam}
+                className="px-6 py-2.5 rounded-xl border border-slate-600 text-slate-400 hover:text-white hover:border-slate-400 hover:bg-slate-800/50 text-sm font-medium transition-all"
+              >
+                Continue without signing in
+              </button>
+              <p className="text-slate-600 text-xs mt-1">You can sign in anytime during the exam to save your progress.</p>
+            </div>
+          )}
+
+          {user && (
+            <p className="text-slate-500 text-sm mt-4">Good luck! Your progress will be saved.</p>
+          )}
         </div>
       </main>
 
