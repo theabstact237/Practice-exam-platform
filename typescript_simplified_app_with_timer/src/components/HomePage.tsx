@@ -441,7 +441,10 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                 Join thousands of successful professionals who have used FreeCertify to achieve their AWS certifications
               </p>
             </div>
-            <TestimonialsCarousel testimonials={testimonials} autoPlayInterval={6000} />
+            {/* px-6 gives room for the absolute-positioned prev/next arrow buttons */}
+            <div className="px-6">
+              <TestimonialsCarousel testimonials={testimonials} autoPlayInterval={6000} />
+            </div>
           </div>
         )}
 

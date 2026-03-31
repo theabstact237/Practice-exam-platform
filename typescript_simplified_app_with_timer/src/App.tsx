@@ -275,7 +275,7 @@ function App() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const reviews = await getReviews(20);
+        const reviews = await getReviews(100);
         // Transform reviews to testimonials format
         const transformedTestimonials: Testimonial[] = reviews.map((review: Review) => ({
           id: review.id,
@@ -637,7 +637,7 @@ function App() {
       setTestimonials(prev => [newTestimonial, ...prev]);
 
       // Background refresh to pick up the real DB record (with correct ID)
-      getReviews(20).then(reviews => {
+      getReviews(100).then(reviews => {
         const refreshed: Testimonial[] = reviews.map((review: Review) => ({
           id: review.id,
           user_name: review.user_name,

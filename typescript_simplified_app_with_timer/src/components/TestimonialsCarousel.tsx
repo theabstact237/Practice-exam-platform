@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 export interface Testimonial {
@@ -15,183 +15,187 @@ export interface Testimonial {
 
 interface TestimonialsCarouselProps {
   testimonials: Testimonial[];
-  autoPlayInterval?: number; // in milliseconds
+  autoPlayInterval?: number;
+}
+
+function useVisibleCount() {
+  const [count, setCount] = useState(1);
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth >= 1024) setCount(3);
+      else if (window.innerWidth >= 640) setCount(2);
+      else setCount(1);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  return count;
 }
 
 const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   testimonials,
-  autoPlayInterval = 5000
+  autoPlayInterval = 5000,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const visibleCount = useVisibleCount();
+  const total = testimonials.length;
+  const maxIndex = Math.max(0, total - visibleCount);
+
+  const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Auto-play functionality
+  const goTo = useCallback((i: number) => {
+    setIndex(Math.min(Math.max(i, 0), maxIndex));
+  }, [maxIndex]);
+
+  const next = useCallback(() => goTo(index >= maxIndex ? 0 : index + 1), [index, maxIndex, goTo]);
+  const prev = useCallback(() => goTo(index <= 0 ? maxIndex : index - 1), [index, maxIndex, goTo]);
+
+  // Clamp index when window resizes and maxIndex shrinks
   useEffect(() => {
-    if (testimonials.length <= 1 || isPaused) return;
-    
-    const interval = setInterval(() => {
-      goToNext();
-    }, autoPlayInterval);
-    
-    return () => clearInterval(interval);
-  }, [currentIndex, testimonials.length, autoPlayInterval, isPaused]);
+    if (index > maxIndex) setIndex(maxIndex);
+  }, [maxIndex, index]);
 
-  const goToNext = () => {
-    if (isAnimating || testimonials.length <= 1) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  // Auto-play
+  useEffect(() => {
+    if (total <= visibleCount || isPaused) return;
+    timerRef.current = setInterval(next, autoPlayInterval);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [next, total, visibleCount, isPaused, autoPlayInterval]);
 
-  const goToPrev = () => {
-    if (isAnimating || testimonials.length <= 1) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  if (total === 0) return null;
 
-  const goToSlide = (index: number) => {
-    if (isAnimating || index === currentIndex) return;
-    setIsAnimating(true);
-    setCurrentIndex(index);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  const cardWidthPct = 100 / visibleCount;
+  const translatePct = -(index * cardWidthPct);
 
-  if (testimonials.length === 0) {
-    return null;
-  }
-
-  const currentTestimonial = testimonials[currentIndex];
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  };
+  const formatDate = (d: string) =>
+    new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
   return (
-    <div 
-      className="relative w-full max-w-4xl mx-auto"
+    <div
+      className="relative w-full"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Main Card */}
-      <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-700/50 overflow-hidden">
-        {/* Quote Icon */}
-        <div className="absolute top-6 left-6 opacity-20">
-          <Quote size={48} className="text-sky-400" />
-        </div>
-
-        {/* Content */}
-        <div 
-          className={`p-8 md:p-12 transition-opacity duration-500 ${
-            isAnimating ? 'opacity-0' : 'opacity-100'
-          }`}
+      {/* Slide track */}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(${translatePct}%)` }}
         >
-          {/* Stars */}
-          <div className="flex justify-center gap-1 mb-6">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star
-                key={star}
-                size={24}
-                className={`${
-                  star <= currentTestimonial.rating
-                    ? 'text-yellow-400 fill-yellow-400'
-                    : 'text-slate-600'
-                }`}
-              />
-            ))}
-          </div>
+          {testimonials.map((t) => (
+            <div
+              key={t.id}
+              className="flex-shrink-0 px-3"
+              style={{ width: `${cardWidthPct}%` }}
+            >
+              <div className="h-full bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-700/50 overflow-hidden p-6 flex flex-col">
+                {/* Quote */}
+                <div className="mb-3 opacity-20">
+                  <Quote size={28} className="text-sky-400" />
+                </div>
 
-          {/* Comment */}
-          <blockquote className="text-center mb-8">
-            <p className="text-lg md:text-xl text-slate-200 italic leading-relaxed">
-              "{currentTestimonial.comment}"
-            </p>
-          </blockquote>
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-3">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star
+                      key={s}
+                      size={16}
+                      className={s <= t.rating ? 'text-yellow-400 fill-yellow-400' : 'text-slate-600'}
+                    />
+                  ))}
+                </div>
 
-          {/* User Info */}
-          <div className="flex flex-col items-center">
-            {/* Profile Picture */}
-            {currentTestimonial.user_photo_url ? (
-              <img
-                src={currentTestimonial.user_photo_url}
-                alt={currentTestimonial.user_name}
-                className="w-16 h-16 rounded-full border-3 border-sky-500 shadow-lg shadow-sky-500/20 object-cover mb-4"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230ea5e9'/%3E%3Ctext x='50%25' y='55%25' font-size='28' fill='white' text-anchor='middle'%3E${currentTestimonial.user_name[0].toUpperCase()}%3C/text%3E%3C/svg%3E`;
-                }}
-              />
-            ) : (
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center mb-4 shadow-lg shadow-sky-500/20">
-                <span className="text-white text-2xl font-bold">
-                  {currentTestimonial.user_name[0].toUpperCase()}
-                </span>
+                {/* Comment */}
+                <p className="text-slate-300 text-sm leading-relaxed flex-1 mb-5 line-clamp-4">
+                  "{t.comment}"
+                </p>
+
+                {/* User */}
+                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-slate-700/50">
+                  {t.user_photo_url ? (
+                    <img
+                      src={t.user_photo_url}
+                      alt={t.user_name}
+                      className="w-10 h-10 rounded-full border-2 border-sky-500 object-cover flex-shrink-0"
+                      onError={(e) => {
+                        const el = e.target as HTMLImageElement;
+                        el.style.display = 'none';
+                        const sibling = el.nextElementSibling as HTMLElement | null;
+                        if (sibling) sibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex-shrink-0 items-center justify-center"
+                    style={{ display: t.user_photo_url ? 'none' : 'flex' }}
+                  >
+                    <span className="text-white font-bold text-sm">
+                      {t.user_name[0].toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-white font-medium text-sm truncate">{t.user_name}</p>
+                    <p className="text-sky-400 text-xs truncate">{t.exam_name}</p>
+                    {t.passed && t.exam_score != null && (
+                      <span className="inline-block mt-0.5 px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-400 text-xs">
+                        Passed · {t.exam_score}%
+                      </span>
+                    )}
+                  </div>
+                  <span className="ml-auto text-slate-600 text-xs flex-shrink-0">
+                    {formatDate(t.created_at)}
+                  </span>
+                </div>
               </div>
-            )}
-
-            {/* Name & Exam */}
-            <h4 className="text-white font-semibold text-lg">
-              {currentTestimonial.user_name}
-            </h4>
-            <p className="text-sky-400 text-sm font-medium">
-              {currentTestimonial.exam_name}
-            </p>
-            
-            {/* Score Badge */}
-            {currentTestimonial.passed && currentTestimonial.exam_score && (
-              <div className="mt-2 px-3 py-1 bg-emerald-500/20 border border-emerald-500/30 rounded-full">
-                <span className="text-emerald-400 text-xs font-medium">
-                  Passed with {currentTestimonial.exam_score}%
-                </span>
-              </div>
-            )}
-            
-            {/* Date */}
-            <p className="text-slate-500 text-xs mt-2">
-              {formatDate(currentTestimonial.created_at)}
-            </p>
-          </div>
+            </div>
+          ))}
         </div>
-
-        {/* Navigation Arrows */}
-        {testimonials.length > 1 && (
-          <>
-            <button
-              onClick={goToPrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-slate-700/50 hover:bg-slate-600/50 rounded-full text-white transition-all hover:scale-110"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-slate-700/50 hover:bg-slate-600/50 rounded-full text-white transition-all hover:scale-110"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </>
-        )}
       </div>
 
-      {/* Dots Indicator */}
-      {testimonials.length > 1 && (
-        <div className="flex justify-center gap-2 mt-6">
-          {testimonials.map((_, index) => (
+      {/* Arrows */}
+      {total > visibleCount && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2.5 bg-slate-700 hover:bg-sky-600 border border-slate-600 hover:border-sky-500 rounded-full text-white shadow-lg transition-all hover:scale-110"
+            aria-label="Previous"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={next}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2.5 bg-slate-700 hover:bg-sky-600 border border-slate-600 hover:border-sky-500 rounded-full text-white shadow-lg transition-all hover:scale-110"
+            aria-label="Next"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
+
+      {/* Dots */}
+      {total > visibleCount && (
+        <div className="flex justify-center gap-1.5 mt-6">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'bg-sky-500 w-8'
-                  : 'bg-slate-600 hover:bg-slate-500'
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === index
+                  ? 'bg-sky-500 w-6 h-2.5'
+                  : 'bg-slate-600 hover:bg-slate-500 w-2.5 h-2.5'
               }`}
-              aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>
       )}
+
+      {/* Count badge */}
+      <p className="text-center text-slate-500 text-xs mt-3">
+        {index + 1}–{Math.min(index + visibleCount, total)} of {total} reviews
+      </p>
     </div>
   );
 };
