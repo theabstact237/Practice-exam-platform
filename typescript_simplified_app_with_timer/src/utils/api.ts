@@ -129,13 +129,16 @@ export const getExamsByType = async (examType: string): Promise<Exam[]> => {
  */
 export const getSyllabusLectures = async (syllabus: string): Promise<SyllabusLecturePlan> => {
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 60000);
+
     const response = await fetch(`${API_BASE_URL}/assistant/syllabus-lectures/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ syllabus }),
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
@@ -144,6 +147,9 @@ export const getSyllabusLectures = async (syllabus: string): Promise<SyllabusLec
 
     return await response.json();
   } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('Request timed out. The AI provider may be slow — please try again.');
+    }
     console.error('Error fetching syllabus lectures:', error);
     throw error;
   }
