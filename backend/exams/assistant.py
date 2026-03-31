@@ -200,7 +200,7 @@ class SyllabusAssistantService:
             "temperature": 0.4,
             "messages": messages,
             "stream": True,
-            "max_tokens": 3000,
+            "max_tokens": 1000,
         }
         with requests.post(
             endpoint,
@@ -241,7 +241,7 @@ class SyllabusAssistantService:
             "model": model,
             "temperature": 0.4,
             "messages": messages,
-            "max_tokens": 3000,
+            "max_tokens": 1000,
         }
         response = requests.post(
             endpoint,
@@ -301,8 +301,9 @@ Current lecture roadmap:
 {lectures_json}
 
 Rules:
+- Be concise and direct — keep answers under 300 words unless a longer answer is truly necessary
+- Use bullet points or numbered lists for structure
 - Reference specific lecture titles when relevant
-- Give concise, exam-oriented, actionable guidance
 - Stay focused on this certification only
 - CRITICAL: If the user's question is not related to AWS, cloud computing, or this certification exam, \
 respond with EXACTLY this single line and nothing else: \
