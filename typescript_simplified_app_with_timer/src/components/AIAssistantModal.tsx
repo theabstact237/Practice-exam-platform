@@ -37,6 +37,7 @@ interface AIAssistantModalProps {
   onSelectSyllabus: (syllabus: string) => void;
   onChatInputChange: (value: string) => void;
   onSendMessage: () => void;
+  onQuickPromptSend: (text: string) => void;
   onTogglePin: () => void;
 }
 
@@ -69,6 +70,7 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
   onSelectSyllabus,
   onChatInputChange,
   onSendMessage,
+  onQuickPromptSend,
   onTogglePin,
 }) => {
   if (!isVisible) return null;
@@ -179,7 +181,7 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
                 {QUICK_PROMPTS.map((prompt) => (
                   <button
                     key={prompt}
-                    onClick={() => { onChatInputChange(prompt); }}
+                    onClick={() => onQuickPromptSend(prompt)}
                     disabled={chatLoading}
                     className="text-xs px-3 py-1.5 rounded-full bg-slate-700/50 border border-slate-600 text-slate-300 hover:bg-slate-600 hover:text-white transition disabled:opacity-50"
                   >

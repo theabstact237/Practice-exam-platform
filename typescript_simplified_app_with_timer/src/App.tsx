@@ -762,12 +762,14 @@ function App() {
     }
   };
 
-  const handleAssistantSendMessage = async () => {
-    if (!selectedSyllabus || !lecturePlan || !assistantChatInput.trim() || assistantChatLoading) return;
+  const sendChatMessage = async (userMessage: string) => {
+    if (!selectedSyllabus || !lecturePlan || !userMessage.trim() || assistantChatLoading) return;
 
-    const userMessage = assistantChatInput.trim();
     setAssistantChatInput('');
     setAssistantError(null);
+
+    // Snapshot on-topic history BEFORE adding the new user message
+    const onTopicHistory = assistantChatMessages.filter(m => !m.off_topic);
 
     const withUser: ChatMessage[] = [...assistantChatMessages, { role: 'user', content: userMessage }];
     // Add an empty assistant bubble immediately so the user sees it filling in
@@ -775,9 +777,8 @@ function App() {
     setAssistantChatMessages(withPlaceholder);
     setAssistantChatLoading(true);
 
-    // Only send on-topic history to avoid wasting tokens
-    const onTopicHistory = assistantChatMessages.filter(m => !m.off_topic);
-    let accumulated = '';
+    // Plain object so the closure always reads the latest accumulated text
+    const acc = { text: '' };
 
     try {
       await streamChatWithSyllabusAssistant(
@@ -787,10 +788,11 @@ function App() {
         onTopicHistory,
         // onDelta — append each token to the last message
         (delta) => {
-          accumulated += delta;
+          acc.text += delta;
+          const snapshot = acc.text;
           setAssistantChatMessages(prev => {
             const updated = [...prev];
-            updated[updated.length - 1] = { role: 'assistant', content: accumulated, off_topic: false };
+            updated[updated.length - 1] = { role: 'assistant', content: snapshot, off_topic: false };
             return updated;
           });
         },
@@ -837,6 +839,14 @@ function App() {
       });
       setAssistantChatLoading(false);
     }
+  };
+
+  const handleAssistantSendMessage = () => {
+    sendChatMessage(assistantChatInput.trim());
+  };
+
+  const handleAssistantQuickPrompt = (text: string) => {
+    sendChatMessage(text);
   };
 
   const handleToggleAssistantPin = () => {
@@ -981,6 +991,7 @@ function App() {
           onSelectSyllabus={handleSyllabusSelection}
           onChatInputChange={setAssistantChatInput}
           onSendMessage={handleAssistantSendMessage}
+          onQuickPromptSend={handleAssistantQuickPrompt}
           onTogglePin={handleToggleAssistantPin}
         />
       </div>
@@ -1857,6 +1868,7 @@ function App() {
         onSelectSyllabus={handleSyllabusSelection}
         onChatInputChange={setAssistantChatInput}
         onSendMessage={handleAssistantSendMessage}
+        onQuickPromptSend={handleAssistantQuickPrompt}
         onTogglePin={handleToggleAssistantPin}
       />
       
