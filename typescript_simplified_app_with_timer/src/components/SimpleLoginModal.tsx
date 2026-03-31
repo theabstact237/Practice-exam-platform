@@ -2,6 +2,23 @@ import React, { useState } from 'react';
 import { X, Github } from 'lucide-react';
 import { signInWithGoogle, signInWithGitHub } from '../utils/auth';
 
+const friendlyAuthError = (err: unknown): string => {
+  const code = (err as { code?: string })?.code ?? '';
+  if (code === 'auth/operation-not-allowed')
+    return 'GitHub sign-in is not enabled for this app. Please use Google sign-in or contact support.';
+  if (code === 'auth/popup-blocked')
+    return 'Popup was blocked by your browser. Please allow popups for this site and try again.';
+  if (code === 'auth/popup-closed-by-user')
+    return 'Sign-in window was closed. Please try again.';
+  if (code === 'auth/account-exists-with-different-credential')
+    return 'An account already exists with the same email. Please sign in with Google instead.';
+  if (code === 'auth/cancelled-popup-request')
+    return 'Only one sign-in popup can be open at a time. Please try again.';
+  if (code === 'auth/network-request-failed')
+    return 'Network error. Please check your internet connection and try again.';
+  return `Sign-in failed (${code || 'unknown error'}). Please try again.`;
+};
+
 interface SimpleLoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -14,17 +31,12 @@ const SimpleLoginModal: React.FC<SimpleLoginModalProps> = ({ isOpen, onClose }) 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError(null);
-    
     try {
-      const result = await signInWithGoogle();
-      if (result) {
-        onClose();
-      } else {
-        setError('Failed to sign in with Google. Please try again.');
-      }
-    } catch (error) {
-      setError('An error occurred during Google sign-in.');
-      console.error('Google sign-in error:', error);
+      await signInWithGoogle();
+      onClose();
+    } catch (err) {
+      console.error('Google sign-in error:', err);
+      setError(friendlyAuthError(err));
     } finally {
       setIsLoading(false);
     }
@@ -33,17 +45,12 @@ const SimpleLoginModal: React.FC<SimpleLoginModalProps> = ({ isOpen, onClose }) 
   const handleGitHubSignIn = async () => {
     setIsLoading(true);
     setError(null);
-    
     try {
-      const result = await signInWithGitHub();
-      if (result) {
-        onClose();
-      } else {
-        setError('Failed to sign in with GitHub. Please try again.');
-      }
-    } catch (error) {
-      setError('An error occurred during GitHub sign-in.');
-      console.error('GitHub sign-in error:', error);
+      await signInWithGitHub();
+      onClose();
+    } catch (err) {
+      console.error('GitHub sign-in error:', err);
+      setError(friendlyAuthError(err));
     } finally {
       setIsLoading(false);
     }

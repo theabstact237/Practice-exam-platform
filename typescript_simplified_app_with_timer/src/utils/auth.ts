@@ -33,38 +33,22 @@ export interface UserProfile {
 
 // Sign in with Google
 export const signInWithGoogle = async (): Promise<UserCredential | null> => {
-  try {
-    analytics.paymentLinkClicked('google_auth_attempt');
-    const result = await signInWithPopup(auth, googleProvider);
-    
-    // Save user data to Firestore
-    await saveUserProfile(result.user, 'google');
-    
-    analytics.paymentLinkClicked('google_auth_success');
-    return result;
-  } catch (error) {
-    console.error('Error signing in with Google:', error);
-    analytics.questionLoadError('auth', 'google_signin_failed');
-    return null;
-  }
+  analytics.paymentLinkClicked('google_auth_attempt');
+  // Let errors propagate so callers can display meaningful messages
+  const result = await signInWithPopup(auth, googleProvider);
+  await saveUserProfile(result.user, 'google');
+  analytics.paymentLinkClicked('google_auth_success');
+  return result;
 };
 
 // Sign in with GitHub
 export const signInWithGitHub = async (): Promise<UserCredential | null> => {
-  try {
-    analytics.paymentLinkClicked('github_auth_attempt');
-    const result = await signInWithPopup(auth, githubProvider);
-    
-    // Save user data to Firestore
-    await saveUserProfile(result.user, 'github');
-    
-    analytics.paymentLinkClicked('github_auth_success');
-    return result;
-  } catch (error) {
-    console.error('Error signing in with GitHub:', error);
-    analytics.questionLoadError('auth', 'github_signin_failed');
-    return null;
-  }
+  analytics.paymentLinkClicked('github_auth_attempt');
+  // Let errors propagate so callers can display meaningful messages
+  const result = await signInWithPopup(auth, githubProvider);
+  await saveUserProfile(result.user, 'github');
+  analytics.paymentLinkClicked('github_auth_success');
+  return result;
 };
 
 // Sign out

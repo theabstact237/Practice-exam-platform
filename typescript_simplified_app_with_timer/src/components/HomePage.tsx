@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star, Mail, MessageCircle } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star, Mail, MessageCircle, BarChart3 } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
 import TestimonialsCarousel, { Testimonial } from './TestimonialsCarousel';
@@ -10,6 +10,7 @@ interface HomePageProps {
   onSelectExam: (examType: string) => void;
   onContactClick: () => void;
   onOpenAIAssistant: () => void;
+  onOpenAnalytics?: () => void;
   user: any;
   testimonials?: Testimonial[];
 }
@@ -89,7 +90,7 @@ const TechBackground = () => {
   );
 };
 
-const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpenAIAssistant, user, testimonials = [] }) => {
+const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpenAIAssistant, onOpenAnalytics, user, testimonials = [] }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
   const [_loadingExams, setLoadingExams] = useState(true);
@@ -174,6 +175,18 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                 >
                   <MessageCircle className="w-4 h-4" />
                   AI Assistant
+                </button>
+              )}
+
+              {/* Analytics Dashboard - logged-in users only */}
+              {user && onOpenAnalytics && (
+                <button
+                  onClick={onOpenAnalytics}
+                  className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all border border-transparent hover:border-sky-500/20 flex items-center gap-1.5"
+                  title="Analytics Dashboard"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  Analytics
                 </button>
               )}
               

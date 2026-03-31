@@ -990,6 +990,7 @@ function App() {
           onSelectExam={handleExamSelection}
           onContactClick={handleContactClick}
           onOpenAIAssistant={() => setShowAIAssistant(true)}
+          onOpenAnalytics={() => setShowAnalyticsDashboard(true)}
           user={user}
           testimonials={testimonials}
         />
@@ -1024,6 +1025,12 @@ function App() {
           onSendMessage={handleAssistantSendMessage}
           onQuickPromptSend={handleAssistantQuickPrompt}
           onTogglePin={handleToggleAssistantPin}
+        />
+
+        {/* Analytics Dashboard - accessible from homepage for logged-in users */}
+        <AnalyticsDashboard
+          isVisible={showAnalyticsDashboard}
+          onClose={() => setShowAnalyticsDashboard(false)}
         />
       </div>
     );
@@ -1687,7 +1694,19 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-sky-400">AWS Practice Exams</h1>
+              <button
+                onClick={() => {
+                  if (examInProgress && !isReviewMode) {
+                    setShowExamInProgressModal(true);
+                  } else {
+                    setCurrentPage(PAGES.HOME);
+                  }
+                }}
+                className="text-xl font-bold text-sky-400 hover:text-sky-300 transition-colors focus:outline-none"
+                title="Go to Home"
+              >
+                FreeCertify
+              </button>
             </div>
             
             {/* Desktop Navigation */}
@@ -1756,14 +1775,16 @@ function App() {
                   <Mail className="w-4 h-4 mr-2" />
                   Contact
                 </button>
-                <button
-                  onClick={() => setShowAnalyticsDashboard(true)}
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
-                  title="View Analytics"
-                >
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Analytics
-                </button>
+                {user && (
+                  <button
+                    onClick={() => setShowAnalyticsDashboard(true)}
+                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                    title="View Analytics"
+                  >
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    Analytics
+                  </button>
+                )}
                 {user && (
                   <button
                     onClick={() => setShowAIAssistant(true)}
@@ -1933,6 +1954,18 @@ function App() {
                 >
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
                   AI Assistant
+                </button>
+              )}
+              {user && (
+                <button
+                  onClick={() => {
+                    setShowAnalyticsDashboard(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-600"
+                >
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  Analytics
                 </button>
               )}
             </div>
