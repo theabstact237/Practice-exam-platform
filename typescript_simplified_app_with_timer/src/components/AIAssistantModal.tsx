@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export interface SyllabusLecture {
   title: string;
@@ -73,6 +73,11 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
   onQuickPromptSend,
   onTogglePin,
 }) => {
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
   if (!isVisible) return null;
 
   return (
@@ -158,23 +163,36 @@ const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
                     Ask about AWS services, exam concepts, study strategies, or lecture content.
                   </p>
                 )}
-                {chatMessages.map((message, idx) => (
-                  <div
-                    key={`${message.role}-${idx}`}
-                    className={`text-sm p-2 rounded-md ${
-                      message.role === 'user'
-                        ? 'bg-sky-600/20 border border-sky-500/40 text-sky-100'
-                        : message.off_topic
-                          ? 'bg-amber-900/30 border border-amber-600/50 text-amber-200'
-                          : 'bg-slate-700/40 border border-slate-600 text-slate-100'
-                    }`}
-                  >
-                    <p className="text-xs uppercase tracking-wide mb-1 opacity-75">
-                      {message.role === 'user' ? 'You' : message.off_topic ? '⚠ Off-topic' : 'Assistant'}
-                    </p>
-                    <p className="whitespace-pre-wrap">{message.content}</p>
-                  </div>
-                ))}
+                {chatMessages.map((message, idx) => {
+                  const isLastMsg = idx === chatMessages.length - 1;
+                  const isThinking = chatLoading && isLastMsg && message.role === 'assistant' && message.content === '';
+                  return (
+                    <div
+                      key={`${message.role}-${idx}`}
+                      className={`text-sm p-2 rounded-md ${
+                        message.role === 'user'
+                          ? 'bg-sky-600/20 border border-sky-500/40 text-sky-100'
+                          : message.off_topic
+                            ? 'bg-amber-900/30 border border-amber-600/50 text-amber-200'
+                            : 'bg-slate-700/40 border border-slate-600 text-slate-100'
+                      }`}
+                    >
+                      <p className="text-xs uppercase tracking-wide mb-1 opacity-75">
+                        {message.role === 'user' ? 'You' : message.off_topic ? '⚠ Off-topic' : 'Assistant'}
+                      </p>
+                      {isThinking ? (
+                        <span className="flex items-center gap-1 h-5">
+                          <span className="w-1.5 h-1.5 bg-sky-400 rounded-full animate-bounce [animation-delay:0ms]" />
+                          <span className="w-1.5 h-1.5 bg-sky-400 rounded-full animate-bounce [animation-delay:150ms]" />
+                          <span className="w-1.5 h-1.5 bg-sky-400 rounded-full animate-bounce [animation-delay:300ms]" />
+                        </span>
+                      ) : (
+                        <p className="whitespace-pre-wrap">{message.content}</p>
+                      )}
+                    </div>
+                  );
+                })}
+                <div ref={chatEndRef} />
               </div>
 
               <div className="flex flex-wrap gap-2 mb-3">
