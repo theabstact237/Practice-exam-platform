@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star, Mail } from 'lucide-react';
+import { LogIn, Menu, X, User, LogOut, Cloud, Server, Database, Shield, Zap, Globe, Cpu, Github, Linkedin, Target, Star, Mail, MessageCircle } from 'lucide-react';
 import SimpleLoginModal from './SimpleLoginModal';
 import LanguageSelector from './LanguageSelector';
 import TestimonialsCarousel, { Testimonial } from './TestimonialsCarousel';
@@ -9,6 +9,7 @@ import { signOutUser } from '../utils/auth';
 interface HomePageProps {
   onSelectExam: (examType: string) => void;
   onContactClick: () => void;
+  onOpenAIAssistant: () => void;
   user: any;
   testimonials?: Testimonial[];
 }
@@ -88,7 +89,7 @@ const TechBackground = () => {
   );
 };
 
-const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, user, testimonials = [] }) => {
+const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpenAIAssistant, user, testimonials = [] }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
   const [_loadingExams, setLoadingExams] = useState(true);
@@ -164,6 +165,17 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, user,
                 <Mail className="w-4 h-4" />
                 Contact
               </button>
+
+              {/* AI Assistant */}
+              {user && (
+                <button
+                  onClick={onOpenAIAssistant}
+                  className="px-3 py-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 rounded-md transition-all border border-sky-500/20 hover:border-sky-500/40 flex items-center gap-1.5"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  AI Assistant
+                </button>
+              )}
               
               {/* Language Selector */}
               <LanguageSelector />
@@ -235,6 +247,20 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, user,
               <Mail className="w-5 h-5" />
               Contact & Support
             </button>
+
+            {/* AI Assistant - Mobile */}
+            {user && (
+              <button
+                onClick={() => {
+                  onOpenAIAssistant();
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3 text-base font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2 border border-sky-500/20"
+              >
+                <MessageCircle className="w-5 h-5" />
+                AI Assistant
+              </button>
+            )}
             
             {/* Language Selector - Mobile */}
             <div className="px-4 py-2 border-t border-slate-800 mt-4">

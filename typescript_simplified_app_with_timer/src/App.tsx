@@ -6,7 +6,9 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
 import { initGA, analytics, setUserProperties } from './utils/analytics';
-import { getOrGenerateExamQuestions, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review } from './utils/api';
+import { getOrGenerateExamQuestions, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan } from './utils/api';
+import type { ChatMessage } from './components/AIAssistantModal';
+import { getOrCreateSessionKey, getDeviceCategory } from './utils/analyticsClient';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import LoginModal from './components/LoginModal';
 import HomePage from './components/HomePage';
@@ -15,6 +17,7 @@ import ExamInProgressModal from './components/ExamInProgressModal';
 import ReviewModal, { ReviewData } from './components/ReviewModal';
 import ExamLandingPage from './components/ExamLandingPage';
 import { Testimonial } from './components/TestimonialsCarousel';
+import AIAssistantModal from './components/AIAssistantModal';
 
 // Define page types for navigation
 const PAGES = {
@@ -175,6 +178,15 @@ function App() {
   const [user] = useAuthState(auth);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [hasShownLoginPrompt, setHasShownLoginPrompt] = useState(false);
+  const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [assistantLoading, setAssistantLoading] = useState(false);
+  const [assistantChatLoading, setAssistantChatLoading] = useState(false);
+  const [assistantError, setAssistantError] = useState<string | null>(null);
+  const [selectedSyllabus, setSelectedSyllabus] = useState<string | null>(null);
+  const [lecturePlan, setLecturePlan] = useState<SyllabusLecturePlan | null>(null);
+  const [assistantChatInput, setAssistantChatInput] = useState('');
+  const [assistantChatMessages, setAssistantChatMessages] = useState<ChatMessage[]>([]);
+  const [assistantPinned, setAssistantPinned] = useState(false);
 
   // Exam lock state - prevent switching during active exam
   const [examInProgress, setExamInProgress] = useState(false);
@@ -205,6 +217,10 @@ function App() {
     
     // Mark as visited
     localStorage.setItem('aws_exam_visited', 'true');
+
+    // Server-side practice analytics (session + device)
+    const sk = getOrCreateSessionKey();
+    void registerAnalyticsSession(sk, getDeviceCategory());
     
     // Track session start
     analytics.pageChanged('', 'exam');
@@ -218,6 +234,41 @@ function App() {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [sessionStartTime]);
+
+  // Show AI assistant on login and restore pinned plan from DB
+  useEffect(() => {
+    if (!user) return;
+
+    const restorePinned = async () => {
+      try {
+        const plans = await getPinnedPlans(user.uid);
+        if (plans.length > 0) {
+          const latest = plans[0];
+          setLecturePlan(latest.lecture_plan);
+          setSelectedSyllabus(latest.syllabus);
+          setAssistantChatMessages(latest.chat_messages || []);
+          setAssistantPinned(true);
+        }
+      } catch {
+        // DB unavailable — fall back to localStorage
+        const pinnedRaw = localStorage.getItem(`ai_pinned_plan_${user.uid}`);
+        if (pinnedRaw) {
+          try {
+            const saved = JSON.parse(pinnedRaw);
+            if (saved.lecturePlan && saved.syllabus) {
+              setLecturePlan(saved.lecturePlan);
+              setSelectedSyllabus(saved.syllabus);
+              setAssistantChatMessages(saved.chatMessages || []);
+              setAssistantPinned(true);
+            }
+          } catch { /* ignore corrupt data */ }
+        }
+      }
+    };
+
+    restorePinned();
+    setShowAIAssistant(true);
+  }, [user]);
 
   // Fetch testimonials for homepage
   useEffect(() => {
@@ -303,6 +354,11 @@ function App() {
         
         // Track exam started
         analytics.examStarted(currentExamType);
+        {
+          const sk = getOrCreateSessionKey();
+          await registerAnalyticsSession(sk, getDeviceCategory());
+          await recordAnalyticsEvent(sk, currentExamType, 'exam_start');
+        }
         setIsLoadingQuestions(false);
         
       } catch (error) {
@@ -488,6 +544,11 @@ function App() {
       const percentage = Math.round((score / questions.length) * 100);
       
       analytics.examCompleted(currentExamType, score, questions.length, totalTime);
+      {
+        const sk = getOrCreateSessionKey();
+        void registerAnalyticsSession(sk, getDeviceCategory());
+        void recordAnalyticsEvent(sk, currentExamType, 'exam_complete', percentage);
+      }
       
       // Update final progress if authenticated
       if (user) {
@@ -648,8 +709,142 @@ function App() {
 
   const handleSignOut = async () => {
     await signOutUser();
-    // Reset login prompt state so it can be shown again if needed
     setHasShownLoginPrompt(false);
+    setShowAIAssistant(false);
+    setLecturePlan(null);
+    setSelectedSyllabus(null);
+    setAssistantError(null);
+    setAssistantChatMessages([]);
+    setAssistantPinned(false);
+  };
+
+  const persistPinnedPlan = (
+    syllabus: string,
+    plan: SyllabusLecturePlan,
+    messages: ChatMessage[],
+  ) => {
+    if (!user) return;
+    // Save to DB (primary) and localStorage (fallback)
+    savePinnedPlan(user.uid, syllabus, plan, messages).catch(() => {});
+    localStorage.setItem(
+      `ai_pinned_plan_${user.uid}`,
+      JSON.stringify({ syllabus, lecturePlan: plan, chatMessages: messages }),
+    );
+  };
+
+  const handleSyllabusSelection = async (syllabus: string) => {
+    setSelectedSyllabus(syllabus);
+    setAssistantError(null);
+    setAssistantLoading(true);
+    setAssistantChatMessages([]);
+    setAssistantChatInput('');
+    setAssistantPinned(false);
+    try {
+      const response = await getSyllabusLectures(syllabus);
+      setLecturePlan(response);
+      const starterMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [
+        {
+          role: 'assistant',
+          content: `Great choice. I generated a lecture roadmap for ${response.syllabus_label}. Ask me anything about these lectures and I will guide you.`,
+        },
+      ];
+      setAssistantChatMessages(starterMessages);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to generate lecture plan.';
+      setAssistantError(message);
+    } finally {
+      setAssistantLoading(false);
+    }
+  };
+
+  const handleAssistantSendMessage = async () => {
+    if (!selectedSyllabus || !lecturePlan || !assistantChatInput.trim() || assistantChatLoading) return;
+
+    const userMessage = assistantChatInput.trim();
+    setAssistantChatInput('');
+    setAssistantError(null);
+
+    const withUser: ChatMessage[] = [...assistantChatMessages, { role: 'user', content: userMessage }];
+    // Add an empty assistant bubble immediately so the user sees it filling in
+    const withPlaceholder: ChatMessage[] = [...withUser, { role: 'assistant', content: '', off_topic: false }];
+    setAssistantChatMessages(withPlaceholder);
+    setAssistantChatLoading(true);
+
+    // Only send on-topic history to avoid wasting tokens
+    const onTopicHistory = assistantChatMessages.filter(m => !m.off_topic);
+    let accumulated = '';
+
+    try {
+      await streamChatWithSyllabusAssistant(
+        selectedSyllabus,
+        userMessage,
+        lecturePlan.lectures,
+        onTopicHistory,
+        // onDelta — append each token to the last message
+        (delta) => {
+          accumulated += delta;
+          setAssistantChatMessages(prev => {
+            const updated = [...prev];
+            updated[updated.length - 1] = { role: 'assistant', content: accumulated, off_topic: false };
+            return updated;
+          });
+        },
+        // onDone
+        (offTopic, _provider) => {
+          if (offTopic) {
+            const offTopicMsg: ChatMessage = {
+              role: 'assistant',
+              content: 'I can only help with topics related to your AWS certification study plan. Please ask me about AWS services, exam concepts, lecture content, or study strategies.',
+              off_topic: true,
+            };
+            setAssistantChatMessages(prev => {
+              const updated = [...prev];
+              updated[updated.length - 1] = offTopicMsg;
+              return updated;
+            });
+          }
+          setAssistantChatLoading(false);
+          if (assistantPinned && selectedSyllabus && lecturePlan) {
+            setAssistantChatMessages(prev => {
+              persistPinnedPlan(selectedSyllabus, lecturePlan, prev);
+              return prev;
+            });
+          }
+        },
+        // onError
+        (errMsg) => {
+          setAssistantError(errMsg);
+          setAssistantChatMessages(prev => {
+            const updated = [...prev];
+            updated[updated.length - 1] = { role: 'assistant', content: `I could not answer right now: ${errMsg}` };
+            return updated;
+          });
+          setAssistantChatLoading(false);
+        },
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Assistant failed to respond.';
+      setAssistantError(message);
+      setAssistantChatMessages(prev => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { role: 'assistant', content: `I could not answer right now: ${message}` };
+        return updated;
+      });
+      setAssistantChatLoading(false);
+    }
+  };
+
+  const handleToggleAssistantPin = () => {
+    if (!user || !selectedSyllabus || !lecturePlan) return;
+    if (assistantPinned) {
+      // Remove from DB and localStorage
+      deletePinnedPlan(user.uid, selectedSyllabus).catch(() => {});
+      localStorage.removeItem(`ai_pinned_plan_${user.uid}`);
+      setAssistantPinned(false);
+    } else {
+      persistPinnedPlan(selectedSyllabus, lecturePlan, assistantChatMessages);
+      setAssistantPinned(true);
+    }
   };
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -748,6 +943,7 @@ function App() {
         <HomePage 
           onSelectExam={handleExamSelection}
           onContactClick={handleContactClick}
+          onOpenAIAssistant={() => setShowAIAssistant(true)}
           user={user}
           testimonials={testimonials}
         />
@@ -762,6 +958,24 @@ function App() {
           currentExamType={currentExamType}
           currentProgress={currentQuestionIndex + 1}
           totalQuestions={questions.length || 50}
+        />
+
+        {/* AI Assistant Modal - shown on homepage too */}
+        <AIAssistantModal
+          isVisible={showAIAssistant}
+          loading={assistantLoading}
+          chatLoading={assistantChatLoading}
+          error={assistantError}
+          selectedSyllabus={selectedSyllabus}
+          lecturePlan={lecturePlan}
+          chatMessages={assistantChatMessages}
+          chatInput={assistantChatInput}
+          isPinned={assistantPinned}
+          onClose={() => setShowAIAssistant(false)}
+          onSelectSyllabus={handleSyllabusSelection}
+          onChatInputChange={setAssistantChatInput}
+          onSendMessage={handleAssistantSendMessage}
+          onTogglePin={handleToggleAssistantPin}
         />
       </div>
     );
@@ -1400,6 +1614,16 @@ function App() {
                   <BarChart3 className="w-4 h-4 mr-2" />
                   Analytics
                 </button>
+                {user && (
+                  <button
+                    onClick={() => setShowAIAssistant(true)}
+                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                    title="AI Study Assistant"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                    AI Assistant
+                  </button>
+                )}
               </div>
               
               {/* User Authentication */}
@@ -1549,6 +1773,18 @@ function App() {
                 <Mail className="w-4 h-4 mr-2" />
                 Contact
               </button>
+              {user && (
+                <button
+                  onClick={() => {
+                    setShowAIAssistant(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-600"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                  AI Assistant
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -1588,6 +1824,24 @@ function App() {
         onSuccess={handleLoginSuccess}
         questionNumber={currentQuestionIndex + 1}
         examType={currentExamType}
+      />
+
+      {/* AI Assistant Modal */}
+      <AIAssistantModal
+        isVisible={showAIAssistant}
+        loading={assistantLoading}
+        chatLoading={assistantChatLoading}
+        error={assistantError}
+        selectedSyllabus={selectedSyllabus}
+        lecturePlan={lecturePlan}
+        chatMessages={assistantChatMessages}
+        chatInput={assistantChatInput}
+        isPinned={assistantPinned}
+        onClose={() => setShowAIAssistant(false)}
+        onSelectSyllabus={handleSyllabusSelection}
+        onChatInputChange={setAssistantChatInput}
+        onSendMessage={handleAssistantSendMessage}
+        onTogglePin={handleToggleAssistantPin}
       />
       
       {/* Exam In Progress Modal */}

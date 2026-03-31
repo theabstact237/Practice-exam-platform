@@ -154,3 +154,59 @@ class Review(models.Model):
         return f"{self.user_name} - {self.exam.name} - {self.rating}★"
 
 
+class CachedLecturePlan(models.Model):
+    """AI-generated lecture roadmap cached per syllabus to avoid repeated API calls."""
+
+    syllabus = models.CharField(max_length=50, unique=True, db_index=True)
+    syllabus_label = models.CharField(max_length=200)
+    overview = models.TextField()
+    lectures = models.JSONField()
+    provider = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    CACHE_TTL_DAYS = 7
+
+    def is_stale(self) -> bool:
+        from datetime import timedelta
+        return timezone.now() - self.updated_at > timedelta(days=self.CACHE_TTL_DAYS)
+
+    def to_dict(self) -> dict:
+        return {
+            "syllabus": self.syllabus,
+            "syllabus_label": self.syllabus_label,
+            "overview": self.overview,
+            "lectures": self.lectures,
+            "provider": self.provider,
+            "cached": True,
+        }
+
+    class Meta:
+        verbose_name = "Cached Lecture Plan"
+        verbose_name_plural = "Cached Lecture Plans"
+
+    def __str__(self):
+        return f"LecturePlan: {self.syllabus} (provider: {self.provider})"
+
+
+class PinnedPlan(models.Model):
+    """A user's pinned lecture plan + chat history, stored per syllabus."""
+
+    user_uid = models.CharField(max_length=200, db_index=True)
+    syllabus = models.CharField(max_length=50)
+    lecture_plan = models.JSONField()
+    chat_messages = models.JSONField(default=list)
+    pinned_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ("user_uid", "syllabus")
+        verbose_name = "Pinned Plan"
+        verbose_name_plural = "Pinned Plans"
+        indexes = [
+            models.Index(fields=["user_uid", "syllabus"], name="pinned_plan_user_syllabus_idx"),
+        ]
+
+    def __str__(self):
+        return f"PinnedPlan: {self.user_uid} / {self.syllabus}"
+
+

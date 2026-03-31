@@ -7,10 +7,11 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env from the backend root directory explicitly
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'exams',
+    'analytics',
 ]
 
 MIDDLEWARE = [
@@ -199,6 +201,12 @@ REST_FRAMEWORK = {
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
 MANUS_API_KEY = os.getenv('MANUS_API_KEY', '')
 MANUS_API_URL = os.getenv('MANUS_API_URL', 'https://api.manus.ai/v1')  # Update with actual Manus API URL
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY', '')
+DEEPSEEK_BASE_URL = os.getenv('DEEPSEEK_BASE_URL', 'https://api.deepseek.com')
+DEEPSEEK_MODEL = os.getenv('DEEPSEEK_MODEL', 'deepseek-chat')
+GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
+GROQ_BASE_URL = os.getenv('GROQ_BASE_URL', 'https://api.groq.com/openai')
+GROQ_MODEL = os.getenv('GROQ_MODEL', 'llama-3.1-8b-instant')
 
 # Intelligent Question Pool Enrichment Settings
 # Probability of enriching database when pool is full (0.0 to 1.0)

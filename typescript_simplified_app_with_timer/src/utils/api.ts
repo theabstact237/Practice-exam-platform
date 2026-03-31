@@ -66,6 +66,29 @@ export interface ExamWithQuestions extends Exam {
   questions: Question[];
 }
 
+export interface SyllabusLecture {
+  title: string;
+  focus: string;
+  duration_minutes: number;
+  resources: string[];
+  hands_on_lab: string;
+}
+
+export interface SyllabusLecturePlan {
+  syllabus: string;
+  syllabus_label: string;
+  provider: string;
+  overview: string;
+  lectures: SyllabusLecture[];
+}
+
+export interface AssistantChatResponse {
+  syllabus: string;
+  provider: string;
+  reply: string;
+  off_topic?: boolean;
+}
+
 /**
  * Get all exams
  */
@@ -100,6 +123,154 @@ export const getExamsByType = async (examType: string): Promise<Exam[]> => {
     throw error;
   }
 };
+
+/**
+ * Generate syllabus-specific lecture roadmap from AI assistant endpoint
+ */
+export const getSyllabusLectures = async (syllabus: string): Promise<SyllabusLecturePlan> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/assistant/syllabus-lectures/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ syllabus }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching syllabus lectures:', error);
+    throw error;
+  }
+};
+
+export const chatWithSyllabusAssistant = async (
+  syllabus: string,
+  message: string,
+  lectures: SyllabusLecture[],
+  history: Array<{ role: 'user' | 'assistant'; content: string }> = []
+): Promise<AssistantChatResponse> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/assistant/chat/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ syllabus, message, lectures, history }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error chatting with syllabus assistant:', error);
+    throw error;
+  }
+};
+
+/**
+ * Stream chat responses token-by-token for a snappy typing effect.
+ * Calls onDelta for each new text chunk, onDone when finished.
+ */
+export const streamChatWithSyllabusAssistant = async (
+  syllabus: string,
+  message: string,
+  lectures: SyllabusLecture[],
+  history: Array<{ role: 'user' | 'assistant'; content: string }>,
+  onDelta: (delta: string) => void,
+  onDone: (offTopic: boolean, provider: string) => void,
+  onError: (error: string) => void,
+): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/assistant/chat/stream/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ syllabus, message, lectures, history }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    onError(errorData.error || `HTTP error! status: ${response.status}`);
+    return;
+  }
+
+  const reader = response.body!.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() ?? '';
+
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (!raw) continue;
+
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed.error) { onError(parsed.error); return; }
+        if (parsed.off_topic) { onDone(true, 'filter'); return; }
+        if (parsed.done) { onDone(false, parsed.provider ?? ''); return; }
+        if (parsed.delta) { onDelta(parsed.delta); }
+      } catch {
+        // skip malformed chunk
+      }
+    }
+  }
+};
+
+// ─── Pinned Plan DB API ────────────────────────────────────────────────────
+
+export interface PinnedPlanRecord {
+  syllabus: string;
+  lecture_plan: SyllabusLecturePlan;
+  chat_messages: Array<{ role: 'user' | 'assistant'; content: string; off_topic?: boolean }>;
+  pinned_at: string;
+}
+
+export const getPinnedPlans = async (userUid: string, syllabus?: string): Promise<PinnedPlanRecord[]> => {
+  const params = new URLSearchParams({ user_uid: userUid });
+  if (syllabus) params.set('syllabus', syllabus);
+  const response = await fetch(`${API_BASE_URL}/assistant/pin/?${params}`);
+  if (!response.ok) return [];
+  const data = await response.json();
+  return data.plans ?? [];
+};
+
+export const savePinnedPlan = async (
+  userUid: string,
+  syllabus: string,
+  lecturePlan: SyllabusLecturePlan,
+  chatMessages: Array<{ role: 'user' | 'assistant'; content: string; off_topic?: boolean }>,
+): Promise<void> => {
+  await fetch(`${API_BASE_URL}/assistant/pin/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user_uid: userUid, syllabus, lecture_plan: lecturePlan, chat_messages: chatMessages }),
+  });
+};
+
+export const deletePinnedPlan = async (userUid: string, syllabus: string): Promise<void> => {
+  await fetch(`${API_BASE_URL}/assistant/pin/`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user_uid: userUid, syllabus }),
+  });
+};
+
+// ─── Exam question generation ──────────────────────────────────────────────
 
 /**
  * Pre-generate questions when user clicks exam tab
@@ -402,5 +573,90 @@ export const getReviewStats = async (): Promise<{
   } catch (error) {
     console.error('Error fetching review stats:', error);
     return { total_reviews: 0, average_rating: 0, rating_distribution: {} };
+  }
+};
+
+// ============ PRACTICE ANALYTICS (server-side aggregates) ============
+
+export interface AnalyticsDashboardData {
+  sessions_today: number;
+  total_sessions: number;
+  exam_completions: number;
+  average_score_percent: number;
+  exam_type_performance: Array<{
+    exam_type: string;
+    name: string;
+    sessions: number;
+    completions: number;
+  }>;
+  device_breakdown: {
+    mobile: number;
+    tablet: number;
+    desktop: number;
+    unknown: number;
+  };
+  popular_exam_type: string;
+  popular_exam_label: string;
+  updated_at: string;
+}
+
+export const registerAnalyticsSession = async (
+  sessionKey: string,
+  deviceCategory: string
+): Promise<boolean> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics/session/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        session_key: sessionKey,
+        device_category: deviceCategory,
+      }),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+};
+
+export const recordAnalyticsEvent = async (
+  sessionKey: string,
+  examType: string,
+  eventType: 'exam_start' | 'exam_complete',
+  scorePercent?: number
+): Promise<boolean> => {
+  try {
+    const body: Record<string, unknown> = {
+      session_key: sessionKey,
+      exam_type: examType,
+      event_type: eventType,
+    };
+    if (eventType === 'exam_complete' && scorePercent !== undefined) {
+      body.score_percent = scorePercent;
+    }
+    const response = await fetch(`${API_BASE_URL}/analytics/events/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+};
+
+export const getAnalyticsDashboard = async (): Promise<AnalyticsDashboardData | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics/dashboard/`);
+    if (!response.ok) {
+      return null;
+    }
+    return await response.json();
+  } catch {
+    return null;
   }
 };
