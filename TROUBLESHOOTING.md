@@ -211,6 +211,60 @@ For full environment variable tables and deploy steps, see `RENDER_DEPLOYMENT.md
 
 ---
 
+---
+
+## Issue: AI Assistant shows "Failed to fetch" when selecting a syllabus
+
+### Problem
+
+Clicking a syllabus button (Solutions Architect, Cloud Practitioner, Developer) in the AI Study Assistant modal shows **"Failed to fetch"** in red and never loads the lecture plan.
+
+### Cause
+
+The Render free-tier **web service goes to sleep** after 15 minutes of inactivity. When asleep, Render immediately closes any incoming TCP connection instead of returning an HTTP response. The browser receives a network-level failure (`TypeError: Failed to fetch`) rather than an HTTP error code.
+
+### Resolution
+
+**Automatic retry (already in the code):** `getSyllabusLectures` in `api.ts` now retries once after a 4-second pause when a network-level failure is detected. During the retry the modal shows *"Server is waking up, please wait a moment..."* instead of the error message.
+
+**If the retry also fails**, the server is taking longer than usual to wake. Wait 10–15 seconds and click the syllabus button again — subsequent requests will succeed once Render's service is fully awake.
+
+**To prevent this permanently:** Upgrade the Render web service from the free tier to a paid plan (Starter or above), which keeps the service always on.
+
+### Key files changed
+
+- `typescript_simplified_app_with_timer/src/utils/api.ts` — `getSyllabusLectures` now accepts an `onRetry` callback and retries once on `TypeError` or `AbortError`
+- `typescript_simplified_app_with_timer/src/components/AIAssistantModal.tsx` — added `statusMsg` prop to show the "waking up" message in the loading state
+- `typescript_simplified_app_with_timer/src/App.tsx` — passes the `onRetry` callback that sets `assistantStatusMsg`
+
+---
+
+## Issue: AI Assistant quick-prompt buttons do nothing / streaming response is empty
+
+### Problem
+
+1. Clicking a suggested quick-prompt button (e.g. "Give me a 7-day study plan from these lectures") only fills the text input but **never sends the message**.
+2. After manually sending, the assistant bubble appears empty and stays empty — the streaming response text never renders.
+
+### Cause
+
+**Bug 1 — Quick prompts never sent:** The `onClick` handler on quick-prompt buttons only called `onChatInputChange(prompt)` (sets the input value). Because React state updates are asynchronous, immediately calling `onSendMessage()` right after would read a still-empty `assistantChatInput`. The message appeared to be submitted only after the user pressed Enter or clicked Send manually.
+
+**Bug 2 — Streaming text invisible:** The `handleAssistantSendMessage` function used `let accumulated = ''` declared in the outer scope. Subsequent `setAssistantChatMessages` calls inside the `onDelta` closure could reference a stale copy of `accumulated` due to React's closure-capture behaviour, resulting in the assistant bubble staying empty even though tokens were arriving from the backend.
+
+### Resolution
+
+- Added a dedicated `sendChatMessage(text: string)` helper that accepts the message directly, bypassing React input state entirely. Both the send button and quick-prompt buttons now call this helper.
+- Replaced `let accumulated` with a plain mutable object `const acc = { text: '' }`. Each `onDelta` call captures a fresh `snapshot` of `acc.text` before passing it to `setAssistantChatMessages`, eliminating the stale-closure issue.
+- Added `onQuickPromptSend: (text: string) => void` prop to `AIAssistantModal` so the modal calls `handleAssistantQuickPrompt(text)` directly on button click.
+
+### Key files changed
+
+- `typescript_simplified_app_with_timer/src/App.tsx` — refactored `handleAssistantSendMessage` into `sendChatMessage`, added `handleAssistantQuickPrompt`
+- `typescript_simplified_app_with_timer/src/components/AIAssistantModal.tsx` — added `onQuickPromptSend` prop; quick-prompt buttons now call `onQuickPromptSend(prompt)` instead of `onChatInputChange(prompt)`
+
+---
+
 ## Quick Checklist
 
 - [ ] Backend running on http://localhost:8000
@@ -227,8 +281,8 @@ For full environment variable tables and deploy steps, see `RENDER_DEPLOYMENT.md
 ## Common Error Messages
 
 ### "Failed to fetch"
-**Cause:** Backend not running or CORS issue
-**Fix:** Start backend, check CORS settings
+**Cause:** Backend not running, CORS issue, or Render free-tier service is asleep
+**Fix:** Start backend, check CORS settings. If the error appears in the AI Assistant modal, see *Issue: AI Assistant shows "Failed to fetch" when selecting a syllabus* above — the server is likely waking up and will retry automatically.
 
 ### "Request timed out"
 **Cause:** API call taking too long
