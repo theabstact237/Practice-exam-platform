@@ -268,8 +268,8 @@ class SyllabusAssistantService:
         endpoint = f"{base_url.rstrip('/')}/chat/completions"
         payload = {
             "model": model,
-            "temperature": 0.4,
-            "max_tokens": 2000,
+            "temperature": 0.3,
+            "max_tokens": 1200,
             "messages": [
                 {"role": "system", "content": system_content},
                 {"role": "user", "content": prompt},
@@ -285,29 +285,14 @@ class SyllabusAssistantService:
         return response.json()["choices"][0]["message"]["content"]
 
     def _build_prompt(self, syllabus: str, syllabus_label: str) -> str:
-        return f"""
-Create a practical lecture roadmap for this AWS syllabus: {syllabus_label} ({syllabus}).
+        return f"""Return ONLY valid JSON. No explanation. No markdown.
 
-Return ONLY JSON with this exact shape:
-{{
-  "overview": "1 short paragraph",
-  "lectures": [
-    {{
-      "title": "Lecture title",
-      "focus": "What this lecture teaches",
-      "duration_minutes": 45,
-      "resources": ["resource 1", "resource 2"],
-      "hands_on_lab": "short lab idea"
-    }}
-  ]
-}}
+Create a 6-lecture roadmap for: {syllabus_label}
 
-Rules:
-- Return 8 to 10 lectures
-- Keep each lecture specific to the selected AWS certification
-- Use realistic AWS topics and progression from fundamentals to exam strategy
-- duration_minutes must be an integer between 25 and 90
-""".strip()
+JSON shape:
+{{"overview":"2 sentences","lectures":[{{"title":"string","focus":"1 sentence","duration_minutes":45,"resources":["res1","res2"],"hands_on_lab":"1 sentence"}}]}}
+
+Rules: exactly 6 lectures, AWS exam-focused, fundamentals to exam strategy progression."""
 
     def _build_chat_system(self, syllabus: str, syllabus_label: str, lectures_json: str) -> str:
         return f"""You are an AWS certification study coach for {syllabus_label} ({syllabus}).
