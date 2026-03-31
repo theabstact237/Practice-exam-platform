@@ -1690,284 +1690,221 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Navigation */}
-      <nav className="bg-slate-800 shadow-lg">
+      <nav className="bg-slate-800/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <button
-                onClick={() => {
-                  if (examInProgress && !isReviewMode) {
-                    setShowExamInProgressModal(true);
-                  } else {
-                    setCurrentPage(PAGES.HOME);
-                  }
-                }}
-                className="text-xl font-bold text-sky-400 hover:text-sky-300 transition-colors focus:outline-none"
-                title="Go to Home"
-              >
-                FreeCertify
-              </button>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Logo */}
+            <button
+              onClick={() => {
+                if (examInProgress && !isReviewMode) {
+                  setShowExamInProgressModal(true);
+                } else {
+                  setCurrentPage(PAGES.HOME);
+                }
+              }}
+              className="text-xl font-bold text-sky-400 hover:text-sky-300 transition-colors focus:outline-none shrink-0"
+              title="Go to Home"
+            >
+              FreeCertify
+            </button>
+
+            {/* ── Desktop Navigation (lg+) ── */}
+            <div className="hidden lg:flex items-center gap-1">
               {/* Exam Type Selector */}
-              <div className="flex space-x-2">
+              {[
+                { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'Solutions Architect' },
+                { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'Cloud Practitioner' },
+                { type: EXAM_TYPES.DEVELOPER, label: 'Developer' },
+              ].map(({ type, label }) => (
                 <button
-                  onClick={() => handleExamTypeChange(EXAM_TYPES.SOLUTIONS_ARCHITECT)}
-                  className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
-                    currentExamType === EXAM_TYPES.SOLUTIONS_ARCHITECT
-                      ? 'bg-sky-600 text-white'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                  key={type}
+                  onClick={() => handleExamTypeChange(type)}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currentExamType === type ? 'bg-sky-600 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'
                   }`}
                 >
-                  Solutions Architect
+                  {label}
                 </button>
-                <button
-                  onClick={() => handleExamTypeChange(EXAM_TYPES.CLOUD_PRACTITIONER)}
-                  className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
-                    currentExamType === EXAM_TYPES.CLOUD_PRACTITIONER
-                      ? 'bg-sky-600 text-white'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700'
-                  }`}
-                >
-                  Cloud Practitioner
-                </button>
-                <button
-                  onClick={() => handleExamTypeChange(EXAM_TYPES.DEVELOPER)}
-                  className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
-                    currentExamType === EXAM_TYPES.DEVELOPER
-                      ? 'bg-sky-600 text-white'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700'
-                  }`}
-                >
-                  Developer
-                </button>
-              </div>
-              
-              {/* Page Navigation */}
-              <div className="flex space-x-4">
-                <button
-                  onClick={() => {
-                    analytics.pageChanged(currentPage, PAGES.EXAM);
-                    setCurrentPage(PAGES.EXAM);
-                  }}
-                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    currentPage === PAGES.EXAM
-                      ? 'bg-slate-700 text-white'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700'
-                  }`}
-                >
-                  <Home className="w-4 h-4 mr-2" />
-                  Exam
-                </button>
-                <button
-                  onClick={() => {
-                    analytics.pageChanged(currentPage, PAGES.CONTACT);
-                    setCurrentPage(PAGES.CONTACT);
-                  }}
-                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    currentPage === PAGES.CONTACT
-                      ? 'bg-slate-700 text-white'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700'
-                  }`}
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contact
-                </button>
-                {user && (
-                  <button
-                    onClick={() => setShowAnalyticsDashboard(true)}
-                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
-                    title="View Analytics"
-                  >
-                    <BarChart3 className="w-4 h-4 mr-2" />
-                    Analytics
-                  </button>
-                )}
-                {user && (
-                  <button
-                    onClick={() => setShowAIAssistant(true)}
-                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
-                    title="AI Study Assistant"
-                  >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-                    AI Assistant
-                  </button>
-                )}
-              </div>
-              
-              {/* User Authentication */}
-              <div className="flex items-center space-x-4">
-                {user ? (
-                  <div className="flex items-center space-x-3">
-                    <div className="flex items-center space-x-2">
-                      {user.photoURL ? (
-                        <img 
-                          src={user.photoURL} 
-                          alt="Profile" 
-                          className="w-8 h-8 rounded-full"
-                        />
-                      ) : (
-                        <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center">
-                          <User className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                      <span className="text-slate-300 text-sm hidden md:block">
-                        {user.displayName || user.email?.split('@')[0]}
-                      </span>
-                    </div>
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center px-2 py-1 text-slate-400 hover:text-white transition-colors"
-                      title="Sign Out"
-                    >
-                      <LogOut className="w-4 h-4" />
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setShowLoginModal(true)}
-                    className="flex items-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-md text-sm font-medium transition-colors"
-                  >
-                    <User className="w-4 h-4 mr-2" />
-                    Sign In
-                  </button>
-                )}
-              </div>
-            </div>
-            
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+              ))}
+
+              <div className="w-px h-5 bg-slate-600 mx-1" />
+
               <button
-                onClick={() => {
-                  analytics.mobileMenuToggled(!mobileMenuOpen);
-                  setMobileMenuOpen(!mobileMenuOpen);
-                }}
-                className="text-slate-400 hover:text-white"
+                onClick={() => { analytics.pageChanged(currentPage, PAGES.EXAM); setCurrentPage(PAGES.EXAM); }}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPage === PAGES.EXAM ? 'bg-slate-700 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
+              >
+                <Home className="w-4 h-4" />
+                Exam
+              </button>
+
+              <button
+                onClick={() => { analytics.pageChanged(currentPage, PAGES.CONTACT); setCurrentPage(PAGES.CONTACT); }}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPage === PAGES.CONTACT ? 'bg-slate-700 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
+              >
+                <Mail className="w-4 h-4" />
+                Contact
+              </button>
+
+              {user && (
+                <button
+                  onClick={() => setShowAIAssistant(true)}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                  AI Assistant
+                </button>
+              )}
+
+              {user && (
+                <button
+                  onClick={() => setShowAnalyticsDashboard(true)}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20 transition-colors"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  Analytics
+                </button>
+              )}
+
+              <div className="w-px h-5 bg-slate-600 mx-1" />
+
+              {user ? (
+                <div className="flex items-center gap-2">
+                  {user.photoURL
+                    ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                    : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                  }
+                  <span className="text-slate-300 text-sm max-w-[110px] truncate">{user.displayName || user.email?.split('@')[0]}</span>
+                  <button onClick={handleSignOut} className="p-1.5 text-slate-400 hover:text-white transition-colors" title="Sign Out">
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowLoginModal(true)}
+                  className="flex items-center gap-1.5 px-3 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-md text-sm font-medium transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                  Sign In
+                </button>
+              )}
+            </div>
+
+            {/* ── Mobile right: avatar + hamburger (< lg) ── */}
+            <div className="flex lg:hidden items-center gap-2">
+              {user && (
+                user.photoURL
+                  ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                  : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+              )}
+              <button
+                onClick={() => { analytics.mobileMenuToggled(!mobileMenuOpen); setMobileMenuOpen(!mobileMenuOpen); }}
+                className="p-2 text-slate-400 hover:text-white rounded-md hover:bg-slate-700 transition-colors"
+                aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
+
           </div>
         </div>
-        
-        {/* Mobile Navigation */}
+
+        {/* ── Mobile Drawer (< lg) ── */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-700">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {/* Exam Type Selector */}
-              <div className="px-3 py-2">
-                <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">Exam Type</p>
-                <div className="mt-2 space-y-1">
-                  <button
-                    onClick={() => {
-                      handleExamTypeChange(EXAM_TYPES.SOLUTIONS_ARCHITECT);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
-                      currentExamType === EXAM_TYPES.SOLUTIONS_ARCHITECT
-                        ? 'bg-sky-600 text-white'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                    }`}
-                  >
-                    Solutions Architect
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleExamTypeChange(EXAM_TYPES.CLOUD_PRACTITIONER);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
-                      currentExamType === EXAM_TYPES.CLOUD_PRACTITIONER
-                        ? 'bg-sky-600 text-white'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                    }`}
-                  >
-                    Cloud Practitioner
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleExamTypeChange(EXAM_TYPES.DEVELOPER);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
-                      currentExamType === EXAM_TYPES.DEVELOPER
-                        ? 'bg-sky-600 text-white'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                    }`}
-                  >
-                    Developer
+          <div className="lg:hidden border-t border-slate-700 bg-slate-800">
+            <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
+
+              {/* User greeting */}
+              {user ? (
+                <div className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-700/60 rounded-xl">
+                  {user.photoURL
+                    ? <img src={user.photoURL} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
+                    : <div className="w-9 h-9 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                  }
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">{user.displayName || 'User'}</p>
+                    <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                  </div>
+                  <button onClick={handleSignOut} className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors shrink-0" title="Sign Out">
+                    <LogOut className="w-4 h-4" />
                   </button>
                 </div>
-              </div>
-              
-              {/* Page Navigation */}
+              ) : (
+                <button
+                  onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-sm font-bold transition-colors mb-2"
+                >
+                  <User className="w-4 h-4" />
+                  Sign In
+                </button>
+              )}
+
+              {/* Section: Exam Type */}
+              <p className="px-3 pt-2 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Exam Type</p>
+              {[
+                { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'AWS Solutions Architect' },
+                { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'AWS Cloud Practitioner' },
+                { type: EXAM_TYPES.DEVELOPER, label: 'AWS Developer Associate' },
+              ].map(({ type, label }) => (
+                <button
+                  key={type}
+                  onClick={() => { handleExamTypeChange(type); setMobileMenuOpen(false); }}
+                  className={`flex items-center w-full px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    currentExamType === type ? 'bg-sky-600 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+
+              {/* Section: Navigation */}
+              <p className="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Navigation</p>
+
               <button
-                onClick={() => {
-                  setCurrentPage(PAGES.HOME);
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium ${
-                  currentPage === PAGES.HOME
-                    ? 'bg-slate-600 text-white'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                }`}
+                onClick={() => { setCurrentPage(PAGES.HOME); setMobileMenuOpen(false); }}
+                className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium transition-colors ${currentPage === PAGES.HOME ? 'bg-slate-700 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
               >
-                <Home className="w-4 h-4 mr-2" />
+                <Home className="w-5 h-5 shrink-0" />
                 Home
               </button>
+
               <button
-                onClick={() => {
-                  setCurrentPage(PAGES.EXAM);
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium ${
-                  currentPage === PAGES.EXAM
-                    ? 'bg-slate-600 text-white'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                }`}
+                onClick={() => { analytics.pageChanged(currentPage, PAGES.EXAM); setCurrentPage(PAGES.EXAM); setMobileMenuOpen(false); }}
+                className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium transition-colors ${currentPage === PAGES.EXAM ? 'bg-slate-700 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
               >
-                Exam
+                <Home className="w-5 h-5 shrink-0" />
+                Practice Exam
               </button>
+
               <button
-                onClick={() => {
-                  setCurrentPage(PAGES.CONTACT);
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium ${
-                  currentPage === PAGES.CONTACT
-                    ? 'bg-slate-600 text-white'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-600'
-                }`}
+                onClick={() => { analytics.pageChanged(currentPage, PAGES.CONTACT); setCurrentPage(PAGES.CONTACT); setMobileMenuOpen(false); }}
+                className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium transition-colors ${currentPage === PAGES.CONTACT ? 'bg-slate-700 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
               >
-                <Mail className="w-4 h-4 mr-2" />
-                Contact
+                <Mail className="w-5 h-5 shrink-0" />
+                Contact & Support
               </button>
+
+              {/* Section: Tools (logged-in only) */}
               {user && (
-                <button
-                  onClick={() => {
-                    setShowAIAssistant(true);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-600"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-                  AI Assistant
-                </button>
+                <>
+                  <p className="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Tools</p>
+                  <button
+                    onClick={() => { setShowAIAssistant(true); setMobileMenuOpen(false); }}
+                    className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 border border-sky-500/20 transition-colors"
+                  >
+                    <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                    AI Study Assistant
+                  </button>
+                  <button
+                    onClick={() => { setShowAnalyticsDashboard(true); setMobileMenuOpen(false); }}
+                    className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20 transition-colors"
+                  >
+                    <BarChart3 className="w-5 h-5 shrink-0" />
+                    Analytics Dashboard
+                  </button>
+                </>
               )}
-              {user && (
-                <button
-                  onClick={() => {
-                    setShowAnalyticsDashboard(true);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="flex items-center w-full px-3 py-2 rounded-md text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20"
-                >
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Analytics Dashboard
-                </button>
-              )}
+
             </div>
           </div>
         )}

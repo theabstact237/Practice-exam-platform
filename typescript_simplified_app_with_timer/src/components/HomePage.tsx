@@ -129,192 +129,202 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
       <TechBackground />
 
       {/* Navigation Bar */}
-      <nav className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+      <nav className="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
+
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center shrink-0">
               <div className="bg-sky-500/20 p-2 rounded-lg mr-3 border border-sky-500/30">
-                <Cloud className="w-6 h-6 text-sky-400" />
+                <Cloud className="w-5 h-5 text-sky-400" />
               </div>
-              <span className="text-2xl font-bold tracking-tight font-['Space_Grotesk']">
+              <span className="text-xl font-bold tracking-tight font-['Space_Grotesk']">
                 Free<span className="text-sky-400">Certify</span>
               </span>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6">
-              {exams.length > 0 && (
-                <div className="flex items-center space-x-2 mr-4">
-                  {exams.map((exam) => (
-                    <button
-                      key={exam.id}
-                      onClick={() => handleExamClick(exam.exam_type)}
-                      className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all border border-transparent hover:border-sky-500/20"
-                    >
-                      {exam.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-              
-              {/* Contact Link */}
+            {/* ── Desktop Navigation (lg+) ── */}
+            <div className="hidden lg:flex items-center gap-1">
+              {exams.map((exam) => (
+                <button
+                  key={exam.id}
+                  onClick={() => handleExamClick(exam.exam_type)}
+                  className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all"
+                >
+                  {exam.name}
+                </button>
+              ))}
+
               <button
                 onClick={onContactClick}
-                className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all border border-transparent hover:border-sky-500/20 flex items-center gap-1.5"
+                className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-md transition-all flex items-center gap-1.5 ml-2"
               >
                 <Mail className="w-4 h-4" />
                 Contact
               </button>
 
-              {/* AI Assistant */}
               {user && (
                 <button
                   onClick={onOpenAIAssistant}
-                  className="px-3 py-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 rounded-md transition-all border border-sky-500/20 hover:border-sky-500/40 flex items-center gap-1.5"
+                  className="px-3 py-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 rounded-md transition-all border border-sky-500/20 flex items-center gap-1.5"
                 >
                   <MessageCircle className="w-4 h-4" />
                   AI Assistant
                 </button>
               )}
 
-              {/* Analytics Dashboard - logged-in users only */}
               {user && onOpenAnalytics && (
                 <button
                   onClick={onOpenAnalytics}
-                  className="px-3 py-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 rounded-md transition-all border border-emerald-500/20 hover:border-emerald-500/40 flex items-center gap-1.5"
-                  title="Analytics Dashboard"
+                  className="px-3 py-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 rounded-md transition-all border border-emerald-500/20 flex items-center gap-1.5"
                 >
                   <BarChart3 className="w-4 h-4" />
                   Analytics
                 </button>
               )}
-              
-              {/* Language Selector */}
+
               <LanguageSelector />
 
               {!user ? (
                 <button
                   onClick={() => setShowLoginModal(true)}
-                  className="px-5 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] flex items-center gap-2"
+                  className="ml-2 px-4 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-lg text-sm font-bold transition-all flex items-center gap-2"
                 >
                   <LogIn className="w-4 h-4" />
                   Sign In
                 </button>
               ) : (
-                <div className="flex items-center space-x-4 pl-4 border-l border-slate-800">
-                  <div className="flex items-center gap-2">
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/50" />
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                        <User size={16} className="text-sky-400" />
-                      </div>
-                    )}
-                    <span className="text-sm font-medium text-slate-300">{user.displayName || user.email?.split('@')[0]}</span>
-                  </div>
-                  <button
-                    onClick={handleSignOut}
-                    className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
-                    title="Sign Out"
-                  >
-                    <LogOut className="w-5 h-5" />
+                <div className="flex items-center gap-3 ml-3 pl-3 border-l border-slate-700">
+                  {user.photoURL ? (
+                    <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/50" />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                      <User size={15} className="text-sky-400" />
+                    </div>
+                  )}
+                  <span className="text-sm text-slate-300 max-w-[110px] truncate">
+                    {user.displayName || user.email?.split('@')[0]}
+                  </span>
+                  <button onClick={handleSignOut} className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors" title="Sign Out">
+                    <LogOut className="w-4 h-4" />
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-slate-400 hover:text-white">
+            {/* ── Mobile right: avatar + hamburger (< lg) ── */}
+            <div className="flex lg:hidden items-center gap-2">
+              {user && (
+                user.photoURL
+                  ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                  : <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center"><User size={14} className="text-sky-400" /></div>
+              )}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-slate-400 hover:text-white rounded-md hover:bg-slate-800 transition-colors"
+                aria-label="Toggle menu"
+              >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
+
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* ── Mobile Drawer (< lg) ── */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-900 border-t border-slate-800 px-4 py-6 space-y-4">
-            {exams.map((exam) => (
-              <button
-                key={exam.id}
-                onClick={() => {
-                  handleExamClick(exam.exam_type);
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left px-4 py-3 text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-sky-500/10 rounded-xl transition-colors"
-              >
-                {exam.name}
-              </button>
-            ))}
-            
-            {/* Contact Link - Mobile */}
-            <button
-              onClick={() => {
-                onContactClick();
-                setMobileMenuOpen(false);
-              }}
-              className="block w-full text-left px-4 py-3 text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              Contact & Support
-            </button>
+          <div className="lg:hidden border-t border-slate-800 bg-slate-900">
+            <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
 
-            {/* AI Assistant - Mobile */}
-            {user && (
-              <button
-                onClick={() => {
-                  onOpenAIAssistant();
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left px-4 py-3 text-base font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2 border border-sky-500/20"
-              >
-                <MessageCircle className="w-5 h-5" />
-                AI Assistant
-              </button>
-            )}
+              {/* User greeting */}
+              {user && (
+                <div className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-800/60 rounded-xl">
+                  {user.photoURL
+                    ? <img src={user.photoURL} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
+                    : <div className="w-9 h-9 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center"><User size={16} className="text-sky-400" /></div>
+                  }
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">{user.displayName || 'User'}</p>
+                    <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                  </div>
+                </div>
+              )}
 
-            {/* Analytics - Mobile */}
-            {user && onOpenAnalytics && (
+              {/* Section: Practice Exams */}
+              {exams.length > 0 && (
+                <>
+                  <p className="px-3 pt-2 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Practice Exams</p>
+                  {exams.map((exam) => (
+                    <button
+                      key={exam.id}
+                      onClick={() => { handleExamClick(exam.exam_type); setMobileMenuOpen(false); }}
+                      className="flex items-center w-full px-3 py-3 rounded-xl text-sm font-medium text-slate-200 hover:text-sky-400 hover:bg-sky-500/10 transition-colors"
+                    >
+                      {exam.name}
+                    </button>
+                  ))}
+                </>
+              )}
+
+              {/* Section: Tools */}
+              <p className="px-3 pt-3 pb-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">Tools</p>
+
               <button
-                onClick={() => {
-                  onOpenAnalytics();
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left px-4 py-3 text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-sky-500/10 rounded-xl transition-colors flex items-center gap-2"
+                onClick={() => { onContactClick(); setMobileMenuOpen(false); }}
+                className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-slate-200 hover:text-sky-400 hover:bg-sky-500/10 transition-colors"
               >
-                <BarChart3 className="w-5 h-5" />
-                Analytics Dashboard
+                <Mail className="w-5 h-5 shrink-0" />
+                Contact & Support
               </button>
-            )}
-            
-            {/* Language Selector - Mobile */}
-            <div className="px-4 py-2 border-t border-slate-800 mt-4">
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Language</p>
-              <LanguageSelector />
+
+              {user && (
+                <button
+                  onClick={() => { onOpenAIAssistant(); setMobileMenuOpen(false); }}
+                  className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-sky-400 hover:text-sky-300 hover:bg-sky-500/10 transition-colors border border-sky-500/20"
+                >
+                  <MessageCircle className="w-5 h-5 shrink-0" />
+                  AI Assistant
+                </button>
+              )}
+
+              {user && onOpenAnalytics && (
+                <button
+                  onClick={() => { onOpenAnalytics(); setMobileMenuOpen(false); }}
+                  className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 transition-colors border border-emerald-500/20"
+                >
+                  <BarChart3 className="w-5 h-5 shrink-0" />
+                  Analytics Dashboard
+                </button>
+              )}
+
+              {/* Language */}
+              <div className="px-3 py-3 border-t border-slate-800 mt-2">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Language</p>
+                <LanguageSelector />
+              </div>
+
+              {/* Sign In / Sign Out */}
+              <div className="pt-2 border-t border-slate-800">
+                {!user ? (
+                  <button
+                    onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-xl text-sm font-bold transition-all"
+                  >
+                    <LogIn className="w-5 h-5" />
+                    Sign In
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSignOut}
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-400 rounded-xl text-sm font-medium transition-colors border border-slate-700"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    Sign Out
+                  </button>
+                )}
+              </div>
+
             </div>
-
-            {!user ? (
-              <button
-                onClick={() => {
-                  setShowLoginModal(true);
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full px-4 py-3 bg-sky-500 text-slate-950 rounded-xl text-base font-bold flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20"
-              >
-                <LogIn className="w-5 h-5" />
-                Sign In
-              </button>
-            ) : (
-              <button
-                onClick={handleSignOut}
-                className="w-full px-4 py-3 bg-slate-800 text-slate-300 rounded-xl text-base font-medium flex items-center justify-center gap-2"
-              >
-                <LogOut className="w-5 h-5" />
-                Sign Out
-              </button>
-            )}
           </div>
         )}
       </nav>
