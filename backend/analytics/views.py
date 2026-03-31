@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django.db.models import Avg, Count
 from django.utils import timezone
 from rest_framework import status
@@ -79,6 +81,7 @@ def record_event(request):
         )
 
     score_val = None
+    domain_scores = request.data.get("domain_scores")
     if event_type == AnalyticsExamEvent.EVENT_EXAM_COMPLETE:
         if score_percent is None:
             return Response(
@@ -98,6 +101,7 @@ def record_event(request):
         exam_type=exam_type,
         event_type=event_type,
         score_percent=score_val,
+        domain_scores=domain_scores if isinstance(domain_scores, dict) else None,
     )
     return Response({"ok": True})
 
@@ -175,6 +179,31 @@ def dashboard(request):
         cat = _normalize_device(row["device_category"])
         device_breakdown[cat] = device_breakdown.get(cat, 0) + row["count"]
 
+    # Aggregate domain weakness across all exam_complete events that have domain_scores
+    domain_totals: dict = defaultdict(lambda: {"correct": 0, "total": 0})
+    for event in completions_qs.exclude(domain_scores=None).only("domain_scores"):
+        ds = event.domain_scores
+        if not isinstance(ds, dict):
+            continue
+        for domain, stats in ds.items():
+            if isinstance(stats, dict):
+                domain_totals[domain]["correct"] += stats.get("correct", 0)
+                domain_totals[domain]["total"] += stats.get("total", 0)
+
+    domain_weakness = sorted(
+        [
+            {
+                "domain": domain,
+                "correct": v["correct"],
+                "total": v["total"],
+                "pct": round(v["correct"] / v["total"] * 100) if v["total"] else 0,
+            }
+            for domain, v in domain_totals.items()
+            if v["total"] > 0
+        ],
+        key=lambda x: x["pct"],  # weakest first
+    )
+
     return Response(
         {
             "sessions_today": sessions_today,
@@ -185,6 +214,7 @@ def dashboard(request):
             "device_breakdown": device_breakdown,
             "popular_exam_type": popular_exam_type,
             "popular_exam_label": popular_exam_label,
+            "domain_weakness": domain_weakness,
             "updated_at": timezone.now().isoformat(),
         }
     )

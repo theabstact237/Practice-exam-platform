@@ -205,6 +205,8 @@ function App() {
   const [lastExamScore, setLastExamScore] = useState(0);
   const [lastExamPassed, setLastExamPassed] = useState(false);
   const [currentExamId, setCurrentExamId] = useState(1);
+  const [examDomainScores, setExamDomainScores] = useState<Record<string, { correct: number; total: number }>>({});
+  const [examTimeTaken, setExamTimeTaken] = useState(0); // seconds
 
   // Initialize Google Analytics on component mount
   useEffect(() => {
@@ -548,12 +550,23 @@ function App() {
       const score = Object.values(userAnswers).filter(answer => answer.isCorrect).length;
       const totalTime = Math.round((Date.now() - sessionStartTime) / 1000); // seconds
       const percentage = Math.round((score / questions.length) * 100);
-      
+
+      // Compute per-domain breakdown
+      const domainScores: Record<string, { correct: number; total: number }> = {};
+      questions.forEach(q => {
+        const domain = q.domain || 'General';
+        if (!domainScores[domain]) domainScores[domain] = { correct: 0, total: 0 };
+        domainScores[domain].total++;
+        if (userAnswers[q.id]?.isCorrect) domainScores[domain].correct++;
+      });
+      setExamDomainScores(domainScores);
+      setExamTimeTaken(totalTime);
+
       analytics.examCompleted(currentExamType, score, questions.length, totalTime);
       {
         const sk = getOrCreateSessionKey();
         void registerAnalyticsSession(sk, getDeviceCategory());
-        void recordAnalyticsEvent(sk, currentExamType, 'exam_complete', percentage);
+        void recordAnalyticsEvent(sk, currentExamType, 'exam_complete', percentage, domainScores);
       }
       
       // Update final progress if authenticated
@@ -1090,94 +1103,187 @@ function App() {
   const renderExamPage = () => {
     if (isReviewMode) {
       const score = calculateScore();
-      
+      const passed = score.percentage >= 70;
+      const timedOutCount = Object.values(userAnswers).filter(a => a.timedOut).length;
+      const notAttempted = score.total - Object.values(userAnswers).filter(a => a.attempted).length;
+      const timeMins = Math.floor(examTimeTaken / 60);
+      const timeSecs = examTimeTaken % 60;
+
+      // Sort domains: weakest first
+      const sortedDomains = Object.entries(examDomainScores).sort(
+        ([, a], [, b]) => (a.correct / a.total) - (b.correct / b.total)
+      );
+      const weakDomains = sortedDomains.filter(([, s]) => s.total > 0 && (s.correct / s.total) < 0.6);
+
       return (
-        <div className="max-w-4xl mx-auto">
-          {/* Score Summary */}
-          <div className="bg-slate-800 rounded-lg shadow-lg p-6 mb-6">
-            <h2 className="text-2xl font-bold mb-4">Exam Complete!</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-sky-400">{score.correct}</div>
-                <div className="text-slate-400">Correct</div>
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* ── Hero Card ── */}
+          <div className={`rounded-2xl shadow-xl overflow-hidden border ${passed ? 'border-emerald-500/40' : 'border-amber-500/40'}`}>
+            {/* Coloured header strip */}
+            <div className={`px-6 py-4 flex items-center justify-between ${passed ? 'bg-gradient-to-r from-emerald-700/50 to-emerald-600/30' : 'bg-gradient-to-r from-amber-700/50 to-amber-600/30'}`}>
+              <div>
+                <h2 className="text-xl font-bold text-white">
+                  {passed ? '🎉 Exam Passed!' : '📋 Exam Complete'}
+                </h2>
+                <p className="text-sm text-slate-300 mt-0.5">{getExamTitle()}</p>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400">{score.total - score.correct}</div>
-                <div className="text-slate-400">Incorrect</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-400">{score.percentage}%</div>
-                <div className="text-slate-400">Score</div>
+              <div className="text-right">
+                <div className={`text-5xl font-black ${passed ? 'text-emerald-400' : 'text-amber-400'}`}>
+                  {score.percentage}%
+                </div>
+                <div className="text-xs text-slate-400 mt-1">
+                  {timeMins}m {timeSecs}s &nbsp;·&nbsp; {score.total} questions
+                </div>
               </div>
             </div>
-            <div className="flex flex-wrap gap-4">
-              <Button onClick={handleRestartExam} className="flex-1">
-                Retake Exam
-              </Button>
-              <Button onClick={() => setCurrentPage(PAGES.EXAM)} className="flex-1">
-                Continue Review
-              </Button>
-              {score.percentage >= 70 && user && (
-                <Button 
-                  onClick={() => setShowCertificate(true)} 
-                  className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400"
-                >
-                  🎓 View Certificate
-                </Button>
+
+            <div className="bg-slate-800 px-6 py-5">
+              {/* Stat row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-5">
+                <div className="bg-slate-700/60 rounded-xl p-4 text-center">
+                  <div className="text-2xl font-bold text-emerald-400">{score.correct}</div>
+                  <div className="text-xs text-slate-400 mt-1">Correct</div>
+                </div>
+                <div className="bg-slate-700/60 rounded-xl p-4 text-center">
+                  <div className="text-2xl font-bold text-red-400">{score.total - score.correct - notAttempted}</div>
+                  <div className="text-xs text-slate-400 mt-1">Incorrect</div>
+                </div>
+                <div className="bg-slate-700/60 rounded-xl p-4 text-center">
+                  <div className="text-2xl font-bold text-amber-400">{timedOutCount}</div>
+                  <div className="text-xs text-slate-400 mt-1">Timed Out</div>
+                </div>
+                <div className="bg-slate-700/60 rounded-xl p-4 text-center">
+                  <div className="text-2xl font-bold text-slate-300">{notAttempted}</div>
+                  <div className="text-xs text-slate-400 mt-1">Skipped</div>
+                </div>
+              </div>
+
+              {/* Pass / Fail explanation */}
+              {passed ? (
+                <div className="rounded-lg p-4 bg-emerald-600/15 border border-emerald-500/30 text-sm text-emerald-200">
+                  <span className="font-semibold">Well done!</span> You exceeded the 70% passing threshold by {score.percentage - 70} points.
+                  {user && ' Your certificate is ready to download.'}
+                </div>
+              ) : (
+                <div className="rounded-lg p-4 bg-red-600/15 border border-red-500/30 text-sm text-red-200">
+                  <span className="font-semibold">Why you didn't pass:</span> You scored {score.percentage}% — {70 - score.percentage} point{70 - score.percentage !== 1 ? 's' : ''} short of the 70% passing mark.
+                  {' '}You answered {score.total - score.correct} question{score.total - score.correct !== 1 ? 's' : ''} incorrectly
+                  {timedOutCount > 0 ? ` and ${timedOutCount} timed out` : ''}.
+                  {weakDomains.length > 0 && (
+                    <span> Focus on: <span className="font-semibold">{weakDomains.slice(0, 3).map(([d]) => d).join(', ')}</span>.</span>
+                  )}
+                </div>
               )}
+
+              {/* Action buttons */}
+              <div className="flex flex-wrap gap-3 mt-5">
+                <Button onClick={handleRestartExam} className="flex-1 min-w-[120px]">
+                  🔄 Retake Exam
+                </Button>
+                <Button onClick={() => setCurrentPage(PAGES.EXAM)} className="flex-1 min-w-[120px] bg-slate-600 hover:bg-slate-500">
+                  👁 Review Answers
+                </Button>
+                {passed && user && (
+                  <Button
+                    onClick={() => setShowCertificate(true)}
+                    className="flex-1 min-w-[120px] bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400"
+                  >
+                    🎓 View Certificate
+                  </Button>
+                )}
+              </div>
             </div>
-            
-            {/* Pass/Fail Banner */}
-            {score.percentage >= 70 ? (
-              <div className="mt-4 p-4 bg-gradient-to-r from-emerald-600/20 to-emerald-500/20 border border-emerald-500/30 rounded-lg text-center">
-                <p className="text-emerald-400 text-lg font-semibold">
-                  🎉 Congratulations! You Passed! 🎉
-                </p>
-                <p className="text-slate-300 text-sm mt-1">
-                  You scored {score.percentage}% - above the 70% passing threshold!
-                </p>
-              </div>
-            ) : (
-              <div className="mt-4 p-4 bg-gradient-to-r from-amber-600/20 to-amber-500/20 border border-amber-500/30 rounded-lg text-center">
-                <p className="text-amber-400 text-lg font-semibold">
-                  📚 Keep Practicing!
-                </p>
-                <p className="text-slate-300 text-sm mt-1">
-                  You need 70% to pass. Review the questions and try again!
-                </p>
-              </div>
-            )}
           </div>
 
-          {/* Question Navigation */}
-          <div className="bg-slate-800 rounded-lg shadow-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold mb-4">Question Navigation</h3>
-            <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
-              {questions.map((_, index) => {
-                const questionId = questions[index].id;
-                const userAnswer = userAnswers[questionId];
-                let buttonClass = "w-10 h-10 rounded-md text-sm font-medium ";
-                
-                if (index === currentQuestionIndex) {
-                  buttonClass += "bg-sky-600 text-white";
-                } else if (userAnswer?.isCorrect) {
-                  buttonClass += "bg-green-600 text-white";
+          {/* ── Domain Performance Breakdown ── */}
+          {sortedDomains.length > 0 && (
+            <div className="bg-slate-800 rounded-2xl shadow-lg p-6 border border-slate-700">
+              <h3 className="text-lg font-semibold mb-4 text-white">📊 Domain Performance</h3>
+              <div className="space-y-3">
+                {sortedDomains.map(([domain, stats]) => {
+                  const pct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                  const isWeak = pct < 60;
+                  const isMid = pct >= 60 && pct < 80;
+                  const barColor = isWeak ? 'bg-red-500' : isMid ? 'bg-amber-500' : 'bg-emerald-500';
+                  const textColor = isWeak ? 'text-red-400' : isMid ? 'text-amber-400' : 'text-emerald-400';
+                  const badge = isWeak ? '❌ Needs Work' : isMid ? '⚠ Improve' : '✅ Strong';
+                  return (
+                    <div key={domain}>
+                      <div className="flex items-center justify-between mb-1 text-sm">
+                        <span className="text-slate-200 font-medium truncate max-w-[55%]">{domain}</span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`text-xs ${textColor}`}>{badge}</span>
+                          <span className="text-slate-300 font-semibold">{pct}%</span>
+                          <span className="text-slate-500 text-xs">({stats.correct}/{stats.total})</span>
+                        </div>
+                      </div>
+                      <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${barColor} rounded-full transition-all duration-700`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ── Improvement Recommendations ── */}
+          {weakDomains.length > 0 && (
+            <div className="bg-slate-800 rounded-2xl shadow-lg p-6 border border-slate-700">
+              <h3 className="text-lg font-semibold mb-3 text-white">💡 What to Study Next</h3>
+              <ul className="space-y-2">
+                {weakDomains.slice(0, 5).map(([domain, stats]) => {
+                  const pct = Math.round((stats.correct / stats.total) * 100);
+                  return (
+                    <li key={domain} className="flex items-start gap-2 text-sm text-slate-300">
+                      <span className="text-red-400 mt-0.5">•</span>
+                      <span>
+                        <span className="font-semibold text-white">{domain}</span>
+                        {' '}— you got {pct}% ({stats.correct}/{stats.total}). Review this domain's concepts and retry those questions.
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+
+          {/* ── Question Navigation Grid ── */}
+          <div className="bg-slate-800 rounded-2xl shadow-lg p-6 border border-slate-700">
+            <h3 className="text-lg font-semibold mb-4 text-white">Question Navigator</h3>
+            <div className="flex flex-wrap gap-1.5">
+              {questions.map((q, index) => {
+                const userAnswer = userAnswers[q.id];
+                let cls = "w-9 h-9 rounded-md text-xs font-semibold transition-colors ";
+                if (userAnswer?.isCorrect) {
+                  cls += "bg-emerald-600 text-white";
+                } else if (userAnswer?.timedOut) {
+                  cls += "bg-amber-600 text-white";
                 } else if (userAnswer?.attempted) {
-                  buttonClass += "bg-red-600 text-white";
+                  cls += "bg-red-600 text-white";
                 } else {
-                  buttonClass += "bg-slate-600 text-slate-300";
+                  cls += "bg-slate-600 text-slate-300";
                 }
-                
                 return (
                   <button
                     key={index}
+                    title={`Q${index + 1}${userAnswer?.isCorrect ? ' ✓' : userAnswer?.timedOut ? ' ⏱' : userAnswer?.attempted ? ' ✗' : ' –'}`}
                     onClick={() => handleReviewNavigation(index)}
-                    className={buttonClass}
+                    className={cls}
                   >
                     {index + 1}
                   </button>
                 );
               })}
+            </div>
+            <div className="flex gap-4 mt-4 text-xs text-slate-400">
+              <span><span className="inline-block w-3 h-3 rounded-sm bg-emerald-600 mr-1" />Correct</span>
+              <span><span className="inline-block w-3 h-3 rounded-sm bg-red-600 mr-1" />Incorrect</span>
+              <span><span className="inline-block w-3 h-3 rounded-sm bg-amber-600 mr-1" />Timed Out</span>
+              <span><span className="inline-block w-3 h-3 rounded-sm bg-slate-600 mr-1" />Not Attempted</span>
             </div>
           </div>
         </div>
@@ -1840,17 +1946,17 @@ function App() {
           {/* Page Title */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-white mb-2">
-              {currentPage === PAGES.EXAM ? getExamTitle() : 'Contact & Support'}
+              {(currentPage === PAGES.EXAM || currentPage === PAGES.REVIEW) ? getExamTitle() : 'Contact & Support'}
             </h1>
-            {currentPage === PAGES.EXAM && (
+            {(currentPage === PAGES.EXAM || currentPage === PAGES.REVIEW) && (
               <p className="text-slate-400">
-                {isReviewMode ? 'Review Mode - Navigate through your answers' : 'Test your knowledge with our practice questions'}
+                {isReviewMode ? 'Exam Results & Review' : 'Test your knowledge with our practice questions'}
               </p>
             )}
           </div>
           
           {/* Page Content */}
-          {currentPage === PAGES.EXAM && renderExamPage()}
+          {(currentPage === PAGES.EXAM || currentPage === PAGES.REVIEW) && renderExamPage()}
           {currentPage === PAGES.CONTACT && renderContactPage()}
         </div>
       </main>

@@ -631,6 +631,12 @@ export interface AnalyticsDashboardData {
   };
   popular_exam_type: string;
   popular_exam_label: string;
+  domain_weakness: Array<{
+    domain: string;
+    correct: number;
+    total: number;
+    pct: number;
+  }>;
   updated_at: string;
 }
 
@@ -659,7 +665,8 @@ export const recordAnalyticsEvent = async (
   sessionKey: string,
   examType: string,
   eventType: 'exam_start' | 'exam_complete',
-  scorePercent?: number
+  scorePercent?: number,
+  domainScores?: Record<string, { correct: number; total: number }>,
 ): Promise<boolean> => {
   try {
     const body: Record<string, unknown> = {
@@ -669,6 +676,9 @@ export const recordAnalyticsEvent = async (
     };
     if (eventType === 'exam_complete' && scorePercent !== undefined) {
       body.score_percent = scorePercent;
+    }
+    if (domainScores && Object.keys(domainScores).length > 0) {
+      body.domain_scores = domainScores;
     }
     const response = await fetch(`${API_BASE_URL}/analytics/events/`, {
       method: 'POST',

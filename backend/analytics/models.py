@@ -35,6 +35,8 @@ class AnalyticsExamEvent(models.Model):
     exam_type = models.CharField(max_length=64)
     event_type = models.CharField(max_length=32)
     score_percent = models.FloatField(null=True, blank=True)
+    # Per-domain breakdown: {"EC2": {"correct": 4, "total": 6}, ...}
+    domain_scores = models.JSONField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

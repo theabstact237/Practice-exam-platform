@@ -32,6 +32,7 @@ const emptyDashboard: AnalyticsDashboardData = {
   device_breakdown: { mobile: 0, tablet: 0, desktop: 0, unknown: 0 },
   popular_exam_type: 'solutions_architect',
   popular_exam_label: 'AWS Solutions Architect',
+  domain_weakness: [],
   updated_at: '',
 };
 
@@ -217,6 +218,36 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isVisible, onCl
               )}
             </div>
           </div>
+
+          {/* Domain Weakness Across All Users */}
+          {(dashboardData.domain_weakness?.length ?? 0) > 0 && (
+            <div className="mt-8 bg-slate-700 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-white mb-1">Most Challenging Domains</h3>
+              <p className="text-slate-400 text-xs mb-4">Aggregated from all exam completions — lowest scoring domains shown first.</p>
+              <div className="space-y-3">
+                {dashboardData.domain_weakness.map((d) => {
+                  const isWeak = d.pct < 60;
+                  const isMid = d.pct >= 60 && d.pct < 80;
+                  const barColor = isWeak ? 'bg-red-500' : isMid ? 'bg-amber-500' : 'bg-emerald-500';
+                  const textColor = isWeak ? 'text-red-400' : isMid ? 'text-amber-400' : 'text-emerald-400';
+                  return (
+                    <div key={d.domain}>
+                      <div className="flex items-center justify-between mb-1 text-sm">
+                        <span className="text-slate-200 truncate max-w-[55%]">{d.domain}</span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`text-xs font-semibold ${textColor}`}>{d.pct}%</span>
+                          <span className="text-slate-500 text-xs">({d.correct}/{d.total} correct)</span>
+                        </div>
+                      </div>
+                      <div className="h-2 bg-slate-600 rounded-full overflow-hidden">
+                        <div className={`h-full ${barColor} rounded-full`} style={{ width: `${d.pct}%` }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-slate-700 p-6 rounded-lg">
