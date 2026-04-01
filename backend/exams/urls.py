@@ -8,7 +8,7 @@ from rest_framework import status
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.conf import settings as django_settings
-from .views import ExamViewSet, QuestionViewSet, ReviewViewSet
+from .views import ExamViewSet, QuestionViewSet, ReviewViewSet, save_exam_attempt, get_user_attempts, get_attempt_detail
 from .models import Exam, Question, CachedLecturePlan, PinnedPlan, CachedChatResponse
 from .serializers import ExamSerializer, QuestionSerializer
 from .assistant import SyllabusAssistantService
@@ -286,6 +286,10 @@ urlpatterns = [
     path('assistant/chat/', syllabus_assistant_chat, name='syllabus-assistant-chat'),
     path('assistant/chat/stream/', syllabus_assistant_chat_stream, name='syllabus-assistant-chat-stream'),
     path('assistant/pin/', pinned_plan, name='assistant-pin'),
+    # Exam attempt history
+    path('attempts/', save_exam_attempt, name='save-exam-attempt'),
+    path('attempts/history/', get_user_attempts, name='get-user-attempts'),
+    path('attempts/<int:attempt_id>/', get_attempt_detail, name='get-attempt-detail'),
     path('', include(router.urls)),
 ]
 

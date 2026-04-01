@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.cache import cache
 import random
 import hashlib
-from .models import Exam, Question, Answer, Review
+from .models import Exam, Question, Answer, Review, ExamAttempt
 from .serializers import ExamSerializer, ExamWithQuestionsSerializer, QuestionSerializer, ReviewSerializer, ReviewCreateSerializer
 from .services import QuestionGenerator
 
@@ -600,4 +600,82 @@ class ReviewViewSet(viewsets.ModelViewSet):
             'average_rating': round(stats['average_rating'] or 0, 1),
             'rating_distribution': rating_distribution
         })
+
+
+# ── Exam Attempt (user history) ────────────────────────────────────────────
+
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import AllowAny
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def save_exam_attempt(request):
+    """Save a completed exam attempt for a logged-in user."""
+    data = request.data
+    user_uid = (data.get('user_uid') or '').strip()
+    if not user_uid:
+        return Response({'error': 'user_uid is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        attempt = ExamAttempt.objects.create(
+            user_uid=user_uid,
+            exam_type=data.get('exam_type', ''),
+            exam_title=data.get('exam_title', ''),
+            score_percent=float(data.get('score_percent', 0)),
+            correct=int(data.get('correct', 0)),
+            total=int(data.get('total', 0)),
+            passed=bool(data.get('passed', False)),
+            time_taken_seconds=int(data.get('time_taken_seconds', 0)),
+            domain_scores=data.get('domain_scores') if isinstance(data.get('domain_scores'), dict) else None,
+            question_results=data.get('question_results', []),
+        )
+        return Response({'id': attempt.id, 'ok': True}, status=status.HTTP_201_CREATED)
+    except (TypeError, ValueError) as exc:
+        return Response({'error': str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def get_user_attempts(request):
+    """Return the exam history list (no question detail) for a user."""
+    user_uid = (request.query_params.get('user_uid') or '').strip()
+    if not user_uid:
+        return Response({'error': 'user_uid is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    attempts = list(
+        ExamAttempt.objects.filter(user_uid=user_uid).values(
+            'id', 'exam_type', 'exam_title', 'score_percent', 'correct',
+            'total', 'passed', 'time_taken_seconds', 'domain_scores', 'created_at',
+        )
+    )
+    # Convert datetime to ISO string for JSON serialisation
+    for a in attempts:
+        if a['created_at']:
+            a['created_at'] = a['created_at'].isoformat()
+    return Response(attempts)
+
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def get_attempt_detail(request, attempt_id):
+    """Return a specific attempt including full question_results array."""
+    user_uid = (request.query_params.get('user_uid') or '').strip()
+    attempt = get_object_or_404(ExamAttempt, id=attempt_id, user_uid=user_uid)
+    return Response({
+        'id': attempt.id,
+        'exam_type': attempt.exam_type,
+        'exam_title': attempt.exam_title,
+        'score_percent': attempt.score_percent,
+        'correct': attempt.correct,
+        'total': attempt.total,
+        'passed': attempt.passed,
+        'time_taken_seconds': attempt.time_taken_seconds,
+        'domain_scores': attempt.domain_scores,
+        'question_results': attempt.question_results,
+        'created_at': attempt.created_at.isoformat(),
+    })
 

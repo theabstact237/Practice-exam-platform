@@ -704,3 +704,76 @@ export const getAnalyticsDashboard = async (): Promise<AnalyticsDashboardData | 
     return null;
   }
 };
+
+// ── Exam Attempt History ────────────────────────────────────────────────────
+
+export interface QuestionResult {
+  question_id: number;
+  question_text: string;
+  domain: string;
+  options: Array<{ letter: string; text: string }>;
+  correct_letter: string;
+  selected_letter: string | null;
+  is_correct: boolean;
+  timed_out: boolean;
+  explanation: string;
+}
+
+export interface ExamAttempt {
+  id: number;
+  exam_type: string;
+  exam_title: string;
+  score_percent: number;
+  correct: number;
+  total: number;
+  passed: boolean;
+  time_taken_seconds: number;
+  domain_scores: Record<string, { correct: number; total: number }> | null;
+  created_at: string;
+  question_results?: QuestionResult[];
+}
+
+export const saveExamAttempt = async (
+  payload: Omit<ExamAttempt, 'id' | 'created_at'> & {
+    user_uid: string;
+    question_results: QuestionResult[];
+  }
+): Promise<number | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/attempts/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.id as number;
+  } catch {
+    return null;
+  }
+};
+
+export const getUserExamAttempts = async (userUid: string): Promise<ExamAttempt[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/attempts/history/?user_uid=${encodeURIComponent(userUid)}`);
+    if (!response.ok) return [];
+    return await response.json() as ExamAttempt[];
+  } catch {
+    return [];
+  }
+};
+
+export const getExamAttemptDetail = async (
+  attemptId: number,
+  userUid: string
+): Promise<ExamAttempt | null> => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/attempts/${attemptId}/?user_uid=${encodeURIComponent(userUid)}`
+    );
+    if (!response.ok) return null;
+    return await response.json() as ExamAttempt;
+  } catch {
+    return null;
+  }
+};

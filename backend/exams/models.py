@@ -224,6 +224,35 @@ class CachedChatResponse(models.Model):
         return f"ChatCache: {self.syllabus} | hits={self.hit_count} | {self.question_text[:60]}"
 
 
+class ExamAttempt(models.Model):
+    """Persisted record of one completed exam session for a logged-in user."""
+
+    user_uid = models.CharField(max_length=128, db_index=True)
+    exam_type = models.CharField(max_length=64)
+    exam_title = models.CharField(max_length=128, default="")
+    score_percent = models.FloatField()
+    correct = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
+    passed = models.BooleanField(default=False)
+    time_taken_seconds = models.IntegerField(default=0)
+    domain_scores = models.JSONField(null=True, blank=True)
+    # List of {question_id, question_text, domain, options, correct_letter,
+    #          selected_letter, is_correct, timed_out, explanation}
+    question_results = models.JSONField(default=list)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Exam Attempt"
+        verbose_name_plural = "Exam Attempts"
+        indexes = [
+            models.Index(fields=["user_uid", "-created_at"], name="attempt_user_date_idx"),
+        ]
+
+    def __str__(self):
+        return f"{self.user_uid[:8]}… {self.exam_type} {self.score_percent}%"
+
+
 class PinnedPlan(models.Model):
     """A user's pinned lecture plan + chat history, stored per syllabus."""
 

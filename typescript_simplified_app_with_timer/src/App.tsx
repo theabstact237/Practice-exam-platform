@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
 import { initGA, analytics, setUserProperties } from './utils/analytics';
-import { getOrGenerateExamQuestions, getExamsByType, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan } from './utils/api';
+import { getOrGenerateExamQuestions, getExamsByType, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan, saveExamAttempt } from './utils/api';
 import type { ChatMessage } from './components/AIAssistantModal';
 import { getOrCreateSessionKey, getDeviceCategory } from './utils/analyticsClient';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
@@ -18,6 +18,7 @@ import ReviewModal, { ReviewData } from './components/ReviewModal';
 import ExamLandingPage from './components/ExamLandingPage';
 import { Testimonial } from './components/TestimonialsCarousel';
 import AIAssistantModal from './components/AIAssistantModal';
+import UserProfileModal from './components/UserProfileModal';
 
 // Define page types for navigation
 const PAGES = {
@@ -207,6 +208,7 @@ function App() {
   const [currentExamId, setCurrentExamId] = useState(1);
   const [examDomainScores, setExamDomainScores] = useState<Record<string, { correct: number; total: number }>>({});
   const [examTimeTaken, setExamTimeTaken] = useState(0); // seconds
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   // Initialize Google Analytics on component mount
   useEffect(() => {
@@ -562,6 +564,39 @@ function App() {
       setExamDomainScores(domainScores);
       setExamTimeTaken(totalTime);
 
+      // Persist full attempt for logged-in users
+      if (user) {
+        const questionResults = questions.map(q => {
+          const ans = userAnswers[q.id];
+          const opts = Array.isArray(q.options)
+            ? q.options
+            : Object.entries(q.options || {}).map(([letter, text]) => ({ letter, text: String(text) }));
+          return {
+            question_id: q.id,
+            question_text: q.questionText || q.question || '',
+            domain: q.domain || 'General',
+            options: opts,
+            correct_letter: q.correctAnswerLetter,
+            selected_letter: ans?.selectedLetter ?? null,
+            is_correct: ans?.isCorrect ?? false,
+            timed_out: ans?.timedOut ?? false,
+            explanation: q.explanation || '',
+          };
+        });
+        void saveExamAttempt({
+          user_uid: user.uid,
+          exam_type: currentExamType,
+          exam_title: getExamTitle ? getExamTitle() : currentExamType,
+          score_percent: percentage,
+          correct: score,
+          total: questions.length,
+          passed: percentage >= 70,
+          time_taken_seconds: totalTime,
+          domain_scores: domainScores,
+          question_results: questionResults,
+        });
+      }
+
       analytics.examCompleted(currentExamType, score, questions.length, totalTime);
       {
         const sk = getOrCreateSessionKey();
@@ -748,6 +783,25 @@ function App() {
     setAssistantError(null);
     setAssistantChatMessages([]);
     setAssistantPinned(false);
+    setShowProfileModal(false);
+  };
+
+  // Open a past-attempt certificate from the profile modal
+  const handleProfileCertificate = (
+    examType: string,
+    _score: number,
+    total: number,
+    percentage: number,
+    date: Date,
+  ) => {
+    setCurrentExamType(examType);
+    setLastExamScore(percentage);
+    setLastExamPassed(true);
+    setExamCompletionDate(date);
+    // total questions for the certificate
+    void total;
+    setShowProfileModal(false);
+    setShowCertificate(true);
   };
 
   const persistPinnedPlan = (
@@ -991,6 +1045,7 @@ function App() {
           onContactClick={handleContactClick}
           onOpenAIAssistant={() => setShowAIAssistant(true)}
           onOpenAnalytics={() => setShowAnalyticsDashboard(true)}
+          onOpenProfile={() => setShowProfileModal(true)}
           user={user}
           testimonials={testimonials}
         />
@@ -1032,6 +1087,16 @@ function App() {
           isVisible={showAnalyticsDashboard}
           onClose={() => setShowAnalyticsDashboard(false)}
         />
+
+        {/* User Profile Modal - accessible from homepage */}
+        {user && (
+          <UserProfileModal
+            isVisible={showProfileModal}
+            onClose={() => setShowProfileModal(false)}
+            user={user}
+            onViewCertificate={handleProfileCertificate}
+          />
+        )}
       </div>
     );
   }
@@ -1770,11 +1835,17 @@ function App() {
 
               {user ? (
                 <div className="flex items-center gap-2">
-                  {user.photoURL
-                    ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
-                    : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
-                  }
-                  <span className="text-slate-300 text-sm max-w-[110px] truncate">{user.displayName || user.email?.split('@')[0]}</span>
+                  <button
+                    onClick={() => setShowProfileModal(true)}
+                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                    title="My Profile"
+                  >
+                    {user.photoURL
+                      ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                      : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                    }
+                    <span className="text-slate-300 text-sm max-w-[110px] truncate">{user.displayName || user.email?.split('@')[0]}</span>
+                  </button>
                   <button onClick={handleSignOut} className="p-1.5 text-slate-400 hover:text-white transition-colors" title="Sign Out">
                     <LogOut className="w-4 h-4" />
                   </button>
@@ -1793,9 +1864,12 @@ function App() {
             {/* ── Mobile right: avatar + hamburger (< lg) ── */}
             <div className="flex lg:hidden items-center gap-2">
               {user && (
-                user.photoURL
-                  ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
-                  : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                <button onClick={() => setShowProfileModal(true)} title="My Profile" className="hover:opacity-80 transition-opacity">
+                  {user.photoURL
+                    ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                    : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                  }
+                </button>
               )}
               <button
                 onClick={() => { analytics.mobileMenuToggled(!mobileMenuOpen); setMobileMenuOpen(!mobileMenuOpen); }}
@@ -1816,19 +1890,20 @@ function App() {
 
               {/* User greeting */}
               {user ? (
-                <div className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-700/60 rounded-xl">
+                <button
+                  onClick={() => { setShowProfileModal(true); setMobileMenuOpen(false); }}
+                  className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-700/60 hover:bg-slate-700 rounded-xl w-full text-left transition-colors"
+                >
                   {user.photoURL
                     ? <img src={user.photoURL} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
-                    : <div className="w-9 h-9 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
+                    : <div className="w-9 h-9 bg-sky-600 rounded-full flex items-center justify-center shrink-0"><User className="w-4 h-4 text-white" /></div>
                   }
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white truncate">{user.displayName || 'User'}</p>
                     <p className="text-xs text-slate-400 truncate">{user.email}</p>
                   </div>
-                  <button onClick={handleSignOut} className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors shrink-0" title="Sign Out">
-                    <LogOut className="w-4 h-4" />
-                  </button>
-                </div>
+                  <span className="text-xs text-sky-400 shrink-0">View Profile →</span>
+                </button>
               ) : (
                 <button
                   onClick={() => { setShowLoginModal(true); setMobileMenuOpen(false); }}
@@ -1905,6 +1980,19 @@ function App() {
                 </>
               )}
 
+              {/* Sign Out */}
+              {user && (
+                <div className="pt-2 border-t border-slate-700">
+                  <button
+                    onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
+                    className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                  >
+                    <LogOut className="w-5 h-5 shrink-0" />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+
             </div>
           </div>
         )}
@@ -1936,6 +2024,16 @@ function App() {
         isVisible={showAnalyticsDashboard}
         onClose={() => setShowAnalyticsDashboard(false)}
       />
+
+      {/* User Profile Modal */}
+      {user && (
+        <UserProfileModal
+          isVisible={showProfileModal}
+          onClose={() => setShowProfileModal(false)}
+          user={user}
+          onViewCertificate={handleProfileCertificate}
+        />
+      )}
       
       {/* Login Modal */}
       <LoginModal
