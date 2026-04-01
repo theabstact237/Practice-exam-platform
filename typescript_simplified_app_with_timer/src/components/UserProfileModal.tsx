@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, ChevronLeft, Award, Clock, CheckCircle, XCircle, AlertTriangle, Download, BarChart2 } from 'lucide-react';
+import { X, ChevronLeft, Award, Clock, CheckCircle, XCircle, AlertTriangle, Download, BarChart2, Pencil, Camera, Save } from 'lucide-react';
 import { getUserExamAttempts, getExamAttemptDetail, ExamAttempt, QuestionResult } from '../utils/api';
 
 interface UserProfileModalProps {
@@ -44,6 +44,13 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(null);
 
+  // Profile editing
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editPhotoURL, setEditPhotoURL] = useState('');
+  const profileName = localStorage.getItem('fc_profile_name') || user.displayName || '';
+  const profilePhoto = localStorage.getItem('fc_profile_photo') || user.photoURL || '';
+
   const loadHistory = useCallback(async () => {
     setLoadingList(true);
     const list = await getUserExamAttempts(user.uid);
@@ -55,9 +62,40 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     if (isVisible) {
       setSelectedAttempt(null);
       setExpandedQuestion(null);
+      setIsEditing(false);
       void loadHistory();
     }
   }, [isVisible, loadHistory]);
+
+  const startEditing = () => {
+    setEditName(profileName);
+    setEditPhotoURL(profilePhoto);
+    setIsEditing(true);
+  };
+
+  const handleSaveProfile = () => {
+    const trimName = editName.trim();
+    const trimPhoto = editPhotoURL.trim();
+    if (trimName) localStorage.setItem('fc_profile_name', trimName);
+    else localStorage.removeItem('fc_profile_name');
+    if (trimPhoto) localStorage.setItem('fc_profile_photo', trimPhoto);
+    else localStorage.removeItem('fc_profile_photo');
+    setIsEditing(false);
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 500_000) {
+      alert('Image must be smaller than 500 KB');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setEditPhotoURL(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const openAttempt = async (attempt: ExamAttempt) => {
     setLoadingDetail(true);
@@ -71,7 +109,9 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
 
   if (!isVisible) return null;
 
-  const initials = (user.displayName || user.email || 'U').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const displayName = profileName || user.email?.split('@')[0] || 'User';
+  const displayPhoto = profilePhoto;
+  const initials = (displayName).split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
@@ -181,21 +221,89 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
           ) : (
             /* ── PROFILE VIEW ── */
             <>
-              {/* User info */}
-              <div className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl">
-                {user.photoURL ? (
-                  <img src={user.photoURL} alt="Profile" className="w-14 h-14 rounded-full border-2 border-sky-500/50" />
-                ) : (
-                  <div className="w-14 h-14 rounded-full bg-sky-600 flex items-center justify-center text-xl font-bold text-white border-2 border-sky-500/50">
-                    {initials}
+              {/* User info card */}
+              {isEditing ? (
+                <div className="p-4 bg-slate-700/50 rounded-2xl space-y-4">
+                  <p className="text-sm font-semibold text-slate-300 mb-1">Edit Profile</p>
+
+                  {/* Photo */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      {editPhotoURL ? (
+                        <img src={editPhotoURL} alt="Preview" className="w-16 h-16 rounded-full object-cover border-2 border-sky-500/50" />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-xl font-bold text-white border-2 border-sky-500/50">
+                          {(editName || 'U').slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
+                      <label className="absolute -bottom-1 -right-1 p-1 bg-sky-600 hover:bg-sky-500 rounded-full cursor-pointer transition-colors">
+                        <Camera className="w-3.5 h-3.5 text-white" />
+                        <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+                      </label>
+                    </div>
+                    <div className="flex-1 space-y-2">
+                      <div>
+                        <label className="text-xs text-slate-400 block mb-1">Display Name (shown on certificates)</label>
+                        <input
+                          type="text"
+                          value={editName}
+                          onChange={e => setEditName(e.target.value)}
+                          placeholder="Your full name"
+                          className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-slate-400 block mb-1">Photo URL (or upload above)</label>
+                        <input
+                          type="text"
+                          value={editPhotoURL}
+                          onChange={e => setEditPhotoURL(e.target.value)}
+                          placeholder="https://example.com/photo.jpg"
+                          className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
                   </div>
-                )}
-                <div>
-                  <p className="text-lg font-semibold text-white">{user.displayName || 'User'}</p>
-                  <p className="text-sm text-slate-400">{user.email}</p>
-                  <p className="text-xs text-slate-500 mt-1">{attempts.length} exam attempt{attempts.length !== 1 ? 's' : ''}</p>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleSaveProfile}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      <Save className="w-4 h-4" />
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setIsEditing(false)}
+                      className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-slate-200 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl">
+                  {displayPhoto ? (
+                    <img src={displayPhoto} alt="Profile" className="w-14 h-14 rounded-full object-cover border-2 border-sky-500/50" />
+                  ) : (
+                    <div className="w-14 h-14 rounded-full bg-sky-600 flex items-center justify-center text-xl font-bold text-white border-2 border-sky-500/50">
+                      {initials}
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-lg font-semibold text-white truncate">{displayName}</p>
+                    <p className="text-sm text-slate-400 truncate">{user.email}</p>
+                    <p className="text-xs text-slate-500 mt-1">{attempts.length} exam attempt{attempts.length !== 1 ? 's' : ''}</p>
+                  </div>
+                  <button
+                    onClick={startEditing}
+                    className="p-2 text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-lg transition-colors shrink-0"
+                    title="Edit Profile"
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
 
               {/* Certifications */}
               <div>

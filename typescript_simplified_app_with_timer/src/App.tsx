@@ -198,6 +198,10 @@ function App() {
   // Certificate state
   const [showCertificate, setShowCertificate] = useState(false);
   const [examCompletionDate, setExamCompletionDate] = useState<Date>(new Date());
+  const [certScore, setCertScore] = useState(0);
+  const [certTotal, setCertTotal] = useState(0);
+  const [certPercentage, setCertPercentage] = useState(0);
+  const [certExamType, setCertExamType] = useState('');
 
   // Review/Testimonial state
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -708,6 +712,11 @@ function App() {
       // Close review modal and show certificate whether submission succeeded or failed
       setShowReviewModal(false);
       if (pendingCertificate) {
+        const sc = calculateScore();
+        setCertExamType(currentExamType);
+        setCertScore(sc.correct);
+        setCertTotal(sc.total);
+        setCertPercentage(sc.percentage);
         setShowCertificate(true);
         setPendingCertificate(false);
       }
@@ -718,6 +727,11 @@ function App() {
   const handleReviewClose = () => {
     setShowReviewModal(false);
     if (pendingCertificate) {
+      const sc = calculateScore();
+      setCertExamType(currentExamType);
+      setCertScore(sc.correct);
+      setCertTotal(sc.total);
+      setCertPercentage(sc.percentage);
       setShowCertificate(true);
       setPendingCertificate(false);
     }
@@ -789,17 +803,16 @@ function App() {
   // Open a past-attempt certificate from the profile modal
   const handleProfileCertificate = (
     examType: string,
-    _score: number,
+    score: number,
     total: number,
     percentage: number,
     date: Date,
   ) => {
-    setCurrentExamType(examType);
-    setLastExamScore(percentage);
-    setLastExamPassed(true);
+    setCertExamType(examType);
+    setCertScore(score);
+    setCertTotal(total);
+    setCertPercentage(percentage);
     setExamCompletionDate(date);
-    // total questions for the certificate
-    void total;
     setShowProfileModal(false);
     setShowCertificate(true);
   };
@@ -1257,7 +1270,13 @@ function App() {
                 </Button>
                 {passed && user && (
                   <Button
-                    onClick={() => setShowCertificate(true)}
+                    onClick={() => {
+                      setCertExamType(currentExamType);
+                      setCertScore(score.correct);
+                      setCertTotal(score.total);
+                      setCertPercentage(score.percentage);
+                      setShowCertificate(true);
+                    }}
                     className="flex-1 min-w-[120px] bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400"
                   >
                     🎓 View Certificate
@@ -2080,11 +2099,11 @@ function App() {
       <Certificate
         isVisible={showCertificate}
         onClose={() => setShowCertificate(false)}
-        userName={user?.displayName || user?.email?.split('@')[0] || 'Student'}
-        examType={currentExamType}
-        score={calculateScore().correct}
-        totalQuestions={calculateScore().total}
-        percentage={calculateScore().percentage}
+        userName={localStorage.getItem('fc_profile_name') || user?.displayName || user?.email?.split('@')[0] || 'Student'}
+        examType={certExamType || currentExamType}
+        score={certScore}
+        totalQuestions={certTotal}
+        percentage={certPercentage}
         completionDate={examCompletionDate}
       />
 
