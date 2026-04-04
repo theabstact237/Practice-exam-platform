@@ -15,6 +15,8 @@ interface ReviewModalProps {
     email: string | null;
     photoURL: string | null;
   } | null;
+  userDisplayName?: string;
+  userDisplayPhoto?: string;
 }
 
 export interface ReviewData {
@@ -37,13 +39,19 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
   examId,
   examScore,
   passed,
-  user
+  user,
+  userDisplayName,
+  userDisplayPhoto,
 }) => {
   const [rating, setRating] = useState(5);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Use custom profile name/photo (from localStorage) if provided, else fall back to Firebase values
+  const resolvedName = userDisplayName || user?.displayName || 'Anonymous';
+  const resolvedPhoto = userDisplayPhoto || user?.photoURL || '';
 
   if (!isOpen) return null;
 
@@ -56,8 +64,8 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
     const reviewData: ReviewData = {
       exam: examId,
       user_uid: user.uid,
-      user_name: user.displayName || 'Anonymous',
-      user_photo_url: user.photoURL || '',
+      user_name: resolvedName,
+      user_photo_url: resolvedPhoto,
       user_email: user.email || '',
       rating,
       comment: comment.trim(),
@@ -156,22 +164,22 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
           {/* User Preview */}
           {user && (
             <div className="flex items-center gap-3 p-3 bg-slate-700/30 rounded-xl">
-              {user.photoURL ? (
+              {resolvedPhoto ? (
                 <img
-                  src={user.photoURL}
-                  alt={user.displayName || 'User'}
+                  src={resolvedPhoto}
+                  alt={resolvedName}
                   className="w-10 h-10 rounded-full border-2 border-sky-500"
                 />
               ) : (
                 <div className="w-10 h-10 rounded-full bg-sky-500/20 flex items-center justify-center">
                   <span className="text-sky-400 font-bold">
-                    {(user.displayName || 'A')[0].toUpperCase()}
+                    {resolvedName[0].toUpperCase()}
                   </span>
                 </div>
               )}
               <div>
                 <p className="text-white font-medium text-sm">
-                  {user.displayName || 'Anonymous'}
+                  {resolvedName}
                 </p>
                 <p className="text-slate-500 text-xs">Your review will appear publicly</p>
               </div>

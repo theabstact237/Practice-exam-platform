@@ -2139,6 +2139,8 @@ function App() {
           email: user.email,
           photoURL: user.photoURL
         } : null}
+        userDisplayName={displayName}
+        userDisplayPhoto={displayPhoto}
       />
     </div>
   );
