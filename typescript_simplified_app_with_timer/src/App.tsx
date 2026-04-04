@@ -213,6 +213,9 @@ function App() {
   const [examDomainScores, setExamDomainScores] = useState<Record<string, { correct: number; total: number }>>({});
   const [examTimeTaken, setExamTimeTaken] = useState(0); // seconds
   const [showProfileModal, setShowProfileModal] = useState(false);
+  // Custom display name / photo saved in localStorage (overrides Firebase values)
+  const [profileName, setProfileName] = useState(() => localStorage.getItem('fc_profile_name') || '');
+  const [profilePhoto, setProfilePhoto] = useState(() => localStorage.getItem('fc_profile_photo') || '');
 
   // Initialize Google Analytics on component mount
   useEffect(() => {
@@ -800,6 +803,16 @@ function App() {
     setShowProfileModal(false);
   };
 
+  // Called by UserProfileModal after the user saves their name/photo
+  const handleProfileUpdate = () => {
+    setProfileName(localStorage.getItem('fc_profile_name') || '');
+    setProfilePhoto(localStorage.getItem('fc_profile_photo') || '');
+  };
+
+  // Resolved display values (custom > Firebase > fallback)
+  const displayName = profileName || user?.displayName || user?.email?.split('@')[0] || 'User';
+  const displayPhoto = profilePhoto || user?.photoURL || '';
+
   // Open a past-attempt certificate from the profile modal
   const handleProfileCertificate = (
     examType: string,
@@ -1069,7 +1082,7 @@ function App() {
           onClose={() => setShowExamInProgressModal(false)}
           onContinueExam={handleContinueExam}
           onAbandonExam={handleAbandonExam}
-          userName={user?.displayName || user?.email?.split('@')[0] || 'Student'}
+          userName={displayName}
           currentExamType={currentExamType}
           currentProgress={currentQuestionIndex + 1}
           totalQuestions={questions.length || 50}
@@ -1108,6 +1121,7 @@ function App() {
             onClose={() => setShowProfileModal(false)}
             user={user}
             onViewCertificate={handleProfileCertificate}
+            onProfileUpdate={handleProfileUpdate}
           />
         )}
       </div>
@@ -1859,11 +1873,11 @@ function App() {
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                     title="My Profile"
                   >
-                    {user.photoURL
-                      ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                    {displayPhoto
+                      ? <img src={displayPhoto} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
                       : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
                     }
-                    <span className="text-slate-300 text-sm max-w-[110px] truncate">{user.displayName || user.email?.split('@')[0]}</span>
+                    <span className="text-slate-300 text-sm max-w-[110px] truncate">{displayName}</span>
                   </button>
                   <button onClick={handleSignOut} className="p-1.5 text-slate-400 hover:text-white transition-colors" title="Sign Out">
                     <LogOut className="w-4 h-4" />
@@ -1884,8 +1898,8 @@ function App() {
             <div className="flex lg:hidden items-center gap-2">
               {user && (
                 <button onClick={() => setShowProfileModal(true)} title="My Profile" className="hover:opacity-80 transition-opacity">
-                  {user.photoURL
-                    ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                  {displayPhoto
+                    ? <img src={displayPhoto} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
                     : <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center"><User className="w-4 h-4 text-white" /></div>
                   }
                 </button>
@@ -1913,12 +1927,12 @@ function App() {
                   onClick={() => { setShowProfileModal(true); setMobileMenuOpen(false); }}
                   className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-700/60 hover:bg-slate-700 rounded-xl w-full text-left transition-colors"
                 >
-                  {user.photoURL
-                    ? <img src={user.photoURL} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
+                  {displayPhoto
+                    ? <img src={displayPhoto} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
                     : <div className="w-9 h-9 bg-sky-600 rounded-full flex items-center justify-center shrink-0"><User className="w-4 h-4 text-white" /></div>
                   }
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">{user.displayName || 'User'}</p>
+                    <p className="text-sm font-semibold text-white truncate">{displayName}</p>
                     <p className="text-xs text-slate-400 truncate">{user.email}</p>
                   </div>
                   <span className="text-xs text-sky-400 shrink-0">View Profile →</span>
@@ -2051,6 +2065,7 @@ function App() {
           onClose={() => setShowProfileModal(false)}
           user={user}
           onViewCertificate={handleProfileCertificate}
+          onProfileUpdate={handleProfileUpdate}
         />
       )}
       
@@ -2089,7 +2104,7 @@ function App() {
         onClose={() => setShowExamInProgressModal(false)}
         onContinueExam={handleContinueExam}
         onAbandonExam={handleAbandonExam}
-        userName={user?.displayName || user?.email?.split('@')[0] || 'Student'}
+        userName={displayName}
         currentExamType={currentExamType}
         currentProgress={currentQuestionIndex + 1}
         totalQuestions={questions.length}
@@ -2099,7 +2114,7 @@ function App() {
       <Certificate
         isVisible={showCertificate}
         onClose={() => setShowCertificate(false)}
-        userName={localStorage.getItem('fc_profile_name') || user?.displayName || user?.email?.split('@')[0] || 'Student'}
+        userName={displayName}
         examType={certExamType || currentExamType}
         score={certScore}
         totalQuestions={certTotal}

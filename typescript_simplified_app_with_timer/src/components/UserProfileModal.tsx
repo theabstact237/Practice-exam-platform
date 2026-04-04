@@ -12,6 +12,7 @@ interface UserProfileModalProps {
     photoURL?: string | null;
   };
   onViewCertificate: (examType: string, score: number, total: number, percentage: number, date: Date) => void;
+  onProfileUpdate?: () => void;
 }
 
 const EXAM_LABELS: Record<string, string> = {
@@ -37,6 +38,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   onClose,
   user,
   onViewCertificate,
+  onProfileUpdate,
 }) => {
   const [attempts, setAttempts] = useState<ExamAttempt[]>([]);
   const [loadingList, setLoadingList] = useState(false);
@@ -48,8 +50,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState('');
   const [editPhotoURL, setEditPhotoURL] = useState('');
-  const profileName = localStorage.getItem('fc_profile_name') || user.displayName || '';
-  const profilePhoto = localStorage.getItem('fc_profile_photo') || user.photoURL || '';
+  const [profileName, setProfileNameState] = useState(() => localStorage.getItem('fc_profile_name') || user.displayName || '');
+  const [profilePhoto, setProfilePhotoState] = useState(() => localStorage.getItem('fc_profile_photo') || user.photoURL || '');
 
   const loadHistory = useCallback(async () => {
     setLoadingList(true);
@@ -80,7 +82,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     else localStorage.removeItem('fc_profile_name');
     if (trimPhoto) localStorage.setItem('fc_profile_photo', trimPhoto);
     else localStorage.removeItem('fc_profile_photo');
+    // Update local state so the modal header reflects the change instantly
+    setProfileNameState(trimName || user.displayName || '');
+    setProfilePhotoState(trimPhoto || user.photoURL || '');
     setIsEditing(false);
+    // Notify parent to refresh its displayed name/photo
+    onProfileUpdate?.();
   };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
