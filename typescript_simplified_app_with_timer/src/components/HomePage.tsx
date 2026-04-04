@@ -14,6 +14,8 @@ interface HomePageProps {
   onOpenProfile?: () => void;
   user: any;
   testimonials?: Testimonial[];
+  userDisplayName?: string;
+  userDisplayPhoto?: string;
 }
 
 // Background Animation Component
@@ -91,7 +93,10 @@ const TechBackground = () => {
   );
 };
 
-const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpenAIAssistant, onOpenAnalytics, onOpenProfile, user, testimonials = [] }) => {
+const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpenAIAssistant, onOpenAnalytics, onOpenProfile, user, testimonials = [], userDisplayName, userDisplayPhoto }) => {
+  // Resolve display values: custom (localStorage-based) → Firebase → fallback
+  const navName = userDisplayName || user?.displayName || user?.email?.split('@')[0] || 'User';
+  const navPhoto = userDisplayPhoto || user?.photoURL || '';
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [exams, setExams] = useState<Exam[]>([]);
   const [_loadingExams, setLoadingExams] = useState(true);
@@ -201,15 +206,15 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                     title="My Profile"
                   >
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/50" />
+                    {navPhoto ? (
+                      <img src={navPhoto} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/50" />
                     ) : (
                       <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
                         <User size={15} className="text-sky-400" />
                       </div>
                     )}
                     <span className="text-sm text-slate-300 max-w-[110px] truncate">
-                      {user.displayName || user.email?.split('@')[0]}
+                      {navName}
                     </span>
                   </button>
                   <button onClick={handleSignOut} className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors" title="Sign Out">
@@ -223,8 +228,8 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
             <div className="flex lg:hidden items-center gap-2">
               {user && (
                 <button onClick={onOpenProfile} title="My Profile" className="hover:opacity-80 transition-opacity">
-                  {user.photoURL
-                    ? <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
+                  {navPhoto
+                    ? <img src={navPhoto} alt="Profile" className="w-8 h-8 rounded-full border border-sky-500/40" />
                     : <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center"><User size={14} className="text-sky-400" /></div>
                   }
                 </button>
@@ -252,12 +257,12 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                   onClick={() => { onOpenProfile?.(); setMobileMenuOpen(false); }}
                   className="flex items-center gap-3 px-3 py-3 mb-2 bg-slate-800/60 hover:bg-slate-800 rounded-xl w-full text-left transition-colors"
                 >
-                  {user.photoURL
-                    ? <img src={user.photoURL} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
+                  {navPhoto
+                    ? <img src={navPhoto} alt="Profile" className="w-9 h-9 rounded-full border border-sky-500/50" />
                     : <div className="w-9 h-9 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center shrink-0"><User size={16} className="text-sky-400" /></div>
                   }
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">{user.displayName || 'User'}</p>
+                    <p className="text-sm font-semibold text-white truncate">{navName}</p>
                     <p className="text-xs text-slate-400 truncate">{user.email}</p>
                   </div>
                   <span className="text-xs text-sky-400 shrink-0">Profile →</span>

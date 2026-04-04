@@ -1074,6 +1074,8 @@ function App() {
           onOpenProfile={() => setShowProfileModal(true)}
           user={user}
           testimonials={testimonials}
+          userDisplayName={displayName}
+          userDisplayPhoto={displayPhoto}
         />
         
         {/* Exam In Progress Modal - also shown on homepage */}
