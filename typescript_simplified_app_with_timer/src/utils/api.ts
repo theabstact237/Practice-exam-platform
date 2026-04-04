@@ -610,6 +610,26 @@ export const getReviewStats = async (): Promise<{
   }
 };
 
+/**
+ * Update the user_name and user_photo_url on all reviews submitted by a user.
+ * Called after the user saves a new display name or profile photo.
+ */
+export const updateReviewProfile = async (
+  userUid: string,
+  userName: string,
+  userPhotoUrl: string
+): Promise<void> => {
+  try {
+    await fetch(`${API_BASE_URL}/reviews/update-profile/`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_uid: userUid, user_name: userName, user_photo_url: userPhotoUrl }),
+    });
+  } catch (error) {
+    console.error('Error updating review profile:', error);
+  }
+};
+
 // ============ PRACTICE ANALYTICS (server-side aggregates) ============
 
 export interface AnalyticsDashboardData {

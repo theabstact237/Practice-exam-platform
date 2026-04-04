@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { X, ChevronLeft, Award, Clock, CheckCircle, XCircle, AlertTriangle, Download, BarChart2, Pencil, Camera, Save } from 'lucide-react';
-import { getUserExamAttempts, getExamAttemptDetail, ExamAttempt, QuestionResult } from '../utils/api';
+import { getUserExamAttempts, getExamAttemptDetail, ExamAttempt, QuestionResult, updateReviewProfile } from '../utils/api';
 
 interface UserProfileModalProps {
   isVisible: boolean;
@@ -88,6 +88,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     setIsEditing(false);
     // Notify parent to refresh its displayed name/photo
     onProfileUpdate?.();
+    // Persist the updated name/photo to all existing reviews in the database
+    void updateReviewProfile(user.uid, trimName || user.displayName || '', trimPhoto || user.photoURL || '');
   };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

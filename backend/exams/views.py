@@ -679,3 +679,29 @@ def get_attempt_detail(request, attempt_id):
         'created_at': attempt.created_at.isoformat(),
     })
 
+
+@api_view(['PATCH'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def update_review_profile(request):
+    """Update user_name and user_photo_url on all reviews submitted by a user."""
+    user_uid = (request.data.get('user_uid') or '').strip()
+    new_name = (request.data.get('user_name') or '').strip()
+    new_photo = (request.data.get('user_photo_url') or '').strip()
+
+    if not user_uid:
+        return Response({'error': 'user_uid is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    updates = {}
+    if new_name:
+        updates['user_name'] = new_name
+    if new_photo is not None:
+        updates['user_photo_url'] = new_photo
+
+    if not updates:
+        return Response({'error': 'Nothing to update'}, status=status.HTTP_400_BAD_REQUEST)
+
+    from .models import Review
+    updated = Review.objects.filter(user_uid=user_uid).update(**updates)
+    return Response({'updated': updated})
+

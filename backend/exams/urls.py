@@ -8,7 +8,7 @@ from rest_framework import status
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.conf import settings as django_settings
-from .views import ExamViewSet, QuestionViewSet, ReviewViewSet, save_exam_attempt, get_user_attempts, get_attempt_detail
+from .views import ExamViewSet, QuestionViewSet, ReviewViewSet, save_exam_attempt, get_user_attempts, get_attempt_detail, update_review_profile
 from .models import Exam, Question, CachedLecturePlan, PinnedPlan, CachedChatResponse
 from .serializers import ExamSerializer, QuestionSerializer
 from .assistant import SyllabusAssistantService
@@ -290,6 +290,7 @@ urlpatterns = [
     path('attempts/', save_exam_attempt, name='save-exam-attempt'),
     path('attempts/history/', get_user_attempts, name='get-user-attempts'),
     path('attempts/<int:attempt_id>/', get_attempt_detail, name='get-attempt-detail'),
+    path('reviews/update-profile/', update_review_profile, name='update-review-profile'),
     path('', include(router.urls)),
 ]
 

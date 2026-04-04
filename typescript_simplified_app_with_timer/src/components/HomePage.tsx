@@ -499,7 +499,11 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
             </div>
             {/* px-6 gives room for the absolute-positioned prev/next arrow buttons */}
             <div className="px-6">
-              <TestimonialsCarousel testimonials={testimonials} autoPlayInterval={6000} />
+              <TestimonialsCarousel
+                testimonials={testimonials}
+                autoPlayInterval={6000}
+                currentUser={user ? { uid: user.uid, displayName: navName, photoURL: navPhoto } : undefined}
+              />
             </div>
           </div>
         )}

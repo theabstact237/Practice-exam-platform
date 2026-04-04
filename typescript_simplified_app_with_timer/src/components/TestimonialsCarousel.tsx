@@ -3,6 +3,7 @@ import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 export interface Testimonial {
   id: number;
+  user_uid?: string;
   user_name: string;
   user_photo_url: string;
   exam_name: string;
@@ -16,6 +17,8 @@ export interface Testimonial {
 interface TestimonialsCarouselProps {
   testimonials: Testimonial[];
   autoPlayInterval?: number;
+  /** When provided, any review whose user_uid matches will display this name/photo instead of the stored value. */
+  currentUser?: { uid: string; displayName: string; photoURL: string };
 }
 
 function useVisibleCount() {
@@ -36,6 +39,7 @@ function useVisibleCount() {
 const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   testimonials,
   autoPlayInterval = 5000,
+  currentUser,
 }) => {
   const visibleCount = useVisibleCount();
   const total = testimonials.length;
@@ -84,7 +88,12 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(${translatePct}%)` }}
         >
-          {testimonials.map((t) => (
+          {testimonials.map((t) => {
+            // Override name/photo for the currently logged-in user so changes show immediately
+            const isOwn = currentUser && t.user_uid === currentUser.uid;
+            const displayName = isOwn ? currentUser.displayName : t.user_name;
+            const displayPhoto = isOwn ? currentUser.photoURL : t.user_photo_url;
+            return (
             <div
               key={t.id}
               className="flex-shrink-0 px-3"
@@ -114,10 +123,10 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
                 {/* User */}
                 <div className="flex items-center gap-3 mt-auto pt-4 border-t border-slate-700/50">
-                  {t.user_photo_url ? (
+                  {displayPhoto ? (
                     <img
-                      src={t.user_photo_url}
-                      alt={t.user_name}
+                      src={displayPhoto}
+                      alt={displayName}
                       className="w-10 h-10 rounded-full border-2 border-sky-500 object-cover flex-shrink-0"
                       onError={(e) => {
                         const el = e.target as HTMLImageElement;
@@ -129,14 +138,14 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                   ) : null}
                   <div
                     className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex-shrink-0 items-center justify-center"
-                    style={{ display: t.user_photo_url ? 'none' : 'flex' }}
+                    style={{ display: displayPhoto ? 'none' : 'flex' }}
                   >
                     <span className="text-white font-bold text-sm">
-                      {t.user_name[0].toUpperCase()}
+                      {displayName[0].toUpperCase()}
                     </span>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-white font-medium text-sm truncate">{t.user_name}</p>
+                    <p className="text-white font-medium text-sm truncate">{displayName}</p>
                     <p className="text-sky-400 text-xs truncate">{t.exam_name}</p>
                     {t.passed && t.exam_score != null && (
                       <span className="inline-block mt-0.5 px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-400 text-xs">
@@ -150,7 +159,8 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
