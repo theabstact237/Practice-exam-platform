@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.utils.html import format_html
 import json
-from .models import Exam, Question, Answer
+from .models import Exam, Question, Answer, Review, ExamAttempt, CachedLecturePlan, PinnedPlan, CachedChatResponse
 
 
 class AnswerInline(admin.TabularInline):
@@ -228,5 +228,82 @@ class AnswerAdmin(admin.ModelAdmin):
         """Show preview of answer text"""
         return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
     text_preview.short_description = 'Answer Preview'
+
+
+# ── Reviews ───────────────────────────────────────────────────────────────────
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'user_email', 'exam', 'rating', 'passed', 'exam_score', 'photo_preview', 'is_featured', 'created_at')
+    list_filter = ('rating', 'passed', 'is_featured', 'exam')
+    search_fields = ('user_name', 'user_email', 'user_uid', 'comment')
+    readonly_fields = ('created_at', 'photo_preview')
+    fieldsets = (
+        ('User Info', {
+            'fields': ('user_uid', 'user_name', 'user_email', 'user_photo_url', 'photo_preview')
+        }),
+        ('Review', {
+            'fields': ('exam', 'rating', 'comment', 'exam_score', 'passed', 'is_featured')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def photo_preview(self, obj):
+        if obj.user_photo_url:
+            return format_html('<img src="{}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />', obj.user_photo_url)
+        return '—'
+    photo_preview.short_description = 'Photo'
+
+
+# ── Exam Attempts ─────────────────────────────────────────────────────────────
+
+@admin.register(ExamAttempt)
+class ExamAttemptAdmin(admin.ModelAdmin):
+    list_display = ('user_uid', 'exam_title', 'exam_type', 'score_percent', 'correct', 'total', 'passed', 'time_taken_seconds', 'created_at')
+    list_filter = ('passed', 'exam_type', 'created_at')
+    search_fields = ('user_uid', 'exam_type', 'exam_title')
+    readonly_fields = ('created_at',)
+    fieldsets = (
+        ('User & Exam', {
+            'fields': ('user_uid', 'exam_type', 'exam_title')
+        }),
+        ('Results', {
+            'fields': ('score_percent', 'correct', 'total', 'passed', 'time_taken_seconds')
+        }),
+        ('Detail', {
+            'fields': ('domain_scores', 'question_results'),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+# ── AI / Caching models ───────────────────────────────────────────────────────
+
+@admin.register(CachedLecturePlan)
+class CachedLecturePlanAdmin(admin.ModelAdmin):
+    list_display = ('syllabus', 'created_at', 'updated_at')
+    search_fields = ('syllabus',)
+    readonly_fields = ('created_at', 'updated_at')
+
+
+@admin.register(PinnedPlan)
+class PinnedPlanAdmin(admin.ModelAdmin):
+    list_display = ('user_uid', 'syllabus', 'created_at')
+    search_fields = ('user_uid', 'syllabus')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(CachedChatResponse)
+class CachedChatResponseAdmin(admin.ModelAdmin):
+    list_display = ('cache_key', 'hit_count', 'created_at', 'updated_at')
+    search_fields = ('cache_key',)
+    readonly_fields = ('cache_key', 'hit_count', 'created_at', 'updated_at')
 
 
