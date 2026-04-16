@@ -295,9 +295,9 @@ class CachedLecturePlanAdmin(admin.ModelAdmin):
 
 @admin.register(PinnedPlan)
 class PinnedPlanAdmin(admin.ModelAdmin):
-    list_display = ('user_uid', 'syllabus', 'created_at')
+    list_display = ('user_uid', 'syllabus', 'pinned_at')
     search_fields = ('user_uid', 'syllabus')
-    readonly_fields = ('created_at',)
+    readonly_fields = ('pinned_at',)
 
 
 @admin.register(CachedChatResponse)
