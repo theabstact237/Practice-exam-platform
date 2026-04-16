@@ -302,8 +302,9 @@ class PinnedPlanAdmin(admin.ModelAdmin):
 
 @admin.register(CachedChatResponse)
 class CachedChatResponseAdmin(admin.ModelAdmin):
-    list_display = ('cache_key', 'hit_count', 'created_at', 'updated_at')
-    search_fields = ('cache_key',)
-    readonly_fields = ('cache_key', 'hit_count', 'created_at', 'updated_at')
+    list_display = ('syllabus', 'question_hash', 'provider', 'hit_count', 'created_at', 'updated_at')
+    list_filter = ('syllabus', 'provider')
+    search_fields = ('syllabus', 'question_hash', 'question_text')
+    readonly_fields = ('syllabus', 'question_hash', 'hit_count', 'created_at', 'updated_at')
 
 
