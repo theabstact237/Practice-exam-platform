@@ -9,7 +9,7 @@ services:
     # On Render free Postgres can be sleeping, causing migrations to fail during deploy/build.
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input
     # Run DB migrations at runtime with retries until Postgres is reachable.
-    startCommand: "sh -c 'i=0; until python manage.py migrate --noinput; do i=$((i+1)); if [ $i -ge 30 ]; then echo DB unreachable after retries; exit 1; fi; echo Waiting for database attempt $i/30; sleep 5; done; python manage.py create_exams; python manage.py import_questions; python manage.py create_superuser; exec gunicorn aws_exam_backend.wsgi:application --bind 0.0.0.0:$PORT'"
+    startCommand: "sh -c 'i=0; until python manage.py migrate --noinput; do i=$((i+1)); if [ $i -ge 60 ]; then echo DB unreachable after retries; exit 1; fi; echo Waiting for database attempt $i/60; sleep 10; done; python manage.py create_exams; python manage.py import_questions; python manage.py create_superuser; exec gunicorn aws_exam_backend.wsgi:application --bind 0.0.0.0:$PORT'"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.4
