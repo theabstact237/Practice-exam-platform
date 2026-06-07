@@ -29,6 +29,7 @@ interface UserState {
 
   // Actions
   setUser: (user: UserProfile | null) => void;
+  signOut: () => Promise<void>;
   addXP: (amount: number) => void;
   checkAndUpdateStreak: () => void;
   loseHeart: () => void;
@@ -67,6 +68,14 @@ export const useUserStore = create<UserState>((set, get) => ({
   setUser: (user) => {
     set({ user });
     get().saveToStorage();
+  },
+
+  signOut: async () => {
+    const { signOut: firebaseSignOut } = await import('@react-native-firebase/auth');
+    const { auth } = await import('../config/firebase');
+    await firebaseSignOut(auth);
+    set({ user: null });
+    await AsyncStorage.removeItem(STORAGE_KEY);
   },
 
   addXP: (amount) => {

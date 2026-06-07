@@ -9,10 +9,12 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/__tests__/setup.ts',
     css: true,
+    // Exclude Playwright e2e tests — those run via `npx playwright test`
+    exclude: ['node_modules/**', 'e2e/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      exclude: ['node_modules/', 'src/__tests__/', 'src/vite-env.d.ts'],
+      exclude: ['node_modules/', 'src/__tests__/', 'src/vite-env.d.ts', 'e2e/'],
     },
   },
   plugins: [react()],

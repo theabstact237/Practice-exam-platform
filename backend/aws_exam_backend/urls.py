@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from .auth_views import github_exchange
 
 @require_http_methods(["GET"])
 def root_view(request):
@@ -25,6 +26,7 @@ def root_view(request):
 urlpatterns = [
     path('', root_view, name='root'),
     path('admin/', admin.site.urls),
+    path('api/auth/github/exchange/', github_exchange, name='github-exchange'),
     path('api/analytics/', include('analytics.urls')),
     path('api/', include('exams.urls')),
 ]

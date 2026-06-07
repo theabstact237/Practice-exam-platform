@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, Spacing, Radius, FontSize, FontWeight } from '../../constants/theme';
 import { useUserStore } from '../../stores/useUserStore';
 import { useProgressStore } from '../../stores/useProgressStore';

@@ -1,4 +1,6 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Switch } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 import { Colors, Spacing, Radius, FontSize, FontWeight } from '../../constants/theme';
 import { useUserStore } from '../../stores/useUserStore';
 import { SUBJECTS } from '../../constants/subjects';
@@ -7,11 +9,29 @@ export default function ProfileTab() {
   const {
     user, xp, streak, longestStreak, gems, isPro,
     soundEnabled, hapticsEnabled,
-    toggleSound, toggleHaptics, reset,
+    toggleSound, toggleHaptics, reset, signOut,
   } = useUserStore();
 
+  const isSignedIn = !!user;
   const displayName = user?.displayName || 'Guest Learner';
   const email = user?.email || 'Not signed in';
+
+  const handleSignOut = () => {
+    Alert.alert('Sign out', 'Are you sure you want to sign out?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Sign out',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await signOut();
+          } catch {
+            // ignore — listener will clear state regardless
+          }
+        },
+      },
+    ]);
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -94,8 +114,21 @@ export default function ProfileTab() {
           </>
         )}
 
-        {/* Sign out / Reset */}
+        {/* Account */}
         <Text style={styles.sectionTitle}>Account</Text>
+        {isSignedIn ? (
+          <TouchableOpacity style={styles.signOutBtn} onPress={handleSignOut}>
+            <Text style={styles.signOutBtnText}>Sign Out</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.signInBtn}
+            onPress={() => router.push('/login')}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.signInBtnText}>Sign In / Create Account</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity style={styles.dangerBtn} onPress={reset}>
           <Text style={styles.dangerBtnText}>Reset Progress (Dev)</Text>
         </TouchableOpacity>
@@ -171,6 +204,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   proBtnText: { color: Colors.bgDeep, fontWeight: FontWeight.black, fontSize: FontSize.md },
+  signInBtn: {
+    backgroundColor: Colors.primary,
+    borderRadius: Radius.lg,
+    padding: Spacing.md,
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  signInBtnText: { color: Colors.bgDeep, fontWeight: FontWeight.black, fontSize: FontSize.md },
+  signOutBtn: {
+    backgroundColor: Colors.bgDark,
+    borderRadius: Radius.lg,
+    padding: Spacing.md,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.border,
+    marginBottom: Spacing.sm,
+  },
+  signOutBtnText: { color: Colors.textPrimary, fontWeight: FontWeight.bold, fontSize: FontSize.md },
   dangerBtn: {
     backgroundColor: Colors.error + '20',
     borderRadius: Radius.lg,

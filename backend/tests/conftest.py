@@ -3,7 +3,21 @@ Shared pytest fixtures for the entire backend test suite.
 """
 import pytest
 from django.test import Client
+from django.core.cache import cache
 from exams.models import Exam, Question, Answer, Review, ExamAttempt
+
+
+@pytest.fixture(autouse=True)
+def clear_cache():
+    """Clear Django's in-memory cache before every test.
+
+    Without this, SQLite's transaction rollback reuses auto-increment IDs,
+    causing the question-ID cache from one test to poison the next test that
+    creates an object with the same PK.
+    """
+    cache.clear()
+    yield
+    cache.clear()
 
 
 @pytest.fixture
@@ -44,7 +58,6 @@ def question_with_answers(db, exam):
         domain="Storage",
         difficulty="easy",
         explanation="Amazon S3 is AWS's scalable object storage service.",
-        correct_answer_letter="A",
     )
     Answer.objects.create(question=q, letter="A", text="Amazon S3", is_correct=True)
     Answer.objects.create(question=q, letter="B", text="Amazon EC2", is_correct=False)
@@ -64,7 +77,6 @@ def question_pool(db, exam):
             domain="General",
             difficulty="medium",
             explanation=f"Explanation {i + 1}.",
-            correct_answer_letter="A",
         )
         for letter in ["A", "B", "C", "D"]:
             Answer.objects.create(

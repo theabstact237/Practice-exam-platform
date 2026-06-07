@@ -46,7 +46,6 @@ class TestQuestionModel:
             exam=exam,
             question_text="Test question?",
             explanation="Test explanation.",
-            correct_answer_letter="A",
         )
         assert q.difficulty == "medium"
 

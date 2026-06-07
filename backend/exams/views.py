@@ -695,7 +695,7 @@ def update_review_profile(request):
     updates = {}
     if new_name:
         updates['user_name'] = new_name
-    if new_photo is not None:
+    if new_photo:
         updates['user_photo_url'] = new_photo
 
     if not updates:

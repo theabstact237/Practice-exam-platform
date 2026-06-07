@@ -9,9 +9,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
   Dimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, {
@@ -72,7 +72,8 @@ export default function Onboarding() {
     await AsyncStorage.setItem('freecertify_onboarded', 'true');
     await AsyncStorage.setItem('freecertify_first_subject', subject || 'aws');
     await AsyncStorage.setItem('freecertify_daily_goal', String(dailyGoal));
-    router.replace('/(tabs)/learn');
+    // Offer sign-in/sign-up after onboarding (guest mode available there too).
+    router.replace('/login');
   };
 
   return (

@@ -7,7 +7,7 @@ import axios from 'axios';
 // ── Base URL ──────────────────────────────────────────────────────────────────
 // Change this to your deployed backend URL for production builds.
 const BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ||
+  process.env.EXPO_PUBLIC_API_BASE_URL ||
   'https://aws-exam-backend.onrender.com';
 
 export const api = axios.create({

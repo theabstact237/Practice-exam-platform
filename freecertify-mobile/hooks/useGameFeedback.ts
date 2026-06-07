@@ -3,10 +3,18 @@
  * sound effects + haptic feedback + animation triggers.
  *
  * Every screen calls triggerCorrect() / triggerWrong() — never directly
- * invokes Audio or Haptics. This keeps all feedback logic in one place.
+ * invokes Haptics. This keeps all feedback logic in one place.
+ *
+ * NOTE ON AUDIO: `expo-av` is deprecated and is no longer available in the
+ * Expo Go runtime for SDK 56 (the native module `ExponentAV` is gone). To add
+ * sound later, migrate to the `expo-audio` package:
+ *   1. `npx expo install expo-audio`
+ *   2. add the mp3 files to assets/sounds/
+ *   3. use `createAudioPlayer(require('../assets/sounds/x.mp3'))` and call
+ *      `player.seekTo(0); player.play();` inside playSound().
+ * For now playSound() is a no-op so the app runs cleanly; haptics still fire.
  */
-import { useCallback, useEffect, useRef } from 'react';
-import { Audio } from 'expo-av';
+import { useCallback } from 'react';
 import * as Haptics from 'expo-haptics';
 import { useUserStore } from '../stores/useUserStore';
 
@@ -22,56 +30,14 @@ type SoundKey =
   | 'lessonComplete'
   | 'examPassed';
 
-// Map each key to its asset. Replace with real files in assets/sounds/.
-const SOUND_MAP: Record<SoundKey, any> = {
-  tap: require('../assets/sounds/tap.mp3'),
-  select: require('../assets/sounds/select.mp3'),
-  correct: require('../assets/sounds/correct.mp3'),
-  wrong: require('../assets/sounds/wrong.mp3'),
-  heartLost: require('../assets/sounds/heart_lost.mp3'),
-  xpEarned: require('../assets/sounds/xp_earned.mp3'),
-  levelUp: require('../assets/sounds/level_up.mp3'),
-  streak: require('../assets/sounds/streak.mp3'),
-  lessonComplete: require('../assets/sounds/lesson_complete.mp3'),
-  examPassed: require('../assets/sounds/exam_passed.mp3'),
-};
-
 export const useGameFeedback = () => {
   const { soundEnabled, hapticsEnabled, animationsReduced } = useUserStore();
-  const sounds = useRef<Partial<Record<SoundKey, Audio.Sound>>>({});
-  const loaded = useRef(false);
 
-  // Preload all sounds once
-  useEffect(() => {
-    if (loaded.current) return;
-    loaded.current = true;
-
-    const load = async () => {
-      await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
-      for (const [key, asset] of Object.entries(SOUND_MAP)) {
-        try {
-          const { sound } = await Audio.Sound.createAsync(asset);
-          sounds.current[key as SoundKey] = sound;
-        } catch {
-          // Sound file missing — skip gracefully
-        }
-      }
-    };
-    load();
-
-    return () => {
-      Object.values(sounds.current).forEach(s => s?.unloadAsync());
-    };
-  }, []);
-
+  // Audio is disabled until migrated to expo-audio (see note above).
   const playSound = useCallback(
-    async (key: SoundKey) => {
+    (_key: SoundKey) => {
       if (!soundEnabled) return;
-      try {
-        await sounds.current[key]?.replayAsync();
-      } catch {
-        // Sound unavailable — continue silently
-      }
+      // no-op for now
     },
     [soundEnabled],
   );

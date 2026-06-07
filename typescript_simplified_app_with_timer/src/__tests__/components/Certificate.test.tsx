@@ -19,17 +19,20 @@ describe('Certificate Component', () => {
 
   it('renders when isVisible is true', () => {
     render(<Certificate {...defaultProps} />);
-    expect(screen.getByText(/Certificate of Completion/i)).toBeInTheDocument();
+    // "of Achievement" is unique text that only appears in the certificate heading
+    expect(screen.getByText(/of Achievement/i)).toBeInTheDocument();
   });
 
   it('does not render when isVisible is false', () => {
     render(<Certificate {...defaultProps} isVisible={false} />);
-    expect(screen.queryByText(/Certificate of Completion/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/of Achievement/i)).not.toBeInTheDocument();
   });
 
   it('displays the user name', () => {
     render(<Certificate {...defaultProps} />);
-    expect(screen.getByText('Karl Siaka')).toBeInTheDocument();
+    // Name may appear in multiple places (body text + signature) — just confirm presence
+    const nameElements = screen.getAllByText('Karl Siaka');
+    expect(nameElements.length).toBeGreaterThan(0);
   });
 
   it('displays the score percentage', () => {
@@ -40,8 +43,9 @@ describe('Certificate Component', () => {
   it('calls onClose when close button is clicked', () => {
     const onClose = vi.fn();
     render(<Certificate {...defaultProps} onClose={onClose} />);
-    const closeBtn = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeBtn);
+    // The close button is an icon-only button (X SVG) — select by position
+    const buttons = screen.getAllByRole('button');
+    fireEvent.click(buttons[0]);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 

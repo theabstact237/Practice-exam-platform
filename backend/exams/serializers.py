@@ -144,6 +144,9 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
             'exam_score',
             'passed'
         ]
+        # Disable automatic unique_together validation so the view can handle
+        # duplicate (user_uid, exam) pairs by updating the existing review.
+        validators = []
     
     def validate_rating(self, value):
         if value < 1 or value > 5:
