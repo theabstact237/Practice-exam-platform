@@ -1,0 +1,2902 @@
+[
+  {
+    "question_text": "What is Python primarily known for?",
+    "question_type": "mcq",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Python is praised for clean, readable syntax and is used in web, data, AI, automation, and more.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only web design"
+      },
+      {
+        "letter": "B",
+        "text": "Only hardware control"
+      },
+      {
+        "letter": "C",
+        "text": "Being compiled like C only"
+      },
+      {
+        "letter": "D",
+        "text": "Readable syntax and versatility"
+      }
+    ]
+  },
+  {
+    "question_text": "Which file extension is standard for Python source code?",
+    "question_type": "mcq",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Python files end in .py — for example hello.py.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": ".py"
+      },
+      {
+        "letter": "B",
+        "text": ".python"
+      },
+      {
+        "letter": "C",
+        "text": ".pt"
+      },
+      {
+        "letter": "D",
+        "text": ".pyt"
+      }
+    ]
+  },
+  {
+    "question_text": "What command runs a Python script named app.py from the terminal?",
+    "question_type": "direct",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "Use the python interpreter followed by the filename.",
+    "explanation": "Hint: Use the python interpreter followed by the filename.\n\npython app.py tells the Python interpreter to execute the file. On some systems use python3.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "exec app.py"
+      },
+      {
+        "letter": "B",
+        "text": "start app.py"
+      },
+      {
+        "letter": "C",
+        "text": "python app.py"
+      },
+      {
+        "letter": "D",
+        "text": "run app.py"
+      }
+    ]
+  },
+  {
+    "question_text": "Who created Python?",
+    "question_type": "mcq",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Guido van Rossum created Python; it first appeared in 1991.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "James Gosling"
+      },
+      {
+        "letter": "B",
+        "text": "Guido van Rossum"
+      },
+      {
+        "letter": "C",
+        "text": "Elon Musk"
+      },
+      {
+        "letter": "D",
+        "text": "Bill Gates"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an interpreter in Python?",
+    "question_type": "direct",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "It reads and executes your .py file.",
+    "explanation": "Hint: It reads and executes your .py file.\n\nPython is interpreted — the interpreter translates and runs your code without a separate compile step.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A program that runs code line by line"
+      },
+      {
+        "letter": "B",
+        "text": "A text editor"
+      },
+      {
+        "letter": "C",
+        "text": "A database"
+      },
+      {
+        "letter": "D",
+        "text": "A web browser"
+      }
+    ]
+  },
+  {
+    "question_text": "Which symbol starts a comment in Python?",
+    "question_type": "mcq",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Everything after # on a line is ignored by Python — useful for notes and explanations.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "/*"
+      },
+      {
+        "letter": "B",
+        "text": "#"
+      },
+      {
+        "letter": "C",
+        "text": "//"
+      },
+      {
+        "letter": "D",
+        "text": "--"
+      }
+    ]
+  },
+  {
+    "question_text": "What built-in function displays help for a function or module?",
+    "question_type": "direct",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "Four letters, help(print) works.",
+    "explanation": "Hint: Four letters, help(print) works.\n\nhelp(len) opens documentation for len. Use docstrings for your own functions too.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "doc"
+      },
+      {
+        "letter": "B",
+        "text": "manual"
+      },
+      {
+        "letter": "C",
+        "text": "help"
+      },
+      {
+        "letter": "D",
+        "text": "info"
+      }
+    ]
+  },
+  {
+    "question_text": "Why is Python popular for beginners?",
+    "question_type": "mcq",
+    "domain": "CH01: Python Adventure Start",
+    "chapter_code": "CH01",
+    "chapter": "Python Adventure Start",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Readable code, huge libraries, and beginner-friendly resources make Python a great first language.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "It has no errors"
+      },
+      {
+        "letter": "B",
+        "text": "It requires no practice"
+      },
+      {
+        "letter": "C",
+        "text": "It only runs on one OS"
+      },
+      {
+        "letter": "D",
+        "text": "Simple syntax and a large supportive community"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the correct way to assign 42 to a variable named age?",
+    "question_type": "mcq",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Python uses name = value. No var or type keyword is required for assignment.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "age = 42"
+      },
+      {
+        "letter": "B",
+        "text": "42 = age"
+      },
+      {
+        "letter": "C",
+        "text": "var age = 42"
+      },
+      {
+        "letter": "D",
+        "text": "int age = 42"
+      }
+    ]
+  },
+  {
+    "question_text": "What naming style does PEP 8 recommend for variable names?",
+    "question_type": "direct",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "Words separated by underscores.",
+    "explanation": "Hint: Words separated by underscores.\n\nsnake_case like user_name is the Python convention for variables and functions.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "camelCase"
+      },
+      {
+        "letter": "B",
+        "text": "ALL CAPS"
+      },
+      {
+        "letter": "C",
+        "text": "kebab-case"
+      },
+      {
+        "letter": "D",
+        "text": "snake_case"
+      }
+    ]
+  },
+  {
+    "question_text": "What happens when you assign x = 10?",
+    "question_type": "mcq",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Assignment binds a name to an object. x = 10 makes x reference the int 10.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "x becomes a string"
+      },
+      {
+        "letter": "B",
+        "text": "x now refers to the integer 10"
+      },
+      {
+        "letter": "C",
+        "text": "x is declared but empty"
+      },
+      {
+        "letter": "D",
+        "text": "Python asks for a type"
+      }
+    ]
+  },
+  {
+    "question_text": "Can a variable name start with a number in Python?",
+    "question_type": "mcq",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Identifiers must start with a letter or underscore — 2name is invalid.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only if quoted"
+      },
+      {
+        "letter": "B",
+        "text": "Only for floats"
+      },
+      {
+        "letter": "C",
+        "text": "No"
+      },
+      {
+        "letter": "D",
+        "text": "Yes"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword deletes a variable binding?",
+    "question_type": "direct",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "Three letters.",
+    "explanation": "Hint: Three letters.\n\ndel x removes the name x from the namespace; the object may be garbage-collected if unreferenced.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "del"
+      },
+      {
+        "letter": "B",
+        "text": "remove"
+      },
+      {
+        "letter": "C",
+        "text": "delete"
+      },
+      {
+        "letter": "D",
+        "text": "drop"
+      }
+    ]
+  },
+  {
+    "question_text": "What is x = x + 1 called?",
+    "question_type": "mcq",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Variables can be rebound to new values — x = x + 1 updates what x refers to.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Defining a constant"
+      },
+      {
+        "letter": "B",
+        "text": "Creating a tuple"
+      },
+      {
+        "letter": "C",
+        "text": "Importing a module"
+      },
+      {
+        "letter": "D",
+        "text": "Reassigning the variable"
+      }
+    ]
+  },
+  {
+    "question_text": "Which is a valid variable name?",
+    "question_type": "mcq",
+    "domain": "CH02: Variables",
+    "chapter_code": "CH02",
+    "chapter": "Variables",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "my_score is valid. 2score starts with a digit; my-score has a hyphen; class is a reserved keyword.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "my-score"
+      },
+      {
+        "letter": "B",
+        "text": "class"
+      },
+      {
+        "letter": "C",
+        "text": "my_score"
+      },
+      {
+        "letter": "D",
+        "text": "2score"
+      }
+    ]
+  },
+  {
+    "question_text": "What built-in function returns the type of a value?",
+    "question_type": "mcq",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "type(3) returns <class 'int'>. type('hi') returns <class 'str'>.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "kind"
+      },
+      {
+        "letter": "B",
+        "text": "type"
+      },
+      {
+        "letter": "C",
+        "text": "typeof"
+      },
+      {
+        "letter": "D",
+        "text": "class"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword represents no value in Python?",
+    "question_type": "direct",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "Capital N, four letters.",
+    "explanation": "Hint: Capital N, four letters.\n\nNone is Python's null — a singleton meaning absence of value.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "nil"
+      },
+      {
+        "letter": "B",
+        "text": "empty"
+      },
+      {
+        "letter": "C",
+        "text": "None"
+      },
+      {
+        "letter": "D",
+        "text": "null"
+      }
+    ]
+  },
+  {
+    "question_text": "Which of these is a float?",
+    "question_type": "mcq",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "3 is int, '3.14' is str, 3.14 is float (decimal point).",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "3.14"
+      },
+      {
+        "letter": "B",
+        "text": "3"
+      },
+      {
+        "letter": "C",
+        "text": "'3.14'"
+      },
+      {
+        "letter": "D",
+        "text": "314"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the type of True in Python?",
+    "question_type": "mcq",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "True and False are bool values. bool is a subclass of int in Python.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Boolean class only in Java"
+      },
+      {
+        "letter": "B",
+        "text": "bool"
+      },
+      {
+        "letter": "C",
+        "text": "int"
+      },
+      {
+        "letter": "D",
+        "text": "str"
+      }
+    ]
+  },
+  {
+    "question_text": "What function converts '123' to the integer 123?",
+    "question_type": "direct",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "Three-letter built-in.",
+    "explanation": "Hint: Three-letter built-in.\n\nint('123') → 123. str(123) → '123'. float('3.5') → 3.5.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "str"
+      },
+      {
+        "letter": "B",
+        "text": "float"
+      },
+      {
+        "letter": "C",
+        "text": "num"
+      },
+      {
+        "letter": "D",
+        "text": "int"
+      }
+    ]
+  },
+  {
+    "question_text": "Which values are falsy in Python?",
+    "question_type": "mcq",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Falsy: False, None, 0, '', [], {}, set(), etc. Most objects are truthy.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only False"
+      },
+      {
+        "letter": "B",
+        "text": "Only 0"
+      },
+      {
+        "letter": "C",
+        "text": "Negative numbers only"
+      },
+      {
+        "letter": "D",
+        "text": "0, empty string, None, empty list"
+      }
+    ]
+  },
+  {
+    "question_text": "What does isinstance('hello', str) return?",
+    "question_type": "mcq",
+    "domain": "CH03: Data Types",
+    "chapter_code": "CH03",
+    "chapter": "Data Types",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "isinstance checks whether an object is an instance of a class — 'hello' is a str.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "str"
+      },
+      {
+        "letter": "B",
+        "text": "Error always"
+      },
+      {
+        "letter": "C",
+        "text": "True"
+      },
+      {
+        "letter": "D",
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "question_text": "What function displays output to the console?",
+    "question_type": "mcq",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "print('Hello') writes Hello to stdout. Multiple values: print(a, b).",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "echo"
+      },
+      {
+        "letter": "B",
+        "text": "display"
+      },
+      {
+        "letter": "C",
+        "text": "output"
+      },
+      {
+        "letter": "D",
+        "text": "print"
+      }
+    ]
+  },
+  {
+    "question_text": "What function reads a line of text from the user?",
+    "question_type": "direct",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "Five letters, returns a string.",
+    "explanation": "Hint: Five letters, returns a string.\n\nname = input('Your name: ') always returns a string, even if the user types digits.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "input"
+      },
+      {
+        "letter": "B",
+        "text": "read"
+      },
+      {
+        "letter": "C",
+        "text": "scan"
+      },
+      {
+        "letter": "D",
+        "text": "gets"
+      }
+    ]
+  },
+  {
+    "question_text": "What does print('a', 'b', sep='-') output?",
+    "question_type": "mcq",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "sep='-' joins arguments with a dash instead of the default space.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "a-b"
+      },
+      {
+        "letter": "B",
+        "text": "a b"
+      },
+      {
+        "letter": "C",
+        "text": "a-b-"
+      },
+      {
+        "letter": "D",
+        "text": "ab"
+      }
+    ]
+  },
+  {
+    "question_text": "What does end='' do in print()?",
+    "question_type": "mcq",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Default end is '\\n'. end='' keeps the cursor on the same line for the next print.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Prints nothing"
+      },
+      {
+        "letter": "B",
+        "text": "Repeats output"
+      },
+      {
+        "letter": "C",
+        "text": "Clears the screen"
+      },
+      {
+        "letter": "D",
+        "text": "Prevents adding a newline at the end"
+      }
+    ]
+  },
+  {
+    "question_text": "How do you embed a variable in an f-string?",
+    "question_type": "direct",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "f'Hello {name}'",
+    "explanation": "Hint: f'Hello {name}'\n\nf'Hello {name}' evaluates name inside {} at runtime.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Dollar sign prefix"
+      },
+      {
+        "letter": "B",
+        "text": "Curly braces around the variable"
+      },
+      {
+        "letter": "C",
+        "text": "Square brackets"
+      },
+      {
+        "letter": "D",
+        "text": "Parentheses only"
+      }
+    ]
+  },
+  {
+    "question_text": "What type does input() always return?",
+    "question_type": "mcq",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "input() always gives a string — use int(input()) to read numbers.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Depends on user input type"
+      },
+      {
+        "letter": "B",
+        "text": "str"
+      },
+      {
+        "letter": "C",
+        "text": "int"
+      },
+      {
+        "letter": "D",
+        "text": "float"
+      }
+    ]
+  },
+  {
+    "question_text": "What does print(type(input())) show when the user types 42?",
+    "question_type": "mcq",
+    "domain": "CH04: Print / Input",
+    "chapter_code": "CH04",
+    "chapter": "Print / Input",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Even numeric input is read as the string '42' until you convert it.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "<class 'float'>"
+      },
+      {
+        "letter": "B",
+        "text": "42"
+      },
+      {
+        "letter": "C",
+        "text": "<class 'str'>"
+      },
+      {
+        "letter": "D",
+        "text": "<class 'int'>"
+      }
+    ]
+  },
+  {
+    "question_text": "Which keyword starts a conditional block?",
+    "question_type": "mcq",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "if condition: followed by an indented block is Python's basic branch.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "when"
+      },
+      {
+        "letter": "B",
+        "text": "case"
+      },
+      {
+        "letter": "C",
+        "text": "cond"
+      },
+      {
+        "letter": "D",
+        "text": "if"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword provides an alternative when if is False?",
+    "question_type": "direct",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "Five letters.",
+    "explanation": "Hint: Five letters.\n\nif score >= 60: pass else: print('Try again') runs else when the condition fails.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "except"
+      },
+      {
+        "letter": "B",
+        "text": "else"
+      },
+      {
+        "letter": "C",
+        "text": "elif"
+      },
+      {
+        "letter": "D",
+        "text": "otherwise"
+      }
+    ]
+  },
+  {
+    "question_text": "What does elif stand for?",
+    "question_type": "mcq",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "elif lets you chain multiple conditions between if and else.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "end if"
+      },
+      {
+        "letter": "B",
+        "text": "else loop"
+      },
+      {
+        "letter": "C",
+        "text": "error if"
+      },
+      {
+        "letter": "D",
+        "text": "else if"
+      }
+    ]
+  },
+  {
+    "question_text": "Which operator checks equality?",
+    "question_type": "mcq",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "= assigns; == compares. '5' == 5 is False (different types).",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "==="
+      },
+      {
+        "letter": "B",
+        "text": "eq"
+      },
+      {
+        "letter": "C",
+        "text": "=="
+      },
+      {
+        "letter": "D",
+        "text": "="
+      }
+    ]
+  },
+  {
+    "question_text": "What operator checks inequality?",
+    "question_type": "direct",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "Exclamation plus equals.",
+    "explanation": "Hint: Exclamation plus equals.\n\n5 != 3 is True. Python 3 removed the <> operator.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "!="
+      },
+      {
+        "letter": "B",
+        "text": "<>"
+      },
+      {
+        "letter": "C",
+        "text": "!=="
+      },
+      {
+        "letter": "D",
+        "text": "=/="
+      }
+    ]
+  },
+  {
+    "question_text": "What is the result of bool(0)?",
+    "question_type": "mcq",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Zero is falsy; non-zero numbers are truthy.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "None"
+      },
+      {
+        "letter": "B",
+        "text": "False"
+      },
+      {
+        "letter": "C",
+        "text": "True"
+      },
+      {
+        "letter": "D",
+        "text": "0"
+      }
+    ]
+  },
+  {
+    "question_text": "Which logical operator means 'both conditions must be True'?",
+    "question_type": "mcq",
+    "domain": "CH05: Conditional If/Else",
+    "chapter_code": "CH05",
+    "chapter": "Conditional If/Else",
+    "difficulty": "easy",
+    "hint": "",
+    "explanation": "Python uses and, or, not — not C-style && || !.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "and"
+      },
+      {
+        "letter": "B",
+        "text": "&&"
+      },
+      {
+        "letter": "C",
+        "text": "&"
+      },
+      {
+        "letter": "D",
+        "text": "AND keyword only in SQL"
+      }
+    ]
+  },
+  {
+    "question_text": "Which loop repeats while a condition is True?",
+    "question_type": "mcq",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "while count < 5: runs until count < 5 becomes False.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "loop"
+      },
+      {
+        "letter": "B",
+        "text": "repeat"
+      },
+      {
+        "letter": "C",
+        "text": "while"
+      },
+      {
+        "letter": "D",
+        "text": "for"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword exits a while loop immediately?",
+    "question_type": "direct",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "Also works in for loops.",
+    "explanation": "Hint: Also works in for loops.\n\nbreak leaves the innermost loop — useful when a stop condition is met early.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "stop"
+      },
+      {
+        "letter": "B",
+        "text": "return"
+      },
+      {
+        "letter": "C",
+        "text": "break"
+      },
+      {
+        "letter": "D",
+        "text": "exit"
+      }
+    ]
+  },
+  {
+    "question_text": "What does continue do in a while loop?",
+    "question_type": "mcq",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "continue jumps to the loop condition check, skipping remaining code in the body.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Exits the loop"
+      },
+      {
+        "letter": "B",
+        "text": "Restarts Python"
+      },
+      {
+        "letter": "C",
+        "text": "Pauses forever"
+      },
+      {
+        "letter": "D",
+        "text": "Skips to the next iteration"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an infinite loop risk with while True:",
+    "question_type": "mcq",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "while True: needs break or a condition that eventually becomes False.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Using integers"
+      },
+      {
+        "letter": "B",
+        "text": "Using comments"
+      },
+      {
+        "letter": "C",
+        "text": "Forgetting a break or condition change inside"
+      },
+      {
+        "letter": "D",
+        "text": "Using print"
+      }
+    ]
+  },
+  {
+    "question_text": "What pattern counts from 0 to 4 in a while loop?",
+    "question_type": "direct",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "count = 0; while count < 5: ...; count += 1",
+    "explanation": "Hint: count = 0; while count < 5: ...; count += 1\n\nInitialize before the loop, test the condition, update the counter inside the body.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Initialize counter, while counter < 5, increment"
+      },
+      {
+        "letter": "B",
+        "text": "Use for only"
+      },
+      {
+        "letter": "C",
+        "text": "Use break first"
+      },
+      {
+        "letter": "D",
+        "text": "Use import"
+      }
+    ]
+  },
+  {
+    "question_text": "When is a while loop better than for?",
+    "question_type": "mcq",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "while suits unknown iterations — e.g. 'keep asking until valid input'.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Always"
+      },
+      {
+        "letter": "B",
+        "text": "Never"
+      },
+      {
+        "letter": "C",
+        "text": "Only for strings"
+      },
+      {
+        "letter": "D",
+        "text": "When repetitions depend on a condition, not a fixed sequence"
+      }
+    ]
+  },
+  {
+    "question_text": "What does this print? n=3; while n: print(n); n-=1",
+    "question_type": "mcq",
+    "domain": "CH06: While Loops",
+    "chapter_code": "CH06",
+    "chapter": "While Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "n counts down; 0 is falsy so the loop stops before printing 0.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Infinite loop"
+      },
+      {
+        "letter": "B",
+        "text": "Nothing"
+      },
+      {
+        "letter": "C",
+        "text": "3, 2, 1 each on its own line"
+      },
+      {
+        "letter": "D",
+        "text": "3 2 1 0"
+      }
+    ]
+  },
+  {
+    "question_text": "What does for letter in 'hi': iterate over?",
+    "question_type": "mcq",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "for loops iterate any iterable — strings, lists, ranges, dict keys, etc.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only integers"
+      },
+      {
+        "letter": "B",
+        "text": "File lines only"
+      },
+      {
+        "letter": "C",
+        "text": "Dictionary keys only"
+      },
+      {
+        "letter": "D",
+        "text": "Each character in the string"
+      }
+    ]
+  },
+  {
+    "question_text": "What function generates 0, 1, 2, 3, 4?",
+    "question_type": "direct",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "Stop value is exclusive.",
+    "explanation": "Hint: Stop value is exclusive.\n\nrange(5) yields 0 through 4. range(1, 6) yields 1 through 5.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "range(4)"
+      },
+      {
+        "letter": "B",
+        "text": "list(5)"
+      },
+      {
+        "letter": "C",
+        "text": "count(5)"
+      },
+      {
+        "letter": "D",
+        "text": "range(5)"
+      }
+    ]
+  },
+  {
+    "question_text": "What does range(2, 10, 2) produce?",
+    "question_type": "mcq",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "range(start, stop, step) — stop is exclusive, step is 2 here.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "0, 2, 4, 6, 8"
+      },
+      {
+        "letter": "B",
+        "text": "2, 3, 4, 5"
+      },
+      {
+        "letter": "C",
+        "text": "2, 4, 6, 8"
+      },
+      {
+        "letter": "D",
+        "text": "2, 4, 6, 8, 10"
+      }
+    ]
+  },
+  {
+    "question_text": "How do you loop with index and value from a list?",
+    "question_type": "mcq",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "enumerate pairs each index with its value — common in for-loop patterns.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "for items[i]:"
+      },
+      {
+        "letter": "B",
+        "text": "while enumerate:"
+      },
+      {
+        "letter": "C",
+        "text": "for i, v in enumerate(items):"
+      },
+      {
+        "letter": "D",
+        "text": "for i in items.index:"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword pairs with for to loop over two lists together?",
+    "question_type": "direct",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "Four letters, built-in.",
+    "explanation": "Hint: Four letters, built-in.\n\nfor a, b in zip(names, scores): processes parallel elements from both lists.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "zip"
+      },
+      {
+        "letter": "B",
+        "text": "map"
+      },
+      {
+        "letter": "C",
+        "text": "join"
+      },
+      {
+        "letter": "D",
+        "text": "pair"
+      }
+    ]
+  },
+  {
+    "question_text": "What is printed? for i in range(3): print(i, end=' ')",
+    "question_type": "mcq",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "range(3) is 0,1,2. end=' ' adds spaces instead of newlines.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "0 1 2 3"
+      },
+      {
+        "letter": "B",
+        "text": "012"
+      },
+      {
+        "letter": "C",
+        "text": "0 1 2 "
+      },
+      {
+        "letter": "D",
+        "text": "1 2 3"
+      }
+    ]
+  },
+  {
+    "question_text": "Can you use break inside a for loop?",
+    "question_type": "mcq",
+    "domain": "CH07: For Loops",
+    "chapter_code": "CH07",
+    "chapter": "For Loops",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "break and continue work in both for and while loops.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Yes"
+      },
+      {
+        "letter": "B",
+        "text": "No"
+      },
+      {
+        "letter": "C",
+        "text": "Only in while"
+      },
+      {
+        "letter": "D",
+        "text": "Only with range"
+      }
+    ]
+  },
+  {
+    "question_text": "Which syntax creates a list?",
+    "question_type": "mcq",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Square brackets create lists — ordered, mutable sequences.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "[1, 2, 3]"
+      },
+      {
+        "letter": "B",
+        "text": "(1, 2, 3)"
+      },
+      {
+        "letter": "C",
+        "text": "{1, 2, 3}"
+      },
+      {
+        "letter": "D",
+        "text": "<1, 2, 3>"
+      }
+    ]
+  },
+  {
+    "question_text": "What index gets the first element of a list?",
+    "question_type": "direct",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "Python is zero-indexed.",
+    "explanation": "Hint: Python is zero-indexed.\n\nitems[0] is first; items[-1] is last.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "0"
+      },
+      {
+        "letter": "B",
+        "text": "1"
+      },
+      {
+        "letter": "C",
+        "text": "-0"
+      },
+      {
+        "letter": "D",
+        "text": "first"
+      }
+    ]
+  },
+  {
+    "question_text": "Which method adds an item to the end of a list?",
+    "question_type": "mcq",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "append(x) modifies the list in place. insert(i, x) adds at index i.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "insert_end()"
+      },
+      {
+        "letter": "B",
+        "text": "append()"
+      },
+      {
+        "letter": "C",
+        "text": "add()"
+      },
+      {
+        "letter": "D",
+        "text": "push()"
+      }
+    ]
+  },
+  {
+    "question_text": "What does [1, 2] + [3, 4] produce?",
+    "question_type": "mcq",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "+ concatenates lists; it does not add numbers element-wise.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "[4, 6]"
+      },
+      {
+        "letter": "B",
+        "text": "[7]"
+      },
+      {
+        "letter": "C",
+        "text": "Error"
+      },
+      {
+        "letter": "D",
+        "text": "[1, 2, 3, 4]"
+      }
+    ]
+  },
+  {
+    "question_text": "What method removes and returns the last list item?",
+    "question_type": "direct",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "Also accepts an index.",
+    "explanation": "Hint: Also accepts an index.\n\npop() removes last item. pop(0) removes first. remove(x) deletes first match of value x.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "delete"
+      },
+      {
+        "letter": "B",
+        "text": "last"
+      },
+      {
+        "letter": "C",
+        "text": "pop"
+      },
+      {
+        "letter": "D",
+        "text": "remove"
+      }
+    ]
+  },
+  {
+    "question_text": "What does len([10, 20, 30]) return?",
+    "question_type": "mcq",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "len() counts elements — three items in this list.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "2"
+      },
+      {
+        "letter": "B",
+        "text": "Error"
+      },
+      {
+        "letter": "C",
+        "text": "3"
+      },
+      {
+        "letter": "D",
+        "text": "30"
+      }
+    ]
+  },
+  {
+    "question_text": "Which slice returns the first two elements of nums?",
+    "question_type": "mcq",
+    "domain": "CH08: Lists",
+    "chapter_code": "CH08",
+    "chapter": "Lists",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "nums[:2] is indices 0 and 1 — stop index 2 is excluded.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "nums[1:2]"
+      },
+      {
+        "letter": "B",
+        "text": "nums[0:1]"
+      },
+      {
+        "letter": "C",
+        "text": "nums[2:]"
+      },
+      {
+        "letter": "D",
+        "text": "nums[:2]"
+      }
+    ]
+  },
+  {
+    "question_text": "Which syntax creates a dictionary?",
+    "question_type": "mcq",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Curly braces with key: value pairs define dicts.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "('name', 'Ada')"
+      },
+      {
+        "letter": "B",
+        "text": "<name: Ada>"
+      },
+      {
+        "letter": "C",
+        "text": "{'name': 'Ada', 'age': 30}"
+      },
+      {
+        "letter": "D",
+        "text": "['name', 'Ada']"
+      }
+    ]
+  },
+  {
+    "question_text": "What method safely returns a default when a key is missing?",
+    "question_type": "direct",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "d.get('key', default)",
+    "explanation": "Hint: d.get('key', default)\n\nd.get('score', 0) returns 0 instead of KeyError if 'score' is absent.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "find"
+      },
+      {
+        "letter": "B",
+        "text": "fetch"
+      },
+      {
+        "letter": "C",
+        "text": "lookup"
+      },
+      {
+        "letter": "D",
+        "text": "get"
+      }
+    ]
+  },
+  {
+    "question_text": "How do you access the value for key 'id' in d?",
+    "question_type": "mcq",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Square brackets with the key — KeyError if the key does not exist.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "d.id"
+      },
+      {
+        "letter": "B",
+        "text": "d(id)"
+      },
+      {
+        "letter": "C",
+        "text": "d->id"
+      },
+      {
+        "letter": "D",
+        "text": "d['id']"
+      }
+    ]
+  },
+  {
+    "question_text": "What does d.keys() return?",
+    "question_type": "mcq",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "keys(), values(), items() return dynamic view objects in Python 3.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A view of all keys"
+      },
+      {
+        "letter": "B",
+        "text": "A list always"
+      },
+      {
+        "letter": "C",
+        "text": "Only the first key"
+      },
+      {
+        "letter": "D",
+        "text": "Values only"
+      }
+    ]
+  },
+  {
+    "question_text": "What method loops key-value pairs?",
+    "question_type": "direct",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "for k, v in d.items():",
+    "explanation": "Hint: for k, v in d.items():\n\nitems() returns (key, value) tuples for iteration.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "entries"
+      },
+      {
+        "letter": "B",
+        "text": "values"
+      },
+      {
+        "letter": "C",
+        "text": "items"
+      },
+      {
+        "letter": "D",
+        "text": "pairs"
+      }
+    ]
+  },
+  {
+    "question_text": "Can a list be used as a dictionary key?",
+    "question_type": "mcq",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Dict keys must be hashable/immutable — use tuples instead of lists for composite keys.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Only for strings inside"
+      },
+      {
+        "letter": "B",
+        "text": "No — lists are unhashable"
+      },
+      {
+        "letter": "C",
+        "text": "Yes always"
+      },
+      {
+        "letter": "D",
+        "text": "Only if empty"
+      }
+    ]
+  },
+  {
+    "question_text": "What does {'a': 1, **{'b': 2}} create?",
+    "question_type": "mcq",
+    "domain": "CH09: Dictionaries",
+    "chapter_code": "CH09",
+    "chapter": "Dictionaries",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "** unpacks dicts inside literals to merge them (Python 3.5+).",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "{'a': 1, 'b': 2}"
+      },
+      {
+        "letter": "B",
+        "text": "Error"
+      },
+      {
+        "letter": "C",
+        "text": "{'b': 2}"
+      },
+      {
+        "letter": "D",
+        "text": "A set"
+      }
+    ]
+  },
+  {
+    "question_text": "Which collection is immutable and ordered?",
+    "question_type": "mcq",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Tuples use () — (1, 2, 3) cannot be changed after creation.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "set"
+      },
+      {
+        "letter": "B",
+        "text": "dict"
+      },
+      {
+        "letter": "C",
+        "text": "tuple"
+      },
+      {
+        "letter": "D",
+        "text": "list"
+      }
+    ]
+  },
+  {
+    "question_text": "How do you write a one-element tuple containing 42?",
+    "question_type": "direct",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "Trailing comma required.",
+    "explanation": "Hint: Trailing comma required.\n\n(42) is just the integer 42 in parentheses. (42,) is a tuple.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "(42,)"
+      },
+      {
+        "letter": "B",
+        "text": "(42)"
+      },
+      {
+        "letter": "C",
+        "text": "[42]"
+      },
+      {
+        "letter": "D",
+        "text": "{42}"
+      }
+    ]
+  },
+  {
+    "question_text": "Which collection stores unique unordered elements?",
+    "question_type": "mcq",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "set([1,1,2]) → {1, 2}. Sets deduplicate automatically.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "dict"
+      },
+      {
+        "letter": "B",
+        "text": "set"
+      },
+      {
+        "letter": "C",
+        "text": "list"
+      },
+      {
+        "letter": "D",
+        "text": "tuple"
+      }
+    ]
+  },
+  {
+    "question_text": "What is frozenset?",
+    "question_type": "mcq",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "frozenset can be a dict key because it is hashable unlike a regular set.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "An immutable set"
+      },
+      {
+        "letter": "B",
+        "text": "A frozen list"
+      },
+      {
+        "letter": "C",
+        "text": "A sorted tuple"
+      },
+      {
+        "letter": "D",
+        "text": "A locked dict"
+      }
+    ]
+  },
+  {
+    "question_text": "What operator returns elements in A but not in B for sets?",
+    "question_type": "direct",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "Set difference with minus.",
+    "explanation": "Hint: Set difference with minus.\n\nA - B or A.difference(B) — elements in A that are not in B.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "-"
+      },
+      {
+        "letter": "B",
+        "text": "&"
+      },
+      {
+        "letter": "C",
+        "text": "|"
+      },
+      {
+        "letter": "D",
+        "text": "^"
+      }
+    ]
+  },
+  {
+    "question_text": "What does {1, 2} & {2, 3} return?",
+    "question_type": "mcq",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "& is set intersection — elements in both sets.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Error"
+      },
+      {
+        "letter": "B",
+        "text": "{2}"
+      },
+      {
+        "letter": "C",
+        "text": "{1, 2, 3}"
+      },
+      {
+        "letter": "D",
+        "text": "{1, 3}"
+      }
+    ]
+  },
+  {
+    "question_text": "Which is valid for swapping values a and b?",
+    "question_type": "mcq",
+    "domain": "CH10: Tuples / Sets",
+    "chapter_code": "CH10",
+    "chapter": "Tuples / Sets",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Tuple unpacking makes swap one line without a temp variable.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "a = b only"
+      },
+      {
+        "letter": "B",
+        "text": "exchange a b"
+      },
+      {
+        "letter": "C",
+        "text": "a, b = b, a"
+      },
+      {
+        "letter": "D",
+        "text": "swap(a, b)"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword defines a function?",
+    "question_type": "mcq",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "def greet(name): starts a function definition with an indented body.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "function"
+      },
+      {
+        "letter": "B",
+        "text": "func"
+      },
+      {
+        "letter": "C",
+        "text": "fn"
+      },
+      {
+        "letter": "D",
+        "text": "def"
+      }
+    ]
+  },
+  {
+    "question_text": "What keyword sends a value back to the caller?",
+    "question_type": "direct",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "Six letters.",
+    "explanation": "Hint: Six letters.\n\nreturn value exits the function. No return means the function returns None.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "yield"
+      },
+      {
+        "letter": "B",
+        "text": "send"
+      },
+      {
+        "letter": "C",
+        "text": "output"
+      },
+      {
+        "letter": "D",
+        "text": "return"
+      }
+    ]
+  },
+  {
+    "question_text": "What does *args collect in def f(*args):?",
+    "question_type": "mcq",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "*args gathers surplus positional args — useful for flexible signatures.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Import paths"
+      },
+      {
+        "letter": "B",
+        "text": "Extra positional arguments as a tuple"
+      },
+      {
+        "letter": "C",
+        "text": "Keyword arguments"
+      },
+      {
+        "letter": "D",
+        "text": "Global variables"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a function parameter with a default value?",
+    "question_type": "mcq",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "def power(x, n=2): lets callers omit n to default to 2.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Default parameter"
+      },
+      {
+        "letter": "B",
+        "text": "Static arg"
+      },
+      {
+        "letter": "C",
+        "text": "Global arg"
+      },
+      {
+        "letter": "D",
+        "text": "Fixed constant"
+      }
+    ]
+  },
+  {
+    "question_text": "What statement makes code from another file available?",
+    "question_type": "direct",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "import math or from math import sqrt",
+    "explanation": "Hint: import math or from math import sqrt\n\nimport loads a module; from x import y brings a specific name into scope.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "include"
+      },
+      {
+        "letter": "B",
+        "text": "require"
+      },
+      {
+        "letter": "C",
+        "text": "using"
+      },
+      {
+        "letter": "D",
+        "text": "import"
+      }
+    ]
+  },
+  {
+    "question_text": "What is the scope of a variable created inside a function?",
+    "question_type": "mcq",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Local variables exist only during the function call unless declared global.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Always global"
+      },
+      {
+        "letter": "B",
+        "text": "Module level"
+      },
+      {
+        "letter": "C",
+        "text": "Class only"
+      },
+      {
+        "letter": "D",
+        "text": "Local to that function"
+      }
+    ]
+  },
+  {
+    "question_text": "What does if __name__ == '__main__': guard?",
+    "question_type": "mcq",
+    "domain": "CH11: Modular Functions",
+    "chapter_code": "CH11",
+    "chapter": "Modular Functions",
+    "difficulty": "medium",
+    "hint": "",
+    "explanation": "Prevents script setup code from running when the module is imported elsewhere.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "All test code always"
+      },
+      {
+        "letter": "B",
+        "text": "Code that runs only when the file is executed directly"
+      },
+      {
+        "letter": "C",
+        "text": "Code on import only"
+      },
+      {
+        "letter": "D",
+        "text": "Class definitions"
+      }
+    ]
+  },
+  {
+    "question_text": "Which defines a class?",
+    "question_type": "mcq",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "class Name: with indented methods and attributes defines a new type.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "new Dog:"
+      },
+      {
+        "letter": "B",
+        "text": "class Dog:"
+      },
+      {
+        "letter": "C",
+        "text": "def Dog:"
+      },
+      {
+        "letter": "D",
+        "text": "object Dog:"
+      }
+    ]
+  },
+  {
+    "question_text": "What special method initializes a new instance?",
+    "question_type": "direct",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "Double underscores both sides.",
+    "explanation": "Hint: Double underscores both sides.\n\n__init__(self, ...) sets up instance state when an object is created.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "__init__"
+      },
+      {
+        "letter": "B",
+        "text": "__new__"
+      },
+      {
+        "letter": "C",
+        "text": "__start__"
+      },
+      {
+        "letter": "D",
+        "text": "__create__"
+      }
+    ]
+  },
+  {
+    "question_text": "What is self in an instance method?",
+    "question_type": "mcq",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "self is convention for the instance — self.name accesses instance attributes.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Reference to the current object"
+      },
+      {
+        "letter": "B",
+        "text": "The class itself"
+      },
+      {
+        "letter": "C",
+        "text": "A global variable"
+      },
+      {
+        "letter": "D",
+        "text": "The parent module"
+      }
+    ]
+  },
+  {
+    "question_text": "What does inheritance allow?",
+    "question_type": "mcq",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "class Puppy(Dog): inherits attributes and methods from Dog.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Deleting parent code"
+      },
+      {
+        "letter": "B",
+        "text": "A child class to reuse and extend a parent class"
+      },
+      {
+        "letter": "C",
+        "text": "Only one method per class"
+      },
+      {
+        "letter": "D",
+        "text": "No method overriding"
+      }
+    ]
+  },
+  {
+    "question_text": "What function checks if obj is an instance of a class?",
+    "question_type": "direct",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "is + instance.",
+    "explanation": "Hint: is + instance.\n\nisinstance(obj, Dog) is True for Dog instances and subclasses.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "type"
+      },
+      {
+        "letter": "B",
+        "text": "issubclass"
+      },
+      {
+        "letter": "C",
+        "text": "typeof"
+      },
+      {
+        "letter": "D",
+        "text": "isinstance"
+      }
+    ]
+  },
+  {
+    "question_text": "What does @property enable?",
+    "question_type": "mcq",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "@property def area(self): allows obj.area without parentheses.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Multiple inheritance ban"
+      },
+      {
+        "letter": "B",
+        "text": "Using a method like an attribute"
+      },
+      {
+        "letter": "C",
+        "text": "Private variables only"
+      },
+      {
+        "letter": "D",
+        "text": "Deleting methods"
+      }
+    ]
+  },
+  {
+    "question_text": "What does super().__init__() typically do?",
+    "question_type": "mcq",
+    "domain": "CH12: Classes / OOP",
+    "chapter_code": "CH12",
+    "chapter": "Classes / OOP",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "super() delegates to the parent — common in __init__ for proper setup.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Calls the parent class initializer"
+      },
+      {
+        "letter": "B",
+        "text": "Deletes the object"
+      },
+      {
+        "letter": "C",
+        "text": "Imports a module"
+      },
+      {
+        "letter": "D",
+        "text": "Creates a global"
+      }
+    ]
+  },
+  {
+    "question_text": "Which HTTP method usually fetches data from an API?",
+    "question_type": "mcq",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "GET retrieves resources. POST often creates or submits data.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "POST"
+      },
+      {
+        "letter": "B",
+        "text": "DELETE"
+      },
+      {
+        "letter": "C",
+        "text": "PATCH"
+      },
+      {
+        "letter": "D",
+        "text": "GET"
+      }
+    ]
+  },
+  {
+    "question_text": "What library is commonly used for HTTP requests in Python?",
+    "question_type": "direct",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "pip install requests",
+    "explanation": "Hint: pip install requests\n\nrequests.get(url) returns a Response with status_code, json(), and text.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "fetch"
+      },
+      {
+        "letter": "B",
+        "text": "requests"
+      },
+      {
+        "letter": "C",
+        "text": "urllib only"
+      },
+      {
+        "letter": "D",
+        "text": "httpclient"
+      }
+    ]
+  },
+  {
+    "question_text": "What does HTTP status code 200 mean?",
+    "question_type": "mcq",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "2xx = success, 4xx = client error, 5xx = server error.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Not Found"
+      },
+      {
+        "letter": "B",
+        "text": "Server Error"
+      },
+      {
+        "letter": "C",
+        "text": "Unauthorized"
+      },
+      {
+        "letter": "D",
+        "text": "OK — success"
+      }
+    ]
+  },
+  {
+    "question_text": "What does response.json() do in requests?",
+    "question_type": "mcq",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "json() converts JSON strings to dicts/lists — essential for REST APIs.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Parses the response body as JSON into Python objects"
+      },
+      {
+        "letter": "B",
+        "text": "Sends JSON"
+      },
+      {
+        "letter": "C",
+        "text": "Prints raw text only"
+      },
+      {
+        "letter": "D",
+        "text": "Closes the connection always"
+      }
+    ]
+  },
+  {
+    "question_text": "What header often carries a Bearer token?",
+    "question_type": "direct",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "Authorization: Bearer <token>",
+    "explanation": "Hint: Authorization: Bearer <token>\n\nAPIs use Authorization headers for authenticated requests.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Accept"
+      },
+      {
+        "letter": "B",
+        "text": "Cookie only"
+      },
+      {
+        "letter": "C",
+        "text": "Authorization"
+      },
+      {
+        "letter": "D",
+        "text": "Content-Type"
+      }
+    ]
+  },
+  {
+    "question_text": "What is an API endpoint?",
+    "question_type": "mcq",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "https://api.example.com/users/1 is an endpoint returning user data.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A Python file only"
+      },
+      {
+        "letter": "B",
+        "text": "A database table"
+      },
+      {
+        "letter": "C",
+        "text": "An IDE setting"
+      },
+      {
+        "letter": "D",
+        "text": "A specific URL that exposes a resource or action"
+      }
+    ]
+  },
+  {
+    "question_text": "What does status code 404 indicate?",
+    "question_type": "mcq",
+    "domain": "CH13: API Integration",
+    "chapter_code": "CH13",
+    "chapter": "API Integration",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "404 means the server could not find the requested URL or resource.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Success"
+      },
+      {
+        "letter": "B",
+        "text": "Internal server error"
+      },
+      {
+        "letter": "C",
+        "text": "Bad gateway only"
+      },
+      {
+        "letter": "D",
+        "text": "Resource not found"
+      }
+    ]
+  },
+  {
+    "question_text": "What does a list comprehension [x*2 for x in range(4)] produce?",
+    "question_type": "mcq",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "Comprehensions build lists concisely — doubles each value from range(4).",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "[0, 2, 4, 6]"
+      },
+      {
+        "letter": "B",
+        "text": "[2, 4, 6, 8]"
+      },
+      {
+        "letter": "C",
+        "text": "[0, 1, 2, 3]"
+      },
+      {
+        "letter": "D",
+        "text": "Error"
+      }
+    ]
+  },
+  {
+    "question_text": "What statement ensures a file is closed even on errors?",
+    "question_type": "direct",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "Context manager pattern.",
+    "explanation": "Hint: Context manager pattern.\n\nwith triggers __enter__/__exit__ — the file closes automatically when the block ends.",
+    "correct_answer_letter": "A",
+    "options": [
+      {
+        "letter": "A",
+        "text": "with open(...) as f:"
+      },
+      {
+        "letter": "B",
+        "text": "try only"
+      },
+      {
+        "letter": "C",
+        "text": "close() always manual"
+      },
+      {
+        "letter": "D",
+        "text": "import file"
+      }
+    ]
+  },
+  {
+    "question_text": "What does json.dumps({'a': 1}) return?",
+    "question_type": "mcq",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "dumps = dict to string. loads = string to dict. dump writes to a file.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "A Python dict"
+      },
+      {
+        "letter": "B",
+        "text": "A file handle"
+      },
+      {
+        "letter": "C",
+        "text": "An integer"
+      },
+      {
+        "letter": "D",
+        "text": "A JSON string"
+      }
+    ]
+  },
+  {
+    "question_text": "Which handles exceptions in Python?",
+    "question_type": "mcq",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "try: risky code except ValueError: handle specific errors gracefully.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "error/handle"
+      },
+      {
+        "letter": "B",
+        "text": "if/except"
+      },
+      {
+        "letter": "C",
+        "text": "try/except"
+      },
+      {
+        "letter": "D",
+        "text": "catch/finally only"
+      }
+    ]
+  },
+  {
+    "question_text": "What tool installs packages from PyPI?",
+    "question_type": "direct",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "pip install package_name",
+    "explanation": "Hint: pip install package_name\n\npip is Python's package manager — use requirements.txt for project deps.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "npm"
+      },
+      {
+        "letter": "B",
+        "text": "apt only"
+      },
+      {
+        "letter": "C",
+        "text": "python install"
+      },
+      {
+        "letter": "D",
+        "text": "pip"
+      }
+    ]
+  },
+  {
+    "question_text": "What is a virtual environment (venv) for?",
+    "question_type": "mcq",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "venv keeps each project's packages separate — avoids version conflicts.",
+    "correct_answer_letter": "D",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Making Python faster"
+      },
+      {
+        "letter": "B",
+        "text": "Replacing the interpreter"
+      },
+      {
+        "letter": "C",
+        "text": "Deploying HTML only"
+      },
+      {
+        "letter": "D",
+        "text": "Isolating project dependencies"
+      }
+    ]
+  },
+  {
+    "question_text": "What pattern reads API data, parses JSON, and handles errors?",
+    "question_type": "mcq",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "",
+    "explanation": "Production code wraps network calls in try/except and checks status codes.",
+    "correct_answer_letter": "C",
+    "options": [
+      {
+        "letter": "A",
+        "text": "while True only"
+      },
+      {
+        "letter": "B",
+        "text": "No error handling needed"
+      },
+      {
+        "letter": "C",
+        "text": "try/except around requests.get and response.json()"
+      },
+      {
+        "letter": "D",
+        "text": "print only"
+      }
+    ]
+  },
+  {
+    "question_text": "What skill marks a Master Programmer in this course?",
+    "question_type": "direct",
+    "domain": "CH14: Master Programmer",
+    "chapter_code": "CH14",
+    "chapter": "Master Programmer",
+    "difficulty": "hard",
+    "hint": "Think full-stack Python thinking.",
+    "explanation": "Hint: Think full-stack Python thinking.\n\nMastery means building complete programs — input, logic, data, modules, classes, and real API integration.",
+    "correct_answer_letter": "B",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Avoiding libraries"
+      },
+      {
+        "letter": "B",
+        "text": "Combining variables, logic, data structures, functions, OOP, and APIs in projects"
+      },
+      {
+        "letter": "C",
+        "text": "Memorizing syntax only"
+      },
+      {
+        "letter": "D",
+        "text": "Using one loop type only"
+      }
+    ]
+  }
+]

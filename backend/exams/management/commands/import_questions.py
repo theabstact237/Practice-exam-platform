@@ -12,6 +12,7 @@ class Command(BaseCommand):
         'solutions_architect_100_questions.json': 'solutions_architect',
         'cloud_practitioner_100_questions.json': 'cloud_practitioner',
         'developer_100_questions.json': 'developer',
+        'python_100_questions.json': 'python',
     }
 
     def add_arguments(self, parser):

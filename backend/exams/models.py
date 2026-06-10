@@ -12,6 +12,7 @@ class Exam(models.Model):
         ('sysops', 'AWS SysOps Administrator'),
         ('security', 'AWS Security Specialty'),
         ('machine_learning', 'AWS Machine Learning'),
+        ('python', 'Python Programming'),
     ]
     
     name = models.CharField(max_length=100, unique=True)

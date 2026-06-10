@@ -40,6 +40,7 @@ import { useUserStore } from '../../stores/useUserStore';
 import { useProgressStore } from '../../stores/useProgressStore';
 import { useGameFeedback } from '../../hooks/useGameFeedback';
 import { getExamsByType, getRandomQuestions, APIQuestion } from '../../utils/api';
+import { getPythonUnitById, unitIdToExamType } from '../../constants/pythonSyllabus';
 
 const { width } = Dimensions.get('window');
 const QUESTION_TIME = 90; // seconds per question
@@ -186,9 +187,25 @@ export default function LessonScreen() {
   useEffect(() => {
     const load = async () => {
       try {
-        const exams = await getExamsByType('cloud_practitioner');
-        if (!exams.length) throw new Error('No exam found');
-        const qs = await getRandomQuestions(exams[0].id, 5); // 5 questions per lesson
+        const examType = unitIdToExamType(unitId ?? '');
+        const exams = await getExamsByType(examType);
+        if (!exams.length) throw new Error(`No ${examType} exam found`);
+        const pool = await getRandomQuestions(exams[0].id, 50);
+
+        const unit = getPythonUnitById(unitId ?? '');
+        let qs = pool;
+        if (unit) {
+          const unitPrefix = `${unit.code}:`;
+          const matched = pool.filter(q => q.domain.startsWith(unitPrefix));
+          if (matched.length >= 5) {
+            qs = matched.slice(0, 5);
+          } else {
+            qs = [...matched, ...pool.filter(q => !q.domain.startsWith(unitPrefix))].slice(0, 5);
+          }
+        } else {
+          qs = pool.slice(0, 5);
+        }
+
         setQuestions(qs);
         setTimerActive(true);
       } catch (e) {
@@ -199,7 +216,7 @@ export default function LessonScreen() {
     };
     load();
     return () => { if (timerInterval.current) clearInterval(timerInterval.current); };
-  }, []);
+  }, [unitId]);
 
   // ── Timer ────────────────────────────────────────────────────────────────
   useEffect(() => {

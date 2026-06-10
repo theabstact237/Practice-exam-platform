@@ -36,6 +36,15 @@ class Command(BaseCommand):
                 'time_limit_minutes': 90,
                 'passing_score': 70,
                 'is_active': True
+            },
+            {
+                'name': 'Python Programming',
+                'exam_type': 'python',
+                'description': 'Gamified Python course covering foundations, data structures, OOP, and real-world Python. 100 questions from easy to hard.',
+                'total_questions': 100,
+                'time_limit_minutes': 90,
+                'passing_score': 70,
+                'is_active': True
             }
         ]
 

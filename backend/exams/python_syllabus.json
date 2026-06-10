@@ -1,0 +1,29 @@
+{
+  "syllabus": "python",
+  "label": "Python Adventure",
+  "emoji": "🐍",
+  "description": "14-chapter gamified Python curriculum from first steps to Master Programmer.",
+  "question_mix": {
+    "mcq_percent": 70,
+    "direct_percent": 30,
+    "total_questions": 100
+  },
+  "chapters": [
+    { "code": "CH01", "title": "Python Adventure Start", "questions": 8, "difficulty": "easy" },
+    { "code": "CH02", "title": "Variables", "questions": 7, "difficulty": "easy" },
+    { "code": "CH03", "title": "Data Types", "questions": 7, "difficulty": "easy" },
+    { "code": "CH04", "title": "Print / Input", "questions": 7, "difficulty": "easy" },
+    { "code": "CH05", "title": "Conditional If/Else", "questions": 7, "difficulty": "easy" },
+    { "code": "CH06", "title": "While Loops", "questions": 7, "difficulty": "medium" },
+    { "code": "CH07", "title": "For Loops", "questions": 7, "difficulty": "medium" },
+    { "code": "CH08", "title": "Lists", "questions": 7, "difficulty": "medium" },
+    { "code": "CH09", "title": "Dictionaries", "questions": 7, "difficulty": "medium" },
+    { "code": "CH10", "title": "Tuples / Sets", "questions": 7, "difficulty": "medium" },
+    { "code": "CH11", "title": "Modular Functions", "questions": 7, "difficulty": "medium" },
+    { "code": "CH12", "title": "Classes / OOP", "questions": 7, "difficulty": "hard" },
+    { "code": "CH13", "title": "API Integration", "questions": 7, "difficulty": "hard" },
+    { "code": "CH14", "title": "Master Programmer", "questions": 8, "difficulty": "hard" }
+  ],
+  "upload_file": "python_100_questions.json",
+  "admin_notes": "Re-upload with Replace existing questions checked after curriculum update."
+}

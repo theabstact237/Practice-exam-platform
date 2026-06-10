@@ -15,12 +15,13 @@ import { router } from 'expo-router';
 import Animated, { FadeInDown, useSharedValue, withRepeat, withSequence, withTiming, useAnimatedStyle } from 'react-native-reanimated';
 import { Colors, Spacing, Radius, FontSize, FontWeight } from '../../constants/theme';
 import { SUBJECTS } from '../../constants/subjects';
+import { PYTHON_UNITS } from '../../constants/pythonSyllabus';
 import { useUserStore } from '../../stores/useUserStore';
 import { useProgressStore } from '../../stores/useProgressStore';
 import { useGameFeedback } from '../../hooks/useGameFeedback';
 
-// Simplified unit data — in production this would come from the backend
-const DEMO_UNITS = [
+// AWS demo units — Python uses PYTHON_UNITS from pythonSyllabus.ts
+const AWS_UNITS = [
   { id: 'aws_unit_1', title: '☁️ Cloud Concepts', xp: 10, prerequisites: [] },
   { id: 'aws_unit_2', title: '💰 Pricing & Billing', xp: 10, prerequisites: ['aws_unit_1'] },
   { id: 'aws_unit_3', title: '🖥️ EC2 Compute', xp: 15, prerequisites: ['aws_unit_1'] },
@@ -30,7 +31,7 @@ const DEMO_UNITS = [
 
 const PulsingNode = ({ onPress, unit, locked, completed, stars }: {
   onPress: () => void;
-  unit: typeof DEMO_UNITS[0];
+  unit: { id: string; title: string; xp: number };
   locked: boolean;
   completed: boolean;
   stars: number;
@@ -65,10 +66,22 @@ const PulsingNode = ({ onPress, unit, locked, completed, stars }: {
 };
 
 export default function LearnTab() {
-  const [activeSubject, setActiveSubject] = useState('aws');
+  const [activeSubject, setActiveSubject] = useState('python');
   const { streak, xp, hearts, isPro } = useUserStore();
   const { getUnitProgress, isUnitUnlocked } = useProgressStore();
   const { triggerTap } = useGameFeedback();
+
+  const activeUnits =
+    activeSubject === 'python'
+      ? PYTHON_UNITS.map(u => ({
+          id: u.id,
+          title: `🐍 ${u.title}`,
+          xp: u.xp,
+          prerequisites: u.prerequisites,
+        }))
+      : activeSubject === 'aws'
+        ? AWS_UNITS
+        : [];
 
   const handleUnitPress = (unitId: string) => {
     triggerTap();
@@ -123,8 +136,8 @@ export default function LearnTab() {
       {/* Skill tree */}
       <ScrollView contentContainerStyle={styles.treeScroll}>
         <Animated.View entering={FadeInDown.duration(400)}>
-          {activeSubject === 'aws' ? (
-            DEMO_UNITS.map((unit, i) => {
+          {activeUnits.length > 0 ? (
+            activeUnits.map((unit, i) => {
               const progress = getUnitProgress(unit.id);
               const locked = !isUnitUnlocked(unit.id, unit.prerequisites);
               const isEven = i % 2 === 0;
