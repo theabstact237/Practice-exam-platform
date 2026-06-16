@@ -53,6 +53,7 @@ const SYLLABUS_OPTIONS = [
   { key: 'solutions_architect', label: 'Solutions Architect' },
   { key: 'cloud_practitioner', label: 'Cloud Practitioner' },
   { key: 'developer', label: 'Developer' },
+  { key: 'python', label: '🐍 Python Programming' },
 ];
 
 const AIAssistantModal: React.FC<AIAssistantModalProps> = ({

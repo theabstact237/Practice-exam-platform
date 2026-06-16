@@ -16,6 +16,9 @@ interface UserState {
   user: UserProfile | null;
   xp: number;
   weeklyXp: number;
+  dailyXp: number;
+  lastXpDate: string | null;
+  dailyGoalMins: number;
   streak: number;
   longestStreak: number;
   lastStudyDate: string | null;
@@ -31,8 +34,10 @@ interface UserState {
   setUser: (user: UserProfile | null) => void;
   signOut: () => Promise<void>;
   addXP: (amount: number) => void;
+  setDailyGoal: (mins: number) => void;
   checkAndUpdateStreak: () => void;
   loseHeart: () => void;
+  gainHeart: () => void;
   refillHearts: () => void;
   addGems: (amount: number) => void;
   spendGems: (amount: number) => boolean;
@@ -50,6 +55,9 @@ const initialState = {
   user: null,
   xp: 0,
   weeklyXp: 0,
+  dailyXp: 0,
+  lastXpDate: null,
+  dailyGoalMins: 10,
   streak: 0,
   longestStreak: 0,
   lastStudyDate: null,
@@ -79,10 +87,19 @@ export const useUserStore = create<UserState>((set, get) => ({
   },
 
   addXP: (amount) => {
+    const today = new Date().toISOString().split('T')[0];
     set(state => ({
       xp: state.xp + amount,
       weeklyXp: state.weeklyXp + amount,
+      // Daily XP resets automatically when the date changes.
+      dailyXp: (state.lastXpDate === today ? state.dailyXp : 0) + amount,
+      lastXpDate: today,
     }));
+    get().saveToStorage();
+  },
+
+  setDailyGoal: (mins) => {
+    set({ dailyGoalMins: mins });
     get().saveToStorage();
   },
 
@@ -111,6 +128,13 @@ export const useUserStore = create<UserState>((set, get) => ({
   loseHeart: () => {
     set(state => ({
       hearts: Math.max(0, state.hearts - 1),
+    }));
+    get().saveToStorage();
+  },
+
+  gainHeart: () => {
+    set(state => ({
+      hearts: Math.min(state.maxHearts, state.hearts + 1),
     }));
     get().saveToStorage();
   },
@@ -166,6 +190,9 @@ export const useUserStore = create<UserState>((set, get) => ({
       const toSave = {
         xp: state.xp,
         weeklyXp: state.weeklyXp,
+        dailyXp: state.dailyXp,
+        lastXpDate: state.lastXpDate,
+        dailyGoalMins: state.dailyGoalMins,
         streak: state.streak,
         longestStreak: state.longestStreak,
         lastStudyDate: state.lastStudyDate,

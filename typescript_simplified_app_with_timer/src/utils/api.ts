@@ -125,6 +125,30 @@ export const getExamsByType = async (examType: string): Promise<Exam[]> => {
 };
 
 /**
+ * Fetch random questions directly from the DB for a given exam ID.
+ * Used for static exam types (e.g. Python) that have pre-loaded questions
+ * and do not use Manus AI generation.
+ */
+export const getRandomQuestions = async (
+  examId: number,
+  limit = 50,
+): Promise<Question[]> => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/exams/${examId}/random-questions/?limit=${limit}`,
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.questions || [];
+  } catch (error) {
+    console.error('Error fetching random questions:', error);
+    throw error;
+  }
+};
+
+/**
  * Generate syllabus-specific lecture roadmap from AI assistant endpoint.
  * Retries once if the server appears to be waking up (Render free tier sleep).
  */

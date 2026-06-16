@@ -20,6 +20,7 @@ import {
   ScrollView,
   Dimensions,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -40,7 +41,20 @@ import { useUserStore } from '../../stores/useUserStore';
 import { useProgressStore } from '../../stores/useProgressStore';
 import { useGameFeedback } from '../../hooks/useGameFeedback';
 import { getExamsByType, getRandomQuestions, APIQuestion } from '../../utils/api';
+import { API_BASE_URL } from '../../config/api';
+import axios from 'axios';
 import { getPythonUnitById, unitIdToExamType } from '../../constants/pythonSyllabus';
+import {
+  subjectIdFromUnit,
+  extractHint,
+  fetchBonusQuestion,
+} from '../../utils/lessonHearts';
+import { MascotGuide } from '../../components/MascotGuide';
+import { GameOverModal } from '../../components/GameOverModal';
+import { HeartRecoveryModal } from '../../components/HeartRecoveryModal';
+import { HeartEarnedAnimation } from '../../components/HeartEarnedAnimation';
+import { LoginToSaveNotice } from '../../components/LoginToSaveNotice';
+import { CodeAwareText } from '../../components/CodeAwareText';
 
 const { width } = Dimensions.get('window');
 const QUESTION_TIME = 90; // seconds per question
@@ -141,7 +155,7 @@ const AnswerCard = ({
         <View style={[styles.answerLetter, { borderColor, backgroundColor: borderColor + '30' }]}>
           <Text style={[styles.answerLetterText, { color: borderColor }]}>{letter}</Text>
         </View>
-        <Text style={[styles.answerText, { color: textColor }]}>{text}</Text>
+        <CodeAwareText style={[styles.answerText, { color: textColor }]}>{text}</CodeAwareText>
         {state === 'correct' && <Text style={styles.answerIcon}>✓</Text>}
         {state === 'wrong' && <Text style={styles.answerIcon}>✗</Text>}
       </TouchableOpacity>
@@ -163,11 +177,16 @@ const HeartsBar = ({ hearts, max }: { hearts: number; max: number }) => (
 // ── Main component ─────────────────────────────────────────────────────────
 export default function LessonScreen() {
   const { unitId } = useLocalSearchParams<{ unitId: string }>();
-  const { hearts, maxHearts, isPro, addXP, loseHeart, checkAndUpdateStreak } = useUserStore();
+  const subjectId = subjectIdFromUnit(unitId ?? '');
+  const { hearts, maxHearts, isPro, user, addXP, loseHeart, gainHeart, checkAndUpdateStreak } = useUserStore();
   const { completeUnit } = useProgressStore();
   const feedback = useGameFeedback();
 
   const [questions, setQuestions] = useState<APIQuestion[]>([]);
+  const [examId, setExamId] = useState<number | null>(null);
+  const [lessonMode, setLessonMode] = useState<'normal' | 'retry'>('normal');
+  const [savedNormal, setSavedNormal] = useState<{ questions: APIQuestion[]; index: number } | null>(null);
+  const [failedIndices, setFailedIndices] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -180,47 +199,111 @@ export default function LessonScreen() {
   const [xpAmount, setXPAmount] = useState(10);
   const [finished, setFinished] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [pendingRecovery, setPendingRecovery] = useState(false);
+  const [showRecovery, setShowRecovery] = useState(false);
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showHeartEarned, setShowHeartEarned] = useState(false);
+  const [bonusQuestion, setBonusQuestion] = useState<APIQuestion | null>(null);
+  const [bonusLoading, setBonusLoading] = useState(false);
+  const [hintShown, setHintShown] = useState(false);
 
   const timerInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const heartsRef = useRef(hearts);
+  heartsRef.current = hearts;
+
+  const recordFailure = useCallback((index: number) => {
+    setFailedIndices(prev => (prev.includes(index) ? prev : [...prev, index].sort((a, b) => a - b)));
+  }, []);
+
+  const handleHeartLoss = useCallback((questionIndex: number) => {
+    if (isPro) return;
+    recordFailure(questionIndex);
+    const newHearts = Math.max(0, heartsRef.current - 1);
+    loseHeart();
+    if (newHearts <= 0) {
+      setShowGameOver(true);
+      setPendingRecovery(false);
+    } else if (newHearts === 1) {
+      setPendingRecovery(true);
+    }
+  }, [isPro, loseHeart, recordFailure]);
+
+  const resetQuestionUI = useCallback(() => {
+    setSelected(null);
+    setShowFeedback(false);
+    setHintShown(false);
+    setTimeLeft(QUESTION_TIME);
+    setTimerActive(true);
+  }, []);
+
+  const handleQuit = useCallback(() => {
+    Alert.alert(
+      'Quit lesson?',
+      'Your progress in this lesson will be lost.',
+      [
+        { text: 'Keep learning', style: 'cancel' },
+        { text: 'Quit', style: 'destructive', onPress: () => router.back() },
+      ],
+    );
+  }, []);
+
+  const awardHeartBack = useCallback(() => {
+    gainHeart();
+    setShowHeartEarned(true);
+    setPendingRecovery(false);
+    setShowRecovery(false);
+  }, [gainHeart]);
 
   // ── Load questions ───────────────────────────────────────────────────────
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const examType = unitIdToExamType(unitId ?? '');
-        const exams = await getExamsByType(examType);
-        if (!exams.length) throw new Error(`No ${examType} exam found`);
-        const pool = await getRandomQuestions(exams[0].id, 50);
+  const loadQuestions = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const examType = unitIdToExamType(unitId ?? '');
+      const exams = await getExamsByType(examType);
+      if (!exams.length) throw new Error(`No ${examType} exam found on the server.`);
+      const pool = await getRandomQuestions(exams[0].id, 50);
 
-        const unit = getPythonUnitById(unitId ?? '');
-        let qs = pool;
-        if (unit) {
-          const unitPrefix = `${unit.code}:`;
-          const matched = pool.filter(q => q.domain.startsWith(unitPrefix));
-          if (matched.length >= 5) {
-            qs = matched.slice(0, 5);
-          } else {
-            qs = [...matched, ...pool.filter(q => !q.domain.startsWith(unitPrefix))].slice(0, 5);
-          }
+      const unit = getPythonUnitById(unitId ?? '');
+      let qs = pool;
+      if (unit) {
+        const unitPrefix = `${unit.code}:`;
+        const matched = pool.filter(q => q.domain.startsWith(unitPrefix));
+        if (matched.length >= 5) {
+          qs = matched.slice(0, 5);
         } else {
-          qs = pool.slice(0, 5);
+          qs = [...matched, ...pool.filter(q => !q.domain.startsWith(unitPrefix))].slice(0, 5);
         }
-
-        setQuestions(qs);
-        setTimerActive(true);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : 'Failed to load questions');
-      } finally {
-        setLoading(false);
+      } else {
+        qs = pool.slice(0, 5);
       }
-    };
-    load();
-    return () => { if (timerInterval.current) clearInterval(timerInterval.current); };
+
+      setQuestions(qs);
+      setExamId(exams[0].id);
+      setTimerActive(true);
+    } catch (e) {
+      if (axios.isAxiosError(e) && !e.response) {
+        setError(
+          `Can't reach the backend at ${API_BASE_URL}.\n\n` +
+          'Start Django on your PC:\npython manage.py runserver 0.0.0.0:8000\n\n' +
+          'Phone and PC must be on the same Wi‑Fi.',
+        );
+      } else {
+        setError(e instanceof Error ? e.message : 'Failed to load questions');
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [unitId]);
+
+  useEffect(() => {
+    loadQuestions();
+    return () => { if (timerInterval.current) clearInterval(timerInterval.current); };
+  }, [loadQuestions]);
 
   // ── Timer ────────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!timerActive || showFeedback) return;
+    if (!timerActive || showFeedback || showGameOver || showRecovery || bonusQuestion) return;
     timerInterval.current = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
@@ -231,21 +314,26 @@ export default function LessonScreen() {
       });
     }, 1000);
     return () => { if (timerInterval.current) clearInterval(timerInterval.current); };
-  }, [timerActive, showFeedback, currentIndex]);
+  }, [timerActive, showFeedback, showGameOver, showRecovery, bonusQuestion, currentIndex]);
 
   const handleTimeout = useCallback(() => {
     if (timerInterval.current) clearInterval(timerInterval.current);
     setTimerActive(false);
     feedback.triggerWrong();
-    if (!isPro) loseHeart();
+    if (lessonMode === 'retry') {
+      if (!isPro) loseHeart();
+      setShowGameOver(true);
+    } else {
+      handleHeartLoss(currentIndex);
+    }
     setShowFeedback(true);
-  }, [isPro, feedback, loseHeart]);
+  }, [isPro, feedback, handleHeartLoss, currentIndex, lessonMode, loseHeart]);
 
   const handleSelect = useCallback((letter: string) => {
-    if (showFeedback) return;
+    if (showFeedback || showGameOver || bonusQuestion) return;
     feedback.triggerSelect();
     setSelected(letter);
-  }, [showFeedback, feedback]);
+  }, [showFeedback, showGameOver, bonusQuestion, feedback]);
 
   const handleSubmit = useCallback(() => {
     if (!selected && !showFeedback) return;
@@ -256,7 +344,8 @@ export default function LessonScreen() {
     const isCorrect = selected === q.correct_answer_letter;
 
     if (isCorrect) {
-      const earnedXP = timeLeft > 60 ? 15 : 10; // speed bonus
+      // Hint usage caps XP; otherwise speed bonus applies.
+      const earnedXP = hintShown ? 5 : timeLeft > 60 ? 15 : 10;
       feedback.triggerCorrect();
       addXP(earnedXP);
       setXPAmount(earnedXP);
@@ -265,12 +354,59 @@ export default function LessonScreen() {
       setTimeout(() => setShowXP(false), 1000);
     } else {
       feedback.triggerWrong();
-      if (!isPro) loseHeart();
+      if (lessonMode === 'retry') {
+        if (!isPro) loseHeart();
+        setShowGameOver(true);
+      } else {
+        handleHeartLoss(currentIndex);
+      }
     }
     setShowFeedback(true);
-  }, [selected, showFeedback, questions, currentIndex, timeLeft, isPro, feedback, addXP, loseHeart]);
+  }, [selected, showFeedback, questions, currentIndex, timeLeft, hintShown, isPro, feedback, addXP, handleHeartLoss, lessonMode, loseHeart]);
+
+  const finishRetrySuccess = useCallback(() => {
+    awardHeartBack();
+    if (!savedNormal) return;
+    const { questions: normalQs, index } = savedNormal;
+    setQuestions(normalQs);
+    setSavedNormal(null);
+    setLessonMode('normal');
+    const nextIndex = index + 1;
+    if (nextIndex >= normalQs.length) {
+      const score = Math.round((correctCount / normalQs.length) * 100);
+      completeUnit(unitId as string, score);
+      checkAndUpdateStreak();
+      setFinished(true);
+    } else {
+      setCurrentIndex(nextIndex);
+      resetQuestionUI();
+    }
+  }, [awardHeartBack, savedNormal, resetQuestionUI, correctCount, unitId, completeUnit, checkAndUpdateStreak]);
 
   const handleNext = useCallback(() => {
+    if (showGameOver) return;
+
+    if (pendingRecovery && lessonMode === 'normal') {
+      setShowRecovery(true);
+      return;
+    }
+
+    if (lessonMode === 'retry') {
+      const isLast = currentIndex === questions.length - 1;
+      const q = questions[currentIndex];
+      const wasCorrect = selected === q.correct_answer_letter;
+
+      if (!wasCorrect) return;
+
+      if (isLast) {
+        finishRetrySuccess();
+        return;
+      }
+      setCurrentIndex(i => i + 1);
+      resetQuestionUI();
+      return;
+    }
+
     const isLast = currentIndex === questions.length - 1;
     if (isLast) {
       const score = Math.round((correctCount / questions.length) * 100);
@@ -285,12 +421,73 @@ export default function LessonScreen() {
       setFinished(true);
     } else {
       setCurrentIndex(i => i + 1);
+      resetQuestionUI();
+    }
+  }, [
+    showGameOver, pendingRecovery, lessonMode, currentIndex, questions, selected,
+    finishRetrySuccess, resetQuestionUI, correctCount, unitId, feedback,
+    completeUnit, checkAndUpdateStreak,
+  ]);
+
+  const handleStartRetry = useCallback(() => {
+    if (!failedIndices.length) return;
+    setSavedNormal({ questions, index: currentIndex });
+    setQuestions(failedIndices.map(i => questions[i]));
+    setCurrentIndex(0);
+    setLessonMode('retry');
+    setShowRecovery(false);
+    resetQuestionUI();
+  }, [failedIndices, questions, currentIndex, resetQuestionUI]);
+
+  const handleStartBonus = useCallback(async () => {
+    if (!examId) return;
+    setBonusLoading(true);
+    setShowRecovery(false);
+    try {
+      const q = await fetchBonusQuestion(examId);
+      if (!q) throw new Error('No bonus question available');
+      setBonusQuestion(q);
       setSelected(null);
       setShowFeedback(false);
-      setTimeLeft(QUESTION_TIME);
-      setTimerActive(true);
+    } catch {
+      setShowRecovery(true);
+    } finally {
+      setBonusLoading(false);
     }
-  }, [currentIndex, questions.length, correctCount, unitId, feedback, completeUnit, checkAndUpdateStreak]);
+  }, [examId]);
+
+  const handleBonusSubmit = useCallback(() => {
+    if (!bonusQuestion || !selected) return;
+    const isCorrect = selected === bonusQuestion.correct_answer_letter;
+    if (isCorrect) {
+      feedback.triggerCorrect();
+      setBonusQuestion(null);
+      setSelected(null);
+      awardHeartBack();
+      resetQuestionUI();
+    } else {
+      feedback.triggerWrong();
+      if (!isPro) loseHeart();
+      setBonusQuestion(null);
+      setShowGameOver(true);
+      setPendingRecovery(false);
+    }
+  }, [bonusQuestion, selected, feedback, awardHeartBack, resetQuestionUI, isPro, loseHeart]);
+
+  const handleSkipRecovery = useCallback(() => {
+    setShowRecovery(false);
+    setPendingRecovery(false);
+    resetQuestionUI();
+    const isLast = currentIndex === questions.length - 1;
+    if (isLast) {
+      const score = Math.round((correctCount / questions.length) * 100);
+      completeUnit(unitId as string, score);
+      checkAndUpdateStreak();
+      setFinished(true);
+    } else {
+      setCurrentIndex(i => i + 1);
+    }
+  }, [resetQuestionUI, currentIndex, questions.length, correctCount, unitId, completeUnit, checkAndUpdateStreak]);
 
   // ── Render states ─────────────────────────────────────────────────────────
   if (loading) return (
@@ -304,8 +501,11 @@ export default function LessonScreen() {
     <SafeAreaView style={styles.centered}>
       <Text style={styles.errorEmoji}>😕</Text>
       <Text style={styles.errorText}>{error}</Text>
-      <TouchableOpacity style={styles.retryBtn} onPress={() => router.back()}>
-        <Text style={styles.retryBtnText}>Go Back</Text>
+      <TouchableOpacity style={styles.retryBtn} onPress={loadQuestions}>
+        <Text style={styles.retryBtnText}>Try Again</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.backLink} onPress={() => router.back()}>
+        <Text style={styles.backLinkText}>Go Back</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -321,6 +521,7 @@ export default function LessonScreen() {
         />
       )}
       <ScrollView contentContainerStyle={styles.resultScroll}>
+        {!user && <LoginToSaveNotice subjectId={subjectId} variant="card" />}
         <Text style={styles.resultEmoji}>
           {correctCount === questions.length ? '🎉' : correctCount >= questions.length / 2 ? '👍' : '💪'}
         </Text>
@@ -355,12 +556,83 @@ export default function LessonScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      <GameOverModal
+        visible={showGameOver}
+        subjectId={subjectId}
+        onContinue={() => router.back()}
+      />
+      <HeartRecoveryModal
+        visible={showRecovery}
+        subjectId={subjectId}
+        failedCount={failedIndices.length}
+        onRetryFailed={handleStartRetry}
+        onBonusChallenge={handleStartBonus}
+        onSkip={handleSkipRecovery}
+      />
+      <HeartEarnedAnimation
+        visible={showHeartEarned}
+        onDone={() => setShowHeartEarned(false)}
+      />
+
+      {/* Bonus heart challenge overlay */}
+      {bonusQuestion && (
+        <View style={styles.bonusOverlay}>
+          <View style={styles.bonusCard}>
+            <MascotGuide
+              subjectId={subjectId}
+              message="Bonus challenge! This one's tough — get it right and you earn a heart back."
+            />
+            {extractHint(bonusQuestion.explanation) && (
+              <View style={styles.hintBox}>
+                <Text style={styles.hintLabel}>💡 Hint</Text>
+                <Text style={styles.hintText}>{extractHint(bonusQuestion.explanation)}</Text>
+              </View>
+            )}
+            <CodeAwareText style={styles.questionText}>{bonusQuestion.question_text}</CodeAwareText>
+            <View style={styles.answersContainer}>
+              {bonusQuestion.answers.map(a => (
+                <AnswerCard
+                  key={a.letter}
+                  letter={a.letter}
+                  text={a.text}
+                  state={selected === a.letter ? 'selected' : 'default'}
+                  onPress={() => setSelected(a.letter)}
+                  disabled={false}
+                />
+              ))}
+            </View>
+            <TouchableOpacity
+              style={[styles.submitBtn, !selected && styles.submitBtnDisabled]}
+              onPress={handleBonusSubmit}
+              disabled={!selected}
+            >
+              <Text style={styles.submitBtnText}>Submit Bonus Answer</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.skipBtn} onPress={() => { setBonusQuestion(null); setShowRecovery(true); }}>
+              <Text style={styles.skipText}>← Back to options</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      {bonusLoading && (
+        <View style={styles.bonusOverlay}>
+          <ActivityIndicator size="large" color={Colors.primary} />
+          <Text style={styles.loadingText}>Preparing bonus challenge…</Text>
+        </View>
+      )}
+
       {/* XP float */}
       <XPFloat amount={xpAmount} visible={showXP} />
 
       {/* Header: progress + hearts + quit */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.quitBtn}>
+        <TouchableOpacity
+          onPress={handleQuit}
+          style={styles.quitBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Quit lesson"
+        >
           <Text style={styles.quitBtnText}>✕</Text>
         </TouchableOpacity>
         <View style={styles.progressBar}>
@@ -373,6 +645,8 @@ export default function LessonScreen() {
         </View>
         <HeartsBar hearts={isPro ? 5 : hearts} max={isPro ? 5 : maxHearts} />
       </View>
+
+      {!user && <LoginToSaveNotice subjectId={subjectId} />}
 
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Question counter + timer */}
@@ -415,9 +689,35 @@ export default function LessonScreen() {
         </View>
 
         {/* Question text */}
-        <Text style={styles.questionText}>
-          {q.question_text || q.question}
-        </Text>
+        {lessonMode === 'retry' && (
+          <MascotGuide
+            subjectId={subjectId}
+            message="Retry round — answer every missed question perfectly. One mistake ends the lesson!"
+            compact
+          />
+        )}
+        <CodeAwareText style={styles.questionText}>
+          {q.question_text || q.question || ''}
+        </CodeAwareText>
+
+        {/* Hint (direct questions only) */}
+        {!showFeedback && extractHint(q.explanation) && (
+          hintShown ? (
+            <View style={styles.hintBox}>
+              <Text style={styles.hintLabel}>💡 Hint (-XP)</Text>
+              <CodeAwareText style={styles.hintText}>{extractHint(q.explanation) ?? ''}</CodeAwareText>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.hintBtn}
+              onPress={() => { feedback.triggerSelect(); setHintShown(true); }}
+              accessibilityRole="button"
+              accessibilityLabel="Show hint, reduces XP for this question"
+            >
+              <Text style={styles.hintBtnText}>💡 Show hint (caps XP at +5)</Text>
+            </TouchableOpacity>
+          )
+        )}
 
         {/* Answer options */}
         <View style={styles.answersContainer}>
@@ -458,15 +758,36 @@ export default function LessonScreen() {
                   ? '⏱️ Time\'s Up!'
                   : '❌ Incorrect'}
               </Text>
+              {selected !== q.correct_answer_letter && !showGameOver && (
+                <MascotGuide
+                  subjectId={subjectId}
+                  message={
+                    pendingRecovery
+                      ? "That cost a heart! You have one left — I'll help you earn it back on the next step."
+                      : 'No worries — read the explanation and keep going!'
+                  }
+                  compact
+                />
+              )}
               <Text style={styles.feedbackAnswer}>
                 Correct answer: <Text style={styles.feedbackAnswerHighlight}>{q.correct_answer_letter}</Text>
               </Text>
-              <Text style={styles.feedbackExplanation}>{q.explanation}</Text>
+              <CodeAwareText style={styles.feedbackExplanation}>{q.explanation}</CodeAwareText>
             </View>
 
-            <TouchableOpacity style={styles.nextBtn} onPress={handleNext}>
+            <TouchableOpacity
+              style={[styles.nextBtn, showGameOver && styles.submitBtnDisabled]}
+              onPress={handleNext}
+              disabled={showGameOver}
+            >
               <Text style={styles.nextBtnText}>
-                {currentIndex === questions.length - 1 ? 'Finish Lesson 🎉' : 'Next Question →'}
+                {pendingRecovery && lessonMode === 'normal'
+                  ? 'Choose recovery option →'
+                  : lessonMode === 'retry' && currentIndex === questions.length - 1
+                  ? 'Complete retry 🔄'
+                  : currentIndex === questions.length - 1
+                  ? 'Finish Lesson 🎉'
+                  : 'Next Question →'}
               </Text>
             </TouchableOpacity>
           </Animated.View>
@@ -481,9 +802,11 @@ const styles = StyleSheet.create({
   centered: { flex: 1, backgroundColor: Colors.bgDeep, alignItems: 'center', justifyContent: 'center', gap: Spacing.md },
   loadingText: { color: Colors.textSecondary, fontSize: FontSize.md },
   errorEmoji: { fontSize: 60 },
-  errorText: { color: Colors.error, fontSize: FontSize.md, textAlign: 'center', paddingHorizontal: Spacing.lg },
-  retryBtn: { backgroundColor: Colors.primary, borderRadius: Radius.md, paddingHorizontal: Spacing.xl, paddingVertical: Spacing.sm },
+  errorText: { color: Colors.error, fontSize: FontSize.md, textAlign: 'center', paddingHorizontal: Spacing.lg, lineHeight: 22, marginBottom: Spacing.md },
+  retryBtn: { backgroundColor: Colors.primary, borderRadius: Radius.md, paddingHorizontal: Spacing.xl, paddingVertical: Spacing.sm, marginTop: Spacing.sm },
   retryBtnText: { color: Colors.bgDeep, fontWeight: FontWeight.bold },
+  backLink: { marginTop: Spacing.md, padding: Spacing.sm },
+  backLinkText: { color: Colors.textSecondary, fontSize: FontSize.sm },
 
   // XP float
   xpFloat: { position: 'absolute', top: 100, right: Spacing.lg, zIndex: 999 },
@@ -607,4 +930,47 @@ const styles = StyleSheet.create({
   starsRow: { flexDirection: 'row', gap: Spacing.sm, marginBottom: Spacing.xl },
   ctaButton: { backgroundColor: Colors.primary, borderRadius: Radius.lg, paddingHorizontal: Spacing.xxl, paddingVertical: Spacing.md },
   ctaText: { color: Colors.bgDeep, fontSize: FontSize.lg, fontWeight: FontWeight.bold },
+
+  bonusOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    zIndex: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: Spacing.md,
+  },
+  bonusCard: {
+    width: '100%',
+    maxHeight: '90%',
+    backgroundColor: Colors.bgDeep,
+    borderRadius: Radius.xl,
+    padding: Spacing.md,
+    borderWidth: 1,
+    borderColor: Colors.primary + '50',
+  },
+  hintBox: {
+    backgroundColor: Colors.warning + '18',
+    borderRadius: Radius.md,
+    padding: Spacing.sm,
+    marginBottom: Spacing.md,
+    borderWidth: 1,
+    borderColor: Colors.warning + '40',
+  },
+  hintLabel: { color: Colors.warning, fontSize: FontSize.xs, fontWeight: FontWeight.bold, marginBottom: 4 },
+  hintText: { color: Colors.textPrimary, fontSize: FontSize.sm, lineHeight: 18 },
+  hintBtn: {
+    alignSelf: 'flex-start',
+    backgroundColor: Colors.warning + '18',
+    borderColor: Colors.warning + '45',
+    borderWidth: 1,
+    borderRadius: Radius.full,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    marginBottom: Spacing.md,
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  hintBtnText: { color: Colors.warning, fontSize: FontSize.sm, fontWeight: FontWeight.semibold },
+  skipBtn: { alignItems: 'center', paddingVertical: Spacing.sm, marginTop: Spacing.sm },
+  skipText: { color: Colors.textMuted, fontSize: FontSize.sm },
 });

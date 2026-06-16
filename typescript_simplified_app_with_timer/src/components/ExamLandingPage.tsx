@@ -134,6 +134,44 @@ const examData: { [key: string]: {
     ],
     color: 'orange',
     gradient: 'from-orange-500 to-amber-600'
+  },
+  python: {
+    title: '🐍 Python Programming',
+    subtitle: 'Beginner to Advanced — 14 Chapters',
+    description: 'A gamified Python curriculum that takes you from your very first script all the way to working with APIs and OOP. 100 questions across 14 chapters — 70% multiple-choice with immediate explanations, 30% direct/short-answer. Perfect for beginners and developers levelling up their Python skills.',
+    duration: '90 minutes',
+    questions: 50,
+    passingScore: 70,
+    domains: [
+      {
+        name: 'Foundations',
+        percentage: 29,
+        topics: ['Python Adventure Start', 'Variables', 'Data Types', 'Print / Input']
+      },
+      {
+        name: 'Control Flow',
+        percentage: 21,
+        topics: ['Conditional If/Else', 'While Loops', 'For Loops']
+      },
+      {
+        name: 'Data Structures',
+        percentage: 29,
+        topics: ['Lists', 'Dictionaries', 'Tuples / Sets', 'Modular Functions']
+      },
+      {
+        name: 'Advanced Python',
+        percentage: 21,
+        topics: ['Classes / OOP', 'API Integration', 'Master Programmer']
+      }
+    ],
+    tips: [
+      'Practice writing short snippets — reading code in questions is key',
+      'Know the difference between mutable (list, dict) and immutable (tuple, str) types',
+      'Understand function scope, return values, and default arguments',
+      'For OOP questions, focus on __init__, self, and inheritance basics'
+    ],
+    color: 'emerald',
+    gradient: 'from-emerald-500 to-green-600'
   }
 };
 

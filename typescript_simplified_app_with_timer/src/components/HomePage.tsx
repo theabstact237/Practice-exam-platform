@@ -356,7 +356,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
             AI-Powered Learning Platform
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold mb-8 tracking-tighter font-['Space_Grotesk'] leading-[0.9]">
-            Master <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-500 text-glow">AWS</span> <br /> 
+            Master <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-500 text-glow">Tech</span> <br /> 
             Certifications
           </h1>
           <p className="text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed font-light">
@@ -384,6 +384,12 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                 className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-lg font-bold border border-slate-700 transition-all hover:scale-105"
               >
                 Developer Associate
+              </button>
+              <button
+                onClick={() => onSelectExam('python')}
+                className="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-lg font-bold border border-emerald-500/40 transition-all shadow-lg shadow-emerald-500/20 hover:scale-105"
+              >
+                🐍 Python
               </button>
             </div>
           </div>

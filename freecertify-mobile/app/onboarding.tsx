@@ -164,7 +164,10 @@ export default function Onboarding() {
                   activeOpacity={0.8}
                 >
                   <Text style={styles.subjectEmoji}>{s.emoji}</Text>
-                  <Text style={[styles.subjectName, subject === s.id && { color: s.color }]}>
+                  <Text
+                    style={[styles.subjectName, subject === s.id && { color: s.color }]}
+                    numberOfLines={2}
+                  >
                     {s.name}
                   </Text>
                 </TouchableOpacity>
@@ -282,16 +285,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgDark,
     borderRadius: Radius.lg,
     borderWidth: 2,
-    padding: Spacing.md,
+    paddingVertical: Spacing.lg,
+    paddingHorizontal: Spacing.sm,
     alignItems: 'center',
+    justifyContent: 'center',
     gap: Spacing.sm,
+    minHeight: 108,
   },
-  subjectEmoji: { fontSize: 36 },
+  subjectEmoji: { fontSize: 36, lineHeight: 42 },
   subjectName: {
     color: Colors.textPrimary,
     fontSize: FontSize.sm,
     fontWeight: FontWeight.bold,
     textAlign: 'center',
+    lineHeight: 18,
+    paddingHorizontal: Spacing.xs,
   },
   ctaButton: {
     backgroundColor: Colors.primary,

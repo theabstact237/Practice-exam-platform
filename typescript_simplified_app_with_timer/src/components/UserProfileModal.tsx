@@ -22,6 +22,7 @@ const EXAM_LABELS: Record<string, string> = {
   sysops: 'AWS SysOps Administrator',
   security: 'AWS Security Specialty',
   machine_learning: 'AWS Machine Learning',
+  python: '🐍 Python Programming',
 };
 
 const fmt = (iso: string) =>

@@ -3,15 +3,12 @@
  * Reused from the web app with React Native fetch compatibility.
  */
 import axios from 'axios';
+import { API_BASE_URL, apiRequestHeaders } from '../config/api';
 
-// ── Base URL ──────────────────────────────────────────────────────────────────
-// Change this to your deployed backend URL for production builds.
-const BASE_URL =
-  process.env.EXPO_PUBLIC_API_BASE_URL ||
-  'https://aws-exam-backend.onrender.com';
+export { API_BASE_URL, checkBackendReachable } from '../config/api';
 
 export const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_BASE_URL,
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -123,13 +120,174 @@ export const getUserAttempts = async (userUid: string) => {
   return Array.isArray(data) ? data : [];
 };
 
-// ── AI Assistant ───────────────────────────────────────────────────────────────
+// ── AI Assistant (same Django endpoints as web — provider-agnostic branding) ───
 
-export const getSyllabusLectures = async (syllabus: string) => {
-  const { data } = await api.post('/api/assistant/syllabus-lectures/', {
-    syllabus,
+export interface SyllabusLecture {
+  title: string;
+  focus: string;
+  duration_minutes: number;
+  resources: string[];
+  hands_on_lab: string;
+}
+
+export interface SyllabusLecturePlan {
+  syllabus: string;
+  syllabus_label: string;
+  provider: string;
+  overview: string;
+  lectures: SyllabusLecture[];
+}
+
+export interface AssistantChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  off_topic?: boolean;
+}
+
+export interface AssistantChatResponse {
+  syllabus: string;
+  provider: string;
+  reply: string;
+  off_topic?: boolean;
+}
+
+export const getSyllabusLectures = async (
+  syllabus: string,
+  onRetry?: () => void,
+): Promise<SyllabusLecturePlan> => {
+  const attempt = async (timeoutMs: number) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/assistant/syllabus-lectures/`, {
+        method: 'POST',
+        headers: apiRequestHeaders(),
+        body: JSON.stringify({ syllabus }),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      return (await response.json()) as SyllabusLecturePlan;
+    } catch (err) {
+      clearTimeout(timer);
+      throw err;
+    }
+  };
+
+  try {
+    return await attempt(65_000);
+  } catch (firstError) {
+    const isFetchFail =
+      firstError instanceof TypeError ||
+      (firstError instanceof Error && firstError.name === 'AbortError');
+
+    if (isFetchFail) {
+      onRetry?.();
+      await new Promise(res => setTimeout(res, 4000));
+      return await attempt(65_000);
+    }
+    throw firstError;
+  }
+};
+
+export const chatWithSyllabusAssistant = async (
+  syllabus: string,
+  message: string,
+  lectures: SyllabusLecture[],
+  history: AssistantChatMessage[] = [],
+): Promise<AssistantChatResponse> => {
+  const response = await fetch(`${API_BASE_URL}/api/assistant/chat/`, {
+    method: 'POST',
+    headers: apiRequestHeaders(),
+    body: JSON.stringify({ syllabus, message, lectures, history }),
   });
-  return data;
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+/**
+ * Stream chat responses token-by-token (SSE). Falls back to non-streaming if needed.
+ */
+export const streamChatWithSyllabusAssistant = async (
+  syllabus: string,
+  message: string,
+  lectures: SyllabusLecture[],
+  history: AssistantChatMessage[],
+  onDelta: (delta: string) => void,
+  onDone: (offTopic: boolean) => void,
+  onError: (error: string) => void,
+): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/api/assistant/chat/stream/`, {
+    method: 'POST',
+    headers: apiRequestHeaders(),
+    body: JSON.stringify({ syllabus, message, lectures, history }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    onError(errorData.error || `HTTP error! status: ${response.status}`);
+    return;
+  }
+
+  if (!response.body) {
+    try {
+      const result = await chatWithSyllabusAssistant(syllabus, message, lectures, history);
+      onDelta(result.reply);
+      onDone(!!result.off_topic);
+    } catch (e: any) {
+      onError(e?.message || 'Assistant request failed.');
+    }
+    return;
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() ?? '';
+
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (!raw) continue;
+
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed.error) {
+          onError(parsed.error);
+          return;
+        }
+        if (parsed.off_topic) {
+          if (parsed.reply) onDelta(parsed.reply);
+          onDone(true);
+          return;
+        }
+        if (parsed.done) {
+          onDone(false);
+          return;
+        }
+        if (parsed.delta) {
+          onDelta(parsed.delta);
+        }
+      } catch {
+        // skip malformed chunk
+      }
+    }
+  }
 };
 
 // ── Analytics ─────────────────────────────────────────────────────────────────

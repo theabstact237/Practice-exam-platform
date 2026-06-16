@@ -1,0 +1,802 @@
+{
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\__init__.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "81051bcc2cf1bedf378224b0a93e2877",
+    "semantic_hash": "81051bcc2cf1bedf378224b0a93e2877"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\admin.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "362f5ef37ded2f5e8e6a94efc751476d",
+    "semantic_hash": "362f5ef37ded2f5e8e6a94efc751476d"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\apps.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "908e0445ccf51bfac605b79d37e794dd",
+    "semantic_hash": "908e0445ccf51bfac605b79d37e794dd"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\migrations\\0001_initial.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "c697383a2dedf55d564cab08aaba3ca2",
+    "semantic_hash": "c697383a2dedf55d564cab08aaba3ca2"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\migrations\\0002_add_domain_scores.py": {
+    "mtime": 1774982322.5351522,
+    "ast_hash": "14e8363de71b93bd3e388c64deaa7011",
+    "semantic_hash": "14e8363de71b93bd3e388c64deaa7011"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\migrations\\__init__.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "81051bcc2cf1bedf378224b0a93e2877",
+    "semantic_hash": "81051bcc2cf1bedf378224b0a93e2877"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\models.py": {
+    "mtime": 1774982310.205337,
+    "ast_hash": "8c96d0310c5925c0d72d47b64a8bb900",
+    "semantic_hash": "8c96d0310c5925c0d72d47b64a8bb900"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\urls.py": {
+    "mtime": 1774526993.9035904,
+    "ast_hash": "a4bb441efe4f79b24a7a21946f0623f3",
+    "semantic_hash": "a4bb441efe4f79b24a7a21946f0623f3"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\analytics\\views.py": {
+    "mtime": 1774982367.125011,
+    "ast_hash": "fdd5eed89f5cd8f834ecee663c93e6a4",
+    "semantic_hash": "fdd5eed89f5cd8f834ecee663c93e6a4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\__init__.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\asgi.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "b34f9758f02a1decd133dd0bec04f99f",
+    "semantic_hash": "b34f9758f02a1decd133dd0bec04f99f"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\auth_views.py": {
+    "mtime": 1780847146.4458995,
+    "ast_hash": "d0a007390104381a942be0f9ac189421",
+    "semantic_hash": "d0a007390104381a942be0f9ac189421"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\settings.py": {
+    "mtime": 1774530577.4886398,
+    "ast_hash": "93a165772f9762e61f0cb53606393620",
+    "semantic_hash": "93a165772f9762e61f0cb53606393620"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\urls.py": {
+    "mtime": 1780847146.4795256,
+    "ast_hash": "4746d700f16cd2863ae22100b570232a",
+    "semantic_hash": "4746d700f16cd2863ae22100b570232a"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\aws_exam_backend\\wsgi.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "50ecb9b80550250517d8a1007c45c2d2",
+    "semantic_hash": "50ecb9b80550250517d8a1007c45c2d2"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\build.sh": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "4de95a5d400ab8b4b413475456350148",
+    "semantic_hash": "4de95a5d400ab8b4b413475456350148"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\__init__.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\admin.py": {
+    "mtime": 1776367826.914782,
+    "ast_hash": "46154b2ac3a11df1bb86d41632d462c4",
+    "semantic_hash": "46154b2ac3a11df1bb86d41632d462c4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\apps.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "a83a71683e9cfeb07bce30730173e0a4",
+    "semantic_hash": "a83a71683e9cfeb07bce30730173e0a4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\assistant.py": {
+    "mtime": 1774965949.697362,
+    "ast_hash": "9743c8018e90cb41eafb4ea868f8992e",
+    "semantic_hash": "9743c8018e90cb41eafb4ea868f8992e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\cloud_practitioner_100_questions.json": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "101af4983c316ce4b8b9b4db7f3c2a72",
+    "semantic_hash": "101af4983c316ce4b8b9b4db7f3c2a72"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\developer_100_questions.json": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "3985a3b0800d2647ca6cafd08a6bc65b",
+    "semantic_hash": "3985a3b0800d2647ca6cafd08a6bc65b"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\management\\__init__.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\management\\commands\\__init__.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\management\\commands\\create_exams.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "ed2a0ffa1c72ba2e188efcc33ecdb104",
+    "semantic_hash": "ed2a0ffa1c72ba2e188efcc33ecdb104"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\management\\commands\\create_superuser.py": {
+    "mtime": 1776355014.5149043,
+    "ast_hash": "2b1c1a45b0ecab24ac769c0717272cfb",
+    "semantic_hash": "2b1c1a45b0ecab24ac769c0717272cfb"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\management\\commands\\import_questions.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "f242c4651483b0009168ea2ffb12cda3",
+    "semantic_hash": "f242c4651483b0009168ea2ffb12cda3"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0001_initial.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "07222f1565f17bde31ab6a04499a5731",
+    "semantic_hash": "07222f1565f17bde31ab6a04499a5731"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0002_add_performance_indexes.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "53ee93a8c9cee0f0672db40538fe0035",
+    "semantic_hash": "53ee93a8c9cee0f0672db40538fe0035"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0003_review.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "229bf25d59dc112e1de674c59943fc8d",
+    "semantic_hash": "229bf25d59dc112e1de674c59943fc8d"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0004_add_cached_lecture_plan_and_pinned_plan.py": {
+    "mtime": 1774536171.9419806,
+    "ast_hash": "6c6512346389e1d30c07e807fea1d12c",
+    "semantic_hash": "6c6512346389e1d30c07e807fea1d12c"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0005_add_cached_chat_response.py": {
+    "mtime": 1774969732.0213168,
+    "ast_hash": "2c01af6ee8a292130d31af999210119c",
+    "semantic_hash": "2c01af6ee8a292130d31af999210119c"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\0006_add_exam_attempt.py": {
+    "mtime": 1775014813.0546846,
+    "ast_hash": "f267e9b9120917b044fc73d932a893d0",
+    "semantic_hash": "f267e9b9120917b044fc73d932a893d0"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\migrations\\__init__.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\models.py": {
+    "mtime": 1775014805.8012133,
+    "ast_hash": "593643214af4dcf4dafe3d24afb9c268",
+    "semantic_hash": "593643214af4dcf4dafe3d24afb9c268"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\sample_questions.json": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "a75bf3a89bc92b9c096e3954d73e2be4",
+    "semantic_hash": "a75bf3a89bc92b9c096e3954d73e2be4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\serializers.py": {
+    "mtime": 1780847146.469071,
+    "ast_hash": "156c16a3e02a8b5693a189e376d045c8",
+    "semantic_hash": "156c16a3e02a8b5693a189e376d045c8"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\services.py": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "67cc3ed225d7aed97d1f90a54db0fb61",
+    "semantic_hash": "67cc3ed225d7aed97d1f90a54db0fb61"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\solutions_architect_100_questions.json": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "d3efa5f8ef8a438bf83b012adcec3070",
+    "semantic_hash": "d3efa5f8ef8a438bf83b012adcec3070"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\urls.py": {
+    "mtime": 1775312018.0799959,
+    "ast_hash": "97d42a5bad1df1bd467b0c418b2425b1",
+    "semantic_hash": "97d42a5bad1df1bd467b0c418b2425b1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\views.py": {
+    "mtime": 1780847146.4489012,
+    "ast_hash": "3c0440b5a57a799e424b4ee32bd40cac",
+    "semantic_hash": "3c0440b5a57a799e424b4ee32bd40cac"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\manage.py": {
+    "mtime": 1774015412.2310946,
+    "ast_hash": "502a42f5fd5fa043455b9f82f817b76f",
+    "semantic_hash": "502a42f5fd5fa043455b9f82f817b76f"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\package.json": {
+    "mtime": 1774015412.2345893,
+    "ast_hash": "626aa205159d1abcc8bff7eb140e5d13",
+    "semantic_hash": "626aa205159d1abcc8bff7eb140e5d13"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\pyrightconfig.json": {
+    "mtime": 1774015412.2345893,
+    "ast_hash": "4b03887601bdac80cc5bdcc4318b332f",
+    "semantic_hash": "4b03887601bdac80cc5bdcc4318b332f"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\tests\\__init__.py": {
+    "mtime": 1779916782.7494998,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\tests\\conftest.py": {
+    "mtime": 1780847146.4772265,
+    "ast_hash": "3c0297ac38353c41dbcc49fd7309db9c",
+    "semantic_hash": "3c0297ac38353c41dbcc49fd7309db9c"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\tests\\test_analytics_api.py": {
+    "mtime": 1780847146.4439695,
+    "ast_hash": "1bca6d74debea8b33427e2da58b90d98",
+    "semantic_hash": "1bca6d74debea8b33427e2da58b90d98"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\tests\\test_exam_api.py": {
+    "mtime": 1779916779.6007378,
+    "ast_hash": "90045643557123d7154b0a2f8d2f1bcd",
+    "semantic_hash": "90045643557123d7154b0a2f8d2f1bcd"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\tests\\test_exam_models.py": {
+    "mtime": 1780847146.4680707,
+    "ast_hash": "4f8c43bc59fa9568cf1d59cc1deb492c",
+    "semantic_hash": "4f8c43bc59fa9568cf1d59cc1deb492c"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\.claude\\settings.json": {
+    "mtime": 1779917049.627361,
+    "ast_hash": "dc580fca35a0e98ed20777ede5e545a1",
+    "semantic_hash": "dc580fca35a0e98ed20777ede5e545a1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\.expo\\devices.json": {
+    "mtime": 1780260586.1200716,
+    "ast_hash": "43547189fc5e501cc9b5db42d1dba47e",
+    "semantic_hash": "43547189fc5e501cc9b5db42d1dba47e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\.expo\\types\\router.d.ts": {
+    "mtime": 1780316366.8082314,
+    "ast_hash": "2cf4a3e9842dd32d59db12edfba4db25",
+    "semantic_hash": "2cf4a3e9842dd32d59db12edfba4db25"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app.json": {
+    "mtime": 1780847146.460021,
+    "ast_hash": "8d4d7e76d7862e082748d6302c02a253",
+    "semantic_hash": "8d4d7e76d7862e082748d6302c02a253"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\_layout.tsx": {
+    "mtime": 1779917353.6783216,
+    "ast_hash": "15d99acbb2af19375e7c8e2425f92ee4",
+    "semantic_hash": "15d99acbb2af19375e7c8e2425f92ee4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\leaderboard.tsx": {
+    "mtime": 1780847146.449414,
+    "ast_hash": "3f67d695224e7e68baa5e03ea5f933dc",
+    "semantic_hash": "3f67d695224e7e68baa5e03ea5f933dc"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\learn.tsx": {
+    "mtime": 1780847146.4539685,
+    "ast_hash": "3b50a390dc0eeea7381169fa4f7bd341",
+    "semantic_hash": "3b50a390dc0eeea7381169fa4f7bd341"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\profile.tsx": {
+    "mtime": 1780847146.4725857,
+    "ast_hash": "ad4f3de47666cade9d6f6ca61438bb77",
+    "semantic_hash": "ad4f3de47666cade9d6f6ca61438bb77"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\progress.tsx": {
+    "mtime": 1780847146.4504426,
+    "ast_hash": "9a4869567475ab930f1568d7efa3485d",
+    "semantic_hash": "9a4869567475ab930f1568d7efa3485d"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\(tabs)\\tutor.tsx": {
+    "mtime": 1780847146.4864144,
+    "ast_hash": "43f3d47ec52e91e90738424b62b5e0a9",
+    "semantic_hash": "43f3d47ec52e91e90738424b62b5e0a9"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\_layout.tsx": {
+    "mtime": 1780847146.4680707,
+    "ast_hash": "1a47b6dedeca2d7012147ea5883385a5",
+    "semantic_hash": "1a47b6dedeca2d7012147ea5883385a5"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\index.tsx": {
+    "mtime": 1779917305.9718952,
+    "ast_hash": "9b6a36bd82d67566f251336f7ed9b95a",
+    "semantic_hash": "9b6a36bd82d67566f251336f7ed9b95a"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\lesson\\[unitId].tsx": {
+    "mtime": 1780847146.441897,
+    "ast_hash": "08d7e761ee9ca4273100b013a93d8f79",
+    "semantic_hash": "08d7e761ee9ca4273100b013a93d8f79"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\login.tsx": {
+    "mtime": 1780847146.4640608,
+    "ast_hash": "85a3051e536f36c742ab654cc5af48d8",
+    "semantic_hash": "85a3051e536f36c742ab654cc5af48d8"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\app\\onboarding.tsx": {
+    "mtime": 1780847146.4650757,
+    "ast_hash": "994e5c30aac7f1e451a0122ecdd63e05",
+    "semantic_hash": "994e5c30aac7f1e451a0122ecdd63e05"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\babel.config.js": {
+    "mtime": 1780847146.4650757,
+    "ast_hash": "c1eac5371e78eb85364e101fa5085c6e",
+    "semantic_hash": "c1eac5371e78eb85364e101fa5085c6e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\config\\firebase.ts": {
+    "mtime": 1780847146.476215,
+    "ast_hash": "37fcdd0ce499ca89e72fee27cad60e1f",
+    "semantic_hash": "37fcdd0ce499ca89e72fee27cad60e1f"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\constants\\subjects.ts": {
+    "mtime": 1779917220.2167344,
+    "ast_hash": "6e9027255d9be4238ed10ed386615f8e",
+    "semantic_hash": "6e9027255d9be4238ed10ed386615f8e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\constants\\theme.ts": {
+    "mtime": 1779917207.773197,
+    "ast_hash": "9e8a64c55393a1339a84d00e90e80278",
+    "semantic_hash": "9e8a64c55393a1339a84d00e90e80278"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\eas.json": {
+    "mtime": 1780847146.4864144,
+    "ast_hash": "755a8e860a3451b6832e909d019f0a1f",
+    "semantic_hash": "755a8e860a3451b6832e909d019f0a1f"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\expo-env.d.ts": {
+    "mtime": 1780255532.2098687,
+    "ast_hash": "0dd9dccdb4b08595bc83df70d6a154d3",
+    "semantic_hash": "0dd9dccdb4b08595bc83df70d6a154d3"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\google-services.json": {
+    "mtime": 1780264004.5693443,
+    "ast_hash": "2fae9b4a33462744ab359b564facf0a1",
+    "semantic_hash": "2fae9b4a33462744ab359b564facf0a1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\hooks\\useGameFeedback.ts": {
+    "mtime": 1780847146.460021,
+    "ast_hash": "47870cc1d90eda6f8320baa115b95bfe",
+    "semantic_hash": "47870cc1d90eda6f8320baa115b95bfe"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\hooks\\useSocialAuth.ts": {
+    "mtime": 1780847146.4458995,
+    "ast_hash": "7e2ae4454417aa4ca581f1c7f8b0e44e",
+    "semantic_hash": "7e2ae4454417aa4ca581f1c7f8b0e44e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\package.json": {
+    "mtime": 1780847146.4458995,
+    "ast_hash": "ede54aa39fa1da4ad2c04917f8999d1c",
+    "semantic_hash": "ede54aa39fa1da4ad2c04917f8999d1c"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\stores\\useProgressStore.ts": {
+    "mtime": 1779917250.818561,
+    "ast_hash": "bf6ebffae34eaf3ca333ae00e66dd7f2",
+    "semantic_hash": "bf6ebffae34eaf3ca333ae00e66dd7f2"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\stores\\useUserStore.ts": {
+    "mtime": 1780847146.4720771,
+    "ast_hash": "c9b537dd6b21e2a904620d1515c01514",
+    "semantic_hash": "c9b537dd6b21e2a904620d1515c01514"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\tsconfig.json": {
+    "mtime": 1780034417.8576448,
+    "ast_hash": "85da5c0bf8f1b929693562bbd7fd9018",
+    "semantic_hash": "85da5c0bf8f1b929693562bbd7fd9018"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\utils\\api.ts": {
+    "mtime": 1780847146.476215,
+    "ast_hash": "7088bae192a0cb602c913d512909ff95",
+    "semantic_hash": "7088bae192a0cb602c913d512909ff95"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\e2e\\exam-flow.spec.ts": {
+    "mtime": 1779916908.1427476,
+    "ast_hash": "60c7182435ea4abac1f3aed926bf2e18",
+    "semantic_hash": "60c7182435ea4abac1f3aed926bf2e18"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\package.json": {
+    "mtime": 1779919245.3961532,
+    "ast_hash": "9aea89384ed71c5131297d8e459b0739",
+    "semantic_hash": "9aea89384ed71c5131297d8e459b0739"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\playwright.config.ts": {
+    "mtime": 1779916915.8830075,
+    "ast_hash": "d668dd7c849489a90b461c5831da1c50",
+    "semantic_hash": "d668dd7c849489a90b461c5831da1c50"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\postcss.config.js": {
+    "mtime": 1774015412.2419186,
+    "ast_hash": "5b84f4567208c7c747079c0477373231",
+    "semantic_hash": "5b84f4567208c7c747079c0477373231"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\public\\data\\aws_cloud_practitioner_questions.json": {
+    "mtime": 1774015412.2419186,
+    "ast_hash": "cebde207022210bd0f50723630f0c252",
+    "semantic_hash": "cebde207022210bd0f50723630f0c252"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\public\\data\\aws_questions.json": {
+    "mtime": 1774015412.2449398,
+    "ast_hash": "67e3093a61755259b859adfd7e0aae26",
+    "semantic_hash": "67e3093a61755259b859adfd7e0aae26"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\App.tsx": {
+    "mtime": 1780847146.456024,
+    "ast_hash": "dd38af8f0e843cfa09c93d63cf816947",
+    "semantic_hash": "dd38af8f0e843cfa09c93d63cf816947"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\components\\Certificate.test.tsx": {
+    "mtime": 1780847146.469071,
+    "ast_hash": "7f740caf7e7d5f83c827d5dfdef1a280",
+    "semantic_hash": "7f740caf7e7d5f83c827d5dfdef1a280"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\components\\DifficultyBadge.test.tsx": {
+    "mtime": 1779916873.8561304,
+    "ast_hash": "26c5c01ced51a01ae00fbf6024ad6dc1",
+    "semantic_hash": "26c5c01ced51a01ae00fbf6024ad6dc1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\components\\ExamInProgressModal.test.tsx": {
+    "mtime": 1779916890.4730778,
+    "ast_hash": "fba1d2f12b94683236c47b7073141a29",
+    "semantic_hash": "fba1d2f12b94683236c47b7073141a29"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\mocks\\api.ts": {
+    "mtime": 1779916845.4534068,
+    "ast_hash": "83a17795a22258d6dc988b9f4892e248",
+    "semantic_hash": "83a17795a22258d6dc988b9f4892e248"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\setup.ts": {
+    "mtime": 1779916833.2796245,
+    "ast_hash": "064b1bc51c768991e31d7d848d2ee556",
+    "semantic_hash": "064b1bc51c768991e31d7d848d2ee556"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\__tests__\\utils\\scoreCalculator.test.ts": {
+    "mtime": 1779916862.8302946,
+    "ast_hash": "5fbc1a00b6a41b39f20a6a4d7510e846",
+    "semantic_hash": "5fbc1a00b6a41b39f20a6a4d7510e846"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\AIAssistantModal.tsx": {
+    "mtime": 1774965626.6544762,
+    "ast_hash": "52cfc2eb3fdd128fdb1724a8660b4230",
+    "semantic_hash": "52cfc2eb3fdd128fdb1724a8660b4230"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\AnalyticsDashboard.tsx": {
+    "mtime": 1774982556.3471186,
+    "ast_hash": "0c6fbb315a232048295d1fef71b99952",
+    "semantic_hash": "0c6fbb315a232048295d1fef71b99952"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\Certificate.tsx": {
+    "mtime": 1774015412.2464452,
+    "ast_hash": "07560e43bfb0720d77b8a8eeccfd42ae",
+    "semantic_hash": "07560e43bfb0720d77b8a8eeccfd42ae"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\ExamInProgressModal.tsx": {
+    "mtime": 1774015412.2464452,
+    "ast_hash": "0047506391448dcb64815d6b2b0b1688",
+    "semantic_hash": "0047506391448dcb64815d6b2b0b1688"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\ExamLandingPage.tsx": {
+    "mtime": 1774960452.3723702,
+    "ast_hash": "3c95df725875c51d0b911e8ebc2c0150",
+    "semantic_hash": "3c95df725875c51d0b911e8ebc2c0150"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\HomePage.tsx": {
+    "mtime": 1775312159.3698008,
+    "ast_hash": "f3cff0b68038646d7906a042463567dc",
+    "semantic_hash": "f3cff0b68038646d7906a042463567dc"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\LanguageSelector.tsx": {
+    "mtime": 1774015412.2464452,
+    "ast_hash": "0d7de671c34308f4e13e216f483aaaf8",
+    "semantic_hash": "0d7de671c34308f4e13e216f483aaaf8"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\LoginModal.tsx": {
+    "mtime": 1774983921.7713413,
+    "ast_hash": "526973fc96d4241bcb408ba584fd5d7e",
+    "semantic_hash": "526973fc96d4241bcb408ba584fd5d7e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\ReviewModal.tsx": {
+    "mtime": 1775311296.0401347,
+    "ast_hash": "0aaeec13a548526e09bcdad2fb5546b0",
+    "semantic_hash": "0aaeec13a548526e09bcdad2fb5546b0"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\SimpleLoginModal.tsx": {
+    "mtime": 1774983949.4566958,
+    "ast_hash": "cf81ce5ae666e96cf4f19d50e2b00f31",
+    "semantic_hash": "cf81ce5ae666e96cf4f19d50e2b00f31"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\TestimonialsCarousel.tsx": {
+    "mtime": 1775312116.7809956,
+    "ast_hash": "4f35cc646815c6f502859dc0e8d9baa0",
+    "semantic_hash": "4f35cc646815c6f502859dc0e8d9baa0"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\components\\UserProfileModal.tsx": {
+    "mtime": 1775312142.4642866,
+    "ast_hash": "90c6fc314633966b211c15e7c00804d4",
+    "semantic_hash": "90c6fc314633966b211c15e7c00804d4"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\config\\firebase.ts": {
+    "mtime": 1774015412.2569017,
+    "ast_hash": "f972a210caaab0504d06b51e63b1f10e",
+    "semantic_hash": "f972a210caaab0504d06b51e63b1f10e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\hooks\\useTranslation.ts": {
+    "mtime": 1774015412.2569017,
+    "ast_hash": "8a4603ab19a8dc43d67d24b5ddc797d0",
+    "semantic_hash": "8a4603ab19a8dc43d67d24b5ddc797d0"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\main.tsx": {
+    "mtime": 1774015412.2569017,
+    "ast_hash": "9944dcbd9c9d7e6526ea4fbc5e80c479",
+    "semantic_hash": "9944dcbd9c9d7e6526ea4fbc5e80c479"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\utils\\analytics.ts": {
+    "mtime": 1774015412.2569017,
+    "ast_hash": "bd85e2e38a6a7ca5bb4945833064b3bd",
+    "semantic_hash": "bd85e2e38a6a7ca5bb4945833064b3bd"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\utils\\analyticsClient.ts": {
+    "mtime": 1774526993.9126494,
+    "ast_hash": "6a45bfa241022252c54965e7344265b1",
+    "semantic_hash": "6a45bfa241022252c54965e7344265b1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\utils\\api.ts": {
+    "mtime": 1775312053.047869,
+    "ast_hash": "7abb73888e5e42a3aa6717c2e8e493b9",
+    "semantic_hash": "7abb73888e5e42a3aa6717c2e8e493b9"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\utils\\auth.ts": {
+    "mtime": 1774983959.3842146,
+    "ast_hash": "fa48401036e454ace43aa86c1c0c1cab",
+    "semantic_hash": "fa48401036e454ace43aa86c1c0c1cab"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\src\\vite-env.d.ts": {
+    "mtime": 1774015412.2624948,
+    "ast_hash": "b2fb7620c74353bbfa0590518458f727",
+    "semantic_hash": "b2fb7620c74353bbfa0590518458f727"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\tailwind.config.js": {
+    "mtime": 1774015412.2624948,
+    "ast_hash": "9afb21cebd97d1d0507d3a6067926a05",
+    "semantic_hash": "9afb21cebd97d1d0507d3a6067926a05"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\tsconfig.json": {
+    "mtime": 1774015412.2624948,
+    "ast_hash": "82b3f3711bf2fa9a4eee636087adeb33",
+    "semantic_hash": "82b3f3711bf2fa9a4eee636087adeb33"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\tsconfig.node.json": {
+    "mtime": 1774015412.2624948,
+    "ast_hash": "281e378713152cccc7860c818db55849",
+    "semantic_hash": "281e378713152cccc7860c818db55849"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\vite.config.ts": {
+    "mtime": 1780847146.4580183,
+    "ast_hash": "0534989327679fb96cd38334f8790c80",
+    "semantic_hash": "0534989327679fb96cd38334f8790c80"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\BUSINESS_MODEL.md": {
+    "mtime": 1779744645.108417,
+    "ast_hash": "c5b0952990a93863be24113f0bf5f1c6",
+    "semantic_hash": "c5b0952990a93863be24113f0bf5f1c6"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\CONNECTION_SUMMARY.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "17fd532d2eefc3f05b592bc33b8c89f1",
+    "semantic_hash": "17fd532d2eefc3f05b592bc33b8c89f1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\DEPLOYMENT_CHECKLIST.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "b4420f53b89fdd5b14748d1257f1ccdc",
+    "semantic_hash": "b4420f53b89fdd5b14748d1257f1ccdc"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\ENVIRONMENT_VARIABLES_GUIDE.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "15075cf065cfbd53520ee3f094fe1c26",
+    "semantic_hash": "15075cf065cfbd53520ee3f094fe1c26"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\FRONTEND_BACKEND_CONNECTION.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "74cbffc7575b699ff89966af281cca47",
+    "semantic_hash": "74cbffc7575b699ff89966af281cca47"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\FRONTEND_BACKEND_EXPLAINED.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "88dca8dfd2a9baf79b522faf3c8e3b81",
+    "semantic_hash": "88dca8dfd2a9baf79b522faf3c8e3b81"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\LOCAL_DEVELOPMENT.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "ef115a19ca3b1e5b579aca721459f407",
+    "semantic_hash": "ef115a19ca3b1e5b579aca721459f407"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\MOBILE_APP_SPEC.md": {
+    "mtime": 1779744475.9454777,
+    "ast_hash": "3438a70491c6778602fef20c1589ff37",
+    "semantic_hash": "3438a70491c6778602fef20c1589ff37"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\NETLIFY_DEPLOYMENT.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "0ce98a2b1c6077d8c9f966a09f0c0fa0",
+    "semantic_hash": "0ce98a2b1c6077d8c9f966a09f0c0fa0"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\PERFORMANCE_GUIDE.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "53a7e45514e5af648915567cbcb89102",
+    "semantic_hash": "53a7e45514e5af648915567cbcb89102"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\README.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "9253c40fde7f6f24d9c9ed919211f9bd",
+    "semantic_hash": "9253c40fde7f6f24d9c9ed919211f9bd"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\RENDER_DEPLOYMENT.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "b70c7f8efba3e407e5f40bd50c36b920",
+    "semantic_hash": "b70c7f8efba3e407e5f40bd50c36b920"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\START_LOCAL.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "d43a4b2f7d635118bcbebf6dcd79c59e",
+    "semantic_hash": "d43a4b2f7d635118bcbebf6dcd79c59e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\TROUBLESHOOTING.md": {
+    "mtime": 1774965428.0886326,
+    "ast_hash": "16f126d11db711860fa8df3cd1f3e318",
+    "semantic_hash": "16f126d11db711860fa8df3cd1f3e318"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\WORKFLOW_IMPROVEMENTS.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "61cf66ff84da35368ae91b9b4f272092",
+    "semantic_hash": "61cf66ff84da35368ae91b9b4f272092"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\DJANGO_BACKEND.md": {
+    "mtime": 1774015412.1983426,
+    "ast_hash": "6523d8323afcb6d2a1cf56d33dd6e9b5",
+    "semantic_hash": "6523d8323afcb6d2a1cf56d33dd6e9b5"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\INTELLIGENT_ENRICHMENT.md": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "a03d7656b81831a8ee71e229cb9e2a5d",
+    "semantic_hash": "a03d7656b81831a8ee71e229cb9e2a5d"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\JSON_UPLOAD_WORKFLOW.md": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "976f2d563400ed476b296fc1ba8380bc",
+    "semantic_hash": "976f2d563400ed476b296fc1ba8380bc"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\README.md": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "3afe1505f008ad732da23985fea1a0bb",
+    "semantic_hash": "3afe1505f008ad732da23985fea1a0bb"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\RESOURCE_OPTIMIZATION.md": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "f896fba7417ace6bb6500ad78595dfea",
+    "semantic_hash": "f896fba7417ace6bb6500ad78595dfea"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\SETUP.md": {
+    "mtime": 1774015412.2143526,
+    "ast_hash": "cc0add6ccdc8a7a2b500f764376fe117",
+    "semantic_hash": "cc0add6ccdc8a7a2b500f764376fe117"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\exams\\templates\\admin\\exams\\exam\\upload_json.html": {
+    "mtime": 1774015412.2310946,
+    "ast_hash": "f5dfcc7175cd503ad0f0c73134b19465",
+    "semantic_hash": "f5dfcc7175cd503ad0f0c73134b19465"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\backend\\requirements.txt": {
+    "mtime": 1779916806.8196652,
+    "ast_hash": "80ddbe61f0e92c36adaba322ae28d6d7",
+    "semantic_hash": "80ddbe61f0e92c36adaba322ae28d6d7"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\.expo\\README.md": {
+    "mtime": 1780034417.408636,
+    "ast_hash": "a7c2b7fea86b2a2559e471f999e478f1",
+    "semantic_hash": "a7c2b7fea86b2a2559e471f999e478f1"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\AGENTS.md": {
+    "mtime": 1779917049.627361,
+    "ast_hash": "0168b78417bf60f34fd1233c69591023",
+    "semantic_hash": "0168b78417bf60f34fd1233c69591023"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\CLAUDE.md": {
+    "mtime": 1779917049.627361,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\README.md": {
+    "mtime": 1779917598.5548284,
+    "ast_hash": "c302601fd50087ea316c98903008a326",
+    "semantic_hash": "c302601fd50087ea316c98903008a326"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\sounds\\README.md": {
+    "mtime": 1779917576.0798297,
+    "ast_hash": "3bc926838573212a83cd6d26a1db8dbe",
+    "semantic_hash": "3bc926838573212a83cd6d26a1db8dbe"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\render.yaml": {
+    "mtime": 1777379297.7952576,
+    "ast_hash": "154a340c7eea7753f1a58da431430bf7",
+    "semantic_hash": "154a340c7eea7753f1a58da431430bf7"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\ANALYTICS_SETUP.md": {
+    "mtime": 1774015412.2345893,
+    "ast_hash": "bbab69dcba7e7c933419452e7d9efec3",
+    "semantic_hash": "bbab69dcba7e7c933419452e7d9efec3"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\FIREBASE_SETUP.md": {
+    "mtime": 1774015412.2345893,
+    "ast_hash": "398652019f38257091da251cfb16356a",
+    "semantic_hash": "398652019f38257091da251cfb16356a"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\ISSUES_AND_SOLUTIONS.md": {
+    "mtime": 1774015412.2345893,
+    "ast_hash": "6bcd99667030fa0c40f9075738683499",
+    "semantic_hash": "6bcd99667030fa0c40f9075738683499"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\index.html": {
+    "mtime": 1777378933.723848,
+    "ast_hash": "b660784c2ccf5410a7d20d678ebce82e",
+    "semantic_hash": "b660784c2ccf5410a7d20d678ebce82e"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\.expo\\web\\cache\\production\\images\\favicon\\favicon-ac6de690e4deff59afed174c3012fc5ec70b51b46f93e57093f26050ace36bb7-contain-transparent\\favicon-48.png": {
+    "mtime": 1780034533.9027615,
+    "ast_hash": "c6aef6a09e67f1017110e8df41651ae3",
+    "semantic_hash": "c6aef6a09e67f1017110e8df41651ae3"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\android-icon-background.png": {
+    "mtime": 1779916951.0770357,
+    "ast_hash": "2d65569cc0e2afdcea0af9f9902d4173",
+    "semantic_hash": "2d65569cc0e2afdcea0af9f9902d4173"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\android-icon-foreground.png": {
+    "mtime": 1779916951.0965874,
+    "ast_hash": "72e71a9c846c6aa4ae32476641a00e18",
+    "semantic_hash": "72e71a9c846c6aa4ae32476641a00e18"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\android-icon-monochrome.png": {
+    "mtime": 1779916951.109585,
+    "ast_hash": "1e097dab989759fc0b69440092ca22cd",
+    "semantic_hash": "1e097dab989759fc0b69440092ca22cd"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\favicon.png": {
+    "mtime": 1779916951.1135864,
+    "ast_hash": "d9f444efbdfbe7931aa93beada07318a",
+    "semantic_hash": "d9f444efbdfbe7931aa93beada07318a"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\icon.png": {
+    "mtime": 1779916951.136585,
+    "ast_hash": "cb975bba2216ce10a60e6c0ffe9941a2",
+    "semantic_hash": "cb975bba2216ce10a60e6c0ffe9941a2"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\images\\adaptive-icon.png": {
+    "mtime": 1780000251.040043,
+    "ast_hash": "ae516066207d2d4a86d5882c166f5f03",
+    "semantic_hash": "ae516066207d2d4a86d5882c166f5f03"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\images\\favicon.png": {
+    "mtime": 1780000251.040043,
+    "ast_hash": "ae516066207d2d4a86d5882c166f5f03",
+    "semantic_hash": "ae516066207d2d4a86d5882c166f5f03"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\images\\icon.png": {
+    "mtime": 1780000251.040043,
+    "ast_hash": "ae516066207d2d4a86d5882c166f5f03",
+    "semantic_hash": "ae516066207d2d4a86d5882c166f5f03"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\images\\splash-icon.png": {
+    "mtime": 1780000327.3397467,
+    "ast_hash": "5a88bc1bf83a39cbf89ccfa9d29aff0b",
+    "semantic_hash": "5a88bc1bf83a39cbf89ccfa9d29aff0b"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\freecertify-mobile\\assets\\splash-icon.png": {
+    "mtime": 1779916951.1410048,
+    "ast_hash": "97dae5a0e62ad8551d8a31897b425e63",
+    "semantic_hash": "97dae5a0e62ad8551d8a31897b425e63"
+  },
+  "C:\\Users\\siaka\\Documents\\Practice-exam-platform\\typescript_simplified_app_with_timer\\public\\profile-image.png": {
+    "mtime": 1774015412.2464452,
+    "ast_hash": "1daf9e84c1cb5bb0b8d76c8639764682",
+    "semantic_hash": "1daf9e84c1cb5bb0b8d76c8639764682"
+  }
+}

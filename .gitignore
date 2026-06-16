@@ -66,6 +66,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 *.env
+firebase-service-account.json
+**/firebase-service-account.json
 
 # =========================
 # IDE / Editor

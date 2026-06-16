@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 import { signOutUser, updateUserProgress } from './utils/auth';
 import { initGA, analytics, setUserProperties } from './utils/analytics';
-import { getOrGenerateExamQuestions, getExamsByType, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan, saveExamAttempt } from './utils/api';
+import { getOrGenerateExamQuestions, getExamsByType, getRandomQuestions, Question as APIQuestion, preGenerateExamQuestions, getReviews, submitReview, Review, registerAnalyticsSession, recordAnalyticsEvent, getSyllabusLectures, SyllabusLecturePlan, streamChatWithSyllabusAssistant, getPinnedPlans, savePinnedPlan, deletePinnedPlan, saveExamAttempt } from './utils/api';
 import type { ChatMessage } from './components/AIAssistantModal';
 import { getOrCreateSessionKey, getDeviceCategory } from './utils/analyticsClient';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
@@ -33,8 +33,12 @@ const PAGES = {
 const EXAM_TYPES = {
   SOLUTIONS_ARCHITECT: 'solutions_architect',
   CLOUD_PRACTITIONER: 'cloud_practitioner',
-  DEVELOPER: 'developer'
+  DEVELOPER: 'developer',
+  PYTHON: 'python',
 };
+
+// Exam types that have static questions in the DB and do NOT use Manus AI generation
+const STATIC_EXAM_TYPES = new Set([EXAM_TYPES.PYTHON]);
 
 // Define TypeScript interfaces
 interface Option {
@@ -318,27 +322,31 @@ function App() {
       setQuestions([]);
       
       try {
-        // Map frontend exam types to backend exam types
-        const examTypeMap: { [key: string]: string } = {
-          [EXAM_TYPES.SOLUTIONS_ARCHITECT]: 'solutions_architect',
-          [EXAM_TYPES.CLOUD_PRACTITIONER]: 'cloud_practitioner',
-          [EXAM_TYPES.DEVELOPER]: 'developer'
-        };
+        const backendExamType = currentExamType;
 
-        const backendExamType = examTypeMap[currentExamType] || currentExamType;
+        // Resolve the real exam ID from the API
+        const examsForType = await getExamsByType(backendExamType);
+        if (examsForType.length > 0) setCurrentExamId(examsForType[0].id);
 
-        // Resolve the real exam ID from the API (avoids hardcoded ID assumptions)
-        getExamsByType(backendExamType).then(exams => {
-          if (exams.length > 0) setCurrentExamId(exams[0].id);
-        }).catch(() => {});
-        
-        // Get or generate questions from Django API with timeout (using Manus API by default)
-        const apiQuestions = await Promise.race([
-          getOrGenerateExamQuestions(backendExamType, 50, true),  // Use Manus API
-          new Promise<never>((_, reject) => 
-            setTimeout(() => reject(new Error('Request timed out after 60 seconds')), 60000)
-          )
-        ]);
+        // Static exams (e.g. Python) use pre-loaded DB questions directly.
+        // Dynamic AWS exams use Manus AI generation.
+        let apiQuestions;
+        if (STATIC_EXAM_TYPES.has(backendExamType)) {
+          if (!examsForType.length) throw new Error(`No ${backendExamType} exam found in the database.`);
+          apiQuestions = await Promise.race([
+            getRandomQuestions(examsForType[0].id, 50),
+            new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error('Request timed out after 30 seconds')), 30000)
+            ),
+          ]);
+        } else {
+          apiQuestions = await Promise.race([
+            getOrGenerateExamQuestions(backendExamType, 50, true),  // Use Manus API
+            new Promise<never>((_, reject) => 
+              setTimeout(() => reject(new Error('Request timed out after 60 seconds')), 60000)
+            )
+          ]);
+        }
         
         // Transform API questions to match frontend format
         const transformedQuestions: Question[] = apiQuestions.map((q: APIQuestion) => ({
@@ -462,25 +470,17 @@ function App() {
     setCurrentExamType(examType);
     setCurrentPage(PAGES.EXAM);
     
-    // Pre-generate questions when exam tab is clicked (using Manus API)
-    const examTypeMap: { [key: string]: string } = {
-      [EXAM_TYPES.SOLUTIONS_ARCHITECT]: 'solutions_architect',
-      [EXAM_TYPES.CLOUD_PRACTITIONER]: 'cloud_practitioner',
-      [EXAM_TYPES.DEVELOPER]: 'developer'
-    };
-    
-    const backendExamType = examTypeMap[examType] || examType;
-    
-    try {
-      setIsPreGenerating(true);
-      // Pre-generate questions in background (using Manus API)
-      await preGenerateExamQuestions(backendExamType, 50, true);
-      console.log(`✅ Pre-generated questions for ${backendExamType}`);
-    } catch (error) {
-      console.error('Error pre-generating questions:', error);
-      // Continue anyway - questions might already exist
-    } finally {
-      setIsPreGenerating(false);
+    // Static exam types (Python) have questions already in the DB — skip pre-generation.
+    if (!STATIC_EXAM_TYPES.has(examType)) {
+      try {
+        setIsPreGenerating(true);
+        await preGenerateExamQuestions(examType, 50, true);
+        console.log(`✅ Pre-generated questions for ${examType}`);
+      } catch (error) {
+        console.error('Error pre-generating questions:', error);
+      } finally {
+        setIsPreGenerating(false);
+      }
     }
   };
 
@@ -490,6 +490,8 @@ function App() {
         return 'AWS Cloud Practitioner Practice Exam';
       case EXAM_TYPES.DEVELOPER:
         return 'AWS Developer Associate Practice Exam';
+      case EXAM_TYPES.PYTHON:
+        return 'Python Programming Practice Exam';
       default:
         return 'AWS Solutions Architect Practice Exam';
     }
@@ -1030,29 +1032,20 @@ function App() {
 
   // Handle starting the actual exam from landing page
   const handleStartExam = async () => {
-    setIsPreGenerating(true);
     setCurrentPage(PAGES.EXAM);
-    
-    // Map frontend exam types to backend exam types
-    const examTypeMap: { [key: string]: string } = {
-      [EXAM_TYPES.SOLUTIONS_ARCHITECT]: 'solutions_architect',
-      [EXAM_TYPES.CLOUD_PRACTITIONER]: 'cloud_practitioner',
-      [EXAM_TYPES.DEVELOPER]: 'developer'
-    };
 
-    const backendExamType = examTypeMap[currentExamType] || currentExamType;
-    
+    // Static exam types have pre-loaded questions — no AI generation needed.
+    if (STATIC_EXAM_TYPES.has(currentExamType)) return;
+
+    setIsPreGenerating(true);
     try {
-      // Pre-generate questions when user starts exam
-      console.log(`Pre-generating questions for ${backendExamType}...`);
-      await preGenerateExamQuestions(backendExamType, 50, true);
+      console.log(`Pre-generating questions for ${currentExamType}...`);
+      await preGenerateExamQuestions(currentExamType, 50, true);
       console.log('Pre-generation complete!');
     } catch (error) {
       console.error('Error pre-generating questions:', error);
-      // Continue anyway - questions might already exist
     } finally {
       setIsPreGenerating(false);
-      // Questions will load via useEffect when currentExamType changes
     }
   };
 
@@ -1816,6 +1809,7 @@ function App() {
                 { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'Solutions Architect' },
                 { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'Cloud Practitioner' },
                 { type: EXAM_TYPES.DEVELOPER, label: 'Developer' },
+                { type: EXAM_TYPES.PYTHON, label: '🐍 Python' },
               ].map(({ type, label }) => (
                 <button
                   key={type}
@@ -1955,6 +1949,7 @@ function App() {
                 { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'AWS Solutions Architect' },
                 { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'AWS Cloud Practitioner' },
                 { type: EXAM_TYPES.DEVELOPER, label: 'AWS Developer Associate' },
+                { type: EXAM_TYPES.PYTHON, label: '🐍 Python Programming' },
               ].map(({ type, label }) => (
                 <button
                   key={type}
