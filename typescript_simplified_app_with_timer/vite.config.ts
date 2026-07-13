@@ -18,7 +18,9 @@ export default defineConfig({
     },
   },
   plugins: [react()],
-  base: './',
+  // Absolute base so nested prerendered routes (e.g. /exam/aws-devops-engineer)
+  // resolve /assets/* correctly. Served from the domain root on Render.
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

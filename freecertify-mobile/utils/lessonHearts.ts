@@ -2,6 +2,7 @@ import { getRandomQuestions, APIQuestion } from '../utils/api';
 
 export function subjectIdFromUnit(unitId: string): string {
   if (unitId.startsWith('python_')) return 'python';
+  if (unitId.startsWith('prompt_')) return 'prompt_engineering';
   if (unitId.startsWith('aws_')) return 'aws';
   return 'python';
 }

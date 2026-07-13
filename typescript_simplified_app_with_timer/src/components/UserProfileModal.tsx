@@ -19,10 +19,12 @@ const EXAM_LABELS: Record<string, string> = {
   solutions_architect: 'AWS Solutions Architect',
   cloud_practitioner: 'AWS Cloud Practitioner',
   developer: 'AWS Developer Associate',
+  devops: 'AWS DevOps Engineer',
   sysops: 'AWS SysOps Administrator',
   security: 'AWS Security Specialty',
   machine_learning: 'AWS Machine Learning',
   python: '🐍 Python Programming',
+  prompt_engineering: '✍️ Prompt Engineering',
 };
 
 const fmt = (iso: string) =>

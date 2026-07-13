@@ -42,6 +42,7 @@ export const getPythonUnitById = (unitId: string): SyllabusUnit | undefined =>
 /** Map mobile unit id → Django exam_type for question loading. */
 export const unitIdToExamType = (unitId: string): string => {
   if (unitId.startsWith('python_')) return 'python';
+  if (unitId.startsWith('prompt_')) return 'prompt_engineering';
   if (unitId.startsWith('aws_')) return 'cloud_practitioner';
   return 'cloud_practitioner';
 };

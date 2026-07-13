@@ -10,6 +10,7 @@ AWS_SYLLABUS_LABELS: Dict[str, str] = {
     "solutions_architect": "AWS Certified Solutions Architect - Associate",
     "cloud_practitioner": "AWS Certified Cloud Practitioner",
     "developer": "AWS Certified Developer - Associate",
+    "devops": "AWS Certified DevOps Engineer - Professional",
 }
 
 # FreeCertify mobile app subjects (separate from web AWS tracks).

@@ -122,6 +122,7 @@ class ExamViewSet(viewsets.ModelViewSet):
         
         num_questions = request.data.get('num_questions', 100)  # Default to 100
         use_manus = request.data.get('use_manus', True)  # Default to Manus API
+        use_llama = request.data.get('use_llama', False)  # Use Llama (Groq) API fallback
         force_generate = request.data.get('force_generate', False)  # Force AI generation
         
         # PRIORITY: Check existing questions in database first

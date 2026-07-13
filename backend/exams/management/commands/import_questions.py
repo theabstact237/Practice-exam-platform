@@ -13,6 +13,8 @@ class Command(BaseCommand):
         'cloud_practitioner_100_questions.json': 'cloud_practitioner',
         'developer_100_questions.json': 'developer',
         'python_100_questions.json': 'python',
+        'prompt_engineering_100_questions.json': 'prompt_engineering',
+        'aws_devops_100_questions.json': 'devops',
     }
 
     def add_arguments(self, parser):

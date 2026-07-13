@@ -19,6 +19,8 @@ import ExamLandingPage from './components/ExamLandingPage';
 import { Testimonial } from './components/TestimonialsCarousel';
 import AIAssistantModal from './components/AIAssistantModal';
 import UserProfileModal from './components/UserProfileModal';
+import Seo from './components/Seo';
+import { slugToType, typeToSlug } from './seo/seoData';
 
 // Define page types for navigation
 const PAGES = {
@@ -34,11 +36,13 @@ const EXAM_TYPES = {
   SOLUTIONS_ARCHITECT: 'solutions_architect',
   CLOUD_PRACTITIONER: 'cloud_practitioner',
   DEVELOPER: 'developer',
+  DEVOPS: 'devops',
   PYTHON: 'python',
+  PROMPT_ENGINEERING: 'prompt_engineering',
 };
 
 // Exam types that have static questions in the DB and do NOT use Manus AI generation
-const STATIC_EXAM_TYPES = new Set([EXAM_TYPES.PYTHON]);
+const STATIC_EXAM_TYPES = new Set([EXAM_TYPES.PYTHON, EXAM_TYPES.PROMPT_ENGINEERING, EXAM_TYPES.DEVOPS]);
 
 // Define TypeScript interfaces
 interface Option {
@@ -220,6 +224,56 @@ function App() {
   // Custom display name / photo saved in localStorage (overrides Firebase values)
   const [profileName, setProfileName] = useState(() => localStorage.getItem('fc_profile_name') || '');
   const [profilePhoto, setProfilePhoto] = useState(() => localStorage.getItem('fc_profile_photo') || '');
+
+  // Deep-linking: honor path-based routes (/exam/<slug>, /contact) as well as
+  // legacy query params (?exam=<type>, ?page=contact) on first load so
+  // prerendered pages, sitemap URLs, and shared links open the right view.
+  useEffect(() => {
+    const path = window.location.pathname.replace(/\/+$/, ''); // trim trailing slash
+    const examMatch = path.match(/^\/exam\/([a-z0-9-]+)$/i);
+    const validExamTypes = Object.values(EXAM_TYPES);
+
+    if (examMatch && slugToType[examMatch[1]]) {
+      setCurrentExamType(slugToType[examMatch[1]]);
+      setCurrentPage(PAGES.EXAM_LANDING);
+      return;
+    }
+    if (path === '/contact') {
+      setCurrentPage(PAGES.CONTACT);
+      return;
+    }
+
+    // Legacy query-param links (kept for backward compatibility)
+    const params = new URLSearchParams(window.location.search);
+    const examParam = params.get('exam');
+    const pageParam = params.get('page');
+    if (examParam && validExamTypes.includes(examParam)) {
+      setCurrentExamType(examParam);
+      setCurrentPage(PAGES.EXAM_LANDING);
+    } else if (pageParam === 'contact') {
+      setCurrentPage(PAGES.CONTACT);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep the browser URL in sync with the current view so exam/contact pages
+  // are shareable and match their prerendered/canonical URLs.
+  useEffect(() => {
+    let path = '/';
+    if (
+      currentPage === PAGES.EXAM_LANDING ||
+      currentPage === PAGES.EXAM ||
+      currentPage === PAGES.REVIEW
+    ) {
+      const slug = typeToSlug[currentExamType];
+      if (slug) path = `/exam/${slug}`;
+    } else if (currentPage === PAGES.CONTACT) {
+      path = '/contact';
+    }
+    if (window.location.pathname !== path) {
+      window.history.replaceState(null, '', path);
+    }
+  }, [currentPage, currentExamType]);
 
   // Initialize Google Analytics on component mount
   useEffect(() => {
@@ -490,8 +544,12 @@ function App() {
         return 'AWS Cloud Practitioner Practice Exam';
       case EXAM_TYPES.DEVELOPER:
         return 'AWS Developer Associate Practice Exam';
+      case EXAM_TYPES.DEVOPS:
+        return 'AWS DevOps Engineer Practice Exam';
       case EXAM_TYPES.PYTHON:
         return 'Python Programming Practice Exam';
+      case EXAM_TYPES.PROMPT_ENGINEERING:
+        return 'Prompt Engineering Practice Exam';
       default:
         return 'AWS Solutions Architect Practice Exam';
     }
@@ -1782,6 +1840,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <Seo page={currentPage} examType={currentExamType} isReview={isReviewMode} />
       {/* Navigation */}
       <nav className="bg-slate-800/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1809,7 +1868,9 @@ function App() {
                 { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'Solutions Architect' },
                 { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'Cloud Practitioner' },
                 { type: EXAM_TYPES.DEVELOPER, label: 'Developer' },
+                { type: EXAM_TYPES.DEVOPS, label: 'DevOps' },
                 { type: EXAM_TYPES.PYTHON, label: '🐍 Python' },
+                { type: EXAM_TYPES.PROMPT_ENGINEERING, label: '✍️ Prompt Eng' },
               ].map(({ type, label }) => (
                 <button
                   key={type}
@@ -1949,7 +2010,9 @@ function App() {
                 { type: EXAM_TYPES.SOLUTIONS_ARCHITECT, label: 'AWS Solutions Architect' },
                 { type: EXAM_TYPES.CLOUD_PRACTITIONER, label: 'AWS Cloud Practitioner' },
                 { type: EXAM_TYPES.DEVELOPER, label: 'AWS Developer Associate' },
+                { type: EXAM_TYPES.DEVOPS, label: 'AWS DevOps Engineer' },
                 { type: EXAM_TYPES.PYTHON, label: '🐍 Python Programming' },
+                { type: EXAM_TYPES.PROMPT_ENGINEERING, label: '✍️ Prompt Engineering' },
               ].map(({ type, label }) => (
                 <button
                   key={type}

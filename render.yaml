@@ -55,6 +55,12 @@ services:
     rootDir: typescript_simplified_app_with_timer
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    # Serve prerendered static files when they exist (e.g. /exam/<slug>/index.html),
+    # otherwise fall back to the SPA entry point for client-side routing.
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: NODE_VERSION
         value: 20.11.0

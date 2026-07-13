@@ -135,6 +135,44 @@ const examData: { [key: string]: {
     color: 'orange',
     gradient: 'from-orange-500 to-amber-600'
   },
+  devops: {
+    title: 'AWS DevOps Engineer',
+    subtitle: 'Professional Level Certification',
+    description: 'The AWS Certified DevOps Engineer – Professional exam validates your ability to implement and manage continuous delivery systems, automate security controls, and maintain monitoring and logging. It covers CI/CD, infrastructure as code, resilient architectures, and incident response at scale.',
+    duration: '90 minutes',
+    questions: 50,
+    passingScore: 70,
+    domains: [
+      {
+        name: 'SDLC Automation',
+        percentage: 22,
+        topics: ['CodePipeline', 'CodeBuild', 'CodeDeploy', 'Blue/Green & Canary']
+      },
+      {
+        name: 'Configuration Management & IaC',
+        percentage: 19,
+        topics: ['CloudFormation', 'Systems Manager', 'Elastic Beanstalk', 'CDK / SAM']
+      },
+      {
+        name: 'Monitoring & Logging',
+        percentage: 15,
+        topics: ['CloudWatch', 'CloudTrail', 'X-Ray', 'Logs Insights']
+      },
+      {
+        name: 'Resilience, Incident Response & Security',
+        percentage: 44,
+        topics: ['Auto Scaling', 'EventBridge', 'Config remediation', 'GuardDuty / Secrets Manager']
+      }
+    ],
+    tips: [
+      'Know the CodeDeploy deployment types: in-place, blue/green, canary, and linear',
+      'Understand CloudFormation change sets, StackSets, and drift detection',
+      'Master event-driven automation with EventBridge, Lambda, and SSM Automation',
+      'Be comfortable with monitoring: CloudWatch alarms, metric filters, and X-Ray tracing'
+    ],
+    color: 'blue',
+    gradient: 'from-blue-500 to-sky-600'
+  },
   python: {
     title: '🐍 Python Programming',
     subtitle: 'Beginner to Advanced — 14 Chapters',
@@ -172,6 +210,44 @@ const examData: { [key: string]: {
     ],
     color: 'emerald',
     gradient: 'from-emerald-500 to-green-600'
+  },
+  prompt_engineering: {
+    title: '✍️ Prompt Engineering',
+    subtitle: 'AI Basics to Advanced — 14 Chapters',
+    description: 'Master the art of communicating with AI. This curriculum takes you from the fundamentals of prompts all the way to RAG, AI agents, and production-grade prompt engineering. 100 multiple-choice questions across 14 chapters with immediate explanations — ideal for anyone building with ChatGPT, Claude, or other LLMs.',
+    duration: '90 minutes',
+    questions: 50,
+    passingScore: 70,
+    domains: [
+      {
+        name: 'Foundations',
+        percentage: 30,
+        topics: ['What is Prompt Engineering?', 'Anatomy of a Prompt', 'Instruction Clarity', 'Roles & Personas']
+      },
+      {
+        name: 'Core Techniques',
+        percentage: 28,
+        topics: ['Zero-shot vs Few-shot', 'Chain-of-Thought', 'Output Formatting']
+      },
+      {
+        name: 'Advanced Control',
+        percentage: 22,
+        topics: ['Context & Memory Limits', 'Temperature & Parameters', 'Prompt Injection & Safety']
+      },
+      {
+        name: 'Expert Level',
+        percentage: 20,
+        topics: ['Iterative Refinement', 'RAG & Grounding', 'AI Agents & Tool Use', 'Master Prompt Engineer']
+      }
+    ],
+    tips: [
+      'Understand the four parts of a prompt: instruction, context, input, output indicator',
+      'Know when to use zero-shot vs few-shot prompting',
+      'Chain-of-Thought ("let\'s think step by step") boosts reasoning accuracy',
+      'Learn how RAG grounds responses and reduces hallucinations'
+    ],
+    color: 'purple',
+    gradient: 'from-purple-500 to-fuchsia-600'
   }
 };
 

@@ -9,10 +9,12 @@ class Exam(models.Model):
         ('solutions_architect', 'AWS Solutions Architect'),
         ('cloud_practitioner', 'AWS Cloud Practitioner'),
         ('developer', 'AWS Developer'),
+        ('devops', 'AWS DevOps Engineer'),
         ('sysops', 'AWS SysOps Administrator'),
         ('security', 'AWS Security Specialty'),
         ('machine_learning', 'AWS Machine Learning'),
         ('python', 'Python Programming'),
+        ('prompt_engineering', 'Prompt Engineering'),
     ]
     
     name = models.CharField(max_length=100, unique=True)

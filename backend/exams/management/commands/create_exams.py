@@ -45,6 +45,24 @@ class Command(BaseCommand):
                 'time_limit_minutes': 90,
                 'passing_score': 70,
                 'is_active': True
+            },
+            {
+                'name': 'Prompt Engineering',
+                'exam_type': 'prompt_engineering',
+                'description': 'Gamified Prompt Engineering curriculum from AI basics to advanced agent design. 100 MCQ questions across 14 chapters — easy to hard.',
+                'total_questions': 100,
+                'time_limit_minutes': 90,
+                'passing_score': 70,
+                'is_active': True
+            },
+            {
+                'name': 'AWS DevOps Engineer',
+                'exam_type': 'devops',
+                'description': 'AWS Certified DevOps Engineer – Professional practice exam. Covers CI/CD (SDLC automation), infrastructure as code, monitoring, incident response, high availability, and security automation. 100 MCQ questions.',
+                'total_questions': 100,
+                'time_limit_minutes': 90,
+                'passing_score': 70,
+                'is_active': True
             }
         ]
 

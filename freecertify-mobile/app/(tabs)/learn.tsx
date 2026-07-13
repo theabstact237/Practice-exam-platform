@@ -17,6 +17,7 @@ import Animated, { FadeInDown, useSharedValue, withRepeat, withSequence, withTim
 import { Colors, Spacing, Radius, FontSize, FontWeight } from '../../constants/theme';
 import { SUBJECTS } from '../../constants/subjects';
 import { PYTHON_UNITS, PYTHON_CHAPTERS } from '../../constants/pythonSyllabus';
+import { PROMPT_ENG_UNITS, PROMPT_ENG_CHAPTERS } from '../../constants/promptEngSyllabus';
 import { useUserStore } from '../../stores/useUserStore';
 import { useProgressStore } from '../../stores/useProgressStore';
 import { useGameFeedback } from '../../hooks/useGameFeedback';
@@ -55,6 +56,24 @@ function buildTreeItems(subject: string): TreeItem[] {
           type: 'unit',
           key: u.id,
           unit: { id: u.id, title: `🐍 ${u.title}`, xp: u.xp, prerequisites: u.prerequisites },
+          nodeIndex: nodeIndex++,
+        });
+      }
+    }
+    return items;
+  }
+  if (subject === 'prompt_engineering') {
+    const items: TreeItem[] = [];
+    let nodeIndex = 0;
+    for (const ch of PROMPT_ENG_CHAPTERS) {
+      const units = PROMPT_ENG_UNITS.filter(u => u.chapter === ch.id);
+      if (units.length === 0) continue;
+      items.push({ type: 'header', key: `pch_${ch.id}`, emoji: ch.emoji, title: ch.title });
+      for (const u of units) {
+        items.push({
+          type: 'unit',
+          key: u.id,
+          unit: { id: u.id, title: `✍️ ${u.title}`, xp: u.xp, prerequisites: u.prerequisites },
           nodeIndex: nodeIndex++,
         });
       }
