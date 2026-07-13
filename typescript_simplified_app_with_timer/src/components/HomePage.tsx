@@ -386,10 +386,22 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectExam, onContactClick, onOpe
                 Developer Associate
               </button>
               <button
+                onClick={() => onSelectExam('devops')}
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-lg font-bold border border-blue-500/40 transition-all shadow-lg shadow-blue-500/20 hover:scale-105"
+              >
+                DevOps Engineer
+              </button>
+              <button
                 onClick={() => onSelectExam('python')}
                 className="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-lg font-bold border border-emerald-500/40 transition-all shadow-lg shadow-emerald-500/20 hover:scale-105"
               >
                 🐍 Python
+              </button>
+              <button
+                onClick={() => onSelectExam('prompt_engineering')}
+                className="px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl text-lg font-bold border border-purple-500/40 transition-all shadow-lg shadow-purple-500/20 hover:scale-105"
+              >
+                ✍️ Prompt Engineering
               </button>
             </div>
           </div>
